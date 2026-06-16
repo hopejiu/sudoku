@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXRRenderModelManager" property="og:title"/>
+
+
+
+<meta content="Inherits: Node3D&lt; Node&lt; Object Helper node that will automatically manage displaying render models. Description: This helper node will automatically manage displaying render models. It will c..." property="og:description"/>
+<meta content="Inherits: Node3D&lt; Node&lt; Object Helper node that will automatically manage displaying render models. Description: This helper node will automatically manage displaying render models. It will c..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXRRenderModelManager — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_openxrvisibilitymask.html" rel="next" title="OpenXRVisibilityMask"/>
+<link href="class_openxrrendermodel.html" rel="prev" title="OpenXRRenderModel"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_openxrrendermodelmanager" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxrrendermodelmanager">
+<span id="class-openxrrendermodelmanager"></span><h1>OpenXRRenderModelManager<a class="headerlink" href="#openxrrendermodelmanager" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Helper node that will automatically manage displaying render models.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This helper node will automatically manage displaying render models. It will create new <a class="reference internal" href="class_openxrrendermodel.html#class-openxrrendermodel"><span class="std std-ref">OpenXRRenderModel</span></a> nodes as controllers and other hand held devices are detected, and remove those nodes when they are deactivated.</p>
+<p><strong>Note:</strong> If you want more control over this logic you can alternatively call <a class="reference internal" href="class_openxrrendermodelextension.html#class-openxrrendermodelextension-method-render-model-get-all"><span class="std std-ref">OpenXRRenderModelExtension.render_model_get_all()</span></a> to obtain a list of active render model ids and create <a class="reference internal" href="class_openxrrendermodel.html#class-openxrrendermodel"><span class="std std-ref">OpenXRRenderModel</span></a> instances for each render model id provided.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrrendermodelmanager-property-make-local-to-pose"><span class="std std-ref">make_local_to_pose</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrrendermodelmanager-property-tracker"><span class="std std-ref">tracker</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="signals">
+<h2>Signals<a class="headerlink" href="#signals" title="Link to this heading"></a></h2>
+<p class="classref-signal" id="class-openxrrendermodelmanager-signal-render-model-added"><strong>render_model_added</strong>(render_model: <a class="reference internal" href="class_openxrrendermodel.html#class-openxrrendermodel"><span class="std std-ref">OpenXRRenderModel</span></a>) <a class="reference internal" href="#class-openxrrendermodelmanager-signal-render-model-added"><span class="std std-ref">🔗</span></a></p>
+<p>Emitted when a render model node is added as a child to this node.</p>
+<p class="classref-signal" id="class-openxrrendermodelmanager-signal-render-model-removed"><strong>render_model_removed</strong>(render_model: <a class="reference internal" href="class_openxrrendermodel.html#class-openxrrendermodel"><span class="std std-ref">OpenXRRenderModel</span></a>) <a class="reference internal" href="#class-openxrrendermodelmanager-signal-render-model-removed"><span class="std std-ref">🔗</span></a></p>
+<p>Emitted when a render model child node is about to be removed from this node.</p>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-openxrrendermodelmanager-rendermodeltracker">enum <strong>RenderModelTracker</strong>: <a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-openxrrendermodelmanager-constant-render-model-tracker-any"><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a> <strong>RENDER_MODEL_TRACKER_ANY</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>All active render models are shown regardless of what tracker they relate to.</p>
+<p class="classref-enumeration-constant" id="class-openxrrendermodelmanager-constant-render-model-tracker-none-set"><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a> <strong>RENDER_MODEL_TRACKER_NONE_SET</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Only active render models are shown that are not related to any tracker we manage.</p>
+<p class="classref-enumeration-constant" id="class-openxrrendermodelmanager-constant-render-model-tracker-left-hand"><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a> <strong>RENDER_MODEL_TRACKER_LEFT_HAND</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Only active render models are shown that are related to the left hand tracker.</p>
+<p class="classref-enumeration-constant" id="class-openxrrendermodelmanager-constant-render-model-tracker-right-hand"><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a> <strong>RENDER_MODEL_TRACKER_RIGHT_HAND</strong> = <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>Only active render models are shown that are related to the right hand tracker.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-openxrrendermodelmanager-property-make-local-to-pose"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>make_local_to_pose</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-openxrrendermodelmanager-property-make-local-to-pose"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_make_local_to_pose</strong>(value: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_make_local_to_pose</strong>()</p></li>
+</ul>
+<p>Position render models local to this pose (this will adjust the position of the render models container node).</p>
+<p class="classref-property" id="class-openxrrendermodelmanager-property-tracker"><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a> <strong>tracker</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-openxrrendermodelmanager-property-tracker"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tracker</strong>(value: <a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-openxrrendermodelmanager-rendermodeltracker"><span class="std std-ref">RenderModelTracker</span></a> <strong>get_tracker</strong>()</p></li>
+</ul>
+<p>Limits render models to the specified tracker. Include: 0 = All render models, 1 = Render models not related to a tracker, 2 = Render models related to the left hand tracker, 3 = Render models related to the right hand tracker.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

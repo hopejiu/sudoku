@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXRSpatialEntityTracker" property="og:title"/>
+
+
+
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: XRPositionalTracker&lt; XRTracker&lt; RefCounted&lt; Object Inherited By: OpenXRAnchorTracker, OpenXRMarkerTracker, ..." property="og:description"/>
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: XRPositionalTracker&lt; XRTracker&lt; RefCounted&lt; Object Inherited By: OpenXRAnchorTracker, OpenXRMarkerTracker, ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXRSpatialEntityTracker — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_openxrspatialmarkertrackingcapability.html" rel="next" title="OpenXRSpatialMarkerTrackingCapability"/>
+<link href="class_openxrspatialentityextension.html" rel="prev" title="OpenXRSpatialEntityExtension"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_openxrspatialentitytracker" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxrspatialentitytracker">
+<span id="class-openxrspatialentitytracker"></span><h1>OpenXRSpatialEntityTracker<a class="headerlink" href="#openxrspatialentitytracker" title="Link to this heading"></a></h1>
+<p><strong>Experimental:</strong> This class may be changed or removed in future versions.</p>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_xrpositionaltracker.html#class-xrpositionaltracker"><span class="std std-ref">XRPositionalTracker</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_xrtracker.html#class-xrtracker"><span class="std std-ref">XRTracker</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p><strong>Inherited By:</strong> <a class="reference internal" href="class_openxranchortracker.html#class-openxranchortracker"><span class="std std-ref">OpenXRAnchorTracker</span></a>, <a class="reference internal" href="class_openxrmarkertracker.html#class-openxrmarkertracker"><span class="std std-ref">OpenXRMarkerTracker</span></a>, <a class="reference internal" href="class_openxrplanetracker.html#class-openxrplanetracker"><span class="std std-ref">OpenXRPlaneTracker</span></a></p>
+<p>Base class for Positional trackers managed by OpenXR's spatial entity extensions.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>These are trackers created and managed by OpenXR's spatial entity extensions that give access to specific data related to OpenXR's spatial entities. They will always be of type <code class="docutils literal notranslate"><span class="pre">TRACKER_ANCHOR</span></code>.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrspatialentitytracker-property-entity"><span class="std std-ref">entity</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RID()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrspatialentitytracker-property-spatial-tracking-state"><span class="std std-ref">spatial_tracking_state</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_xrserver.html#enum-xrserver-trackertype"><span class="std std-ref">TrackerType</span></a></p></td>
+<td><p>type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code> (overrides <a class="reference internal" href="class_xrtracker.html#class-xrtracker-property-type"><span class="std std-ref">XRTracker</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="signals">
+<h2>Signals<a class="headerlink" href="#signals" title="Link to this heading"></a></h2>
+<p class="classref-signal" id="class-openxrspatialentitytracker-signal-spatial-tracking-state-changed"><strong>spatial_tracking_state_changed</strong>(spatial_tracking_state: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-openxrspatialentitytracker-signal-spatial-tracking-state-changed"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this signal. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-openxrspatialentitytracker-entitytrackingstate">enum <strong>EntityTrackingState</strong>: <a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-openxrspatialentitytracker-constant-entity-tracking-state-stopped"><a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a> <strong>ENTITY_TRACKING_STATE_STOPPED</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>This anchor has stopped tracking.</p>
+<p class="classref-enumeration-constant" id="class-openxrspatialentitytracker-constant-entity-tracking-state-paused"><a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a> <strong>ENTITY_TRACKING_STATE_PAUSED</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Tracking is currently paused.</p>
+<p class="classref-enumeration-constant" id="class-openxrspatialentitytracker-constant-entity-tracking-state-tracking"><a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a> <strong>ENTITY_TRACKING_STATE_TRACKING</strong> = <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>This anchor is currently being tracked.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-openxrspatialentitytracker-property-entity"><a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a> <strong>entity</strong> = <code class="docutils literal notranslate"><span class="pre">RID()</span></code> <a class="reference internal" href="#class-openxrspatialentitytracker-property-entity"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_entity</strong>(value: <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a> <strong>get_entity</strong>()</p></li>
+</ul>
+<p>The spatial entity associated with this tracker.</p>
+<p class="classref-property" id="class-openxrspatialentitytracker-property-spatial-tracking-state"><a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a> <strong>spatial_tracking_state</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code> <a class="reference internal" href="#class-openxrspatialentitytracker-property-spatial-tracking-state"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_spatial_tracking_state</strong>(value: <a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-openxrspatialentitytracker-entitytrackingstate"><span class="std std-ref">EntityTrackingState</span></a> <strong>get_spatial_tracking_state</strong>()</p></li>
+</ul>
+<p>The spatial tracking state for this tracker.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

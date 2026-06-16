@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ZIPPacker" property="og:title"/>
+
+
+
+<meta content="Inherits: RefCounted&lt; Object Allows the creation of ZIP files. Description: This class implements a writer that allows storing the multiple blobs in a ZIP archive. See also ZIPReader and PCKPack..." property="og:description"/>
+<meta content="Inherits: RefCounted&lt; Object Allows the creation of ZIP files. Description: This class implements a writer that allows storing the multiple blobs in a ZIP archive. See also ZIPReader and PCKPack..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ZIPPacker — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_zipreader.html" rel="next" title="ZIPReader"/>
+<link href="class_xrvrs.html" rel="prev" title="XRVRS"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_zippacker" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="zippacker">
+<span id="class-zippacker"></span><h1>ZIPPacker<a class="headerlink" href="#zippacker" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Allows the creation of ZIP files.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This class implements a writer that allows storing the multiple blobs in a ZIP archive. See also <a class="reference internal" href="class_zipreader.html#class-zipreader"><span class="std std-ref">ZIPReader</span></a> and <a class="reference internal" href="class_pckpacker.html#class-pckpacker"><span class="std std-ref">PCKPacker</span></a>.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a ZIP archive with a single file at its root.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">write_zip_file</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ZIPPacker</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">writer</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">"user://archive.zip"</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">err</span>
+<span class="w">    </span><span class="n">writer</span><span class="o">.</span><span class="nf">start_file</span><span class="p">(</span><span class="s2">"hello.txt"</span><span class="p">)</span>
+<span class="w">    </span><span class="n">writer</span><span class="o">.</span><span class="nf">write_file</span><span class="p">(</span><span class="s2">"Hello World"</span><span class="o">.</span><span class="nf">to_utf8_buffer</span><span class="p">())</span>
+<span class="w">    </span><span class="n">writer</span><span class="o">.</span><span class="nf">close_file</span><span class="p">()</span>
+<span class="w">    </span><span class="n">writer</span><span class="o">.</span><span class="nf">close</span><span class="p">()</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-zippacker-property-compression-level"><span class="std std-ref">compression_level</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-zippacker-method-close"><span class="std std-ref">close</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-zippacker-method-close-file"><span class="std std-ref">close_file</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-zippacker-method-open"><span class="std std-ref">open</span></a>(path: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, append: <a class="reference internal" href="#enum-zippacker-zipappend"><span class="std std-ref">ZipAppend</span></a> = 0)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-zippacker-method-start-file"><span class="std std-ref">start_file</span></a>(path: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-zippacker-method-write-file"><span class="std std-ref">write_file</span></a>(data: <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-zippacker-zipappend">enum <strong>ZipAppend</strong>: <a class="reference internal" href="#enum-zippacker-zipappend"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-append-create"><a class="reference internal" href="#enum-zippacker-zipappend"><span class="std std-ref">ZipAppend</span></a> <strong>APPEND_CREATE</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Create a new zip archive at the given path.</p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-append-createafter"><a class="reference internal" href="#enum-zippacker-zipappend"><span class="std std-ref">ZipAppend</span></a> <strong>APPEND_CREATEAFTER</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Append a new zip archive to the end of the already existing file at the given path.</p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-append-addinzip"><a class="reference internal" href="#enum-zippacker-zipappend"><span class="std std-ref">ZipAppend</span></a> <strong>APPEND_ADDINZIP</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Add new files to the existing zip archive at the given path.</p>
+<p class="classref-enumeration" id="enum-zippacker-compressionlevel">enum <strong>CompressionLevel</strong>: <a class="reference internal" href="#enum-zippacker-compressionlevel"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-compression-default"><a class="reference internal" href="#enum-zippacker-compressionlevel"><span class="std std-ref">CompressionLevel</span></a> <strong>COMPRESSION_DEFAULT</strong> = <code class="docutils literal notranslate"><span class="pre">-1</span></code></p>
+<p>Start a file with the default Deflate compression level (<code class="docutils literal notranslate"><span class="pre">6</span></code>). This is a good compromise between speed and file size.</p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-compression-none"><a class="reference internal" href="#enum-zippacker-compressionlevel"><span class="std std-ref">CompressionLevel</span></a> <strong>COMPRESSION_NONE</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Start a file with no compression. This is also known as the "Store" compression mode and is the fastest method of packing files inside a ZIP archive. Consider using this mode for files that are already compressed (such as JPEG, PNG, MP3, or Ogg Vorbis files).</p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-compression-fast"><a class="reference internal" href="#enum-zippacker-compressionlevel"><span class="std std-ref">CompressionLevel</span></a> <strong>COMPRESSION_FAST</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Start a file with the fastest Deflate compression level (<code class="docutils literal notranslate"><span class="pre">1</span></code>). This is fast to compress, but results in larger file sizes than <a class="reference internal" href="#class-zippacker-constant-compression-default"><span class="std std-ref">COMPRESSION_DEFAULT</span></a>. Decompression speed is generally unaffected by the chosen compression level.</p>
+<p class="classref-enumeration-constant" id="class-zippacker-constant-compression-best"><a class="reference internal" href="#enum-zippacker-compressionlevel"><span class="std std-ref">CompressionLevel</span></a> <strong>COMPRESSION_BEST</strong> = <code class="docutils literal notranslate"><span class="pre">9</span></code></p>
+<p>Start a file with the best Deflate compression level (<code class="docutils literal notranslate"><span class="pre">9</span></code>). This is slow to compress, but results in smaller file sizes than <a class="reference internal" href="#class-zippacker-constant-compression-default"><span class="std std-ref">COMPRESSION_DEFAULT</span></a>. Decompression speed is generally unaffected by the chosen compression level.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-zippacker-property-compression-level"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>compression_level</strong> = <code class="docutils literal notranslate"><span class="pre">-1</span></code> <a class="reference internal" href="#class-zippacker-property-compression-level"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_compression_level</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_compression_level</strong>()</p></li>
+</ul>
+<p>The compression level used when <a class="reference internal" href="#class-zippacker-method-start-file"><span class="std std-ref">start_file()</span></a> is called. Use <a class="reference internal" href="#enum-zippacker-compressionlevel"><span class="std std-ref">CompressionLevel</span></a> as a reference.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-zippacker-method-close"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>close</strong>() <a class="reference internal" href="#class-zippacker-method-close"><span class="std std-ref">🔗</span></a></p>
+<p>Closes the underlying resources used by this instance.</p>
+<p class="classref-method" id="class-zippacker-method-close-file"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>close_file</strong>() <a class="reference internal" href="#class-zippacker-method-close-file"><span class="std std-ref">🔗</span></a></p>
+<p>Stops writing to a file within the archive.</p>
+<p>It will fail if there is no open file.</p>
+<p class="classref-method" id="class-zippacker-method-open"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>open</strong>(path: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, append: <a class="reference internal" href="#enum-zippacker-zipappend"><span class="std std-ref">ZipAppend</span></a> = 0) <a class="reference internal" href="#class-zippacker-method-open"><span class="std std-ref">🔗</span></a></p>
+<p>Opens a zip file for writing at the given path using the specified write mode.</p>
+<p>This must be called before everything else.</p>
+<p class="classref-method" id="class-zippacker-method-start-file"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>start_file</strong>(path: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-zippacker-method-start-file"><span class="std std-ref">🔗</span></a></p>
+<p>Starts writing to a file within the archive. Only one file can be written at the same time.</p>
+<p>Must be called after <a class="reference internal" href="#class-zippacker-method-open"><span class="std std-ref">open()</span></a>.</p>
+<p class="classref-method" id="class-zippacker-method-write-file"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>write_file</strong>(data: <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>) <a class="reference internal" href="#class-zippacker-method-write-file"><span class="std std-ref">🔗</span></a></p>
+<p>Write the given <code class="docutils literal notranslate"><span class="pre">data</span></code> to the file.</p>
+<p>Needs to be called after <a class="reference internal" href="#class-zippacker-method-start-file"><span class="std std-ref">start_file()</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

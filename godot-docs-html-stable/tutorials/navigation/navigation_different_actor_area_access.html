@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Support different actor area access" property="og:title"/>
+
+
+
+<meta content="A typical example for different area access in gameplay are doors that connect rooms with different navigation meshes and are not accessible by all actors all the time. Add a NavigationRegion at th..." property="og:description"/>
+<meta content="A typical example for different area access in gameplay are doors that connect rooms with different navigation meshes and are not accessible by all actors all the time. Add a NavigationRegion at th..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Support different actor area access — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="navigation_optimizing_performance.html" rel="next" title="Optimizing Navigation Performance"/>
+<link href="navigation_different_actor_locomotion.html" rel="prev" title="Support different actor locomotion"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/navigation/navigation_different_actor_area_access" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="support-different-actor-area-access">
+<span id="doc-navigation-different-actor-area-access"></span><h1>Support different actor area access<a class="headerlink" href="#support-different-actor-area-access" title="Link to this heading"></a></h1>
+<img alt="../../_images/nav_actor_doors.png" src="../../_images/nav_actor_doors.png"/>
+<p>A typical example for different area access in gameplay are doors that connect rooms
+with different navigation meshes and are not accessible by all actors all the time.</p>
+<p>Add a NavigationRegion at the door position.
+Add an appropriate navigation mesh the size of the door that can connect with the surrounding navigation meshes.
+In order to control access, enable / disable navigation layer bits so path queries
+that use the same navigation layer bits can find a path through the "door" navigation mesh.</p>
+<p>The bitmask can act as a set of door keys or abilities and only actors with at least
+one matching and enabled bit layer in their pathfinding query will find a path through this region.
+See <a class="reference internal" href="navigation_using_navigationlayers.html#doc-navigation-advanced-using-navigationlayers"><span class="std std-ref">Using NavigationLayers</span></a> for more information on how to work with navigation layers and the bitmask.</p>
+<img alt="../../_images/nav_actor_doorbitmask.png" src="../../_images/nav_actor_doorbitmask.png"/>
+<p>The entire "door" region can also be enabled / disable if required but if disabled will block access for all path queries.</p>
+<p>Prefer working with navigation layers in path queries whenever possible as enabling or disabling
+navigation layers on a region triggers a costly recalculation of the navigation map connections.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Changing navigation layers will only affect new path queries but not automatically update existing paths.</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

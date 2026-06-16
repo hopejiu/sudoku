@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="PanoramaSkyMaterial" property="og:title"/>
+
+
+
+<meta content="Inherits: Material&lt; Resource&lt; RefCounted&lt; Object A material that provides a special texture to a Sky, usually an HDR panorama. Description: A resource referenced in a Sky that is used to d..." property="og:description"/>
+<meta content="Inherits: Material&lt; Resource&lt; RefCounted&lt; Object A material that provides a special texture to a Sky, usually an HDR panorama. Description: A resource referenced in a Sky that is used to d..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) PanoramaSkyMaterial — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_particleprocessmaterial.html" rel="next" title="ParticleProcessMaterial"/>
+<link href="class_packedscene.html" rel="prev" title="PackedScene"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_panoramaskymaterial" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="panoramaskymaterial">
+<span id="class-panoramaskymaterial"></span><h1>PanoramaSkyMaterial<a class="headerlink" href="#panoramaskymaterial" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A material that provides a special texture to a <a class="reference internal" href="class_sky.html#class-sky"><span class="std std-ref">Sky</span></a>, usually an HDR panorama.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A resource referenced in a <a class="reference internal" href="class_sky.html#class-sky"><span class="std std-ref">Sky</span></a> that is used to draw a background. <strong>PanoramaSkyMaterial</strong> functions similar to skyboxes in other engines, except it uses an equirectangular sky map instead of a <a class="reference internal" href="class_cubemap.html#class-cubemap"><span class="std std-ref">Cubemap</span></a>.</p>
+<p>Using an HDR panorama is strongly recommended for accurate, high-quality reflections. Godot supports the Radiance HDR (<code class="docutils literal notranslate"><span class="pre">.hdr</span></code>) and OpenEXR (<code class="docutils literal notranslate"><span class="pre">.exr</span></code>) image formats for this purpose.</p>
+<p>You can use <a class="reference external" href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this tool</a> to convert a cubemap to an equirectangular sky map.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-panoramaskymaterial-property-energy-multiplier"><span class="std std-ref">energy_multiplier</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-panoramaskymaterial-property-filter"><span class="std std-ref">filter</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-panoramaskymaterial-property-panorama"><span class="std std-ref">panorama</span></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-panoramaskymaterial-property-energy-multiplier"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>energy_multiplier</strong> = <code class="docutils literal notranslate"><span class="pre">1.0</span></code> <a class="reference internal" href="#class-panoramaskymaterial-property-energy-multiplier"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_energy_multiplier</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_energy_multiplier</strong>()</p></li>
+</ul>
+<p>The sky's overall brightness multiplier. Higher values result in a brighter sky.</p>
+<p class="classref-property" id="class-panoramaskymaterial-property-filter"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>filter</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-panoramaskymaterial-property-filter"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_filtering_enabled</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_filtering_enabled</strong>()</p></li>
+</ul>
+<p>A boolean value to determine if the background texture should be filtered or not.</p>
+<p class="classref-property" id="class-panoramaskymaterial-property-panorama"><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a> <strong>panorama</strong> <a class="reference internal" href="#class-panoramaskymaterial-property-panorama"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_panorama</strong>(value: <a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a> <strong>get_panorama</strong>()</p></li>
+</ul>
+<p><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a> to be applied to the <strong>PanoramaSkyMaterial</strong>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

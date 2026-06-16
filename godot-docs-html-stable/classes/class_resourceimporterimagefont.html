@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ResourceImporterImageFont" property="og:title"/>
+
+
+
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports a bitmap font where all glyphs have the same width and height. Description: This image-based workflow can be easier to use than Resource..." property="og:description"/>
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports a bitmap font where all glyphs have the same width and height. Description: This image-based workflow can be easier to use than Resource..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ResourceImporterImageFont — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_resourceimporterlayeredtexture.html" rel="next" title="ResourceImporterLayeredTexture"/>
+<link href="class_resourceimporterimage.html" rel="prev" title="ResourceImporterImage"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_resourceimporterimagefont" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="resourceimporterimagefont">
+<span id="class-resourceimporterimagefont"></span><h1>ResourceImporterImageFont<a class="headerlink" href="#resourceimporterimagefont" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_resourceimporter.html#class-resourceimporter"><span class="std std-ref">ResourceImporter</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Imports a bitmap font where all glyphs have the same width and height.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This image-based workflow can be easier to use than <a class="reference internal" href="class_resourceimporterbmfont.html#class-resourceimporterbmfont"><span class="std std-ref">ResourceImporterBMFont</span></a>, but it requires all glyphs to have the same width and height, glyph advances and drawing offsets can be customized. This makes <strong>ResourceImporterImageFont</strong> most suited to fixed-width fonts.</p>
+<p>See also <a class="reference internal" href="class_resourceimporterdynamicfont.html#class-resourceimporterdynamicfont"><span class="std std-ref">ResourceImporterDynamicFont</span></a>.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="../tutorials/ui/gui_using_fonts.html#bitmap-fonts">Bitmap fonts - Using fonts</a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-ascent"><span class="std std-ref">ascent</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_rect2i.html#class-rect2i"><span class="std std-ref">Rect2i</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-character-margin"><span class="std std-ref">character_margin</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rect2i(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-character-ranges"><span class="std std-ref">character_ranges</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PackedStringArray()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-columns"><span class="std std-ref">columns</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-compress"><span class="std std-ref">compress</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-descent"><span class="std std-ref">descent</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-fallbacks"><span class="std std-ref">fallbacks</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_rect2i.html#class-rect2i"><span class="std std-ref">Rect2i</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-image-margin"><span class="std std-ref">image_margin</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rect2i(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-kerning-pairs"><span class="std std-ref">kerning_pairs</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PackedStringArray()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-rows"><span class="std std-ref">rows</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterimagefont-property-scaling-mode"><span class="std std-ref">scaling_mode</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-resourceimporterimagefont-property-ascent"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>ascent</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-ascent"><span class="std std-ref">🔗</span></a></p>
+<p>Font ascent (number of pixels above the baseline). If set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, half of the character height is used.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-character-margin"><a class="reference internal" href="class_rect2i.html#class-rect2i"><span class="std std-ref">Rect2i</span></a> <strong>character_margin</strong> = <code class="docutils literal notranslate"><span class="pre">Rect2i(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-character-margin"><span class="std std-ref">🔗</span></a></p>
+<p>Margin applied around every imported glyph. If your font image contains guides (in the form of lines between glyphs) or if spacing between characters appears incorrect, try adjusting <a class="reference internal" href="#class-resourceimporterimagefont-property-character-margin"><span class="std std-ref">character_margin</span></a>.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-character-ranges"><a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a> <strong>character_ranges</strong> = <code class="docutils literal notranslate"><span class="pre">PackedStringArray()</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-character-ranges"><span class="std std-ref">🔗</span></a></p>
+<p>The character ranges to import from the font image. This is an array that maps each position on the image (in tile coordinates, not pixels). The font atlas is traversed from left to right and top to bottom. Characters can be specified with decimal numbers (126), hexadecimal numbers (<code class="docutils literal notranslate"><span class="pre">0x007e</span></code> or <code class="docutils literal notranslate"><span class="pre">U+007e</span></code>), or between single quotes (<code class="docutils literal notranslate"><span class="pre">'~'</span></code>). Ranges can be specified with a hyphen between characters.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">0-127</span></code> represents the full ASCII range. It can also be written as <code class="docutils literal notranslate"><span class="pre">0x0000-0x007f</span></code> (or <code class="docutils literal notranslate"><span class="pre">U+0000-U+007f</span></code>). As another example, <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">'-'~'</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">32-126</span></code> and represents the range of printable (visible) ASCII characters.</p>
+<p>For any range, the character advance and offset can be customized by appending three space-separated integer values (additional advance, x offset, y offset) to the end. For example <code class="docutils literal notranslate"><span class="pre">'a'-'b'</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">2</span></code> sets the advance to <code class="docutils literal notranslate"><span class="pre">char_width</span> <span class="pre">+</span> <span class="pre">4</span></code> and offset to <code class="docutils literal notranslate"><span class="pre">Vector2(5,</span> <span class="pre">2)</span></code> for both <cite>a</cite> and <cite>b</cite> characters.</p>
+<p><strong>Note:</strong> The overall number of characters must not exceed the number of <a class="reference internal" href="#class-resourceimporterimagefont-property-columns"><span class="std std-ref">columns</span></a> multiplied by <a class="reference internal" href="#class-resourceimporterimagefont-property-rows"><span class="std std-ref">rows</span></a>. Otherwise, the font will fail to import.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a> for more details.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-columns"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>columns</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-columns"><span class="std std-ref">🔗</span></a></p>
+<p>Number of columns in the font image. See also <a class="reference internal" href="#class-resourceimporterimagefont-property-rows"><span class="std std-ref">rows</span></a>.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-compress"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>compress</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-compress"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, uses lossless compression for the resulting font.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-descent"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>descent</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-descent"><span class="std std-ref">🔗</span></a></p>
+<p>Font descent (number of pixels below the baseline). If set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, half of the character height is used.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-fallbacks"><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a> <strong>fallbacks</strong> = <code class="docutils literal notranslate"><span class="pre">[]</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-fallbacks"><span class="std std-ref">🔗</span></a></p>
+<p>List of font fallbacks to use if a glyph isn't found in this bitmap font. Fonts at the beginning of the array are attempted first.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-image-margin"><a class="reference internal" href="class_rect2i.html#class-rect2i"><span class="std std-ref">Rect2i</span></a> <strong>image_margin</strong> = <code class="docutils literal notranslate"><span class="pre">Rect2i(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-image-margin"><span class="std std-ref">🔗</span></a></p>
+<p>Margin to cut on the sides of the entire image. This can be used to cut parts of the image that contain attribution information or similar.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-kerning-pairs"><a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a> <strong>kerning_pairs</strong> = <code class="docutils literal notranslate"><span class="pre">PackedStringArray()</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-kerning-pairs"><span class="std std-ref">🔗</span></a></p>
+<p>Kerning pairs for the font. Kerning pair adjust the spacing between two characters.</p>
+<p>Each string consist of three space separated values: "from" string, "to" string and integer offset. Each combination form the two string for a kerning pair, e.g, <code class="docutils literal notranslate"><span class="pre">ab</span> <span class="pre">cd</span> <span class="pre">-3</span></code> will create kerning pairs <code class="docutils literal notranslate"><span class="pre">ac</span></code>, <code class="docutils literal notranslate"><span class="pre">ad</span></code>, <code class="docutils literal notranslate"><span class="pre">bc</span></code>, and <code class="docutils literal notranslate"><span class="pre">bd</span></code> with offset <code class="docutils literal notranslate"><span class="pre">-3</span></code>. <code class="docutils literal notranslate"><span class="pre">\uXXXX</span></code> escape sequences can be used to add Unicode characters.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a> for more details.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-rows"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>rows</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-rows"><span class="std std-ref">🔗</span></a></p>
+<p>Number of rows in the font image. See also <a class="reference internal" href="#class-resourceimporterimagefont-property-columns"><span class="std std-ref">columns</span></a>.</p>
+<p class="classref-property" id="class-resourceimporterimagefont-property-scaling-mode"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>scaling_mode</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code> <a class="reference internal" href="#class-resourceimporterimagefont-property-scaling-mode"><span class="std std-ref">🔗</span></a></p>
+<p>Font scaling mode.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

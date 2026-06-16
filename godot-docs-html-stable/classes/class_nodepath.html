@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="NodePath" property="og:title"/>
+
+
+
+<meta content="A pre-parsed scene tree path. Description: The NodePath built-in Variant type represents a path to a node or property in a hierarchy of nodes. It is designed to be efficiently passed into many buil..." property="og:description"/>
+<meta content="A pre-parsed scene tree path. Description: The NodePath built-in Variant type represents a path to a node or property in a hierarchy of nodes. It is designed to be efficiently passed into many buil..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) NodePath — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_packedbytearray.html" rel="next" title="PackedByteArray"/>
+<link href="class_int.html" rel="prev" title="int"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_nodepath" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="nodepath">
+<span id="class-nodepath"></span><h1>NodePath<a class="headerlink" href="#nodepath" title="Link to this heading"></a></h1>
+<p>A pre-parsed scene tree path.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The <strong>NodePath</strong> built-in <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> type represents a path to a node or property in a hierarchy of nodes. It is designed to be efficiently passed into many built-in methods (such as <a class="reference internal" href="class_node.html#class-node-method-get-node"><span class="std std-ref">Node.get_node()</span></a>, <a class="reference internal" href="class_object.html#class-object-method-set-indexed"><span class="std std-ref">Object.set_indexed()</span></a>, <a class="reference internal" href="class_tween.html#class-tween-method-tween-property"><span class="std std-ref">Tween.tween_property()</span></a>, etc.) without a hard dependence on the node or property they point to.</p>
+<p>A node path is represented as a <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> composed of slash-separated (<code class="docutils literal notranslate"><span class="pre">/</span></code>) node names and colon-separated (<code class="docutils literal notranslate"><span class="pre">:</span></code>) property names (also called "subnames"). Similar to a filesystem path, <code class="docutils literal notranslate"><span class="pre">".."</span></code> and <code class="docutils literal notranslate"><span class="pre">"."</span></code> are special node names. They refer to the parent node and the current node, respectively.</p>
+<p>The following examples are paths relative to the current node:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="s s-NodePath">^"A"</span><span class="w">     </span><span class="c1"># Points to the direct child A.</span>
+<span class="s s-NodePath">^"A/B"</span><span class="w">   </span><span class="c1"># Points to A's child B.</span>
+<span class="s s-NodePath">^"."</span><span class="w">     </span><span class="c1"># Points to the current node.</span>
+<span class="s s-NodePath">^".."</span><span class="w">    </span><span class="c1"># Points to the parent node.</span>
+<span class="s s-NodePath">^"../C"</span><span class="w">  </span><span class="c1"># Points to the sibling node C.</span>
+<span class="s s-NodePath">^"../.."</span><span class="w"> </span><span class="c1"># Points to the grandparent node.</span>
+</pre></div>
+</div>
+<p>A leading slash means the path is absolute, and begins from the <a class="reference internal" href="class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="s s-NodePath">^"/root"</span><span class="w">            </span><span class="c1"># Points to the SceneTree's root Window.</span>
+<span class="s s-NodePath">^"/root/Title"</span><span class="w">      </span><span class="c1"># May point to the main scene's root node named "Title".</span>
+<span class="s s-NodePath">^"/root/Global"</span><span class="w">     </span><span class="c1"># May point to an autoloaded node or scene named "Global".</span>
+</pre></div>
+</div>
+<p>Despite their name, node paths may also point to a property:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="s s-NodePath">^":position"</span><span class="w">           </span><span class="c1"># Points to this object's position.</span>
+<span class="s s-NodePath">^":position:x"</span><span class="w">         </span><span class="c1"># Points to this object's position in the x axis.</span>
+<span class="s s-NodePath">^"Camera3D:rotation:y"</span><span class="w"> </span><span class="c1"># Points to the child Camera3D and its y rotation.</span>
+<span class="s s-NodePath">^"/root:size:x"</span><span class="w">        </span><span class="c1"># Points to the root Window and its width.</span>
+</pre></div>
+</div>
+<p>In some situations, it's possible to omit the leading <code class="docutils literal notranslate"><span class="pre">:</span></code> when pointing to an object's property. As an example, this is the case with <a class="reference internal" href="class_object.html#class-object-method-set-indexed"><span class="std std-ref">Object.set_indexed()</span></a> and <a class="reference internal" href="class_tween.html#class-tween-method-tween-property"><span class="std std-ref">Tween.tween_property()</span></a>, as those methods call <a class="reference internal" href="#class-nodepath-method-get-as-property-path"><span class="std std-ref">get_as_property_path()</span></a> under the hood. However, it's generally recommended to keep the <code class="docutils literal notranslate"><span class="pre">:</span></code> prefix.</p>
+<p>Node paths cannot check whether they are valid and may point to nodes or properties that do not exist. Their meaning depends entirely on the context in which they're used.</p>
+<p>You usually do not have to worry about the <strong>NodePath</strong> type, as strings are automatically converted to the type when necessary. There are still times when defining node paths is useful. For example, exported <strong>NodePath</strong> properties allow you to easily select any node within the currently edited scene. They are also automatically updated when moving, renaming or deleting nodes in the scene tree editor. See also <a class="reference internal" href="class_%40gdscript.html#class-gdscript-annotation-export-node-path"><span class="std std-ref">@GDScript.@export_node_path</span></a>.</p>
+<p>See also <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, which is a similar type designed for optimized strings.</p>
+<p><strong>Note:</strong> In a boolean context, a <strong>NodePath</strong> will evaluate to <code class="docutils literal notranslate"><span class="pre">false</span></code> if it is empty (<code class="docutils literal notranslate"><span class="pre">NodePath("")</span></code>). Otherwise, a <strong>NodePath</strong> will always evaluate to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are notable differences when using this API with C#. See <a class="reference internal" href="../tutorials/scripting/c_sharp/c_sharp_differences.html#doc-c-sharp-differences"><span class="std std-ref">C# API differences to GDScript</span></a> for more information.</p>
+</div>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2729">2D Role Playing Game (RPG) Demo</a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="constructors">
+<h2>Constructors<a class="headerlink" href="#constructors" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-constructor-nodepath"><span class="std std-ref">NodePath</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-constructor-nodepath"><span class="std std-ref">NodePath</span></a>(from: <a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-constructor-nodepath"><span class="std std-ref">NodePath</span></a>(from: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-as-property-path"><span class="std std-ref">get_as_property_path</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-concatenated-names"><span class="std std-ref">get_concatenated_names</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-concatenated-subnames"><span class="std std-ref">get_concatenated_subnames</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-name"><span class="std std-ref">get_name</span></a>(idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-name-count"><span class="std std-ref">get_name_count</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-subname"><span class="std std-ref">get_subname</span></a>(idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-get-subname-count"><span class="std std-ref">get_subname_count</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-hash"><span class="std std-ref">hash</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-is-absolute"><span class="std std-ref">is_absolute</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-is-empty"><span class="std std-ref">is_empty</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-method-slice"><span class="std std-ref">slice</span></a>(begin: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, end: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 2147483647) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-operator-neq-nodepath"><span class="std std-ref">operator !=</span></a>(right: <a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-nodepath-operator-eq-nodepath"><span class="std std-ref">operator ==</span></a>(right: <a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="constructor-descriptions">
+<h2>Constructor Descriptions<a class="headerlink" href="#constructor-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-constructor" id="class-nodepath-constructor-nodepath"><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a> <strong>NodePath</strong>() <a class="reference internal" href="#class-nodepath-constructor-nodepath"><span class="std std-ref">🔗</span></a></p>
+<p>Constructs an empty <strong>NodePath</strong>.</p>
+<p class="classref-constructor"><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a> <strong>NodePath</strong>(from: <a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a>)</p>
+<p>Constructs a <strong>NodePath</strong> as a copy of the given <strong>NodePath</strong>.</p>
+<p class="classref-constructor"><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a> <strong>NodePath</strong>(from: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p>
+<p>Constructs a <strong>NodePath</strong> from a <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>. The created path is absolute if prefixed with a slash (see <a class="reference internal" href="#class-nodepath-method-is-absolute"><span class="std std-ref">is_absolute()</span></a>).</p>
+<p>The "subnames" optionally included after the path to the target node can point to properties, and can also be nested.</p>
+<p>The following strings can be valid node paths:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Points to the Sprite2D node.</span>
+<span class="s2">"Level/RigidBody2D/Sprite2D"</span>
+<span class="c1"># Points to the Sprite2D node and its "texture" resource.</span>
+<span class="c1"># get_node() would retrieve the Sprite2D, while get_node_and_resource()</span>
+<span class="c1"># would retrieve both the Sprite2D node and the "texture" resource.</span>
+<span class="s2">"Level/RigidBody2D/Sprite2D:texture"</span>
+<span class="c1"># Points to the Sprite2D node and its "position" property.</span>
+<span class="s2">"Level/RigidBody2D/Sprite2D:position"</span>
+<span class="c1"># Points to the Sprite2D node and the "x" component of its "position" property.</span>
+<span class="s2">"Level/RigidBody2D/Sprite2D:position:x"</span>
+<span class="c1"># Points to the RigidBody2D node as an absolute path beginning from the SceneTree.</span>
+<span class="s2">"/root/Level/RigidBody2D"</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> In GDScript, it's also possible to convert a constant string into a node path by prefixing it with <code class="docutils literal notranslate"><span class="pre">^</span></code>. <code class="docutils literal notranslate"><span class="pre">^"path/to/node"</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">NodePath("path/to/node")</span></code>.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-nodepath-method-get-as-property-path"><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a> <strong>get_as_property_path</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-as-property-path"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a copy of this node path with a colon character (<code class="docutils literal notranslate"><span class="pre">:</span></code>) prefixed, transforming it to a pure property path with no node names (relative to the current node).</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># node_path points to the "x" property of the child node named "position".</span>
+<span class="k">var</span><span class="w"> </span><span class="n">node_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s s-NodePath">^"position:x"</span>
+<span class="c1"># property_path points to the "position" in the "x" axis of this node.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">property_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node_path</span><span class="o">.</span><span class="nf">get_as_property_path</span><span class="p">()</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">property_path</span><span class="p">)</span><span class="w"> </span><span class="c1"># Prints ":position:x"</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// nodePath points to the "x" property of the child node named "position".</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">nodePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodePath</span><span class="p">(</span><span class="s">"position:x"</span><span class="p">);</span>
+<span class="c1">// propertyPath points to the "position" in the "x" axis of this node.</span>
+<span class="n">NodePath</span><span class="w"> </span><span class="n">propertyPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nodePath</span><span class="p">.</span><span class="n">GetAsPropertyPath</span><span class="p">();</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">propertyPath</span><span class="p">);</span><span class="w"> </span><span class="c1">// Prints ":position:x"</span>
+</pre></div>
+</div>
+</div></div>
+<p class="classref-method" id="class-nodepath-method-get-concatenated-names"><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a> <strong>get_concatenated_names</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-concatenated-names"><span class="std std-ref">🔗</span></a></p>
+<p>Returns all node names concatenated with a slash character (<code class="docutils literal notranslate"><span class="pre">/</span></code>) as a single <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>.</p>
+<p class="classref-method" id="class-nodepath-method-get-concatenated-subnames"><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a> <strong>get_concatenated_subnames</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-concatenated-subnames"><span class="std std-ref">🔗</span></a></p>
+<p>Returns all property subnames concatenated with a colon character (<code class="docutils literal notranslate"><span class="pre">:</span></code>) as a single <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">node_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s s-NodePath">^"Sprite2D:texture:resource_name"</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">node_path</span><span class="o">.</span><span class="nf">get_concatenated_subnames</span><span class="p">())</span><span class="w"> </span><span class="c1"># Prints "texture:resource_name"</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">nodePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodePath</span><span class="p">(</span><span class="s">"Sprite2D:texture:resource_name"</span><span class="p">);</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">nodePath</span><span class="p">.</span><span class="n">GetConcatenatedSubnames</span><span class="p">());</span><span class="w"> </span><span class="c1">// Prints "texture:resource_name"</span>
+</pre></div>
+</div>
+</div></div>
+<p class="classref-method" id="class-nodepath-method-get-name"><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a> <strong>get_name</strong>(idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-name"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the node name indicated by <code class="docutils literal notranslate"><span class="pre">idx</span></code>, starting from 0. If <code class="docutils literal notranslate"><span class="pre">idx</span></code> is out of bounds, an error is generated. See also <a class="reference internal" href="#class-nodepath-method-get-subname-count"><span class="std std-ref">get_subname_count()</span></a> and <a class="reference internal" href="#class-nodepath-method-get-name-count"><span class="std std-ref">get_name_count()</span></a>.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">sprite_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">"../RigidBody2D/Sprite2D"</span><span class="p">)</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">sprite_path</span><span class="o">.</span><span class="nf">get_name</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="c1"># Prints ".."</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">sprite_path</span><span class="o">.</span><span class="nf">get_name</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="c1"># Prints "RigidBody2D"</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">sprite_path</span><span class="o">.</span><span class="nf">get_name</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="c1"># Prints "Sprite"</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">spritePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodePath</span><span class="p">(</span><span class="s">"../RigidBody2D/Sprite2D"</span><span class="p">);</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">spritePath</span><span class="p">.</span><span class="n">GetName</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// Prints ".."</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">spritePath</span><span class="p">.</span><span class="n">GetName</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span><span class="c1">// Prints "PathFollow2D"</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">spritePath</span><span class="p">.</span><span class="n">GetName</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// Prints "Sprite"</span>
+</pre></div>
+</div>
+</div></div>
+<p class="classref-method" id="class-nodepath-method-get-name-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_name_count</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-name-count"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the number of node names in the path. Property subnames are not included.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">"../RigidBody2D/Sprite2D:texture"</span></code> contains 3 node names.</p>
+<p class="classref-method" id="class-nodepath-method-get-subname"><a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a> <strong>get_subname</strong>(idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-subname"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the property name indicated by <code class="docutils literal notranslate"><span class="pre">idx</span></code>, starting from 0. If <code class="docutils literal notranslate"><span class="pre">idx</span></code> is out of bounds, an error is generated. See also <a class="reference internal" href="#class-nodepath-method-get-subname-count"><span class="std std-ref">get_subname_count()</span></a>.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">path_to_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">"Sprite2D:texture:resource_name"</span><span class="p">)</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">path_to_name</span><span class="o">.</span><span class="nf">get_subname</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="c1"># Prints "texture"</span>
+<span class="nb nb-Function">print</span><span class="p">(</span><span class="n">path_to_name</span><span class="o">.</span><span class="nf">get_subname</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="c1"># Prints "resource_name"</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">pathToName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodePath</span><span class="p">(</span><span class="s">"Sprite2D:texture:resource_name"</span><span class="p">);</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">pathToName</span><span class="p">.</span><span class="n">GetSubname</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// Prints "texture"</span>
+<span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">pathToName</span><span class="p">.</span><span class="n">GetSubname</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span><span class="c1">// Prints "resource_name"</span>
+</pre></div>
+</div>
+</div></div>
+<p class="classref-method" id="class-nodepath-method-get-subname-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_subname_count</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-get-subname-count"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the number of property names ("subnames") in the path. Each subname in the node path is listed after a colon character (<code class="docutils literal notranslate"><span class="pre">:</span></code>).</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">"Level/RigidBody2D/Sprite2D:texture:resource_name"</span></code> contains 2 subnames.</p>
+<p class="classref-method" id="class-nodepath-method-hash"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>hash</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-hash"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the 32-bit hash value representing the node path's contents.</p>
+<p><strong>Note:</strong> Node paths with equal hash values are <em>not</em> guaranteed to be the same, as a result of hash collisions. Node paths with different hash values are guaranteed to be different.</p>
+<p class="classref-method" id="class-nodepath-method-is-absolute"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_absolute</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-is-absolute"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the node path is absolute. Unlike a relative path, an absolute path is represented by a leading slash character (<code class="docutils literal notranslate"><span class="pre">/</span></code>) and always begins from the <a class="reference internal" href="class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>. It can be used to reliably access nodes from the root node (e.g. <code class="docutils literal notranslate"><span class="pre">"/root/Global"</span></code> if an autoload named "Global" exists).</p>
+<p class="classref-method" id="class-nodepath-method-is-empty"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_empty</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-is-empty"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the node path has been constructed from an empty <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> (<code class="docutils literal notranslate"><span class="pre">""</span></code>).</p>
+<p class="classref-method" id="class-nodepath-method-slice"><a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a> <strong>slice</strong>(begin: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, end: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 2147483647) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-nodepath-method-slice"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the slice of the <strong>NodePath</strong>, from <code class="docutils literal notranslate"><span class="pre">begin</span></code> (inclusive) to <code class="docutils literal notranslate"><span class="pre">end</span></code> (exclusive), as a new <strong>NodePath</strong>.</p>
+<p>The absolute value of <code class="docutils literal notranslate"><span class="pre">begin</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> will be clamped to the sum of <a class="reference internal" href="#class-nodepath-method-get-name-count"><span class="std std-ref">get_name_count()</span></a> and <a class="reference internal" href="#class-nodepath-method-get-subname-count"><span class="std std-ref">get_subname_count()</span></a>, so the default value for <code class="docutils literal notranslate"><span class="pre">end</span></code> makes it slice to the end of the <strong>NodePath</strong> by default (i.e. <code class="docutils literal notranslate"><span class="pre">path.slice(1)</span></code> is a shorthand for <code class="docutils literal notranslate"><span class="pre">path.slice(1,</span> <span class="pre">path.get_name_count()</span> <span class="pre">+</span> <span class="pre">path.get_subname_count())</span></code>).</p>
+<p>If either <code class="docutils literal notranslate"><span class="pre">begin</span></code> or <code class="docutils literal notranslate"><span class="pre">end</span></code> are negative, they will be relative to the end of the <strong>NodePath</strong> (i.e. <code class="docutils literal notranslate"><span class="pre">path.slice(0,</span> <span class="pre">-2)</span></code> is a shorthand for <code class="docutils literal notranslate"><span class="pre">path.slice(0,</span> <span class="pre">path.get_name_count()</span> <span class="pre">+</span> <span class="pre">path.get_subname_count()</span> <span class="pre">-</span> <span class="pre">2)</span></code>).</p>
+</section>
+<section class="classref-descriptions-group" id="operator-descriptions">
+<h2>Operator Descriptions<a class="headerlink" href="#operator-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-operator" id="class-nodepath-operator-neq-nodepath"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>operator !=</strong>(right: <a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a>) <a class="reference internal" href="#class-nodepath-operator-neq-nodepath"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if two node paths are not equal.</p>
+<p class="classref-operator" id="class-nodepath-operator-eq-nodepath"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>operator ==</strong>(right: <a class="reference internal" href="#class-nodepath"><span class="std std-ref">NodePath</span></a>) <a class="reference internal" href="#class-nodepath-operator-eq-nodepath"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if two node paths are equal, that is, they are composed of the same node names and subnames in the same order.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

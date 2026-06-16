@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="RenderSceneDataExtension" property="og:title"/>
+
+
+
+<meta content="Inherits: RenderSceneData&lt; Object This class allows for a RenderSceneData implementation to be made in GDExtension. Description: This class allows for a RenderSceneData implementation to be made..." property="og:description"/>
+<meta content="Inherits: RenderSceneData&lt; Object This class allows for a RenderSceneData implementation to be made in GDExtension. Description: This class allows for a RenderSceneData implementation to be made..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) RenderSceneDataExtension — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_renderscenedatard.html" rel="next" title="RenderSceneDataRD"/>
+<link href="class_renderscenedata.html" rel="prev" title="RenderSceneData"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_renderscenedataextension" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="renderscenedataextension">
+<span id="class-renderscenedataextension"></span><h1>RenderSceneDataExtension<a class="headerlink" href="#renderscenedataextension" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_renderscenedata.html#class-renderscenedata"><span class="std std-ref">RenderSceneData</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>This class allows for a RenderSceneData implementation to be made in GDExtension.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This class allows for a RenderSceneData implementation to be made in GDExtension.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_projection.html#class-projection"><span class="std std-ref">Projection</span></a></p></td>
+<td><p><a class="reference internal" href="#class-renderscenedataextension-private-method-get-cam-projection"><span class="std std-ref">_get_cam_projection</span></a>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-renderscenedataextension-private-method-get-cam-transform"><span class="std std-ref">_get_cam_transform</span></a>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a></p></td>
+<td><p><a class="reference internal" href="#class-renderscenedataextension-private-method-get-uniform-buffer"><span class="std std-ref">_get_uniform_buffer</span></a>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-renderscenedataextension-private-method-get-view-count"><span class="std std-ref">_get_view_count</span></a>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a></p></td>
+<td><p><a class="reference internal" href="#class-renderscenedataextension-private-method-get-view-eye-offset"><span class="std std-ref">_get_view_eye_offset</span></a>(view: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_projection.html#class-projection"><span class="std std-ref">Projection</span></a></p></td>
+<td><p><a class="reference internal" href="#class-renderscenedataextension-private-method-get-view-projection"><span class="std std-ref">_get_view_projection</span></a>(view: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-renderscenedataextension-private-method-get-cam-projection"><a class="reference internal" href="class_projection.html#class-projection"><span class="std std-ref">Projection</span></a> <strong>_get_cam_projection</strong>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-renderscenedataextension-private-method-get-cam-projection"><span class="std std-ref">🔗</span></a></p>
+<p>Implement this in GDExtension to return the camera <a class="reference internal" href="class_projection.html#class-projection"><span class="std std-ref">Projection</span></a>.</p>
+<p class="classref-method" id="class-renderscenedataextension-private-method-get-cam-transform"><a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> <strong>_get_cam_transform</strong>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-renderscenedataextension-private-method-get-cam-transform"><span class="std std-ref">🔗</span></a></p>
+<p>Implement this in GDExtension to return the camera <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a>.</p>
+<p class="classref-method" id="class-renderscenedataextension-private-method-get-uniform-buffer"><a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a> <strong>_get_uniform_buffer</strong>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-renderscenedataextension-private-method-get-uniform-buffer"><span class="std std-ref">🔗</span></a></p>
+<p>Implement this in GDExtension to return the <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a> of the uniform buffer containing the scene data as a UBO.</p>
+<p class="classref-method" id="class-renderscenedataextension-private-method-get-view-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>_get_view_count</strong>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-renderscenedataextension-private-method-get-view-count"><span class="std std-ref">🔗</span></a></p>
+<p>Implement this in GDExtension to return the view count.</p>
+<p class="classref-method" id="class-renderscenedataextension-private-method-get-view-eye-offset"><a class="reference internal" href="class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a> <strong>_get_view_eye_offset</strong>(view: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-renderscenedataextension-private-method-get-view-eye-offset"><span class="std std-ref">🔗</span></a></p>
+<p>Implement this in GDExtension to return the eye offset for the given <code class="docutils literal notranslate"><span class="pre">view</span></code>.</p>
+<p class="classref-method" id="class-renderscenedataextension-private-method-get-view-projection"><a class="reference internal" href="class_projection.html#class-projection"><span class="std std-ref">Projection</span></a> <strong>_get_view_projection</strong>(view: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-renderscenedataextension-private-method-get-view-projection"><span class="std std-ref">🔗</span></a></p>
+<p>Implement this in GDExtension to return the view <a class="reference internal" href="class_projection.html#class-projection"><span class="std std-ref">Projection</span></a> for the given <code class="docutils literal notranslate"><span class="pre">view</span></code>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

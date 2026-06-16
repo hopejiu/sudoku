@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/HistoryDetail.gd" id="1"]
+
+[node name="HistoryDetail" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+
+[node name="BackBtn" type="Button" parent="VBox/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "< 返回"
+
+[node name="InfoLabel" type="Label" parent="VBox/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+text = "详情"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBox/TopBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(48, 0)
+
+[node name="MetaVBox" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="VBox/MetaVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+
+[node name="DiffLabel" type="Label" parent="VBox/MetaVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+
+[node name="TimeLabel" type="Label" parent="VBox/MetaVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+
+[node name="BottomBar" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+
+[node name="ReplayBtn" type="Button" parent="VBox/BottomBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+text = "重开"
+
+[node name="ContinueBtn" type="Button" parent="VBox/BottomBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+text = "继续"

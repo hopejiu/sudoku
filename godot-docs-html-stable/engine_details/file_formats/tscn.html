@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="TSCN file format" property="og:title"/>
+
+
+
+<meta content="The TSCN (text scene) file format represents a single scene tree inside Godot. Unlike binary SCN files, TSCN files have the advantage of being mostly human-readable and easy for version control sys..." property="og:description"/>
+<meta content="The TSCN (text scene) file format represents a single scene tree inside Godot. Unlike binary SCN files, TSCN files have the advantage of being mostly human-readable and easy for version control sys..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) TSCN file format — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../../community/asset_library/index.html" rel="next" title="Asset Library"/>
+<link href="gdscript_grammar.html" rel="prev" title="GDScript grammar"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/file_formats/tscn" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="tscn-file-format">
+<span id="doc-tscn-file-format"></span><h1>TSCN file format<a class="headerlink" href="#tscn-file-format" title="Link to this heading"></a></h1>
+<p>The TSCN (text scene) file format represents a single scene tree inside
+Godot. Unlike binary SCN files, TSCN files have the advantage of being mostly
+human-readable and easy for version control systems to manage.</p>
+<p>The ESCN (exported scene) file format is identical to the TSCN file format, but
+is used to indicate to Godot that the file has been exported from another
+program and should not be edited by the user from within Godot.
+Unlike SCN and TSCN files, during import, ESCN files are compiled to binary
+SCN files stored inside the <code class="docutils literal notranslate"><span class="pre">.godot/imported/</span></code> folder.
+This reduces the data size and speeds up loading, as binary formats are faster
+to load compared to text-based formats.</p>
+<p>To make files more compact, properties equal to the default value are not stored
+in scene/resource files. It is possible to write them manually, but they will be
+discarded when saving the file.</p>
+<p>For those looking for a complete description, the parsing is handled in the file
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/scene/resources/resource_format_text.cpp">resource_format_text.cpp</a>
+in the <code class="docutils literal notranslate"><span class="pre">ResourceFormatLoaderText</span></code> class.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The scene and resource file formats have changed significantly in Godot 4,
+with the introduction of string-based UIDs to replace incremental integer
+IDs.</p>
+<p>Mesh, skeleton and animation data is also stored differently compared to Godot 3.
+You can read about some of the changes in this article:
+<a class="reference external" href="https://godotengine.org/article/animation-data-redesign-40/">Animation data rework for 4.0</a></p>
+<p>Scenes and resources saved with Godot 4.x contain <code class="docutils literal notranslate"><span class="pre">format=3</span></code> in their
+header, whereas Godot 3.x uses <code class="docutils literal notranslate"><span class="pre">format=2</span></code> instead.</p>
+</div>
+<section id="file-structure">
+<h2>File structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h2>
+<p>There are five main sections inside the TSCN file:</p>
+<ol class="arabic simple" start="0">
+<li><p>File descriptor</p></li>
+<li><p>External resources</p></li>
+<li><p>Internal resources</p></li>
+<li><p>Nodes</p></li>
+<li><p>Connections</p></li>
+</ol>
+<p>The file descriptor looks like <code class="docutils literal notranslate"><span class="pre">[gd_scene</span> <span class="pre">format=3</span> <span class="pre">uid="uid://cecaux1sm7mo0"]</span></code>
+and should be the first entry in the file. Note that scenes saved before Godot 4.6
+will also have a <code class="docutils literal notranslate"><span class="pre">load_steps=&lt;int&gt;</span></code> attribute in the file descriptor. This
+attribute is now deprecated and should be ignored if present.</p>
+<p><code class="docutils literal notranslate"><span class="pre">uid</span></code> is a unique string-based identifier representing the scene. This is
+used by the engine to track files that are moved around, even while the editor
+is closed. Scripts can also load UID-based resources using the <code class="docutils literal notranslate"><span class="pre">uid://</span></code> path
+prefix to avoid relying on filesystem paths. This makes it possible to move
+around a file in the project, but still be able to load it in scripts without
+having to modify the script. Godot does not use external files to keep track of
+IDs, which means no central metadata storage location is required within the
+project. See <a class="reference external" href="https://github.com/godotengine/godot/pull/50786">this pull request</a>
+for detailed information.</p>
+<p>These sections should appear in order, but it can be hard to distinguish them.
+The only difference between them is the first element in the heading for all of
+the items in the section. For example, the heading of all external resources
+should start with <code class="docutils literal notranslate"><span class="pre">[ext_resource</span> <span class="pre">...]</span></code>.</p>
+<p>A TSCN file may contain single-line comments starting with a semicolon (<code class="docutils literal notranslate"><span class="pre">;</span></code>).
+However, comments will be discarded when saving the file using the Godot editor.
+Whitespace within a TSCN file is not significant (except within strings), but
+extraneous whitespace will be discarded when saving the file.</p>
+<section id="entries-inside-the-file">
+<h3>Entries inside the file<a class="headerlink" href="#entries-inside-the-file" title="Link to this heading"></a></h3>
+<p>A heading looks like
+<code class="docutils literal notranslate"><span class="pre">[&lt;resource_type&gt;</span> <span class="pre">key1=value1</span> <span class="pre">key2=value2</span> <span class="pre">key3=value3</span> <span class="pre">...]</span></code>
+where resource_type is one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ext_resource</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sub_resource</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection</span></code></p></li>
+</ul>
+<p>Below every heading comes zero or more <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">=</span> <span class="pre">value</span></code> pairs. The
+values can be complex datatypes such as Arrays, Transforms, Colors, and
+so on. For example, a Node3D looks like:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Cube"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">224283918</span><span class="p">]</span>
+<span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Transform3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-scene-tree">
+<h2>The scene tree<a class="headerlink" href="#the-scene-tree" title="Link to this heading"></a></h2>
+<p>The scene tree is made up of… nodes! The heading of each node consists of its
+name, parent, a unique ID (used to track nodes even if they are moved or
+renamed), and most of the time, a type. For example: <code class="docutils literal notranslate"><span class="pre">[node</span> <span class="pre">name="PlayerCamera"</span>
+<span class="pre">type="Camera"</span> <span class="pre">parent="Player/Head"</span> <span class="pre">unique_id=1697057368]</span></code></p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">unique_id</span></code> is only present in scenes saved with Godot 4.6 or later.
+Therefore, it is not guaranteed to be present.</p>
+<p>Other valid keywords include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">instance</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">instance_placeholder</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">owner</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code> (sets the order of appearance in the tree; if absent, inherited nodes will take precedence over plain ones)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">groups</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node_paths</span></code> (lists names of properties exported as a Node type, but referenced as a NodePath in the file)</p></li>
+</ul>
+</div></blockquote>
+<p>The first node in the file, which is also the scene root, must <strong>not</strong> have a
+<code class="docutils literal notranslate"><span class="pre">parent="Path/To/Node"</span></code> entry in its heading. All scene files should have
+exactly <em>one</em> scene root. If it doesn't, Godot will fail to import the file.
+The parent path of other nodes should be absolute, but shouldn't contain
+the scene root's name. If the node is a direct child of the scene root,
+the path should be <code class="docutils literal notranslate"><span class="pre">"."</span></code>. Here is an example scene tree
+(but without any node content):</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Player"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1155673912</span><span class="p">]</span><span class="w">                    </span><span class="p">;</span><span class="w"> </span><span class="nc">The</span><span class="w"> </span><span class="n">scene</span><span class="w"> </span><span class="n">root</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Arm"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1010797352</span><span class="p">]</span><span class="w">            </span><span class="p">;</span><span class="w"> </span><span class="nc">Parented</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">scene</span><span class="w"> </span><span class="n">root</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Hand"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"Arm"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">536436825</span><span class="p">]</span><span class="w">          </span><span class="p">;</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="s2">"Arm"</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Finger"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"Arm/Hand"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1732647084</span><span class="p">]</span><span class="w">  </span><span class="p">;</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="s2">"Hand"</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To make the file structure easier to grasp, you can save a file with any
+given node or resource and then inspect it yourself in an external editor. You
+can also make incremental changes in the Godot editor, and keep an external
+text editor open on the <code class="docutils literal notranslate"><span class="pre">.tscn</span></code> or <code class="docutils literal notranslate"><span class="pre">.tres</span></code> file with auto-reload enabled
+to see what changes.</p>
+</div>
+<p>Here is an example of a scene containing a RigidBody3D-based ball with
+collision, visuals (mesh + light) and a camera parented to the RigidBody3D:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">gd_scene</span><span class="w"> </span><span class="n">format</span><span class="o">=</span><span class="mi">3</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="s2">"uid://cecaux1sm7mo0"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"SphereShape3D"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"SphereShape3D_tj6p1"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"SphereMesh"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"SphereMesh_4w3ye"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"StandardMaterial3D"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"StandardMaterial3D_k54se"</span><span class="p">]</span>
+<span class="n">albedo_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.639216</span><span class="p">,</span><span class="w"> </span><span class="mf">0.309804</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Ball"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"RigidBody3D"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1358867382</span><span class="p">]</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"CollisionShape3D"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"CollisionShape3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1279975976</span><span class="p">]</span>
+<span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">SubResource</span><span class="p">(</span><span class="s2">"SphereShape3D_tj6p1"</span><span class="p">)</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"MeshInstance3D"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"MeshInstance3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">558852834</span><span class="p">]</span>
+<span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">SubResource</span><span class="p">(</span><span class="s2">"SphereMesh_4w3ye"</span><span class="p">)</span>
+<span class="n">surface_material_override</span><span class="o">/</span><span class="mi">0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">SubResource</span><span class="p">(</span><span class="s2">"StandardMaterial3D_k54se"</span><span class="p">)</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"OmniLight3D"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"OmniLight3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1581292810</span><span class="w"> </span><span class="n">node_paths</span><span class="o">=</span><span class="nb nb-Type">PackedStringArray</span><span class="p">(</span><span class="s2">"follow_node"</span><span class="p">)]</span>
+<span class="n">light_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.698039</span><span class="p">,</span><span class="w"> </span><span class="mf">0.321569</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="n">omni_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span>
+<span class="n">follow_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">".."</span><span class="p">)</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Camera3D"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Camera3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">795715540</span><span class="p">]</span>
+<span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Transform3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.939693</span><span class="p">,</span><span class="w"> </span><span class="mf">0.34202</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.34202</span><span class="p">,</span><span class="w"> </span><span class="mf">0.939693</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="nodepath">
+<h3>NodePath<a class="headerlink" href="#nodepath" title="Link to this heading"></a></h3>
+<p>A tree structure is not enough to represent the whole scene. Godot uses a
+<code class="docutils literal notranslate"><span class="pre">NodePath(Path/To/Node)</span></code> structure to refer to another node or attribute of
+the node anywhere in the scene tree. Paths are relative to the current node,
+with <code class="docutils literal notranslate"><span class="pre">NodePath(".")</span></code> pointing to the current node and <code class="docutils literal notranslate"><span class="pre">NodePath("")</span></code>
+pointing to no node at all.</p>
+<p>For instance, MeshInstance3D uses <code class="docutils literal notranslate"><span class="pre">NodePath()</span></code> to point to its skeleton.
+Likewise, Animation tracks use <code class="docutils literal notranslate"><span class="pre">NodePath()</span></code> to point to node properties to
+animate.</p>
+<p>NodePath can also point to a property using a <code class="docutils literal notranslate"><span class="pre">:property_name</span></code> suffix, and
+even point to a specific component for vector, transform and color types. This
+is used by Animation resources to point to specific properties to animate. For
+example, <code class="docutils literal notranslate"><span class="pre">NodePath("MeshInstance3D:scale.x")</span></code> points to the <code class="docutils literal notranslate"><span class="pre">x</span></code> component of
+the <code class="docutils literal notranslate"><span class="pre">scale</span></code> Vector3 property in MeshInstance3D.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">skeleton</span></code> property in the MeshInstance3D node called
+<code class="docutils literal notranslate"><span class="pre">mesh</span></code> points to its parent, <code class="docutils literal notranslate"><span class="pre">Armature01</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"mesh"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"MeshInstance3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"Armature01"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">1638249225</span><span class="p">]</span>
+<span class="n">skeleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">".."</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="skeleton3d">
+<h3>Skeleton3D<a class="headerlink" href="#skeleton3d" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../../classes/class_skeleton3d.html#class-skeleton3d"><span class="std std-ref">Skeleton3D</span></a> node inherits the Node3D node, but may also have a
+list of bones described in key-value pairs in the format
+<code class="docutils literal notranslate"><span class="pre">bones/&lt;id&gt;/&lt;attribute&gt;</span> <span class="pre">=</span> <span class="pre">value</span></code>. The bone attributes consist of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>: Vector3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rotation</span></code>: Quaternion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale</span></code>: Vector3</p></li>
+</ul>
+<p>These attributes are all optional. For instance, a bone may only define
+<code class="docutils literal notranslate"><span class="pre">position</span></code> or <code class="docutils literal notranslate"><span class="pre">rotation</span></code> without defining the other properties.</p>
+<p>Here's an example of a skeleton node with two bones:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Skeleton3D"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Skeleton3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"PlayerModel/Robot_Skeleton"</span><span class="w"> </span><span class="n">index</span><span class="o">=</span><span class="s2">"0"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">542985694</span><span class="p">]</span>
+<span class="n">bones</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mf">0.114471</span><span class="p">,</span><span class="w"> </span><span class="mf">2.19771</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.197845</span><span class="p">)</span>
+<span class="n">bones</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Quaternion</span><span class="p">(</span><span class="mf">0.191422</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.0471201</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.00831942</span><span class="p">,</span><span class="w"> </span><span class="mf">0.980341</span><span class="p">)</span>
+<span class="n">bones</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mf">2.59096e-05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.236002</span><span class="p">,</span><span class="w"> </span><span class="mf">0.000347473</span><span class="p">)</span>
+<span class="n">bones</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Quaternion</span><span class="p">(</span><span class="o">-</span><span class="mf">0.0580488</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0310587</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.0085914</span><span class="p">,</span><span class="w"> </span><span class="mf">0.997794</span><span class="p">)</span>
+<span class="n">bones</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mf">0.9276</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9276</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9276</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="boneattachment3d">
+<h3>BoneAttachment3D<a class="headerlink" href="#boneattachment3d" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../../classes/class_boneattachment3d.html#class-boneattachment3d"><span class="std std-ref">BoneAttachment3D</span></a> node is an intermediate node to describe some
+node being parented to a single bone in a Skeleton node. The BoneAttachment has
+a <code class="docutils literal notranslate"><span class="pre">bone_name</span> <span class="pre">=</span> <span class="pre">"name</span> <span class="pre">of</span> <span class="pre">bone"</span></code> property, as well as a property for the matching
+bone index.</p>
+<p>An example of a <a class="reference internal" href="../../classes/class_marker3d.html#class-marker3d"><span class="std std-ref">Marker3D</span></a> node parented to a bone in Skeleton:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"GunBone"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"BoneAttachment3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"PlayerModel/Robot_Skeleton/Skeleton3D"</span><span class="w"> </span><span class="n">index</span><span class="o">=</span><span class="s2">"5"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">63481392</span><span class="p">]</span>
+<span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Transform3D</span><span class="p">(</span><span class="mf">0.333531</span><span class="p">,</span><span class="w"> </span><span class="mf">0.128981</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.933896</span><span class="p">,</span><span class="w"> </span><span class="mf">0.567174</span><span class="p">,</span><span class="w"> </span><span class="mf">0.763886</span><span class="p">,</span><span class="w"> </span><span class="mf">0.308015</span><span class="p">,</span><span class="w"> </span><span class="mf">0.753209</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.632331</span><span class="p">,</span><span class="w"> </span><span class="mf">0.181604</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.323915</span><span class="p">,</span><span class="w"> </span><span class="mf">1.07098</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0497144</span><span class="p">)</span>
+<span class="n">bone_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"hand.R"</span>
+<span class="n">bone_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">55</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"ShootFrom"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Marker3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"PlayerModel/Robot_Skeleton/Skeleton3D/GunBone"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">679926736</span><span class="p">]</span>
+<span class="n">transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Transform3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="animationplayer">
+<h3>AnimationPlayer<a class="headerlink" href="#animationplayer" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../../classes/class_animationplayer.html#class-animationplayer"><span class="std std-ref">AnimationPlayer</span></a> node works with one or more animation libraries
+stored in <a class="reference internal" href="../../classes/class_animationlibrary.html#class-animationlibrary"><span class="std std-ref">AnimationLibrary</span></a> resources. An animation library is a
+collection of individual <a class="reference internal" href="../../classes/class_animation.html#class-animation"><span class="std std-ref">Animation</span></a> resources, whose structure is
+documented <a class="reference internal" href="#doc-tscn-animation"><span class="std std-ref">here</span></a>.</p>
+<p>This split between animations themselves and animation libraries was done in
+Godot 4, so that animations can be imported separately from 3D meshes, which is
+a common workflow in 3D animation software. See the <a class="reference external" href="https://github.com/godotengine/godot/pull/59980">original pull request</a> for details.</p>
+<p>If the library name is empty, then it acts as the unique source of animations
+for this AnimationPlayer. This allows using <code class="docutils literal notranslate"><span class="pre">&lt;animation_name&gt;</span></code> directly to
+play animations from script. If you name the library, then you must play it as
+<code class="docutils literal notranslate"><span class="pre">&lt;library_name&gt;/&lt;animation_name&gt;</span></code>. This ensures backwards compatibility and
+keeps the existing workflow if you don't want to use multiple animation
+libraries.</p>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h2>
+<p>Resources are components that make up the nodes. For example, a MeshInstance3D
+node will have an accompanying ArrayMesh resource. The ArrayMesh resource
+may be either internal or external to the TSCN file.</p>
+<p>References to the resources are handled by unique string-based IDs in the
+resource's heading. This is different from the <code class="docutils literal notranslate"><span class="pre">uid</span></code> property, which each
+external resource also has (but subresources don't).</p>
+<p>External resources and internal resources are referred to with
+<code class="docutils literal notranslate"><span class="pre">ExtResource("id")</span></code> and <code class="docutils literal notranslate"><span class="pre">SubResource("id")</span></code>, respectively. Because there
+have different methods to refer to internal and external resources, you can have
+the same ID for both an internal and external resource.</p>
+<p>For example, to refer to the resource
+<code class="docutils literal notranslate"><span class="pre">[ext_resource</span> <span class="pre">type="Material"</span> <span class="pre">uid="uid://c4cp0al3ljsjv"</span> <span class="pre">path="res://material.tres"</span> <span class="pre">id="1_7bt6s"]</span></code>,
+you would use <code class="docutils literal notranslate"><span class="pre">ExtResource("1_7bt6s")</span></code>.</p>
+<section id="external-resources">
+<h3>External resources<a class="headerlink" href="#external-resources" title="Link to this heading"></a></h3>
+<p>External resources are links to resources not contained within the TSCN file
+itself. An external resource consists of a path, a type, a UID (used to map its
+filesystem location to a unique identifier) and an ID (used to refer to the
+resource in the scene file).</p>
+<p>Godot always generates absolute paths relative to the resource directory and
+thus prefixed with <code class="docutils literal notranslate"><span class="pre">res://</span></code>, but paths relative to the TSCN file's location
+are also valid.</p>
+<p>Some example external resources are:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">ext_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Texture2D"</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="s2">"uid://ccbm14ebjmpy1"</span><span class="w"> </span><span class="n">path</span><span class="o">=</span><span class="s2">"res://gradient.tres"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"2_eorut"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">ext_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Material"</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="s2">"uid://c4cp0al3ljsjv"</span><span class="w"> </span><span class="n">path</span><span class="o">=</span><span class="s2">"material.tres"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"1_7bt6s"</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Like TSCN files, a TRES file may contain single-line comments starting with a
+semicolon (<code class="docutils literal notranslate"><span class="pre">;</span></code>). However, comments will be discarded when saving the resource
+using the Godot editor.
+Whitespace within a TRES file is not significant (except within strings), but
+extraneous whitespace will be discarded when saving the file.</p>
+</section>
+<section id="internal-resources">
+<h3>Internal resources<a class="headerlink" href="#internal-resources" title="Link to this heading"></a></h3>
+<p>A TSCN file can contain meshes, materials and other data. These are contained in
+the <em>internal resources</em> section of the file. The heading for an internal
+resource looks similar to those of external resources, except that it doesn't
+have a path. Internal resources also have <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pairs under each
+heading. For example, a capsule collision shape looks like:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"CapsuleShape3D"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"CapsuleShape3D_fdxgg"</span><span class="p">]</span>
+<span class="n">radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span>
+</pre></div>
+</div>
+<p>Some internal resources contain links to other internal resources (such as a
+mesh having a material). In this case, the referring resource must appear
+<em>before</em> the reference to it. This means that order matters in the file's
+internal resources section.</p>
+</section>
+<section id="arraymesh">
+<h3>ArrayMesh<a class="headerlink" href="#arraymesh" title="Link to this heading"></a></h3>
+<p>An ArrayMesh consists of several surfaces contained in the <code class="docutils literal notranslate"><span class="pre">_surfaces</span></code> array
+(notice the leading underscore). Each surface's data is stored in a dictionary
+with the following keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aabb</span></code>: The computed axis-aligned bounding box for visibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_data</span></code>: Vertex attribute data, such as normals, tangents, vertex
+colors, UV1, UV2 and custom vertex data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bone_aabbs</span></code>: The axis-aligned bounding box of each bone for visibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">format</span></code>: The surface's buffer format.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index_count</span></code>: The number of indices in the surface. This must match
+<code class="docutils literal notranslate"><span class="pre">index_data</span></code>'s size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index_data</span></code>: The index data, which determines which vertices from
+<code class="docutils literal notranslate"><span class="pre">vertex_data</span></code> are drawn.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lods</span></code>: Level of detail variations, stored as an array. Each LOD level
+represents two values in the array. The first value is the percentage of
+screen space the LOD level is most suited for (edge length); the second value
+is the list of indices that should be drawn for the given LOD level.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">material</span></code>: The material used when drawing the surface.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The surface's name. This can be used in scripts and is imported from
+3D DCCs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">primitive</span></code>: The surface's primitive type, matching the <code class="docutils literal notranslate"><span class="pre">Mesh.PrimitiveType</span></code> Godot enum. <code class="docutils literal notranslate"><span class="pre">0</span></code> = points, <code class="docutils literal notranslate"><span class="pre">1</span></code> = lines, <code class="docutils literal notranslate"><span class="pre">2</span></code> = line
+strip, <code class="docutils literal notranslate"><span class="pre">3</span></code> = triangles (most common), <code class="docutils literal notranslate"><span class="pre">4</span></code> = triangle strip.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skin_data</span></code>: Bone weight data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vertex_count</span></code>: Number of vertices in the surface. This must match <code class="docutils literal notranslate"><span class="pre">vertex_data</span></code>'s size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vertex_data</span></code>: The vertex position data.</p></li>
+</ul>
+<p>Here's an example of an ArrayMesh saved to its own <code class="docutils literal notranslate"><span class="pre">.tres</span></code> file. Some fields were shortened with <code class="docutils literal notranslate"><span class="pre">...</span></code> for brevity:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">gd_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"ArrayMesh"</span><span class="w"> </span><span class="n">format</span><span class="o">=</span><span class="mi">3</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="s2">"uid://dww8o7hsqrhx5"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">ext_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Material"</span><span class="w"> </span><span class="n">path</span><span class="o">=</span><span class="s2">"res://player/model/playerobot.tres"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"1_r3bjq"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">resource</span><span class="p">]</span>
+<span class="n">resource_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"player_Sphere_016"</span>
+<span class="n">_surfaces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span>
+<span class="s2">"aabb"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">AABB</span><span class="p">(</span><span class="o">-</span><span class="mf">0.207928</span><span class="p">,</span><span class="w"> </span><span class="mf">1.21409</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.14545</span><span class="p">,</span><span class="w"> </span><span class="mf">0.415856</span><span class="p">,</span><span class="w"> </span><span class="mf">0.226569</span><span class="p">,</span><span class="w"> </span><span class="mf">0.223374</span><span class="p">),</span>
+<span class="s2">"attribute_data"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedByteArray</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">),</span>
+<span class="s2">"bone_aabbs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb nb-Type">AABB</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">AABB</span><span class="p">(</span><span class="o">-</span><span class="mf">0.207928</span><span class="p">,</span><span class="w"> </span><span class="mf">1.21409</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.14545</span><span class="p">,</span><span class="w"> </span><span class="mf">0.134291</span><span class="p">,</span><span class="w"> </span><span class="mf">0.226569</span><span class="p">,</span><span class="w"> </span><span class="mf">0.223374</span><span class="p">)],</span>
+<span class="s2">"format"</span><span class="p">:</span><span class="w"> </span><span class="mi">7191</span><span class="p">,</span>
+<span class="s2">"index_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1224</span><span class="p">,</span>
+<span class="s2">"index_data"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedByteArray</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span>
+<span class="s2">"lods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0382013</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">PackedByteArray</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)],</span>
+<span class="s2">"material"</span><span class="p">:</span><span class="w"> </span><span class="nf">ExtResource</span><span class="p">(</span><span class="s2">"1_r3bjq"</span><span class="p">),</span>
+<span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"playerobot"</span><span class="p">,</span>
+<span class="s2">"primitive"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="s2">"skin_data"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedByteArray</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="s2">"vertex_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span><span class="p">,</span>
+<span class="s2">"vertex_data"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedByteArray</span><span class="p">(</span><span class="mi">196</span><span class="p">,</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">38</span><span class="p">)</span>
+<span class="p">}]</span>
+<span class="n">blend_shape_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="animation">
+<span id="doc-tscn-animation"></span><h3>Animation<a class="headerlink" href="#animation" title="Link to this heading"></a></h3>
+<p>Each animation has the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: The animation's length in seconds. Note that keyframes may be
+placed outside the <code class="docutils literal notranslate"><span class="pre">[0;</span> <span class="pre">length]</span></code> interval, but they may have no effect
+depending on the interpolation mode chosen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loop_mode</span></code>: <code class="docutils literal notranslate"><span class="pre">0</span></code> = no looping, <code class="docutils literal notranslate"><span class="pre">1</span></code> = wrap-around looping, <code class="docutils literal notranslate"><span class="pre">2</span></code> =
+clamped looping.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code>: The step size to use when editing this animation in the editor.
+This is only used in the editor; it doesn't affect animation playback in any way.</p></li>
+</ul>
+<p>Each track is described by a list of key-value pairs in the format
+<code class="docutils literal notranslate"><span class="pre">tracks/&lt;id&gt;/&lt;attribute&gt;</span></code>. Each track includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: The track's type. This defines what kind of properties may be
+animated by this track, and how it'll be exposed to the user in the editor.
+Valid types are <code class="docutils literal notranslate"><span class="pre">value</span></code> (generic property track), <code class="docutils literal notranslate"><span class="pre">position_3d</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rotation_3d</span></code>, <code class="docutils literal notranslate"><span class="pre">scale_3d</span></code>, <code class="docutils literal notranslate"><span class="pre">blend_shape</span></code> (optimized 3D animation
+tracks), <code class="docutils literal notranslate"><span class="pre">method</span></code> (method call tracks), <code class="docutils literal notranslate"><span class="pre">bezier</span></code> (Bezier curve tracks),
+<code class="docutils literal notranslate"><span class="pre">audio</span></code> (audio playback tracks), <code class="docutils literal notranslate"><span class="pre">animation</span></code> (tracks that play other
+animations).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">imported</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> if the track was created from an imported 3D scene,
+<code class="docutils literal notranslate"><span class="pre">false</span></code> if it was manually created by the user in the Godot editor or using
+a script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> if the track is effective, <code class="docutils literal notranslate"><span class="pre">false</span></code> if it was disabled
+in the editor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: Path to the node property that will be affected by the track. The
+property is written after the node path with a <code class="docutils literal notranslate"><span class="pre">:</span></code> separator.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interp</span></code>: The interpolation mode to use. <code class="docutils literal notranslate"><span class="pre">0</span></code> = nearest, <code class="docutils literal notranslate"><span class="pre">1</span></code> = linear,
+<code class="docutils literal notranslate"><span class="pre">2</span></code> = cubic, <code class="docutils literal notranslate"><span class="pre">3</span></code> = linear angle, <code class="docutils literal notranslate"><span class="pre">4</span></code> = cubic angle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loop_wrap</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code> if the track is designed to wrap around when the
+animation is looping, <code class="docutils literal notranslate"><span class="pre">false</span></code> if the track clamps to the first/last
+keyframes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keys</span></code>: The animation track's values. This attribute's structure depends on the <code class="docutils literal notranslate"><span class="pre">type</span></code>.</p></li>
+</ul>
+<p>Here is a scene containing an AnimationPlayer that scales down a cube over time
+using a generic property track. The AnimationLibrary workflow was not used, so
+the animation library has an empty name (but the animation is still given a
+<code class="docutils literal notranslate"><span class="pre">scale_down</span></code> name). Note that the <code class="docutils literal notranslate"><span class="pre">RESET</span></code> track was not created in this
+AnimationPlayer for brevity:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">gd_scene</span><span class="w"> </span><span class="n">format</span><span class="o">=</span><span class="mi">3</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="s2">"uid://cdyt3nktp6y6"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Animation"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"Animation_r2qdp"</span><span class="p">]</span>
+<span class="n">resource_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"scale_down"</span>
+<span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span>
+<span class="n">loop_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.05</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"value"</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">imported</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">"Box:scale"</span><span class="p">)</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">interp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">loop_wrap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="s2">"times"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="s2">"transitions"</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="s2">"update"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="s2">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)]</span>
+<span class="p">}</span>
+<span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"AnimationLibrary"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"AnimationLibrary_4qx36"</span><span class="p">]</span>
+<span class="n">_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="s2">"scale_down"</span><span class="p">:</span><span class="w"> </span><span class="nf">SubResource</span><span class="p">(</span><span class="s2">"Animation_r2qdp"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"BoxMesh"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"BoxMesh_u688r"</span><span class="p">]</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Node3D"</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">2076735200</span><span class="p">]</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"AnimationPlayer"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"AnimationPlayer"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">2139773137</span><span class="p">]</span>
+<span class="n">autoplay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"scale_down"</span>
+<span class="n">libraries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="s2">""</span><span class="p">:</span><span class="w"> </span><span class="nf">SubResource</span><span class="p">(</span><span class="s2">"AnimationLibrary_4qx36"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">[</span><span class="n">node</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s2">"Box"</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"MeshInstance3D"</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="s2">"."</span><span class="w"> </span><span class="n">unique_id</span><span class="o">=</span><span class="mi">711004519</span><span class="p">]</span>
+<span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">SubResource</span><span class="p">(</span><span class="s2">"BoxMesh_u688r"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For generic property <code class="docutils literal notranslate"><span class="pre">value</span></code> tracks, <code class="docutils literal notranslate"><span class="pre">keys</span></code> is a dictionary containing 3
+arrays with positions in <code class="docutils literal notranslate"><span class="pre">times</span></code> (PackedFloat32Array), easing values in
+<code class="docutils literal notranslate"><span class="pre">transitions</span></code> (PackedFloat32Array) and values in <code class="docutils literal notranslate"><span class="pre">values</span></code> (Array). There is
+an additional <code class="docutils literal notranslate"><span class="pre">update</span></code> property, which is an integer with the values <code class="docutils literal notranslate"><span class="pre">0</span></code> =
+continuous, <code class="docutils literal notranslate"><span class="pre">1</span></code> = discrete, <code class="docutils literal notranslate"><span class="pre">2</span></code> = capture.</p>
+<p>Here is a second Animation resource that makes use of the 3D Position and 3D
+Rotation tracks. These tracks (in addition to the 3D Scale track) replace
+Transform tracks from Godot 3. They are optimized for fast playback and can
+optionally be compressed.</p>
+<p>The downside of these optimized track types is that they can't use custom easing
+values. Instead, all keyframes use linear interpolation. That said, you can
+still opt for using nearest or cubic interpolation for all keyframes in a given
+track by changing the track's interpolation mode.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sub_resource</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"Animation"</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s2">"Animation_r2qdp"</span><span class="p">]</span>
+<span class="n">resource_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"move_and_rotate"</span>
+<span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span>
+<span class="n">loop_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.05</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"position_3d"</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">imported</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">"Box"</span><span class="p">)</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">interp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">loop_wrap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"rotation_3d"</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">imported</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">NodePath</span><span class="p">(</span><span class="s2">"Box"</span><span class="p">)</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">interp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">loop_wrap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="n">tracks</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.211</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.047</span><span class="p">,</span><span class="w"> </span><span class="mf">0.211</span><span class="p">,</span><span class="w"> </span><span class="mf">0.953</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.005</span><span class="p">,</span><span class="w"> </span><span class="mf">0.976</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.216</span><span class="p">,</span><span class="w"> </span><span class="mf">0.022</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For 3D position, rotation and scale tracks, <code class="docutils literal notranslate"><span class="pre">keys</span></code> is a PackedFloat32Array
+with all values stored in a sequence.</p>
+<p>In the visual guide below, <code class="docutils literal notranslate"><span class="pre">T</span></code> is the keyframe's time in seconds since the
+start of the animation, <code class="docutils literal notranslate"><span class="pre">E</span></code> is the keyframe's transition (currently always
+<code class="docutils literal notranslate"><span class="pre">1</span></code>). For 3D position and scale tracks, <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code>, <code class="docutils literal notranslate"><span class="pre">Z</span></code> are the Vector3's
+coordinates. For 3D rotation tracks, <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code>, <code class="docutils literal notranslate"><span class="pre">Z</span></code> and <code class="docutils literal notranslate"><span class="pre">W</span></code> are the
+Quaternion's coordinates.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># For 3D position and scale, which use Vector3:</span>
+<span class="n">tracks</span><span class="o">/&lt;</span><span class="n">id</span><span class="o">&gt;/</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w">   </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">,</span><span class="w">      </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w">   </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+<span class="c1"># For 3D rotation, which use Quaternion:</span>
+<span class="n">tracks</span><span class="o">/&lt;</span><span class="n">id</span><span class="o">&gt;/</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">PackedFloat32Array</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w">   </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w">      </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w">   </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="EditorCommandPalette" property="og:title"/>
+
+
+
+<meta content="Inherits: ConfirmationDialog&lt; AcceptDialog&lt; Window&lt; Viewport&lt; Node&lt; Object Godot editor's command palette. Description: Object that holds all the available Commands and their sh..." property="og:description"/>
+<meta content="Inherits: ConfirmationDialog&lt; AcceptDialog&lt; Window&lt; Viewport&lt; Node&lt; Object Godot editor's command palette. Description: Object that holds all the available Commands and their sh..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) EditorCommandPalette — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_editordock.html" rel="next" title="EditorDock"/>
+<link href="class_directionallight3d.html" rel="prev" title="DirectionalLight3D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_editorcommandpalette" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="editorcommandpalette">
+<span id="class-editorcommandpalette"></span><h1>EditorCommandPalette<a class="headerlink" href="#editorcommandpalette" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_confirmationdialog.html#class-confirmationdialog"><span class="std std-ref">ConfirmationDialog</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_acceptdialog.html#class-acceptdialog"><span class="std std-ref">AcceptDialog</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_window.html#class-window"><span class="std std-ref">Window</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Godot editor's command palette.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Object that holds all the available Commands and their shortcuts text. These Commands can be accessed through <strong>Editor &gt; Command Palette</strong> menu.</p>
+<p>Command key names use slash delimiters to distinguish sections, for example: <code class="docutils literal notranslate"><span class="pre">"example/command1"</span></code> then <code class="docutils literal notranslate"><span class="pre">example</span></code> will be the section name.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">command_palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">EditorInterface</span><span class="o">.</span><span class="nf">get_command_palette</span><span class="p">()</span>
+<span class="c1"># external_command is a function that will be called with the command is executed.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">command_callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Callable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="s2">"external_command"</span><span class="p">)</span><span class="o">.</span><span class="nf">bind</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+<span class="n">command_palette</span><span class="o">.</span><span class="nf">add_command</span><span class="p">(</span><span class="s2">"command"</span><span class="p">,</span><span class="w"> </span><span class="s2">"test/command"</span><span class="p">,</span><span class="n">command_callable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">EditorCommandPalette</span><span class="w"> </span><span class="n">commandPalette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EditorInterface</span><span class="p">.</span><span class="n">Singleton</span><span class="p">.</span><span class="n">GetCommandPalette</span><span class="p">();</span>
+<span class="c1">// ExternalCommand is a function that will be called with the command is executed.</span>
+<span class="n">Callable</span><span class="w"> </span><span class="n">commandCallable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">MethodName</span><span class="p">.</span><span class="n">ExternalCommand</span><span class="p">);</span>
+<span class="n">commandPalette</span><span class="p">.</span><span class="n">AddCommand</span><span class="p">(</span><span class="s">"command"</span><span class="p">,</span><span class="w"> </span><span class="s">"test/command"</span><span class="p">,</span><span class="w"> </span><span class="n">commandCallable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+<p><strong>Note:</strong> This class shouldn't be instantiated directly. Instead, access the singleton using <a class="reference internal" href="class_editorinterface.html#class-editorinterface-method-get-command-palette"><span class="std std-ref">EditorInterface.get_command_palette()</span></a>.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p>dialog_hide_on_ok</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code> (overrides <a class="reference internal" href="class_acceptdialog.html#class-acceptdialog-property-dialog-hide-on-ok"><span class="std std-ref">AcceptDialog</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-editorcommandpalette-method-add-command"><span class="std std-ref">add_command</span></a>(command_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, key_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, binded_callable: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>, shortcut_text: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "None")</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-editorcommandpalette-method-remove-command"><span class="std std-ref">remove_command</span></a>(key_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-editorcommandpalette-method-add-command"><abbr title="No return value.">void</abbr> <strong>add_command</strong>(command_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, key_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, binded_callable: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>, shortcut_text: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "None") <a class="reference internal" href="#class-editorcommandpalette-method-add-command"><span class="std std-ref">🔗</span></a></p>
+<p>Adds a custom command to EditorCommandPalette.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">command_name</span></code>: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> (Name of the <strong>Command</strong>. This is displayed to the user.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key_name</span></code>: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> (Name of the key for a particular <strong>Command</strong>. This is used to uniquely identify the <strong>Command</strong>.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">binded_callable</span></code>: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> (Callable of the <strong>Command</strong>. This will be executed when the <strong>Command</strong> is selected.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shortcut_text</span></code>: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> (Shortcut text of the <strong>Command</strong> if available.)</p></li>
+</ul>
+<p class="classref-method" id="class-editorcommandpalette-method-remove-command"><abbr title="No return value.">void</abbr> <strong>remove_command</strong>(key_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-editorcommandpalette-method-remove-command"><span class="std std-ref">🔗</span></a></p>
+<p>Removes the custom command from EditorCommandPalette.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">key_name</span></code>: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> (Name of the key for a particular <strong>Command</strong>.)</p></li>
+</ul>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

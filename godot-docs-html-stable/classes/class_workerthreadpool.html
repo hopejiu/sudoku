@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="WorkerThreadPool" property="og:title"/>
+
+
+
+<meta content="Inherits: Object A singleton that allocates some Thread s on startup, used to offload tasks to these threads. Description: The WorkerThreadPool singleton allocates a set of Thread s (called worker ..." property="og:description"/>
+<meta content="Inherits: Object A singleton that allocates some Thread s on startup, used to offload tasks to these threads. Description: The WorkerThreadPool singleton allocates a set of Thread s (called worker ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) WorkerThreadPool — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_xmlparser.html" rel="next" title="XMLParser"/>
+<link href="class_webxrinterface.html" rel="prev" title="WebXRInterface"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_workerthreadpool" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="workerthreadpool">
+<span id="class-workerthreadpool"></span><h1>WorkerThreadPool<a class="headerlink" href="#workerthreadpool" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A singleton that allocates some <a class="reference internal" href="class_thread.html#class-thread"><span class="std std-ref">Thread</span></a>s on startup, used to offload tasks to these threads.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The <strong>WorkerThreadPool</strong> singleton allocates a set of <a class="reference internal" href="class_thread.html#class-thread"><span class="std std-ref">Thread</span></a>s (called worker threads) on project startup and provides methods for offloading tasks to them. This can be used for simple multithreading without having to create <a class="reference internal" href="class_thread.html#class-thread"><span class="std std-ref">Thread</span></a>s.</p>
+<p>Tasks hold the <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> to be run by the threads. <strong>WorkerThreadPool</strong> can be used to create regular tasks, which will be taken by one worker thread, or group tasks, which can be distributed between multiple worker threads. Group tasks execute the <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> multiple times, which makes them useful for iterating over a lot of elements, such as the enemies in an arena.</p>
+<p>Here's a sample on how to offload an expensive function to worker threads:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">enemies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="c1"># An array to be filled with enemies.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">process_enemy_ai</span><span class="p">(</span><span class="n">enemy_index</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">processed_enemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemies</span><span class="p">[</span><span class="n">enemy_index</span><span class="p">]</span>
+<span class="w">    </span><span class="c1"># Expensive logic...</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">task_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">WorkerThreadPool</span><span class="o">.</span><span class="nf">add_group_task</span><span class="p">(</span><span class="n">process_enemy_ai</span><span class="p">,</span><span class="w"> </span><span class="n">enemies</span><span class="o">.</span><span class="nf">size</span><span class="p">())</span>
+<span class="w">    </span><span class="c1"># Other code...</span>
+<span class="w">    </span><span class="nb">WorkerThreadPool</span><span class="o">.</span><span class="nf">wait_for_group_task_completion</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Other code that depends on the enemy AI already being processed.</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_enemies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// A list to be filled with enemies.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ProcessEnemyAI</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">enemyIndex</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="n">processedEnemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_enemies</span><span class="p">[</span><span class="n">enemyIndex</span><span class="p">];</span>
+<span class="w">    </span><span class="c1">// Expensive logic here.</span>
+<span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WorkerThreadPool</span><span class="p">.</span><span class="n">AddGroupTask</span><span class="p">(</span><span class="n">Callable</span><span class="p">.</span><span class="n">From</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ProcessEnemyAI</span><span class="p">),</span><span class="w"> </span><span class="n">_enemies</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Other code...</span>
+<span class="w">    </span><span class="n">WorkerThreadPool</span><span class="p">.</span><span class="n">WaitForGroupTaskCompletion</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Other code that depends on the enemy AI already being processed.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>The above code relies on the number of elements in the <code class="docutils literal notranslate"><span class="pre">enemies</span></code> array remaining constant during the multithreaded part.</p>
+<p><strong>Note:</strong> Using this singleton could affect performance negatively if the task being distributed between threads is not computationally expensive.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/performance/using_multiple_threads.html"><span class="doc">Using multiple threads</span></a></p></li>
+<li><p><a class="reference internal" href="../tutorials/performance/thread_safe_apis.html"><span class="doc">Thread-safe APIs</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-add-group-task"><span class="std std-ref">add_group_task</span></a>(action: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>, elements: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, tasks_needed: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = -1, high_priority: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, description: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "")</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-add-task"><span class="std std-ref">add_task</span></a>(action: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>, high_priority: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, description: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "")</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-get-caller-group-id"><span class="std std-ref">get_caller_group_id</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-get-caller-task-id"><span class="std std-ref">get_caller_task_id</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-get-group-processed-element-count"><span class="std std-ref">get_group_processed_element_count</span></a>(group_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-is-group-task-completed"><span class="std std-ref">is_group_task_completed</span></a>(group_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-is-task-completed"><span class="std std-ref">is_task_completed</span></a>(task_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-wait-for-group-task-completion"><span class="std std-ref">wait_for_group_task_completion</span></a>(group_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-workerthreadpool-method-wait-for-task-completion"><span class="std std-ref">wait_for_task_completion</span></a>(task_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-workerthreadpool-method-add-group-task"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>add_group_task</strong>(action: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>, elements: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, tasks_needed: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = -1, high_priority: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, description: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "") <a class="reference internal" href="#class-workerthreadpool-method-add-group-task"><span class="std std-ref">🔗</span></a></p>
+<p>Adds <code class="docutils literal notranslate"><span class="pre">action</span></code> as a group task to be executed by the worker threads. The <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> will be called a number of times based on <code class="docutils literal notranslate"><span class="pre">elements</span></code>, with the first thread calling it with the value <code class="docutils literal notranslate"><span class="pre">0</span></code> as a parameter, and each consecutive execution incrementing this value by 1 until it reaches <code class="docutils literal notranslate"><span class="pre">element</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>The number of threads the task is distributed to is defined by <code class="docutils literal notranslate"><span class="pre">tasks_needed</span></code>, where the default value <code class="docutils literal notranslate"><span class="pre">-1</span></code> means it is distributed to all worker threads. <code class="docutils literal notranslate"><span class="pre">high_priority</span></code> determines if the task has a high priority or a low priority (default). You can optionally provide a <code class="docutils literal notranslate"><span class="pre">description</span></code> to help with debugging.</p>
+<p>Returns a group task ID that can be used by other methods.</p>
+<p><strong>Warning:</strong> Every task must be waited for completion using <a class="reference internal" href="#class-workerthreadpool-method-wait-for-task-completion"><span class="std std-ref">wait_for_task_completion()</span></a> or <a class="reference internal" href="#class-workerthreadpool-method-wait-for-group-task-completion"><span class="std std-ref">wait_for_group_task_completion()</span></a> at some point so that any allocated resources inside the task can be cleaned up.</p>
+<p class="classref-method" id="class-workerthreadpool-method-add-task"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>add_task</strong>(action: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a>, high_priority: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, description: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "") <a class="reference internal" href="#class-workerthreadpool-method-add-task"><span class="std std-ref">🔗</span></a></p>
+<p>Adds <code class="docutils literal notranslate"><span class="pre">action</span></code> as a task to be executed by a worker thread. <code class="docutils literal notranslate"><span class="pre">high_priority</span></code> determines if the task has a high priority or a low priority (default). You can optionally provide a <code class="docutils literal notranslate"><span class="pre">description</span></code> to help with debugging.</p>
+<p>Returns a task ID that can be used by other methods.</p>
+<p><strong>Warning:</strong> Every task must be waited for completion using <a class="reference internal" href="#class-workerthreadpool-method-wait-for-task-completion"><span class="std std-ref">wait_for_task_completion()</span></a> or <a class="reference internal" href="#class-workerthreadpool-method-wait-for-group-task-completion"><span class="std std-ref">wait_for_group_task_completion()</span></a> at some point so that any allocated resources inside the task can be cleaned up.</p>
+<p class="classref-method" id="class-workerthreadpool-method-get-caller-group-id"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_caller_group_id</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-workerthreadpool-method-get-caller-group-id"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the task group ID of the current thread calling this method, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> if invalid or the current thread is not part of a task group.</p>
+<p class="classref-method" id="class-workerthreadpool-method-get-caller-task-id"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_caller_task_id</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-workerthreadpool-method-get-caller-task-id"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the task ID of the current thread calling this method, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> if the task is a group task, invalid or the current thread is not part of the thread pool (e.g. the main thread).</p>
+<p>Can be used by a task to get its own task ID, or to determine whether the current code is running inside the worker thread pool.</p>
+<p><strong>Note:</strong> Group tasks have their own IDs, so this method will return <code class="docutils literal notranslate"><span class="pre">-1</span></code> for group tasks.</p>
+<p class="classref-method" id="class-workerthreadpool-method-get-group-processed-element-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_group_processed_element_count</strong>(group_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-workerthreadpool-method-get-group-processed-element-count"><span class="std std-ref">🔗</span></a></p>
+<p>Returns how many times the <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> of the group task with the given ID has already been executed by the worker threads.</p>
+<p><strong>Note:</strong> If a thread has started executing the <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> but is yet to finish, it won't be counted.</p>
+<p class="classref-method" id="class-workerthreadpool-method-is-group-task-completed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_group_task_completed</strong>(group_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-workerthreadpool-method-is-group-task-completed"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the group task with the given ID is completed.</p>
+<p><strong>Note:</strong> You should only call this method between adding the group task and awaiting its completion.</p>
+<p class="classref-method" id="class-workerthreadpool-method-is-task-completed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_task_completed</strong>(task_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-workerthreadpool-method-is-task-completed"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the task with the given ID is completed.</p>
+<p><strong>Note:</strong> You should only call this method between adding the task and awaiting its completion.</p>
+<p class="classref-method" id="class-workerthreadpool-method-wait-for-group-task-completion"><abbr title="No return value.">void</abbr> <strong>wait_for_group_task_completion</strong>(group_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-workerthreadpool-method-wait-for-group-task-completion"><span class="std std-ref">🔗</span></a></p>
+<p>Pauses the thread that calls this method until the group task with the given ID is completed.</p>
+<p class="classref-method" id="class-workerthreadpool-method-wait-for-task-completion"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>wait_for_task_completion</strong>(task_id: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-workerthreadpool-method-wait-for-task-completion"><span class="std std-ref">🔗</span></a></p>
+<p>Pauses the thread that calls this method until the task with the given ID is completed.</p>
+<p>Returns <a class="reference internal" href="class_%40globalscope.html#class-globalscope-constant-ok"><span class="std std-ref">@GlobalScope.OK</span></a> if the task could be successfully awaited.</p>
+<p>Returns <a class="reference internal" href="class_%40globalscope.html#class-globalscope-constant-err-invalid-parameter"><span class="std std-ref">@GlobalScope.ERR_INVALID_PARAMETER</span></a> if a task with the passed ID does not exist (maybe because it was already awaited and disposed of).</p>
+<p>Returns <a class="reference internal" href="class_%40globalscope.html#class-globalscope-constant-err-busy"><span class="std std-ref">@GlobalScope.ERR_BUSY</span></a> if the call is made from another running task and, due to task scheduling, there's potential for deadlocking (e.g., the task to await may be at a lower level in the call stack and therefore can't progress). This is an advanced situation that should only matter when some tasks depend on others (in the current implementation, the tricky case is a task trying to wait on an older one).</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

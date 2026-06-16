@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXRMarkerTracker" property="og:title"/>
+
+
+
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: OpenXRSpatialEntityTracker&lt; XRPositionalTracker&lt; XRTracker&lt; RefCounted&lt; Object Spatial entity tracker fo..." property="og:description"/>
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: OpenXRSpatialEntityTracker&lt; XRPositionalTracker&lt; XRTracker&lt; RefCounted&lt; Object Spatial entity tracker fo..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXRMarkerTracker — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_openxrplanetracker.html" rel="next" title="OpenXRPlaneTracker"/>
+<link href="class_openxrinterface.html" rel="prev" title="OpenXRInterface"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_openxrmarkertracker" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxrmarkertracker">
+<span id="class-openxrmarkertracker"></span><h1>OpenXRMarkerTracker<a class="headerlink" href="#openxrmarkertracker" title="Link to this heading"></a></h1>
+<p><strong>Experimental:</strong> This class may be changed or removed in future versions.</p>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_openxrspatialentitytracker.html#class-openxrspatialentitytracker"><span class="std std-ref">OpenXRSpatialEntityTracker</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_xrpositionaltracker.html#class-xrpositionaltracker"><span class="std std-ref">XRPositionalTracker</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_xrtracker.html#class-xrtracker"><span class="std std-ref">XRTracker</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Spatial entity tracker for our spatial entity marker tracking extension.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Spatial entity tracker for our OpenXR spatial entity marker tracking extension. These trackers identify entities in our real space detected by a visual marker such as a QRCode or Aruco code, and map their location to our virtual space.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrmarkertracker-property-bounds-size"><span class="std std-ref">bounds_size</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector2(0,</span> <span class="pre">0)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrmarkertracker-property-marker-id"><span class="std std-ref">marker_id</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_openxrspatialcomponentmarkerlist.html#enum-openxrspatialcomponentmarkerlist-markertype"><span class="std std-ref">MarkerType</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrmarkertracker-property-marker-type"><span class="std std-ref">marker_type</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrmarkertracker-method-get-marker-data"><span class="std std-ref">get_marker_data</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-openxrmarkertracker-method-set-marker-data"><span class="std std-ref">set_marker_data</span></a>(marker_data: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-openxrmarkertracker-property-bounds-size"><a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a> <strong>bounds_size</strong> = <code class="docutils literal notranslate"><span class="pre">Vector2(0,</span> <span class="pre">0)</span></code> <a class="reference internal" href="#class-openxrmarkertracker-property-bounds-size"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_bounds_size</strong>(value: <a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a> <strong>get_bounds_size</strong>()</p></li>
+</ul>
+<p>The bounds size for this marker.</p>
+<p class="classref-property" id="class-openxrmarkertracker-property-marker-id"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>marker_id</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-openxrmarkertracker-property-marker-id"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_marker_id</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_marker_id</strong>()</p></li>
+</ul>
+<p>The marker ID for this marker, this is only returned for Aruco and April Tag markers. Call <a class="reference internal" href="#class-openxrmarkertracker-method-get-marker-data"><span class="std std-ref">get_marker_data()</span></a> for QRCode markers.</p>
+<p class="classref-property" id="class-openxrmarkertracker-property-marker-type"><a class="reference internal" href="class_openxrspatialcomponentmarkerlist.html#enum-openxrspatialcomponentmarkerlist-markertype"><span class="std std-ref">MarkerType</span></a> <strong>marker_type</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-openxrmarkertracker-property-marker-type"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_marker_type</strong>(value: <a class="reference internal" href="class_openxrspatialcomponentmarkerlist.html#enum-openxrspatialcomponentmarkerlist-markertype"><span class="std std-ref">MarkerType</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_openxrspatialcomponentmarkerlist.html#enum-openxrspatialcomponentmarkerlist-markertype"><span class="std std-ref">MarkerType</span></a> <strong>get_marker_type</strong>()</p></li>
+</ul>
+<p>The type of marker.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-openxrmarkertracker-method-get-marker-data"><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> <strong>get_marker_data</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-openxrmarkertracker-method-get-marker-data"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the marker data for this marker. This can return a <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> or <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>. Only applicable to QR Code based markers.</p>
+<p class="classref-method" id="class-openxrmarkertracker-method-set-marker-data"><abbr title="No return value.">void</abbr> <strong>set_marker_data</strong>(marker_data: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>) <a class="reference internal" href="#class-openxrmarkertracker-method-set-marker-data"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the marker data for this marker.</p>
+<p><strong>Note:</strong> This should only be set by marker discovery logic.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

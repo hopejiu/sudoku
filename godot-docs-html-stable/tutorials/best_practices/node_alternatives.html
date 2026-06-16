@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="When and how to avoid using nodes for everything" property="og:title"/>
+
+
+
+<meta content="Nodes are cheap to produce, but even they have their limits. A project may have tens of thousands of nodes all doing things. The more complex their behavior though, the larger the strain each one a..." property="og:description"/>
+<meta content="Nodes are cheap to produce, but even they have their limits. A project may have tens of thousands of nodes all doing things. The more complex their behavior though, the larger the strain each one a..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) When and how to avoid using nodes for everything — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="godot_interfaces.html" rel="next" title="Godot interfaces"/>
+<link href="autoloads_versus_regular_nodes.html" rel="prev" title="Autoloads versus regular nodes"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/best_practices/node_alternatives" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="when-and-how-to-avoid-using-nodes-for-everything">
+<span id="doc-node-alternatives"></span><h1>When and how to avoid using nodes for everything<a class="headerlink" href="#when-and-how-to-avoid-using-nodes-for-everything" title="Link to this heading"></a></h1>
+<p>Nodes are cheap to produce, but even they have their limits. A project may
+have tens of thousands of nodes all doing things. The more complex their
+behavior though, the larger the strain each one adds to a project's
+performance.</p>
+<p>Godot provides more lightweight objects for creating APIs which nodes use.
+Be sure to keep these in mind as options when designing how you wish to build
+your project's features.</p>
+<ol class="arabic">
+<li><p><a class="reference internal" href="../../classes/class_object.html#class-object"><span class="std std-ref">Object</span></a>: The ultimate lightweight object, the original
+Object must use manual memory management. With that said, it isn't too
+difficult to create one's own custom data structures, even node structures,
+that are also lighter than the <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> class.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> See the <a class="reference internal" href="../../classes/class_tree.html#class-tree"><span class="std std-ref">Tree</span></a> node. It supports a high level
+of customization for a table of content with an arbitrary number of
+rows and columns. The data that it uses to generate its visualization
+though is actually a tree of <a class="reference internal" href="../../classes/class_treeitem.html#class-treeitem"><span class="std std-ref">TreeItem</span></a> Objects.</p></li>
+<li><p><strong>Advantages:</strong> Simplifying one's API to smaller scoped objects helps improve
+its accessibility and improve iteration time. Rather than working with the
+entire Node library, one creates an abbreviated set of Objects from which
+a node can generate and manage the appropriate sub-nodes.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One should be careful when handling them. One can store an Object
+into a variable, but these references can become invalid without warning.
+For example, if the object's creator decides to delete it out of nowhere,
+this would trigger an error state when one next accesses it.</p>
+</div>
+</li>
+<li><p><a class="reference internal" href="../../classes/class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a>: Only a little more complex than Object.
+They track references to themselves, only deleting loaded memory when no
+further references to themselves exist. These are useful in the majority of
+cases where one needs data in a custom class.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> See the <a class="reference internal" href="../../classes/class_fileaccess.html#class-fileaccess"><span class="std std-ref">FileAccess</span></a> object. It functions
+just like a regular Object except that one need not delete it themselves.</p></li>
+<li><p><strong>Advantages:</strong> same as the Object.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>: Only slightly more complex than RefCounted.
+They have the innate ability to serialize/deserialize (i.e. save and load)
+their object properties to/from Godot resource files.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> Scripts, PackedScene (for scene files), and other types like
+each of the <a class="reference internal" href="../../classes/class_audioeffect.html#class-audioeffect"><span class="std std-ref">AudioEffect</span></a> classes. Each of these
+can be saved and loaded, therefore they extend from Resource.</p></li>
+<li><p><strong>Advantages:</strong> Much has
+<a class="reference internal" href="../scripting/resources.html#doc-resources"><span class="std std-ref">already been said</span></a>
+on <a class="reference internal" href="../../classes/class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>'s advantages over traditional data
+storage methods. In the context of using Resources over Nodes though,
+their main advantage is in Inspector-compatibility. While nearly as
+lightweight as Object/RefCounted, they can still display and export
+properties in the Inspector. This allows them to fulfill a purpose much
+like sub-Nodes on the usability front, but also improve performance if
+one plans to have many such Resources/Nodes in their scenes.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

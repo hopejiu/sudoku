@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Validation layers" property="og:title"/>
+
+
+
+<meta content="Validation layers enable developers to verify their application's correct use of the Vulkan API. Validation layers can be enabled in both debug and release builds, including in exported projec..." property="og:description"/>
+<meta content="Validation layers enable developers to verify their application's correct use of the Vulkan API. Validation layers can be enabled in both debug and release builds, including in exported projec..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Validation layers — Godot Engine (4.6) documentation in English</title>
+<link href="../../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../../search.html" rel="search" title="Search"/>
+<link href="../../profiling/index.html" rel="next" title="Using C++ profilers"/>
+<link href="index.html" rel="prev" title="Vulkan"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/debugging/vulkan/vulkan_validation_layers" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="validation-layers">
+<span id="doc-vulkan-validation-layers"></span><h1>Validation layers<a class="headerlink" href="#validation-layers" title="Link to this heading"></a></h1>
+<p>Validation layers enable developers to verify their application's correct use of
+the Vulkan API. Validation layers can be enabled in both debug and release
+builds, including in exported projects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enabling validation layers has a performance impact, so only enable them
+when you actually need the output to debug the application.</p>
+</div>
+<section id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h2>
+<p>Install the Vulkan SDK <a class="reference external" href="https://vulkan.lunarg.com/sdk/home">https://vulkan.lunarg.com/sdk/home</a>, which contains
+validation layers as part of its default installation. No need to enable any
+optional features in the installer; installing the core Vulkan SDK suffices. You
+don't need to reboot after installing the SDK, but you may need to close and
+reopen your current terminal.</p>
+<p>After installing the Vulkan SDK, run Godot with the <code class="docutils literal notranslate"><span class="pre">--gpu-validation</span></code>
+<a class="reference internal" href="../../../../tutorials/editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">command line argument</span></a>. You can also specify
+<code class="docutils literal notranslate"><span class="pre">--gpu-abort</span></code> which will make Godot quit as soon as a validation error happens.
+This can prevent your system from freezing if a validation error occurs.</p>
+</section>
+<section id="macos">
+<h2>macOS<a class="headerlink" href="#macos" title="Link to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Official Godot macOS builds do <strong>not</strong> support validation layers, as these
+are statically linked against the Vulkan SDK. Dynamic linking must be used
+instead.</p>
+<p>In practice, this means that using validation layers on macOS <strong>requires</strong>
+you to use a Godot build compiled with the <code class="docutils literal notranslate"><span class="pre">use_volk=yes</span></code> SCons option.
+<a class="reference internal" href="../../compiling/compiling_for_macos.html#doc-compiling-for-macos"><span class="std std-ref">Compiling for macOS</span></a>. If testing validation layers on an exported
+project, you must recompile the export template and specify it as a custom
+export template in your project's macOS export preset.</p>
+</div>
+<p>Install the Vulkan SDK <a class="reference external" href="https://vulkan.lunarg.com/sdk/home">https://vulkan.lunarg.com/sdk/home</a>, which contains
+validation layers as part of its default installation. No need to enable any
+optional features in the installer; installing the core Vulkan SDK suffices. You
+don't need to reboot after installing the SDK, but you may need to close and
+reopen your current terminal.</p>
+<p>After installing the Vulkan SDK, run a Godot binary that was compiled with
+<code class="docutils literal notranslate"><span class="pre">use_volk=yes</span></code> SCons option. Specify the <code class="docutils literal notranslate"><span class="pre">--gpu-validation</span></code>
+<a class="reference internal" href="../../../../tutorials/editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">command line argument</span></a>.
+You can also specify <code class="docutils literal notranslate"><span class="pre">--gpu-abort</span></code> which will make Godot quit as soon
+as a validation error happens. This can prevent your system from freezing
+if a validation error occurs.</p>
+</section>
+<section id="linux-bsd">
+<h2>Linux, *BSD<a class="headerlink" href="#linux-bsd" title="Link to this heading"></a></h2>
+<p>Install Vulkan validation layers from your distribution's repositories:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Alpine Linux</button><button class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Arch Linux</button><button class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Debian/Ubuntu</button><button class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Fedora</button><button class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">FreeBSD</button><button class="sphinx-tabs-tab" id="tab-0-0-5" name="0-5" role="tab" tabindex="-1">Gentoo</button><button class="sphinx-tabs-tab" id="tab-0-0-6" name="0-6" role="tab" tabindex="-1">Mageia</button><button class="sphinx-tabs-tab" id="tab-0-0-7" name="0-7" role="tab" tabindex="-1">OpenBSD</button><button class="sphinx-tabs-tab" id="tab-0-0-8" name="0-8" role="tab" tabindex="-1">openSUSE</button><button class="sphinx-tabs-tab" id="tab-0-0-9" name="0-9" role="tab" tabindex="-1">Solus</button></div><div class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span><span class="w"> </span><span class="o">-</span><span class="n">S</span><span class="w"> </span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">vulkan</span><span class="o">-</span><span class="n">validationlayers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">dnf</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-4" name="0-4" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">pkg</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">graphics</span><span class="o">/</span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-5" name="0-5" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">emerge</span><span class="w"> </span><span class="o">-</span><span class="n">an</span><span class="w"> </span><span class="n">media</span><span class="o">-</span><span class="n">libs</span><span class="o">/</span><span class="n">vulkan</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-6" name="0-6" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">urpmi</span><span class="w"> </span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-7" name="0-7" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">pkg_add</span><span class="w"> </span><span class="n">graphics</span><span class="o">/</span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-8" name="0-8" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">zypper</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">vulkan</span><span class="o">-</span><span class="n">validationlayers</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel" hidden="true" id="panel-0-0-9" name="0-9" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">eopkg</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="n">vulkan</span><span class="o">-</span><span class="n">validation</span><span class="o">-</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div></div>
+<p>You don't need to reboot after installing the validation layers, but you may
+need to close and reopen your current terminal.</p>
+<p>After installing the package, run Godot with the <code class="docutils literal notranslate"><span class="pre">--gpu-validation</span></code>
+<a class="reference internal" href="../../../../tutorials/editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">command line argument</span></a>. You can also specify
+<code class="docutils literal notranslate"><span class="pre">--gpu-abort</span></code> which will make Godot quit as soon as a validation error happens.
+This can prevent your system from freezing if a validation error occurs.</p>
+</section>
+<section id="ios">
+<h2>iOS<a class="headerlink" href="#ios" title="Link to this heading"></a></h2>
+<p>Validation layers are currently <strong>not</strong> supported on iOS.</p>
+</section>
+<section id="web">
+<h2>Web<a class="headerlink" href="#web" title="Link to this heading"></a></h2>
+<p>Validation layers are <strong>not</strong> supported on the web platform, as there is no support
+for Vulkan there.</p>
+</section>
+<section id="android">
+<span id="doc-vulkan-validation-layers-android"></span><h2>Android<a class="headerlink" href="#android" title="Link to this heading"></a></h2>
+<p>After enabling validation layers on Android, a developer can see errors and
+warning messages in the <code class="docutils literal notranslate"><span class="pre">adb</span> <span class="pre">logcat</span></code> output.</p>
+<section id="enabling-validation-layers">
+<h3>Enabling validation layers<a class="headerlink" href="#enabling-validation-layers" title="Link to this heading"></a></h3>
+<section id="build-validation-layers-from-official-sources">
+<h4>Build validation layers from official sources<a class="headerlink" href="#build-validation-layers-from-official-sources" title="Link to this heading"></a></h4>
+<p>To build Android libraries, follow the instructions on
+<a class="reference external" href="https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/master/BUILD.md#building-on-android">Khronos' repository</a>.
+After a successful build, the libraries will be located in <code class="docutils literal notranslate"><span class="pre">Vulkan-ValidationLayers/build-android/libs</span></code>.</p>
+</section>
+<section id="copy-libraries">
+<h4>Copy libraries<a class="headerlink" href="#copy-libraries" title="Link to this heading"></a></h4>
+<p>Copy libraries from <code class="docutils literal notranslate"><span class="pre">Vulkan-ValidationLayers/build-android/libs</span></code> to
+<code class="docutils literal notranslate"><span class="pre">godot/platform/android/java/app/libs/debug/vulkan_validation_layers</span></code>.</p>
+<p>Your Godot source directory tree should look like on the example below:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">godot</span>
+<span class="o">|--</span><span class="w"> </span><span class="n">platform</span>
+<span class="w">    </span><span class="o">|--</span><span class="w"> </span><span class="n">android</span>
+<span class="w">        </span><span class="o">|--</span><span class="w"> </span><span class="n">java</span>
+<span class="w">            </span><span class="o">|--</span><span class="w"> </span><span class="n">app</span>
+<span class="w">                </span><span class="o">|--</span><span class="w"> </span><span class="n">libs</span>
+<span class="w">                    </span><span class="o">|--</span><span class="w"> </span><span class="n">debug</span>
+<span class="w">                        </span><span class="o">|--</span><span class="w"> </span><span class="n">vulkan_validation_layers</span>
+<span class="w">                            </span><span class="o">|--</span><span class="w"> </span><span class="n">arm64</span><span class="o">-</span><span class="n">v8a</span>
+<span class="w">                            </span><span class="o">|--</span><span class="w"> </span><span class="n">armeabi</span><span class="o">-</span><span class="n">v7a</span>
+<span class="w">                            </span><span class="o">|--</span><span class="w"> </span><span class="n">x86</span>
+<span class="w">                            </span><span class="o">|--</span><span class="w"> </span><span class="n">x86_64</span>
+</pre></div>
+</div>
+<p>If the subdirectory <code class="docutils literal notranslate"><span class="pre">libs/debug/vulkan_validation_layers</span></code> doesn't exist, create it.</p>
+</section>
+<section id="compile-and-run-the-android-app">
+<h4>Compile and run the Android app<a class="headerlink" href="#compile-and-run-the-android-app" title="Link to this heading"></a></h4>
+<p>Linked validation layers are automatically loaded and enabled in Android debug builds.
+You can use Godot's <a class="reference internal" href="../../../../tutorials/export/one-click_deploy.html#doc-one-click-deploy"><span class="std std-ref">One-click deploy</span></a> feature to quickly test your project with the validation layers enabled.</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

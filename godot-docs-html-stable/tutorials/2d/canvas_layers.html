@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Canvas layers" property="og:title"/>
+
+
+
+<meta content="Viewport and Canvas items: CanvasItem is the base for all 2D nodes, be it regular 2D nodes, such as Node2D, or Control. Both inherit from CanvasItem. You can arrange canvas items in trees. Each ite..." property="og:description"/>
+<meta content="Viewport and Canvas items: CanvasItem is the base for all 2D nodes, be it regular 2D nodes, such as Node2D, or Control. Both inherit from CanvasItem. You can arrange canvas items in trees. Each ite..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Canvas layers — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="2d_transforms.html" rel="next" title="Viewport and canvas transforms"/>
+<link href="introduction_to_2d.html" rel="prev" title="Introduction to 2D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/2d/canvas_layers" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="canvas-layers">
+<span id="doc-canvas-layers"></span><h1>Canvas layers<a class="headerlink" href="#canvas-layers" title="Link to this heading"></a></h1>
+<section id="viewport-and-canvas-items">
+<h2>Viewport and Canvas items<a class="headerlink" href="#viewport-and-canvas-items" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a> is the base for all 2D nodes, be it regular
+2D nodes, such as <a class="reference internal" href="../../classes/class_node2d.html#class-node2d"><span class="std std-ref">Node2D</span></a>, or <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a>.
+Both inherit from <a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a>.
+You can arrange canvas items in trees. Each item will inherit its parent's
+transform: when the parent moves, its children move too.</p>
+<p>CanvasItem nodes, and nodes inheriting from them, are direct or indirect children of a
+<a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>, that displays them.</p>
+<p>The Viewport's property
+<a class="reference internal" href="../../classes/class_viewport.html#class-viewport-property-canvas-transform"><span class="std std-ref">Viewport.canvas_transform</span></a>,
+allows to apply a custom <a class="reference internal" href="../../classes/class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a>
+transform to the CanvasItem hierarchy it contains. Nodes such as
+<a class="reference internal" href="../../classes/class_camera2d.html#class-camera2d"><span class="std std-ref">Camera2D</span></a> work by changing that transform.</p>
+<p>To achieve effects like scrolling, manipulating the canvas transform property is
+more efficient than moving the root canvas item and the entire scene with it.</p>
+<p>Usually though, we don't want <em>everything</em> in the game or app to be subject to the canvas
+transform. For example:</p>
+<ul class="simple">
+<li><p><strong>Parallax Backgrounds</strong>: Backgrounds that move slower than the rest
+of the stage.</p></li>
+<li><p><strong>UI</strong>: Think of a user interface (UI) or head-up display (HUD) superimposed on our view of the game world. We want a life counter, score display and other elements to retain their screen positions even when our view of the game world changes.</p></li>
+<li><p><strong>Transitions</strong>: We may want visual effects used for transitions (fades, blends) to remain at a fixed screen location.</p></li>
+</ul>
+<p>How to solve these problems in a single scene tree?</p>
+</section>
+<section id="canvaslayers">
+<h2>CanvasLayers<a class="headerlink" href="#canvaslayers" title="Link to this heading"></a></h2>
+<p>The answer is <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer"><span class="std std-ref">CanvasLayer</span></a>,
+which is a node that adds a separate 2D rendering layer for all its
+children and grand-children. Viewport children will draw by default at
+layer "0", while a CanvasLayer will draw at any numeric layer. Layers
+with a greater number will be drawn above those with a smaller number.
+CanvasLayers also have their own transform and do not depend on the
+transform of other layers. This allows the UI to be fixed in screen-space
+while our view on the game world changes.</p>
+<p>An example of this is creating a parallax background. This can be done
+with a CanvasLayer at layer "-1". The screen with the points, life
+counter and pause button can also be created at layer "1".</p>
+<p>Here's a diagram of how it looks:</p>
+<img alt="../../_images/canvaslayers.png" src="../../_images/canvaslayers.png"/>
+<p>CanvasLayers are independent of tree order, and they only depend on
+their layer number, so they can be instantiated when needed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CanvasLayers aren't necessary to control the drawing order of nodes.
+The standard way to ensuring that a node is correctly drawn 'in front' or 'behind' others is to manipulate the
+order of the nodes in the scene panel. Perhaps counterintuitively, the topmost nodes in the scene panel are drawn
+on <em>behind</em> lower ones in the viewport. 2D nodes also have the <a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-property-z-index"><span class="std std-ref">CanvasItem.z_index</span></a>
+property for controlling their drawing order.</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

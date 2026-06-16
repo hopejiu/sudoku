@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Sync the gameplay with audio and music" property="og:title"/>
+
+
+
+<meta content="Introduction: In any application or game, sound and music playback will have a slight delay. For games, this delay is often so small that it is negligible. Sound effects will come out a few millise..." property="og:description"/>
+<meta content="Introduction: In any application or game, sound and music playback will have a slight delay. For games, this delay is often so small that it is negligible. Sound effects will come out a few millise..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Sync the gameplay with audio and music — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="recording_with_microphone.html" rel="next" title="Recording with microphone"/>
+<link href="audio_streams.html" rel="prev" title="Audio streams"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/audio/sync_with_audio" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+<div class="admonition attention article-status">
+<p class="first admonition-title">Work in progress</p>
+<p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.6</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+</div>
+</div>
+<section id="sync-the-gameplay-with-audio-and-music">
+<span id="doc-sync-with-audio"></span><h1>Sync the gameplay with audio and music<a class="headerlink" href="#sync-the-gameplay-with-audio-and-music" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In any application or game, sound and music playback will have a slight delay. For games, this delay is often so small that it is negligible. Sound effects will come out a few milliseconds after any play() function is called. For music this does not matter as in most games it does not interact with the gameplay.</p>
+<p>Still, for some games (mainly, rhythm games), it may be required to synchronize player actions with something happening in a song (usually in sync with the BPM). For this, having more precise timing information for an exact playback position is useful.</p>
+<p>Achieving very low playback timing precision is difficult. This is because many factors are at play during audio playback:</p>
+<ul class="simple">
+<li><p>Audio is mixed in chunks (not continuously), depending on the size of audio buffers used (check latency in project settings).</p></li>
+<li><p>Mixed chunks of audio are not played immediately.</p></li>
+<li><p>Graphics APIs display two or three frames late.</p></li>
+<li><p>When playing on TVs, some delay may be added due to image processing.</p></li>
+</ul>
+<p>The most common way to reduce latency is to shrink the audio buffers (again, by editing the latency setting in the project settings). The problem is that when latency is too small, sound mixing will require considerably more CPU. This increases the risk of skipping (a crack in sound because a mix callback was lost).</p>
+<p>This is a common tradeoff, so Godot ships with sensible defaults that should not need to be altered.</p>
+<p>The problem, in the end, is not this slight delay but synchronizing graphics and
+audio for games that require it. Some helpers are available to obtain more
+precise playback timing.</p>
+</section>
+<section id="using-the-system-clock-to-sync">
+<h2>Using the system clock to sync<a class="headerlink" href="#using-the-system-clock-to-sync" title="Link to this heading"></a></h2>
+<p>As mentioned before, If you call <a class="reference internal" href="../../classes/class_audiostreamplayer.html#class-audiostreamplayer-method-play"><span class="std std-ref">AudioStreamPlayer.play()</span></a>, sound will not begin immediately, but when the audio thread processes the next chunk.</p>
+<p>This delay can't be avoided but it can be estimated by calling <a class="reference internal" href="../../classes/class_audioserver.html#class-audioserver-method-get-time-to-next-mix"><span class="std std-ref">AudioServer.get_time_to_next_mix()</span></a>.</p>
+<p>The output latency (what happens after the mix) can also be estimated by calling <a class="reference internal" href="../../classes/class_audioserver.html#class-audioserver-method-get-output-latency"><span class="std std-ref">AudioServer.get_output_latency()</span></a>.</p>
+<p>Add these two and it's possible to guess almost exactly when sound or music will begin playing in the speakers during <em>_process()</em>:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">time_begin</span>
+<span class="k">var</span><span class="w"> </span><span class="n">time_delay</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">time_begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Time</span><span class="o">.</span><span class="nf">get_ticks_usec</span><span class="p">()</span>
+<span class="w">    </span><span class="n">time_delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_time_to_next_mix</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_output_latency</span><span class="p">()</span>
+<span class="w">    </span><span class="sx">$Player</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Obtain from ticks.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb">Time</span><span class="o">.</span><span class="nf">get_ticks_usec</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">time_begin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000000.0</span>
+<span class="w">    </span><span class="c1"># Compensate for latency.</span>
+<span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">time_delay</span>
+<span class="w">    </span><span class="c1"># May be below 0 (did not begin yet).</span>
+<span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Time is: "</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">_timeBegin</span><span class="p">;</span>
+<span class="k">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">_timeDelay</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">_timeBegin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Time</span><span class="p">.</span><span class="n">GetTicksUsec</span><span class="p">();</span>
+<span class="w">    </span><span class="n">_timeDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetTimeToNextMix</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetOutputLatency</span><span class="p">();</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">AudioStreamPlayer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Player"</span><span class="p">).</span><span class="n">Play</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">GetTicksUsec</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">_timeBegin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000000.0d</span><span class="p">;</span>
+<span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="mf">0.0d</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">_timeDelay</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Time is: {0}"</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>In the long run, though, as the sound hardware clock is never exactly in sync with the system clock, the timing information will slowly drift away.</p>
+<p>For a rhythm game where a song begins and ends after a few minutes, this approach is fine (and it's the recommended approach). For a game where playback can last a much longer time, the game will eventually go out of sync and a different approach is needed.</p>
+</section>
+<section id="using-the-sound-hardware-clock-to-sync">
+<h2>Using the sound hardware clock to sync<a class="headerlink" href="#using-the-sound-hardware-clock-to-sync" title="Link to this heading"></a></h2>
+<p>Using <a class="reference internal" href="../../classes/class_audiostreamplayer.html#class-audiostreamplayer-method-get-playback-position"><span class="std std-ref">AudioStreamPlayer.get_playback_position()</span></a> to obtain the current position for the song sounds ideal, but it's not that useful as-is. This value will increment in chunks (every time the audio callback mixed a block of sound), so many calls can return the same value. Added to this, the value will be out of sync with the speakers too because of the previously mentioned reasons.</p>
+<p>To compensate for the "chunked" output, there is a function that can help: <a class="reference internal" href="../../classes/class_audioserver.html#class-audioserver-method-get-time-since-last-mix"><span class="std std-ref">AudioServer.get_time_since_last_mix()</span></a>.</p>
+<p>Adding the return value from this function to <em>get_playback_position()</em> increases precision:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="nf">get_playback_position</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_time_since_last_mix</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">AudioStreamPlayer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Player"</span><span class="p">).</span><span class="n">GetPlaybackPosition</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetTimeSinceLastMix</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>To increase precision, subtract the latency information (how much it takes for the audio to be heard after it was mixed):</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="nf">get_playback_position</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_time_since_last_mix</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_output_latency</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">AudioStreamPlayer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Player"</span><span class="p">).</span><span class="n">GetPlaybackPosition</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetTimeSinceLastMix</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetOutputLatency</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>The result may be a bit jittery due how multiple threads work. Just check that the value is not less than in the previous frame (discard it if so). This is also a less precise approach than the one before, but it will work for songs of any length, or synchronizing anything (sound effects, as an example) to music.</p>
+<p>Here is the same code as before using this approach:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$Player</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$Player</span><span class="o">.</span><span class="nf">get_playback_position</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_time_since_last_mix</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Compensate for output latency.</span>
+<span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nb">AudioServer</span><span class="o">.</span><span class="nf">get_output_latency</span><span class="p">()</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Time is: "</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">AudioStreamPlayer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Player"</span><span class="p">).</span><span class="n">Play</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">AudioStreamPlayer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Player"</span><span class="p">).</span><span class="n">GetPlaybackPosition</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetTimeSinceLastMix</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Compensate for output latency.</span>
+<span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">AudioServer</span><span class="p">.</span><span class="n">GetOutputLatency</span><span class="p">();</span>
+<span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Time is: {0}"</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

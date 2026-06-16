@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Quick start guide" property="og:title"/>
+
+
+
+<meta content="Turn on physics interpolation: Project Settings &gt; Physics &gt; Common &gt; Physics Interpolation, Make sure you move objects and run your game logic in_physics_process() rather than_process(). T..." property="og:description"/>
+<meta content="Turn on physics interpolation: Project Settings &gt; Physics &gt; Common &gt; Physics Interpolation, Make sure you move objects and run your game logic in_physics_process() rather than_process(). T..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Quick start guide — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="physics_interpolation_introduction.html" rel="next" title="Introduction"/>
+<link href="index.html" rel="prev" title="Physics Interpolation"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/physics/interpolation/physics_interpolation_quick_start_guide" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="quick-start-guide">
+<span id="doc-physics-interpolation-quick-start-guide"></span><h1>Quick start guide<a class="headerlink" href="#quick-start-guide" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Turn on physics interpolation: <a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-physics-interpolation"><span class="std std-ref">Project Settings &gt; Physics &gt; Common &gt; Physics Interpolation</span></a></p></li>
+<li><p>Make sure you move objects and run your game logic in <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code>
+rather than <code class="docutils literal notranslate"><span class="pre">_process()</span></code>. This includes moving objects directly <em>and
+indirectly</em> (by e.g. moving a parent, or using another mechanism to automatically
+move nodes).</p></li>
+<li><p>Be sure to call <a class="reference internal" href="../../../classes/class_node.html#class-node-method-reset-physics-interpolation"><span class="std std-ref">Node.reset_physics_interpolation</span></a>
+on nodes <em>after</em> you first position or teleport them, to prevent "streaking".</p></li>
+<li><p>Temporarily try setting <a class="reference internal" href="../../../classes/class_projectsettings.html#class-projectsettings-property-physics-common-physics-ticks-per-second"><span class="std std-ref">Project Settings &gt; Physics &gt; Common &gt; Physics Ticks per Second</span></a>
+to 10 to see the difference with and without interpolation.</p></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="LightOccluder2D" property="og:title"/>
+
+
+
+<meta content="Inherits: Node2D&lt; CanvasItem&lt; Node&lt; Object Occludes light cast by a Light2D, casting shadows. Description: Occludes light cast by a Light2D, casting shadows. The LightOccluder2D must be pr..." property="og:description"/>
+<meta content="Inherits: Node2D&lt; CanvasItem&lt; Node&lt; Object Occludes light cast by a Light2D, casting shadows. Description: Occludes light cast by a Light2D, casting shadows. The LightOccluder2D must be pr..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) LightOccluder2D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_limitangularvelocitymodifier3d.html" rel="next" title="LimitAngularVelocityModifier3D"/>
+<link href="class_lightmapprobe.html" rel="prev" title="LightmapProbe"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_lightoccluder2d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="lightoccluder2d">
+<span id="class-lightoccluder2d"></span><h1>LightOccluder2D<a class="headerlink" href="#lightoccluder2d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_node2d.html#class-node2d"><span class="std std-ref">Node2D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_canvasitem.html#class-canvasitem"><span class="std std-ref">CanvasItem</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Occludes light cast by a Light2D, casting shadows.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Occludes light cast by a Light2D, casting shadows. The LightOccluder2D must be provided with an <a class="reference internal" href="class_occluderpolygon2d.html#class-occluderpolygon2d"><span class="std std-ref">OccluderPolygon2D</span></a> in order for the shadow to be computed.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/2d/2d_lights_and_shadows.html"><span class="doc">2D lights and shadows</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_occluderpolygon2d.html#class-occluderpolygon2d"><span class="std std-ref">OccluderPolygon2D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-lightoccluder2d-property-occluder"><span class="std std-ref">occluder</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-lightoccluder2d-property-occluder-light-mask"><span class="std std-ref">occluder_light_mask</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-lightoccluder2d-property-sdf-collision"><span class="std std-ref">sdf_collision</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-lightoccluder2d-property-occluder"><a class="reference internal" href="class_occluderpolygon2d.html#class-occluderpolygon2d"><span class="std std-ref">OccluderPolygon2D</span></a> <strong>occluder</strong> <a class="reference internal" href="#class-lightoccluder2d-property-occluder"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_occluder_polygon</strong>(value: <a class="reference internal" href="class_occluderpolygon2d.html#class-occluderpolygon2d"><span class="std std-ref">OccluderPolygon2D</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_occluderpolygon2d.html#class-occluderpolygon2d"><span class="std std-ref">OccluderPolygon2D</span></a> <strong>get_occluder_polygon</strong>()</p></li>
+</ul>
+<p>The <a class="reference internal" href="class_occluderpolygon2d.html#class-occluderpolygon2d"><span class="std std-ref">OccluderPolygon2D</span></a> used to compute the shadow.</p>
+<p class="classref-property" id="class-lightoccluder2d-property-occluder-light-mask"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>occluder_light_mask</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-lightoccluder2d-property-occluder-light-mask"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_occluder_light_mask</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_occluder_light_mask</strong>()</p></li>
+</ul>
+<p>The LightOccluder2D's occluder light mask. The LightOccluder2D will cast shadows only from Light2D(s) that have the same light mask(s).</p>
+<p class="classref-property" id="class-lightoccluder2d-property-sdf-collision"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>sdf_collision</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-lightoccluder2d-property-sdf-collision"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_as_sdf_collision</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_set_as_sdf_collision</strong>()</p></li>
+</ul>
+<p>If enabled, the occluder will be part of a real-time generated signed distance field that can be used in custom shaders.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

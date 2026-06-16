@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Creating a 3D particle system" property="og:title"/>
+
+
+
+<meta content="Required particle node properties, To get started with particles, the first thing we need to do is add a GPUParticles3D node to the scene. Before we can actually see any particles, we have to set u..." property="og:description"/>
+<meta content="Required particle node properties, To get started with particles, the first thing we need to do is add a GPUParticles3D node to the scene. Before we can actually see any particles, we have to set u..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Creating a 3D particle system — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="properties.html" rel="next" title="3D Particle system properties"/>
+<link href="index.html" rel="prev" title="Particle systems (3D)"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/3d/particles/creating_a_3d_particle_system" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="creating-a-3d-particle-system">
+<span id="doc-creating-3d-particle-system"></span><h1>Creating a 3D particle system<a class="headerlink" href="#creating-a-3d-particle-system" title="Link to this heading"></a></h1>
+<figure class="align-right" id="id1">
+<img alt="../../../_images/particle_node_new.webp" src="../../../_images/particle_node_new.webp"/>
+<figcaption>
+<p><span class="caption-text">Required particle node properties</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To get started with particles, the first thing we need to do is add a <code class="docutils literal notranslate"><span class="pre">GPUParticles3D</span></code>
+node to the scene. Before we can actually see any particles, we have to set up two parameters on the node:
+the <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">Material</span></code> and at least one <code class="docutils literal notranslate"><span class="pre">Draw</span> <span class="pre">Pass</span></code>.</p>
+<section id="the-process-material">
+<h2>The process material<a class="headerlink" href="#the-process-material" title="Link to this heading"></a></h2>
+<p>To add a process material to your particles node, go to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">Material</span></code> in the inspector panel.
+Click on the box next to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">Material</span></code> and from the dropdown menu select <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">ParticleProcessMaterial</span></code>.</p>
+<figure class="align-right" id="id2">
+<img alt="../../../_images/particle_new_process_material.webp" src="../../../_images/particle_new_process_material.webp"/>
+<figcaption>
+<p><span class="caption-text">Creating a process material</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="../../../classes/class_particleprocessmaterial.html#class-particleprocessmaterial"><span class="std std-ref">ParticleProcessMaterial</span></a> is a special kind of material. We don't use it to draw any objects.
+We use it to update particle data and behavior on the GPU instead of the CPU, which comes with a massive performance
+boost. A click on the newly added material displays a long list of properties that you can set to
+control each particle's behavior.</p>
+</section>
+<section id="draw-passes">
+<h2>Draw passes<a class="headerlink" href="#draw-passes" title="Link to this heading"></a></h2>
+<figure class="align-right" id="id3">
+<img alt="../../../_images/particle_first_draw_pass.webp" src="../../../_images/particle_first_draw_pass.webp"/>
+<figcaption>
+<p><span class="caption-text">At least one draw pass is required</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In order to render any particles, at least one draw pass needs to be defined. To do that, go to
+<code class="docutils literal notranslate"><span class="pre">Draw</span> <span class="pre">Passes</span></code> in the inspector panel. Click on the box next to <code class="docutils literal notranslate"><span class="pre">Pass</span> <span class="pre">1</span></code> and select <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">QuadMesh</span></code>
+from the dropdown menu. After that, click on the mesh and set its <code class="docutils literal notranslate"><span class="pre">Size</span></code> to 0.1 for both <code class="docutils literal notranslate"><span class="pre">x</span></code>
+and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Reducing the mesh's size makes it a little easier to tell the individual particle
+meshes apart at this stage.</p>
+<p>You can use up to 4 draw passes per particle system. Each pass can render a different
+mesh with its own unique material. All draw passes use the data that is computed by the process material,
+which is an efficient method for composing complex effects: Compute particle
+behavior once and feed it to multiple render passes.</p>
+<figure class="align-default" id="id4">
+<img alt="../../../_images/particle_two_draw_passes.webp" src="../../../_images/particle_two_draw_passes.webp"/>
+<figcaption>
+<p><span class="caption-text">Using multiple draw passes: yellow rectangles (pass1) and blue spheres (pass 2)</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you followed the steps above, your particle system should now be emitting particles in a waterfall-like fashion,
+making them move downwards and disappear after a few seconds. This is the foundation for all
+particle effects. Take a look at the documentation for <a class="reference internal" href="properties.html#doc-3d-particles-properties"><span class="std std-ref">particle</span></a> and
+<a class="reference internal" href="process_material_properties.html#doc-process-material-properties"><span class="std std-ref">particle material</span></a> properties to
+learn how to make particle effects more interesting.</p>
+<figure class="align-default">
+<img alt="../../../_images/particle_basic_system.webp" src="../../../_images/particle_basic_system.webp"/>
+</figure>
+</section>
+<section id="particle-conversion">
+<h2>Particle conversion<a class="headerlink" href="#particle-conversion" title="Link to this heading"></a></h2>
+<figure class="align-right" id="id5">
+<img alt="../../../_images/particle_convert_cpu.webp" src="../../../_images/particle_convert_cpu.webp"/>
+<figcaption>
+<p><span class="caption-text">Turning GPU into CPU particles</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can convert GPU particles to CPU particles at any time using the entry in the viewport
+menu. When you do so, keep in mind that not every feature of GPU particles is available for
+CPU particles, so the resulting particle system will look and behave differently from the
+original.</p>
+<p>You can also convert CPU particles to GPU particles if you no longer need to use CPU particles.
+This is also done from the viewport menu.</p>
+<p>Some of the most notable features that are lost during the conversion include:</p>
+<ul class="simple">
+<li><p>multiple draw passes</p></li>
+<li><p>turbulence</p></li>
+<li><p>sub-emitters</p></li>
+<li><p>trails</p></li>
+<li><p>attractors</p></li>
+<li><p>collision</p></li>
+</ul>
+<p>You also lose the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Amount</span> <span class="pre">Ratio</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Interp</span> <span class="pre">to</span> <span class="pre">End</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Damping</span> <span class="pre">as</span> <span class="pre">Friction</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Emission</span> <span class="pre">Shape</span> <span class="pre">Offset</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Emission</span> <span class="pre">Shape</span> <span class="pre">Scale</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Inherit</span> <span class="pre">Velocity</span> <span class="pre">Ratio</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Velocity</span> <span class="pre">Pivot</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Directional</span> <span class="pre">Velocity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Radial</span> <span class="pre">Velocity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Velocity</span> <span class="pre">Limit</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Scale</span> <span class="pre">Over</span> <span class="pre">Velocity</span></code></p></li>
+</ul>
+<p>Converting GPU particles to CPU particles can become necessary when you want to release a game
+on older devices that don't support modern graphics APIs.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

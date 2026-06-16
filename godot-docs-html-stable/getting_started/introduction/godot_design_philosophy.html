@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Godot's design philosophy" property="og:title"/>
+
+
+
+<meta content="Now that you've gotten your feet wet, let's talk about Godot's design. Every game engine is different and fits different needs. Not only do they offer a range of features, but the de..." property="og:description"/>
+<meta content="Now that you've gotten your feet wet, let's talk about Godot's design. Every game engine is different and fits different needs. Not only do they offer a range of features, but the de..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Godot's design philosophy — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../step_by_step/index.html" rel="next" title="Step by step"/>
+<link href="learning_new_features.html" rel="prev" title="Learning new features"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="getting_started/introduction/godot_design_philosophy" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="godot-s-design-philosophy">
+<span id="doc-godot-design-philosophy"></span><h1>Godot's design philosophy<a class="headerlink" href="#godot-s-design-philosophy" title="Link to this heading"></a></h1>
+<p>Now that you've gotten your feet wet, let's talk about Godot's design.</p>
+<p><strong>Every game engine is different and fits different needs.</strong>
+Not only do they offer a range of features, but the design of each engine
+is unique. This leads to different workflows and different ways to form
+your games' structures. This all stems from their respective design philosophies.</p>
+<p>This page is here to help you understand how Godot works, starting
+with some of its core pillars. It is not a list of available features, nor
+is it an engine comparison. To know if any engine can be a good fit for
+your project, you need to try it out for yourself and
+understand its design and limitations.</p>
+<p>Please watch
+<a class="reference external" href="https://www.youtube.com/watch?v=yS9cuu5o5Ug">Godot explained in 7 minutes</a>
+if you're looking for an overview of the engine's features.</p>
+<section id="object-oriented-design-and-composition">
+<h2>Object-oriented design and composition<a class="headerlink" href="#object-oriented-design-and-composition" title="Link to this heading"></a></h2>
+<p>Godot embraces object-oriented design at its core with its flexible
+scene system and Node hierarchy. It tries to stay away from strict
+programming patterns to offer an intuitive way to structure your game.</p>
+<p>For one, Godot lets you <strong>compose or aggregate</strong> scenes.
+It's like nested prefabs: you can create a BlinkingLight scene and
+a BrokenLantern scene that uses the BlinkingLight.
+Then, create a city filled with BrokenLanterns.
+Change the BlinkingLight's color, save, and all the
+BrokenLanterns in the city will update instantly.</p>
+<p>On top of that, you can <strong>inherit</strong> from any scene.</p>
+<p>A Godot scene could be a Weapon, a Character, an Item, a Door, a Level,
+part of a level… anything you'd like. It works like a class in pure code,
+except you're free to design it by using the editor, using only the
+code, or mixing and matching the two.</p>
+<p>It's different from prefabs you find in several 3D engines, as you can
+then inherit from and extend those scenes. You may create a Magician
+that extends your Character. Modify the Character in the editor and the Magician
+will update as well. It helps you build your projects so that their
+structure matches the game's design.</p>
+<p><img alt="image0" src="../../_images/engine_design_01.png"/></p>
+<p>Also note that Godot offers many different types of objects called
+nodes, each with a specific purpose. Nodes are part of a tree and always
+inherit from their parents up to the Node class. Although the engine
+does feature some nodes like collision shapes that a parent physics
+body will use, most nodes work independently from one another.</p>
+<p>In other words, Godot's nodes do not work like components in some
+other game engines.</p>
+<p><img alt="image1" src="../../_images/engine_design_02.png"/></p>
+<p>Sprite2D is a Node2D, a CanvasItem and a Node. It has all the properties
+and features of its three parent classes, like transforms or the ability
+to draw custom shapes and render with a custom shader.</p>
+</section>
+<section id="all-inclusive-package">
+<h2>All-inclusive package<a class="headerlink" href="#all-inclusive-package" title="Link to this heading"></a></h2>
+<p>Godot tries to provide its own tools to answer most common
+needs. It has a dedicated scripting workspace, an animation editor, a
+tilemap editor, a shader editor, a debugger, a profiler,
+the ability to hot-reload locally and on remote devices, etc.</p>
+<p><img alt="image2" src="../../_images/engine_design_03.png"/></p>
+<p>The goal is to offer a full package to create games and a continuous
+user experience. You can still work with external programs as long as
+there is an import plugin available in Godot for it.</p>
+<p>That is also partly why Godot offers its own programming language
+GDScript along with C#. GDScript is designed for the needs
+of game developers and game designers, and is tightly integrated in
+the engine and the editor.</p>
+<p>GDScript lets you write code using an indentation-based syntax,
+yet it detects types and offers a static language's quality of auto-completion.
+It is also optimized for gameplay code with built-in types like Vectors and Colors.</p>
+<p>Note that with GDExtension, you can write high-performance code using compiled
+languages like C, C++, Rust, D, Haxe, or Swift without recompiling the engine.</p>
+<p>Note that the 3D workspace doesn't feature as many tools as the 2D workspace.
+You'll need external programs or add-ons to edit terrains, animate complex characters, and so on.
+Godot provides a complete API to extend the editor's functionality using
+game code. See <a class="reference internal" href="#the-godot-editor-is-a-godot-game">The Godot editor is a Godot game</a> below.</p>
+</section>
+<section id="open-source">
+<h2>Open source<a class="headerlink" href="#open-source" title="Link to this heading"></a></h2>
+<p>Godot offers a fully open source codebase under the <strong>MIT license</strong>.
+This means that the codebase is free for anyone to download, use,
+modify, or share, as long as its license file is kept intact.</p>
+<p>All technologies that ship with Godot, including third-party libraries, must
+be legally compatible with this open source license. Therefore, most parts
+of Godot are developed from the ground up by community contributors.</p>
+<p>Anyone can plug in proprietary tools for the needs of their projects —
+they just won't ship with the engine. This may include Google AdMob,
+or FMOD. Any of these can come as
+third-party plugins instead.</p>
+<p>On the other hand, an open codebase means you can <strong>learn from and extend
+the engine</strong> to your heart's content. You can also debug games easily,
+as Godot will print errors with a stack trace, even if they come from the engine itself.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This <strong>does not affect the work you do with Godot</strong> in any way: there's
+no strings attached to the engine or anything you make with it.</p>
+</div>
+</section>
+<section id="community-driven">
+<h2>Community-driven<a class="headerlink" href="#community-driven" title="Link to this heading"></a></h2>
+<p><strong>Godot is made by its community, for the community, and for all game
+creators out there.</strong> It's the needs of the users and open discussions
+that drive the core updates. New features from the core developers often
+focus on what will benefit the most users first.</p>
+<p>That said, although a handful of core developers work on it full-time,
+the project has thousands of contributors at the time of writing. Benevolent
+programmers work on features they may need themselves, so you'll see
+improvements in all corners of the engine at the same time in every
+major release.</p>
+</section>
+<section id="the-godot-editor-is-a-godot-game">
+<h2>The Godot editor is a Godot game<a class="headerlink" href="#the-godot-editor-is-a-godot-game" title="Link to this heading"></a></h2>
+<p>The Godot editor runs on the game engine. It uses the engine's own UI
+system, it can hot-reload code and scenes when you test your projects,
+or run game code in the editor. This means you can <strong>use the same code</strong>
+and scenes for your games, or <strong>build plugins and extend the editor.</strong></p>
+<p>This leads to a reliable and flexible UI system, as it powers the editor
+itself. With the <code class="docutils literal notranslate"><span class="pre">@tool</span></code> annotation, you can run any game code in the editor.</p>
+<figure class="align-center" id="id1">
+<img alt="../../_images/introduction_rpg_in_a_box.webp" src="../../_images/introduction_rpg_in_a_box.webp"/>
+<figcaption>
+<p><span class="caption-text">RPG in a Box is a voxel RPG editor made with Godot. It uses Godot's
+UI tools for its node-based programming system and for the rest of the
+interface.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Put the <code class="docutils literal notranslate"><span class="pre">@tool</span></code> annotation at the top of any GDScript file and it will run
+in the editor. This lets you import and export plugins, create plugins
+like custom level editors, or create scripts with the same nodes and API
+you use in your projects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The editor is fully written in C++ and is statically compiled into the
+binary. This means you can't import it as a typical project that would have a
+<code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file.</p>
+</div>
+</section>
+<section id="separate-2d-and-3d-engines">
+<h2>Separate 2D and 3D engines<a class="headerlink" href="#separate-2d-and-3d-engines" title="Link to this heading"></a></h2>
+<p>Godot offers dedicated 2D and 3D rendering engines. As a result, <strong>the
+base unit for 2D scenes is pixels.</strong> Even though the engines are
+separate, you can render 2D in 3D, 3D in 2D, and overlay 2D sprites and
+interfaces over your 3D world.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Heads up display" property="og:title"/>
+
+
+
+<meta content='The final piece our game needs is a User Interface (UI) to display things like score, a "game over" message, and a restart button. Create a new scene, click the "Other Node" but...' property="og:description"/>
+<meta content='The final piece our game needs is a User Interface (UI) to display things like score, a "game over" message, and a restart button. Create a new scene, click the "Other Node" but...' name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Heads up display — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="07.finishing-up.html" rel="next" title="Finishing up"/>
+<link href="05.the_main_game_scene.html" rel="prev" title="The main game scene"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="getting_started/first_2d_game/06.heads_up_display" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="heads-up-display">
+<span id="doc-your-first-2d-game-heads-up-display"></span><h1>Heads up display<a class="headerlink" href="#heads-up-display" title="Link to this heading"></a></h1>
+<p>The final piece our game needs is a User Interface (UI) to display things like
+score, a "game over" message, and a restart button.</p>
+<p>Create a new scene, click the "Other Node" button and add a <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer"><span class="std std-ref">CanvasLayer</span></a> node named
+<code class="docutils literal notranslate"><span class="pre">HUD</span></code>. "HUD" stands for "heads-up display", an informational display that
+appears as an overlay on top of the game view.</p>
+<p>The <a class="reference internal" href="../../classes/class_canvaslayer.html#class-canvaslayer"><span class="std std-ref">CanvasLayer</span></a> node lets us draw our UI elements on
+a layer above the rest of the game, so that the information it displays isn't
+covered up by any game elements like the player or mobs.</p>
+<p>The HUD needs to display the following information:</p>
+<ul class="simple">
+<li><p>Score, changed by <code class="docutils literal notranslate"><span class="pre">ScoreTimer</span></code>.</p></li>
+<li><p>A message, such as "Game Over" or "Get Ready!"</p></li>
+<li><p>A "Start" button to begin the game.</p></li>
+</ul>
+<p>The basic node for UI elements is <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a>. To create our
+UI, we'll use two types of <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a> nodes: <a class="reference internal" href="../../classes/class_label.html#class-label"><span class="std std-ref">Label</span></a> and <a class="reference internal" href="../../classes/class_button.html#class-button"><span class="std std-ref">Button</span></a>.</p>
+<p>Create the following as children of the <code class="docutils literal notranslate"><span class="pre">HUD</span></code> node:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../classes/class_label.html#class-label"><span class="std std-ref">Label</span></a> named <code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code>.</p></li>
+<li><p><a class="reference internal" href="../../classes/class_label.html#class-label"><span class="std std-ref">Label</span></a> named <code class="docutils literal notranslate"><span class="pre">Message</span></code>.</p></li>
+<li><p><a class="reference internal" href="../../classes/class_button.html#class-button"><span class="std std-ref">Button</span></a> named <code class="docutils literal notranslate"><span class="pre">StartButton</span></code>.</p></li>
+<li><p><a class="reference internal" href="../../classes/class_timer.html#class-timer"><span class="std std-ref">Timer</span></a> named <code class="docutils literal notranslate"><span class="pre">MessageTimer</span></code>.</p></li>
+</ul>
+<p>Click on the <code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code> and type a number into the <code class="docutils literal notranslate"><span class="pre">Text</span></code> field in the
+Inspector. The default font for <code class="docutils literal notranslate"><span class="pre">Control</span></code> nodes is small and doesn't scale
+well. There is a font file included in the game assets called
+"Xolonium-Regular.ttf". To use this font, do the following:</p>
+<p>Under "Theme Overrides &gt; Fonts", choose "Load" and select the "Xolonium-Regular.ttf" file.</p>
+<img alt="../../_images/custom_font_load_font.webp" src="../../_images/custom_font_load_font.webp"/>
+<p>The font size is still too small, increase it to <code class="docutils literal notranslate"><span class="pre">64</span></code> under "Theme Overrides &gt; Font Sizes".
+Once you've done this with the <code class="docutils literal notranslate"><span class="pre">ScoreLabel</span></code>, repeat the changes for the <code class="docutils literal notranslate"><span class="pre">Message</span></code> and <code class="docutils literal notranslate"><span class="pre">StartButton</span></code> nodes.</p>
+<img alt="../../_images/custom_font_size.webp" src="../../_images/custom_font_size.webp"/>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Anchors:</strong> <code class="docutils literal notranslate"><span class="pre">Control</span></code> nodes have a position and size,
+but they also have anchors. Anchors define the origin -
+the reference point for the edges of the node.</p>
+</div>
+<p>Arrange the nodes as shown below.
+You can drag the nodes to place them manually, or for more precise placement,
+use "Anchor Presets".</p>
+<img alt="../../_images/ui_anchor.webp" src="../../_images/ui_anchor.webp"/>
+<section id="scorelabel">
+<h2>ScoreLabel<a class="headerlink" href="#scorelabel" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Add the text <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>Set the "Horizontal Alignment" and "Vertical Alignment" to <code class="docutils literal notranslate"><span class="pre">Center</span></code>.</p></li>
+<li><p>Choose the "Anchor Preset" <code class="docutils literal notranslate"><span class="pre">Center</span> <span class="pre">Top</span></code>.</p></li>
+</ol>
+</section>
+<section id="message">
+<h2>Message<a class="headerlink" href="#message" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Add the text <code class="docutils literal notranslate"><span class="pre">Dodge</span> <span class="pre">the</span> <span class="pre">Creeps!</span></code>.</p></li>
+<li><p>Set the "Horizontal Alignment" and "Vertical Alignment" to <code class="docutils literal notranslate"><span class="pre">Center</span></code>.</p></li>
+<li><p>Set the "Autowrap Mode" to <code class="docutils literal notranslate"><span class="pre">Word</span></code>, otherwise the label will stay on one line.</p></li>
+<li><p>Under "Control - Layout/Transform" set "Size X"  to <code class="docutils literal notranslate"><span class="pre">480</span></code> to use the entire width of the screen.</p></li>
+<li><p>Choose the "Anchor Preset" <code class="docutils literal notranslate"><span class="pre">Center</span></code>.</p></li>
+</ol>
+</section>
+<section id="startbutton">
+<h2>StartButton<a class="headerlink" href="#startbutton" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Add the text <code class="docutils literal notranslate"><span class="pre">Start</span></code>.</p></li>
+<li><p>Under "Control - Layout/Transform", set "Size X" to <code class="docutils literal notranslate"><span class="pre">200</span></code> and "Size Y" to <code class="docutils literal notranslate"><span class="pre">100</span></code>
+to add a little bit more padding between the border and text.</p></li>
+<li><p>Choose the "Anchor Preset" <code class="docutils literal notranslate"><span class="pre">Center</span> <span class="pre">Bottom</span></code>.</p></li>
+<li><p>Under "Control - Layout/Transform", set "Position Y" to <code class="docutils literal notranslate"><span class="pre">580</span></code>.</p></li>
+</ol>
+<p>On the <code class="docutils literal notranslate"><span class="pre">MessageTimer</span></code>, set the <code class="docutils literal notranslate"><span class="pre">Wait</span> <span class="pre">Time</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code> and set the <code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">Shot</span></code>
+property to "On".</p>
+<p>Now add this script to <code class="docutils literal notranslate"><span class="pre">HUD</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">CanvasLayer</span>
+<span class="c1"># Notifies `Main` node that the button has been pressed</span>
+<span class="k">signal</span><span class="w"> </span><span class="n">start_game</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">HUD</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CanvasLayer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Don't forget to rebuild the project so the editor knows about the new signal.</span>
+<span class="w">    </span><span class="na">[Signal]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">StartGameEventHandler</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>We now want to display a message temporarily,
+such as "Get Ready", so we add the following code</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">show_message</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sx">$Message</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">text</span>
+<span class="w">    </span><span class="sx">$Message</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+<span class="w">    </span><span class="sx">$MessageTimer</span><span class="o">.</span><span class="nf">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ShowMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Label</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">text</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"MessageTimer"</span><span class="p">).</span><span class="n">Start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>We also need to process what happens when the player loses. The code below will show "Game Over" for 2 seconds, then return to the title screen and, after a brief pause, show the "Start" button.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">show_game_over</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">show_message</span><span class="p">(</span><span class="s2">"Game Over"</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Wait until the MessageTimer has counted down.</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="sx">$MessageTimer</span><span class="o">.</span><span class="vi">timeout</span>
+<span class="w">    </span><span class="sx">$Message</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Dodge the Creeps!"</span>
+<span class="w">    </span><span class="sx">$Message</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Make a one-shot timer and wait for it to finish.</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">create_timer</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="vi">timeout</span>
+<span class="w">    </span><span class="sx">$StartButton</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ShowGameOver</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ShowMessage</span><span class="p">(</span><span class="s">"Game Over"</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">messageTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Timer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"MessageTimer"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">ToSignal</span><span class="p">(</span><span class="n">messageTimer</span><span class="p">,</span><span class="w"> </span><span class="n">Timer</span><span class="p">.</span><span class="n">SignalName</span><span class="p">.</span><span class="n">Timeout</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Label</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Dodge the Creeps!"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">ToSignal</span><span class="p">(</span><span class="n">GetTree</span><span class="p">().</span><span class="n">CreateTimer</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">SceneTreeTimer</span><span class="p">.</span><span class="n">SignalName</span><span class="p">.</span><span class="n">Timeout</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"StartButton"</span><span class="p">).</span><span class="n">Show</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you need to pause for a brief time, an alternative to using a
+Timer node is to use the SceneTree's <code class="docutils literal notranslate"><span class="pre">create_timer()</span></code> function. This
+can be very useful to add delays such as in the above code, where we
+want to wait some time before showing the "Start" button.</p>
+</div>
+<p>Add the code below to <code class="docutils literal notranslate"><span class="pre">HUD</span></code> to update the score</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">update_score</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+<span class="w">    </span><span class="sx">$ScoreLabel</span><span class="o">.</span><span class="vi">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">str</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UpdateScore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Label</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"ScoreLabel"</span><span class="p">).</span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Connect the <code class="docutils literal notranslate"><span class="pre">pressed()</span></code> signal of <code class="docutils literal notranslate"><span class="pre">StartButton</span></code> and the <code class="docutils literal notranslate"><span class="pre">timeout()</span></code>
+signal of <code class="docutils literal notranslate"><span class="pre">MessageTimer</span></code> to the <code class="docutils literal notranslate"><span class="pre">HUD</span></code> node, and add the following code to the new functions:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-4-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-4-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_start_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$StartButton</span><span class="o">.</span><span class="nf">hide</span><span class="p">()</span>
+<span class="w">    </span><span class="n">start_game</span><span class="o">.</span><span class="nf">emit</span><span class="p">()</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_message_timer_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$Message</span><span class="o">.</span><span class="nf">hide</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// We also specified this function name in PascalCase in the editor's connection window.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnStartButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"StartButton"</span><span class="p">).</span><span class="n">Hide</span><span class="p">();</span>
+<span class="w">    </span><span class="n">EmitSignal</span><span class="p">(</span><span class="n">SignalName</span><span class="p">.</span><span class="n">StartGame</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// We also specified this function name in PascalCase in the editor's connection window.</span>
+<span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnMessageTimerTimeout</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Label</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Message"</span><span class="p">).</span><span class="n">Hide</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="connecting-hud-to-main">
+<h2>Connecting HUD to Main<a class="headerlink" href="#connecting-hud-to-main" title="Link to this heading"></a></h2>
+<p>Now that we're done creating the <code class="docutils literal notranslate"><span class="pre">HUD</span></code> scene, go back to <code class="docutils literal notranslate"><span class="pre">Main</span></code>. Instance
+the <code class="docutils literal notranslate"><span class="pre">HUD</span></code> scene in <code class="docutils literal notranslate"><span class="pre">Main</span></code> like you did the <code class="docutils literal notranslate"><span class="pre">Player</span></code> scene. The scene tree
+should look like this, so make sure you didn't miss anything:</p>
+<img alt="../../_images/completed_main_scene.webp" src="../../_images/completed_main_scene.webp"/>
+<p>Now we need to connect the <code class="docutils literal notranslate"><span class="pre">HUD</span></code> functionality to our <code class="docutils literal notranslate"><span class="pre">Main</span></code> script. This
+requires a few additions to the <code class="docutils literal notranslate"><span class="pre">Main</span></code> scene:</p>
+<p>In the Signals tab, connect the HUD's <code class="docutils literal notranslate"><span class="pre">start_game</span></code> signal to the <code class="docutils literal notranslate"><span class="pre">new_game()</span></code>
+function of the Main node by clicking the "Pick" button in the "Connect a Signal"
+window and selecting the <code class="docutils literal notranslate"><span class="pre">new_game()</span></code> method or type "new_game" below "Receiver Method"
+in the window. Verify that the green connection icon now appears next to
+<code class="docutils literal notranslate"><span class="pre">func</span> <span class="pre">new_game()</span></code> in the script.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">new_game()</span></code>, update the score display and show the "Get Ready" message:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-5-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-5-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$HUD</span><span class="o">.</span><span class="nf">update_score</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="sx">$HUD</span><span class="o">.</span><span class="nf">show_message</span><span class="p">(</span><span class="s2">"Get Ready"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-5-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">hud</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HUD</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"HUD"</span><span class="p">);</span>
+<span class="n">hud</span><span class="p">.</span><span class="n">UpdateScore</span><span class="p">(</span><span class="n">_score</span><span class="p">);</span>
+<span class="n">hud</span><span class="p">.</span><span class="n">ShowMessage</span><span class="p">(</span><span class="s">"Get Ready!"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>In <code class="docutils literal notranslate"><span class="pre">game_over()</span></code> we need to call the corresponding <code class="docutils literal notranslate"><span class="pre">HUD</span></code> function:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-6-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-6-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$HUD</span><span class="o">.</span><span class="nf">show_game_over</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-6-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HUD</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"HUD"</span><span class="p">).</span><span class="n">ShowGameOver</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+<p>Finally, add this to <code class="docutils literal notranslate"><span class="pre">_on_score_timer_timeout()</span></code> to keep the display in sync
+with the changing score:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-7-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-7-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$HUD</span><span class="o">.</span><span class="nf">update_score</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-7-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HUD</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"HUD"</span><span class="p">).</span><span class="n">UpdateScore</span><span class="p">(</span><span class="n">_score</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Remember to remove the call to <code class="docutils literal notranslate"><span class="pre">new_game()</span></code> from
+<code class="docutils literal notranslate"><span class="pre">_ready()</span></code> if you haven't already, otherwise
+your game will start automatically.</p>
+</div>
+<p>Now you're ready to play! Click the "Play the Project" button.</p>
+</section>
+<section id="removing-old-creeps">
+<h2>Removing old creeps<a class="headerlink" href="#removing-old-creeps" title="Link to this heading"></a></h2>
+<p>If you play until "Game Over" and then start a new game right away, the creeps
+from the previous game may still be on the screen. It would be better if they
+all disappeared at the start of a new game. We just need a way to tell <em>all</em> the
+mobs to remove themselves. We can do this with the "group" feature.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">Mob</span></code> scene, select the root node and click the <span class="role-ui">Groups</span> tab next to the
+<span class="role-ui">Signals</span> tab and the "+" button to open the "Create New Group" dialog.</p>
+<img alt="../../_images/group_tab.webp" src="../../_images/group_tab.webp"/>
+<p>Name the group <code class="docutils literal notranslate"><span class="pre">mobs</span></code> and click "ok" to add a new scene group.</p>
+<img alt="../../_images/add_group_dialog.webp" src="../../_images/add_group_dialog.webp"/>
+<p>Now all mobs will be in the "mobs" group.</p>
+<img alt="../../_images/scene_group_mobs.webp" src="../../_images/scene_group_mobs.webp"/>
+<p>We can then add the following line to the <code class="docutils literal notranslate"><span class="pre">new_game()</span></code> function in <code class="docutils literal notranslate"><span class="pre">Main</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-8-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-8-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="nf">call_group</span><span class="p">(</span><span class="s2">"mobs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"queue_free"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-8-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Note that for calling Godot-provided methods with strings,</span>
+<span class="c1">// we have to use the original Godot snake_case name.</span>
+<span class="n">GetTree</span><span class="p">().</span><span class="n">CallGroup</span><span class="p">(</span><span class="s">"mobs"</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="p">.</span><span class="n">MethodName</span><span class="p">.</span><span class="n">QueueFree</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">call_group()</span></code> function calls the named function on every node in a
+group - in this case we are telling every mob to delete itself.</p>
+<p>The game's mostly done at this point. In the next and last part, we'll polish it
+a bit by adding a background, looping music, and some keyboard shortcuts.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

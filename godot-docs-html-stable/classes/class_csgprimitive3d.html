@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="CSGPrimitive3D" property="og:title"/>
+
+
+
+<meta content="Inherits: CSGShape3D&lt; GeometryInstance3D&lt; VisualInstance3D&lt; Node3D&lt; Node&lt; Object Inherited By: CSGBox3D, CSGCylinder3D, CSGMesh3D, CSGPolygon3D, CSGSphere3D, CSGTorus3D Base class fo..." property="og:description"/>
+<meta content="Inherits: CSGShape3D&lt; GeometryInstance3D&lt; VisualInstance3D&lt; Node3D&lt; Node&lt; Object Inherited By: CSGBox3D, CSGCylinder3D, CSGMesh3D, CSGPolygon3D, CSGSphere3D, CSGTorus3D Base class fo..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) CSGPrimitive3D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_csgshape3d.html" rel="next" title="CSGShape3D"/>
+<link href="class_csgpolygon3d.html" rel="prev" title="CSGPolygon3D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_csgprimitive3d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="csgprimitive3d">
+<span id="class-csgprimitive3d"></span><h1>CSGPrimitive3D<a class="headerlink" href="#csgprimitive3d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_csgshape3d.html#class-csgshape3d"><span class="std std-ref">CSGShape3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_geometryinstance3d.html#class-geometryinstance3d"><span class="std std-ref">GeometryInstance3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_visualinstance3d.html#class-visualinstance3d"><span class="std std-ref">VisualInstance3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p><strong>Inherited By:</strong> <a class="reference internal" href="class_csgbox3d.html#class-csgbox3d"><span class="std std-ref">CSGBox3D</span></a>, <a class="reference internal" href="class_csgcylinder3d.html#class-csgcylinder3d"><span class="std std-ref">CSGCylinder3D</span></a>, <a class="reference internal" href="class_csgmesh3d.html#class-csgmesh3d"><span class="std std-ref">CSGMesh3D</span></a>, <a class="reference internal" href="class_csgpolygon3d.html#class-csgpolygon3d"><span class="std std-ref">CSGPolygon3D</span></a>, <a class="reference internal" href="class_csgsphere3d.html#class-csgsphere3d"><span class="std std-ref">CSGSphere3D</span></a>, <a class="reference internal" href="class_csgtorus3d.html#class-csgtorus3d"><span class="std std-ref">CSGTorus3D</span></a></p>
+<p>Base class for CSG primitives.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Parent class for various CSG primitives. It contains code and functionality that is common between them. It cannot be used directly. Instead use one of the various classes that inherit from it.</p>
+<p><strong>Note:</strong> CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a <a class="reference internal" href="class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> with a <a class="reference internal" href="class_primitivemesh.html#class-primitivemesh"><span class="std std-ref">PrimitiveMesh</span></a>. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/3d/csg_tools.html"><span class="doc">Prototyping levels with CSG</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgprimitive3d-property-flip-faces"><span class="std std-ref">flip_faces</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-csgprimitive3d-property-flip-faces"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>flip_faces</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-csgprimitive3d-property-flip-faces"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_flip_faces</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>get_flip_faces</strong>()</p></li>
+</ul>
+<p>If set, the order of the vertices in each triangle are reversed resulting in the backside of the mesh being drawn.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="VisualShaderNodeCompare" property="og:title"/>
+
+
+
+<meta content="Inherits: VisualShaderNode&lt; Resource&lt; RefCounted&lt; Object A comparison function for common types within the visual shader graph. Description: Compares a and b of type by function. Returns a..." property="og:description"/>
+<meta content="Inherits: VisualShaderNode&lt; Resource&lt; RefCounted&lt; Object A comparison function for common types within the visual shader graph. Description: Compares a and b of type by function. Returns a..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) VisualShaderNodeCompare — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_visualshadernodeconstant.html" rel="next" title="VisualShaderNodeConstant"/>
+<link href="class_visualshadernodecomment.html" rel="prev" title="VisualShaderNodeComment"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_visualshadernodecompare" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="visualshadernodecompare">
+<span id="class-visualshadernodecompare"></span><h1>VisualShaderNodeCompare<a class="headerlink" href="#visualshadernodecompare" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_visualshadernode.html#class-visualshadernode"><span class="std std-ref">VisualShaderNode</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A comparison function for common types within the visual shader graph.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Compares <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> of <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a> by <a class="reference internal" href="#class-visualshadernodecompare-property-function"><span class="std std-ref">function</span></a>. Returns a boolean scalar. Translates to <code class="docutils literal notranslate"><span class="pre">if</span></code> instruction in shader code.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a></p></td>
+<td><p><a class="reference internal" href="#class-visualshadernodecompare-property-condition"><span class="std std-ref">condition</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a></p></td>
+<td><p><a class="reference internal" href="#class-visualshadernodecompare-property-function"><span class="std std-ref">function</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a></p></td>
+<td><p><a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-visualshadernodecompare-comparisontype">enum <strong>ComparisonType</strong>: <a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-scalar"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_SCALAR</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>A floating-point scalar.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-scalar-int"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_SCALAR_INT</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>An integer scalar.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-scalar-uint"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_SCALAR_UINT</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>An unsigned integer scalar.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-vector-2d"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_VECTOR_2D</strong> = <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>A 2D vector type.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-vector-3d"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_VECTOR_3D</strong> = <code class="docutils literal notranslate"><span class="pre">4</span></code></p>
+<p>A 3D vector type.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-vector-4d"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_VECTOR_4D</strong> = <code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+<p>A 4D vector type.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-boolean"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_BOOLEAN</strong> = <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p>A boolean type.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-transform"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_TRANSFORM</strong> = <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
+<p>A transform (<code class="docutils literal notranslate"><span class="pre">mat4</span></code>) type.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-ctype-max"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>CTYPE_MAX</strong> = <code class="docutils literal notranslate"><span class="pre">8</span></code></p>
+<p>Represents the size of the <a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> enum.</p>
+<p class="classref-enumeration" id="enum-visualshadernodecompare-function">enum <strong>Function</strong>: <a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-equal"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_EQUAL</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Comparison for equality (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code>).</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-not-equal"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_NOT_EQUAL</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Comparison for inequality (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">b</span></code>).</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-greater-than"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_GREATER_THAN</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Comparison for greater than (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span></code>). Cannot be used if <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a> set to <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-boolean"><span class="std std-ref">CTYPE_BOOLEAN</span></a> or <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-transform"><span class="std std-ref">CTYPE_TRANSFORM</span></a>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-greater-than-equal"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_GREATER_THAN_EQUAL</strong> = <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>Comparison for greater than or equal (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;=</span> <span class="pre">b</span></code>). Cannot be used if <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a> set to <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-boolean"><span class="std std-ref">CTYPE_BOOLEAN</span></a> or <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-transform"><span class="std std-ref">CTYPE_TRANSFORM</span></a>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-less-than"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_LESS_THAN</strong> = <code class="docutils literal notranslate"><span class="pre">4</span></code></p>
+<p>Comparison for less than (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">b</span></code>). Cannot be used if <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a> set to <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-boolean"><span class="std std-ref">CTYPE_BOOLEAN</span></a> or <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-transform"><span class="std std-ref">CTYPE_TRANSFORM</span></a>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-less-than-equal"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_LESS_THAN_EQUAL</strong> = <code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+<p>Comparison for less than or equal (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;=</span> <span class="pre">b</span></code>). Cannot be used if <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a> set to <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-boolean"><span class="std std-ref">CTYPE_BOOLEAN</span></a> or <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-transform"><span class="std std-ref">CTYPE_TRANSFORM</span></a>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-func-max"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>FUNC_MAX</strong> = <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p>Represents the size of the <a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> enum.</p>
+<p class="classref-enumeration" id="enum-visualshadernodecompare-condition">enum <strong>Condition</strong>: <a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-cond-all"><a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a> <strong>COND_ALL</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>The result will be <code class="docutils literal notranslate"><span class="pre">true</span></code> if all components in the vector satisfy the comparison condition.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-cond-any"><a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a> <strong>COND_ANY</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>The result will be <code class="docutils literal notranslate"><span class="pre">true</span></code> if any component in the vector satisfies the comparison condition.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodecompare-constant-cond-max"><a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a> <strong>COND_MAX</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Represents the size of the <a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a> enum.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-visualshadernodecompare-property-condition"><a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a> <strong>condition</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-visualshadernodecompare-property-condition"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_condition</strong>(value: <a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-visualshadernodecompare-condition"><span class="std std-ref">Condition</span></a> <strong>get_condition</strong>()</p></li>
+</ul>
+<p>Extra condition which is applied if <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">type</span></a> is set to <a class="reference internal" href="#class-visualshadernodecompare-constant-ctype-vector-3d"><span class="std std-ref">CTYPE_VECTOR_3D</span></a>.</p>
+<p class="classref-property" id="class-visualshadernodecompare-property-function"><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>function</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-visualshadernodecompare-property-function"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_function</strong>(value: <a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-visualshadernodecompare-function"><span class="std std-ref">Function</span></a> <strong>get_function</strong>()</p></li>
+</ul>
+<p>A comparison function.</p>
+<p class="classref-property" id="class-visualshadernodecompare-property-type"><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>type</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-visualshadernodecompare-property-type"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_comparison_type</strong>(value: <a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-visualshadernodecompare-comparisontype"><span class="std std-ref">ComparisonType</span></a> <strong>get_comparison_type</strong>()</p></li>
+</ul>
+<p>The type to be used in the comparison.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

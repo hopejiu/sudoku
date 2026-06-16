@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Using NavigationMaps" property="og:title"/>
+
+
+
+<meta content="A NavigationMap is an abstract navigation world on the NavigationServer identified by a NavigationServer RID. A map can hold and connect a near infinite number of navigation regions with navigation..." property="og:description"/>
+<meta content="A NavigationMap is an abstract navigation world on the NavigationServer identified by a NavigationServer RID. A map can hold and connect a near infinite number of navigation regions with navigation..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Using NavigationMaps — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="navigation_using_navigationregions.html" rel="next" title="Using NavigationRegions"/>
+<link href="navigation_using_navigationservers.html" rel="prev" title="Using NavigationServer"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/navigation/navigation_using_navigationmaps" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="using-navigationmaps">
+<span id="doc-navigation-using-navigationmaps"></span><h1>Using NavigationMaps<a class="headerlink" href="#using-navigationmaps" title="Link to this heading"></a></h1>
+<img alt="../../_images/nav_maps.png" src="../../_images/nav_maps.png"/>
+<p>A NavigationMap is an abstract navigation world on the NavigationServer identified by a NavigationServer <a class="reference internal" href="../../classes/class_rid.html#class-rid"><span class="std std-ref">RID</span></a>.</p>
+<p>A map can hold and connect a near infinite number of navigation regions with navigation meshes to build the traversable areas of a game world for pathfinding.</p>
+<p>A map can contain avoidance agents. Collision avoidance will be calculated based on the agents present in the map.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Different NavigationMaps are completely isolated from each other but navigation regions
+and avoidance agents can switch between different maps. Switches will become effective on NavigationServer synchronization.</p>
+</div>
+<section id="default-navigation-maps">
+<h2>Default navigation maps<a class="headerlink" href="#default-navigation-maps" title="Link to this heading"></a></h2>
+<p>By default Godot creates a navigation map for each <a class="reference internal" href="../../classes/class_world2d.html#class-world2d"><span class="std std-ref">World2D</span></a> and <a class="reference internal" href="../../classes/class_world3d.html#class-world3d"><span class="std std-ref">World3D</span></a> of the root viewport.</p>
+<p>The 2D default navigation map RID can be obtained with <code class="docutils literal notranslate"><span class="pre">get_world_2d().get_navigation_map()</span></code> from any <a class="reference internal" href="../../classes/class_node2d.html#class-node2d"><span class="std std-ref">Node2D</span></a> inheriting Node.</p>
+<p>The 3D default navigation map RID can be obtained with <code class="docutils literal notranslate"><span class="pre">get_world_3d().get_navigation_map()</span></code> from any <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> inheriting Node.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgQyM=" name="MkQgQyM=" role="tab" tabindex="-1">2D C#</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgQyM=" name="M0QgQyM=" role="tab" tabindex="-1">3D C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">default_navigation_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_2d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-MkQgQyM=" name="MkQgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">defaultNavigationMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld2D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">default_navigation_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_3d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgQyM=" name="M0QgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">defaultNavigationMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld3D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="creating-new-navigation-maps">
+<h2>Creating new navigation maps<a class="headerlink" href="#creating-new-navigation-maps" title="Link to this heading"></a></h2>
+<p>The NavigationServer can create and support as many navigation maps as required for specific gameplay.
+Additional navigation maps are created and handled by using the NavigationServer API
+directly e.g. to support different avoidance agent or actor locomotion types.</p>
+<p>For example uses of different navigation maps see <a class="reference internal" href="navigation_different_actor_types.html#doc-navigation-different-actor-types"><span class="std std-ref">Support different actor types</span></a> and <a class="reference internal" href="navigation_different_actor_locomotion.html#doc-navigation-different-actor-locomotion"><span class="std std-ref">Support different actor locomotion</span></a>.</p>
+<p>Each navigation map individually synchronizes queued changes to its navigation regions and avoidance agents.
+A navigation map that has not received changes will consume little to no processing time.
+Navigation regions and avoidance agents can only be part of a single navigation map but they can switch map at any time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A navigation map switch will take effect only after the next NavigationServer synchronization.</p>
+</div>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-MkQgQyM=" name="MkQgQyM=" role="tab" tabindex="-1">2D C#</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-M0QgQyM=" name="M0QgQyM=" role="tab" tabindex="-1">3D C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_navigation_map</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_create</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_set_active</span><span class="p">(</span><span class="n">new_navigation_map</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-MkQgQyM=" name="MkQgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">newNavigationMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapCreate</span><span class="p">();</span>
+<span class="w">        </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapSetActive</span><span class="p">(</span><span class="n">newNavigationMap</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">new_navigation_map</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_create</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_set_active</span><span class="p">(</span><span class="n">new_navigation_map</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-M0QgQyM=" name="M0QgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">newNavigationMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapCreate</span><span class="p">();</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapSetActive</span><span class="p">(</span><span class="n">newNavigationMap</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no difference between navigation maps created with the NavigationServer2D API or the NavigationServer3D API.</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

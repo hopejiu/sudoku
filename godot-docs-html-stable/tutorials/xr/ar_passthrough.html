@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="AR / Passthrough" property="og:title"/>
+
+
+
+<meta content="Augmented Reality is supported through various methods depending on the capabilities of the hardware. Headsets such as the Magic Leap and glasses such as TiltFive show the rendered result on see-th..." property="og:description"/>
+<meta content="Augmented Reality is supported through various methods depending on the capabilities of the hardware. Headsets such as the Magic Leap and glasses such as TiltFive show the rendered result on see-th..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) AR / Passthrough — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="xr_next_steps.html" rel="next" title="Where to go from here"/>
+<link href="a_better_xr_start_script.html" rel="prev" title="A better XR start script"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/xr/ar_passthrough" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="ar-passthrough">
+<span id="doc-openxr-passthrough"></span><h1>AR / Passthrough<a class="headerlink" href="#ar-passthrough" title="Link to this heading"></a></h1>
+<p>Augmented Reality is supported through various methods depending on the capabilities of the hardware.</p>
+<p>Headsets such as the Magic Leap and glasses such as TiltFive show the rendered result on
+<a class="reference external" href="https://en.wikipedia.org/wiki/See-through_display">see-through displays</a> allowing the user
+to see the real world.</p>
+<p>Headsets such as the Quest, HTC Elite, and Lynx R1 implement this through a technique called video passthrough,
+where cameras record the real world and these images are used as the background on top of which our rendered
+result is used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Passthrough is implemented very differently across platforms.</p>
+<p>In Godot 4.3 we have implemented a unified approach that is explained on this help page
+so you don't need to worry about these differences, the <a class="reference internal" href="../../classes/class_xrinterface.html#class-xrinterface"><span class="std std-ref">XRInterface</span></a>
+implementation is now responsible for applying the correct platform-dependent method <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<p>For headsets such as the Meta Quest and HTC Elite you will need to use the
+<a class="reference external" href="https://github.com/GodotVR/godot_openxr_vendors/releases">OpenXR vendors plugin v3.0.0</a>
+or later to enable video passthrough.</p>
+<p>For backwards compatibility the old API for passthrough is still available but it is recommended
+to follow the new instructions below.</p>
+</div>
+<section id="environment-blend-modes">
+<h2>Environment blend modes<a class="headerlink" href="#environment-blend-modes" title="Link to this heading"></a></h2>
+<p>The way we configure VR or AR functionality is through setting the environment blend mode.
+This mode determines how the (real world) environment is blended with the virtual world.</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Blend modes</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<colgroup>
+<col/>
+<col/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Blend mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>XR_ENV_BLEND_MODE_OPAQUE</p></td>
+<td><p>The rendered image is opaque, we do not see the real world. We're in VR mode.
+This will turn off passthrough if video-passthrough is used.</p></td>
+</tr>
+<tr class="row-odd"><td><p>XR_ENV_BLEND_MODE_ADDITIVE</p></td>
+<td><p>The rendered image is added to the real world and will look semi transparent.
+This mode is generally used with see-through devices that are unable to obscure
+the real world.
+This will turn on passthrough if video-passthrough is used.</p></td>
+</tr>
+<tr class="row-even"><td><p>XR_ENV_BLEND_MODE_ALPHA_BLEND</p></td>
+<td><p>The rendered image is alpha blended with the real world.
+On see-through devices that support this, the alpha will control the translucency
+of the optics.
+On video-passthrough devices alpha blending is applied with the video image.
+passthrough will also be enabled if applicable.</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can set the environment blend mode for your application through the <code class="docutils literal notranslate"><span class="pre">environment_blend_mode</span></code>
+property of the <a class="reference internal" href="../../classes/class_xrinterface.html#class-xrinterface"><span class="std std-ref">XRInterface</span></a> instance.</p>
+<p>You can query the supported blend modes on the hardware using the
+<code class="docutils literal notranslate"><span class="pre">get_supported_environment_blend_modes</span></code> property on the same instance.</p>
+</section>
+<section id="configuring-your-background">
+<h2>Configuring your background<a class="headerlink" href="#configuring-your-background" title="Link to this heading"></a></h2>
+<p>When setting the blend mode to <code class="docutils literal notranslate"><span class="pre">XR_ENV_BLEND_MODE_ALPHA_BLEND</span></code> you must set
+the <code class="docutils literal notranslate"><span class="pre">transparent_bg</span></code> property on <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> to true.
+When using the <code class="docutils literal notranslate"><span class="pre">XR_ENV_BLEND_MODE_ADDITIVE</span></code> blend mode you should set your
+background color to black.</p>
+<p>Either solution will result in the background rendering not contributing to lighting.
+It is thus also recommended you adjust your environment settings accordingly and ensure
+there is adequate ambient light set to illuminate your scene.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some AR SDKs do provide ambient lighting information or even provide a full radiance
+map to allow for real world reflections in your virtual objects.
+The core Godot XR functionality doesn't currently have support for this, however this
+functionality can be exposed through plugins.</p>
+</div>
+</section>
+<section id="openxr-specific">
+<h2>OpenXR specific<a class="headerlink" href="#openxr-specific" title="Link to this heading"></a></h2>
+<p>In OpenXR you can configure the default blend mode you want to use.
+Godot will select this blend mode at startup if available.
+If not available Godot will default to the first supported blend mode provided
+by the XR runtime.</p>
+<img alt="../../_images/openxr_default_blend_mode.webp" src="../../_images/openxr_default_blend_mode.webp"/>
+<p>For passthrough devices OpenXR requires additional settings to be configured.
+These settings are platform-dependent and provided through the OpenXR vendors plugin.</p>
+<p>For example, these are the settings required on Meta Quest:</p>
+<img alt="../../_images/openxr_export_passthrough.webp" src="../../_images/openxr_export_passthrough.webp"/>
+<p>The <code class="docutils literal notranslate"><span class="pre">Passthrough</span></code> setting defines whether passthrough is supported or even required.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Boundary</span> <span class="pre">Mode</span></code> allows you to define whether the guardian is needed,
+disabling this fully requires passthrough to be enabled at all times.</p>
+</section>
+<section id="putting-it-together">
+<h2>Putting it together<a class="headerlink" href="#putting-it-together" title="Link to this heading"></a></h2>
+<p>Putting the above together we can use the following code as a base:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">viewport</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">Viewport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_viewport</span><span class="p">()</span>
+<span class="nd">@onready</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">environment</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sx">$WorldEnvironment</span><span class="o">.</span><span class="vi">environment</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">switch_to_ar</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">xr_interface</span><span class="p">:</span><span class="w"> </span><span class="nb">XRInterface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">XRServer</span><span class="o">.</span><span class="vi">primary_interface</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">xr_interface</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">modes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xr_interface</span><span class="o">.</span><span class="nf">get_supported_environment_blend_modes</span><span class="p">()</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">XRInterface</span><span class="o">.</span><span class="vi">XR_ENV_BLEND_MODE_ALPHA_BLEND</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">modes</span><span class="p">:</span>
+<span class="w">            </span><span class="n">xr_interface</span><span class="o">.</span><span class="vi">environment_blend_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">XRInterface</span><span class="o">.</span><span class="vi">XR_ENV_BLEND_MODE_ALPHA_BLEND</span>
+<span class="w">            </span><span class="n">viewport</span><span class="o">.</span><span class="vi">transparent_bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">        </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="nb">XRInterface</span><span class="o">.</span><span class="vi">XR_ENV_BLEND_MODE_ADDITIVE</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">modes</span><span class="p">:</span>
+<span class="w">            </span><span class="n">xr_interface</span><span class="o">.</span><span class="vi">environment_blend_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">XRInterface</span><span class="o">.</span><span class="vi">XR_ENV_BLEND_MODE_ADDITIVE</span>
+<span class="w">            </span><span class="n">viewport</span><span class="o">.</span><span class="vi">transparent_bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">false</span>
+<span class="w">    </span><span class="n">environment</span><span class="o">.</span><span class="vi">background_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Environment</span><span class="o">.</span><span class="vi">BG_COLOR</span>
+<span class="w">    </span><span class="n">environment</span><span class="o">.</span><span class="vi">background_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">environment</span><span class="o">.</span><span class="vi">ambient_light_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Environment</span><span class="o">.</span><span class="vi">AMBIENT_SOURCE_COLOR</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">switch_to_vr</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">xr_interface</span><span class="p">:</span><span class="w"> </span><span class="nb">XRInterface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">XRServer</span><span class="o">.</span><span class="vi">primary_interface</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">xr_interface</span><span class="p">:</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">modes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xr_interface</span><span class="o">.</span><span class="nf">get_supported_environment_blend_modes</span><span class="p">()</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">XRInterface</span><span class="o">.</span><span class="vi">XR_ENV_BLEND_MODE_OPAQUE</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">modes</span><span class="p">:</span>
+<span class="w">            </span><span class="n">xr_interface</span><span class="o">.</span><span class="vi">environment_blend_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">XRInterface</span><span class="o">.</span><span class="vi">XR_ENV_BLEND_MODE_OPAQUE</span>
+<span class="w">        </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">false</span>
+<span class="w">    </span><span class="n">viewport</span><span class="o">.</span><span class="vi">transparent_bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">    </span><span class="n">environment</span><span class="o">.</span><span class="vi">background_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Environment</span><span class="o">.</span><span class="vi">BG_SKY</span>
+<span class="w">    </span><span class="n">environment</span><span class="o">.</span><span class="vi">ambient_light_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Environment</span><span class="o">.</span><span class="vi">AMBIENT_SOURCE_BG</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+</pre></div>
+</div>
+</section>
+<section id="shadow-to-opacity">
+<h2>Shadow to opacity<a class="headerlink" href="#shadow-to-opacity" title="Link to this heading"></a></h2>
+<p>Shadow to opacity is a render mode for Godot spatial shaders
+that was introduced in Godot 3 specifically for AR.
+It is a special render mode where the more a surface is in shadow,
+the more opaque the surface becomes. When a surface is fully lit,
+the surface becomes fully transparent and thus shows the real world.</p>
+<p>However the surface is rendered during the opaque state effectively.
+This has two consequences:</p>
+<ul class="simple">
+<li><p>As both the depth buffer and color buffer are written to, we occlude
+any geometry behind our surface even when fully transparent.</p></li>
+<li><p>As we are making the surface opaque if in shadow, we can have virtual
+objects cast shadows on real world objects <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p></li>
+</ul>
+<figure class="align-default" id="id6">
+<img alt="Image showing shadow to opacity being used to show the user's desk." src="../../_images/xr_passthrough_example.webp"/>
+<figcaption>
+<p><span class="caption-text">Image showing shadow to opacity being used to show the user's desk.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This enabled the following use cases:</p>
+<ul class="simple">
+<li><p>You can render a box mesh around a real world table, this ensures the
+table remains visible even if a virtual object is placed underneath it.
+The virtual object will be correctly occluded.
+Placing a virtual object on top of the real world table, will result in
+a shadow being cast on the table.</p></li>
+<li><p>You can use a shader with this render mode when render a hand mesh
+using the hand tracking functionality, and ensure your hands properly
+occlude virtual objects.</p></li>
+</ul>
+<p>The following shader code is a good base for this functionality:</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="n">shader_type</span><span class="w"> </span><span class="n">spatial</span><span class="p">;</span>
+<span class="n">render_mode</span><span class="w"> </span><span class="n">blend_mix</span><span class="p">,</span><span class="w"> </span><span class="n">depth_draw_opaque</span><span class="p">,</span><span class="w"> </span><span class="n">cull_back</span><span class="p">,</span><span class="w"> </span><span class="n">shadow_to_opacity</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ALBEDO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a href="#id1" role="doc-backlink">1</a><span class="fn-bracket">]</span></span>
+<p>Restrictions may apply depending on XR interface implementation.</p>
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a href="#id2" role="doc-backlink">2</a><span class="fn-bracket">]</span></span>
+<p>This feature is still being perfected.</p>
+</aside>
+</aside>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

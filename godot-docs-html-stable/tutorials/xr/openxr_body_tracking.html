@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXR body tracking" property="og:title"/>
+
+
+
+<meta content="Support for full body tracking in OpenXR is only just becoming available for a select few platforms. As support solidifies information will be added to this page. HTC Tracker support: An option tha..." property="og:description"/>
+<meta content="Support for full body tracking in OpenXR is only just becoming available for a select few platforms. As support solidifies information will be added to this page. HTC Tracker support: An option tha..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXR body tracking — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="openxr_render_models.html" rel="next" title="OpenXR Render Models"/>
+<link href="openxr_hand_tracking.html" rel="prev" title="OpenXR hand tracking"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/xr/openxr_body_tracking" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxr-body-tracking">
+<span id="doc-openxr-body-tracking"></span><h1>OpenXR body tracking<a class="headerlink" href="#openxr-body-tracking" title="Link to this heading"></a></h1>
+<p>Support for full body tracking in OpenXR is only just becoming available for a select few platforms.
+As support solidifies information will be added to this page.</p>
+<section id="htc-tracker-support">
+<h2>HTC Tracker support<a class="headerlink" href="#htc-tracker-support" title="Link to this heading"></a></h2>
+<p>An option that has been available for some time is doing full body tracking using HTC trackers.
+These are currently supported through SteamVR and on HTC Elite XR headsets.
+They are exposed through the action map system.</p>
+<p>These trackers are identified by their roles which are assigned to them when configured.
+Simply add <a class="reference internal" href="../../classes/class_xrcontroller3d.html#class-xrcontroller3d"><span class="std std-ref">XRController3D</span></a> nodes as children to
+the <a class="reference internal" href="../../classes/class_xrorigin3d.html#class-xrorigin3d"><span class="std std-ref">XROrigin3D</span></a> node and assign one of the following trackers:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">HTC trackers</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/handheld_object</p></td>
+</tr>
+<tr class="row-even"><td><p>/user/vive_tracker_htcx/role/left_foot</p></td>
+</tr>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/right_foot</p></td>
+</tr>
+<tr class="row-even"><td><p>/user/vive_tracker_htcx/role/left_shoulder</p></td>
+</tr>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/right_shoulder</p></td>
+</tr>
+<tr class="row-even"><td><p>/user/vive_tracker_htcx/role/left_elbow</p></td>
+</tr>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/right_elbow</p></td>
+</tr>
+<tr class="row-even"><td><p>/user/vive_tracker_htcx/role/left_knee</p></td>
+</tr>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/right_knee</p></td>
+</tr>
+<tr class="row-even"><td><p>/user/vive_tracker_htcx/role/waist</p></td>
+</tr>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/chest</p></td>
+</tr>
+<tr class="row-even"><td><p>/user/vive_tracker_htcx/role/camera</p></td>
+</tr>
+<tr class="row-odd"><td><p>/user/vive_tracker_htcx/role/keyboard</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can now use these as targets for IK modifiers on a full body avatar.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

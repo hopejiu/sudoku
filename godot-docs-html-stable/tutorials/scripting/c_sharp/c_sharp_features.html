@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="C# language features" property="og:title"/>
+
+
+
+<meta content="This page provides an overview of the commonly used features of both C# and Godot and how they are used together. Type conversion and casting: C# is a statically typed language. Therefore, you can&amp;..." property="og:description"/>
+<meta content="This page provides an overview of the commonly used features of both C# and Godot and how they are used together. Type conversion and casting: C# is a statically typed language. Therefore, you can&amp;..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) C# language features — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="c_sharp_style_guide.html" rel="next" title="C# style guide"/>
+<link href="c_sharp_basics.html" rel="prev" title="C# basics"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/scripting/c_sharp/c_sharp_features" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="c-language-features">
+<span id="doc-c-sharp-features"></span><h1>C# language features<a class="headerlink" href="#c-language-features" title="Link to this heading"></a></h1>
+<p>This page provides an overview of the commonly used features of both C# and Godot
+and how they are used together.</p>
+<section id="type-conversion-and-casting">
+<span id="doc-c-sharp-features-type-conversion-and-casting"></span><h2>Type conversion and casting<a class="headerlink" href="#type-conversion-and-casting" title="Link to this heading"></a></h2>
+<p>C# is a statically typed language. Therefore, you can't do the following:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">mySprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">);</span>
+<span class="n">mySprite</span><span class="p">.</span><span class="n">SetFrame</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The method <code class="docutils literal notranslate"><span class="pre">GetNode()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">Node</span></code> instance.
+You must explicitly convert it to the desired derived type, <code class="docutils literal notranslate"><span class="pre">Sprite2D</span></code> in this case.</p>
+<p>For this, you have various options in C#.</p>
+<p><strong>Casting and Type Checking</strong></p>
+<p>Throws <code class="docutils literal notranslate"><span class="pre">InvalidCastException</span></code> if the returned node cannot be cast to Sprite2D.
+You would use it instead of the <code class="docutils literal notranslate"><span class="pre">as</span></code> operator if you are pretty sure it won't fail.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">mySprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Sprite2D</span><span class="p">)</span><span class="n">GetNode</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">);</span>
+<span class="n">mySprite</span><span class="p">.</span><span class="n">SetFrame</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Using the AS operator</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">as</span></code> operator returns <code class="docutils literal notranslate"><span class="pre">null</span></code> if the node cannot be cast to Sprite2D,
+and for that reason, it cannot be used with value types.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">mySprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Sprite2D</span><span class="p">;</span>
+<span class="c1">// Only call SetFrame() if mySprite is not null</span>
+<span class="n">mySprite</span><span class="o">?.</span><span class="n">SetFrame</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Using the generic methods</strong></p>
+<p>Generic methods are also provided to make this type conversion transparent.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GetNode&lt;T&gt;()</span></code> casts the node before returning it. It will throw an <code class="docutils literal notranslate"><span class="pre">InvalidCastException</span></code> if the node cannot be cast to the desired type.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">mySprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Sprite2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">);</span>
+<span class="n">mySprite</span><span class="p">.</span><span class="n">SetFrame</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">GetNodeOrNull&lt;T&gt;()</span></code> uses the <code class="docutils literal notranslate"><span class="pre">as</span></code> operator and will return <code class="docutils literal notranslate"><span class="pre">null</span></code> if the node cannot be cast to the desired type.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">mySprite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNodeOrNull</span><span class="o">&lt;</span><span class="n">Sprite2D</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">);</span>
+<span class="c1">// Only call SetFrame() if mySprite is not null</span>
+<span class="n">mySprite</span><span class="o">?.</span><span class="n">SetFrame</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Type checking using the IS operator</strong></p>
+<p>To check if the node can be cast to Sprite2D, you can use the <code class="docutils literal notranslate"><span class="pre">is</span></code> operator.
+The <code class="docutils literal notranslate"><span class="pre">is</span></code> operator returns false if the node cannot be cast to Sprite2D,
+otherwise it returns true. Note that when the <code class="docutils literal notranslate"><span class="pre">is</span></code> operator is used against <code class="docutils literal notranslate"><span class="pre">null</span></code>
+the result is always going to be <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GetNode</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">)</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">Sprite2D</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Yup, it's a Sprite2D!</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">null</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">Sprite2D</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// This block can never happen.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also declare a new variable to conditionally store the result of the cast
+if the <code class="docutils literal notranslate"><span class="pre">is</span></code> operator returns <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GetNode</span><span class="p">(</span><span class="s">"MySprite"</span><span class="p">)</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">Sprite2D</span><span class="w"> </span><span class="n">mySprite</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// The mySprite variable only exists inside this block, and it's never null.</span>
+<span class="w">    </span><span class="n">mySprite</span><span class="p">.</span><span class="n">SetFrame</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more advanced type checking, you can look into <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching">Pattern Matching</a>.</p>
+</section>
+<section id="preprocessor-defines">
+<h2>Preprocessor defines<a class="headerlink" href="#preprocessor-defines" title="Link to this heading"></a></h2>
+<p>Godot has a set of defines that allow you to change your C# code
+depending on the environment you are compiling to.</p>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
+<p>For example, you can change code based on the platform:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="cp">#if (GODOT_MOBILE || GODOT_WEB)</span>
+<span class="w">        </span><span class="c1">// Use simple objects when running on less powerful systems.</span>
+<span class="w">        </span><span class="n">SpawnSimpleObjects</span><span class="p">();</span>
+<span class="cp">#else</span>
+<span class="w">        </span><span class="n">SpawnComplexObjects</span><span class="p">();</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Or you can detect which engine your code is in, useful for making cross-engine libraries:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyPlatformPrinter</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="cp">#if GODOT</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">"This is Godot."</span><span class="p">);</span>
+<span class="cp">#elif UNITY_5_3_OR_NEWER</span>
+<span class="w">        </span><span class="n">print</span><span class="p">(</span><span class="s">"This is Unity."</span><span class="p">);</span>
+<span class="cp">#else</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">NotSupportedException</span><span class="p">(</span><span class="s">"Only Godot and Unity are supported."</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Or you can write scripts that target multiple Godot versions and take
+advantage of features that are only available on some of those versions:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UseCoolFeature</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="cp">#if GODOT4_3_OR_GREATER || GODOT4_2_2_OR_GREATER</span>
+<span class="w">        </span><span class="c1">// Use CoolFeature, that was added to Godot in 4.3 and cherry-picked into 4.2.2, here.</span>
+<span class="cp">#else</span>
+<span class="w">        </span><span class="c1">// Use a workaround for the absence of CoolFeature here.</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="full-list-of-defines">
+<h3>Full list of defines<a class="headerlink" href="#full-list-of-defines" title="Link to this heading"></a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">GODOT</span></code> is always defined for Godot projects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TOOLS</span></code> is defined when building with the Debug configuration (editor and editor player).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GODOT_REAL_T_IS_DOUBLE</span></code> is defined when the <code class="docutils literal notranslate"><span class="pre">GodotFloat64</span></code> property is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>One of <code class="docutils literal notranslate"><span class="pre">GODOT_LINUXBSD</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_WINDOWS</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_OSX</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_IOS</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_WEB</span></code>
+depending on the OS. These names may change in the future.
+These are created from the <code class="docutils literal notranslate"><span class="pre">get_name()</span></code> method of the
+<a class="reference internal" href="../../../classes/class_os.html#class-os"><span class="std std-ref">OS</span></a> singleton, but not every possible OS
+the method returns is an OS that Godot with .NET runs on.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GODOTX</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOTX_Y</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOTX_Y_Z</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOTx_OR_GREATER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GODOTX_y_OR_GREATER</span></code>, and <code class="docutils literal notranslate"><span class="pre">GODOTX_Y_z_OR_GREATER</span></code>, where <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">Z</span></code> are replaced by the current major, minor and patch version of Godot.
+<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> are replaced by all values from 0 to the current version number for that
+component.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These defines were first added in Godot 4.0.4 and 4.1. Version defines for
+prior versions do not exist, regardless of the current Godot version.</p>
+</div>
+<p>For example: Godot 4.0.5 defines <code class="docutils literal notranslate"><span class="pre">GODOT4</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_OR_GREATER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GODOT4_0</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_0_OR_GREATER</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_0_5</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GODOT4_0_4_OR_GREATER</span></code>, and <code class="docutils literal notranslate"><span class="pre">GODOT4_0_5_OR_GREATER</span></code>. Godot 4.3.2 defines
+<code class="docutils literal notranslate"><span class="pre">GODOT4</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_OR_GREATER</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_3</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_0_OR_GREATER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GODOT4_1_OR_GREATER</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_2_OR_GREATER</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_3_OR_GREATER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GODOT4_3_2</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_3_0_OR_GREATER</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT4_3_1_OR_GREATER</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">GODOT4_3_2_OR_GREATER</span></code>.</p>
+</li>
+</ul>
+<p>When <strong>exporting</strong>, the following may also be defined depending on the export features:</p>
+<ul class="simple">
+<li><p>One of <code class="docutils literal notranslate"><span class="pre">GODOT_PC</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_MOBILE</span></code>, or <code class="docutils literal notranslate"><span class="pre">GODOT_WEB</span></code> depending on the platform type.</p></li>
+<li><p>One of <code class="docutils literal notranslate"><span class="pre">GODOT_WINDOWS</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_LINUXBSD</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_MACOS</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID</span></code>, <code class="docutils literal notranslate"><span class="pre">GODOT_IOS</span></code>, or <code class="docutils literal notranslate"><span class="pre">GODOT_WEB</span></code> depending on the platform.</p></li>
+</ul>
+<p>To see an example project, see the OS testing demo:
+<a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/misc/os_test">https://github.com/godotengine/godot-demo-projects/tree/master/misc/os_test</a></p>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

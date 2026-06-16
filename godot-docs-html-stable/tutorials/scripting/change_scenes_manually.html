@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Change scenes manually" property="og:title"/>
+
+
+
+<meta content="Sometimes it helps to have more control over how you swap scenes around. A Viewport's child nodes will render to the image it generates. This holds true even for nodes outside of the &quot;cur..." property="og:description"/>
+<meta content="Sometimes it helps to have more control over how you swap scenes around. A Viewport's child nodes will render to the image it generates. This holds true even for nodes outside of the &quot;cur..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Change scenes manually — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="instancing_with_signals.html" rel="next" title="Instancing with signals"/>
+<link href="evaluating_expressions.html" rel="prev" title="Evaluating expressions"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/scripting/change_scenes_manually" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="change-scenes-manually">
+<span id="doc-change-scenes-manually"></span><h1>Change scenes manually<a class="headerlink" href="#change-scenes-manually" title="Link to this heading"></a></h1>
+<p>Sometimes it helps to have more control over how you swap scenes around.
+A <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>'s child nodes will render to the image
+it generates. This holds true even for nodes outside of the "current"
+scene. Autoloads fall into this category, and also scenes which you
+instantiate and add to the tree at runtime:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">simultaneous_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">"res://levels/level2.tscn"</span><span class="p">)</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_add_a_scene_manually</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># This is like autoloading the scene, only</span>
+<span class="w">    </span><span class="c1"># it happens after already loading the main scene.</span>
+<span class="w">    </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">simultaneous_scene</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">simultaneousScene</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="nf">MyClass</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">simultaneousScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"res://levels/level2.tscn"</span><span class="p">).</span><span class="n">Instantiate</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_AddASceneManually</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// This is like autoloading the scene, only</span>
+<span class="w">    </span><span class="c1">// it happens after already loading the main scene.</span>
+<span class="w">    </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">simultaneousScene</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>To complete the cycle and swap out the new scene with the old one,
+you have a choice to make. Many strategies exist for removing a scene
+from view of the <a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>. The tradeoffs involve
+balancing operation speed and memory consumption, as well as balancing data
+access and integrity.</p>
+<ol class="arabic">
+<li><p><strong>Delete the existing scene.</strong>
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-file"><span class="std std-ref">SceneTree.change_scene_to_file()</span></a> and
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-method-change-scene-to-packed"><span class="std std-ref">SceneTree.change_scene_to_packed()</span></a>
+will delete the current scene immediately. You can also delete the
+main scene. Assuming the root node's name is "Main", you could do
+<code class="docutils literal notranslate"><span class="pre">get_node("/root/Main").free()</span></code> to delete the whole scene.</p>
+<blockquote>
+<div><ul>
+<li><p>Unloads memory.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: RAM is no longer dragging the dead weight.</p></li>
+<li><p>Con: Returning to that scene is now more expensive since it must be
+loaded back into memory again (takes time AND memory). Not a problem
+if returning soon is unnecessary.</p></li>
+<li><p>Con: No longer have access to that scene's data. Not a problem if
+using that data soon is unnecessary.</p></li>
+<li><p>Note: It can be useful to preserve the data in a soon-to-be-deleted
+scene by re-attaching one or more of its nodes to a different scene,
+or even directly to the <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Processing stops.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: No nodes means no processing, physics processing, or input
+handling. The CPU is available to work on the new scene's contents.</p></li>
+<li><p>Con: Those nodes' processing and input handling no longer operate.
+Not a problem if using the updated data is unnecessary.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Hide the existing scene.</strong> By changing the visibility or collision
+detection of the nodes, you can hide the entire node sub-tree from the
+player's perspective. Use
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-method-hide"><span class="std std-ref">CanvasItem.hide()</span></a> to hide a scene and
+<a class="reference internal" href="../../classes/class_canvasitem.html#class-canvasitem-method-show"><span class="std std-ref">CanvasItem.show()</span></a> to show it again.</p>
+<blockquote>
+<div><ul>
+<li><p>Memory still exists.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: You can still access the data if needed.</p></li>
+<li><p>Pro: There's no need to move any more nodes around to save data.</p></li>
+<li><p>Con: More data is being kept in memory, which will be become a problem
+on memory-sensitive platforms like web or mobile.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Processing continues.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pro: Data continues to receive processing updates, so the scene will
+keep any data within it that relies on delta time or frame data
+updated.</p></li>
+<li><p>Pro: Nodes are still members of groups (since groups belong to the
+<a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>).</p></li>
+<li><p>Con: The CPU's attention is now divided between both scenes. Too much
+load could result in low frame rates. You should be sure to test
+performance as you go to ensure the target platform can support the
+load from this approach.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Remove the existing scene from the tree.</strong> Assign a variable
+to the existing scene's root node. Then use
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-remove-child"><span class="std std-ref">Node.remove_child(Node)</span></a> to detach the entire
+scene from the tree. To attach it later, use
+<a class="reference internal" href="../../classes/class_node.html#class-node-method-add-child"><span class="std std-ref">Node.add_child(Node)</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Memory still exists (similar pros/cons as hiding it from view).</p></li>
+<li><p>Processing stops (similar pros/cons as deleting it completely).</p></li>
+<li><p>Pro: This variation of "hiding" it is much easier to show/hide. Rather
+than potentially keeping track of multiple changes to the scene, you
+only need to call the add/remove_child methods. This is similar to
+disabling game objects in other engines.</p></li>
+<li><p>Con: Unlike with hiding it from view only, the data contained within
+the scene will become stale if it relies on delta time, input, groups,
+or other data that is derived from <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>
+access.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>There are also cases where you may wish to have many scenes present at the same
+time, such as adding your own singleton at runtime, or preserving
+a scene's data between scene changes (adding the scene to the root node).</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">root</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">scene</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetTree</span><span class="p">().</span><span class="n">Root</span><span class="p">.</span><span class="n">AddChild</span><span class="p">(</span><span class="n">scene</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Another case may be displaying multiple scenes at the same time using
+<a class="reference internal" href="../../classes/class_subviewportcontainer.html#class-subviewportcontainer"><span class="std std-ref">SubViewportContainers</span></a>. This is optimal for
+rendering different content in different parts of the screen (e.g. minimaps,
+split-screen multiplayer).</p>
+<p>Each option will have cases where it is best appropriate, so you must examine
+the effects of each approach, and determine what path best fits your unique
+situation.</p>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

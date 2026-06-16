@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="VerySleepy" property="og:title"/>
+
+
+
+<meta content="Start the Godot editor or your project first. If you start the Project Manager, make sure to edit or run a project first. Otherwise, the profiler will not track the child process since the Project ..." property="og:description"/>
+<meta content="Start the Godot editor or your project first. If you start the Project Manager, make sure to edit or run a project first. Otherwise, the profiler will not track the child process since the Project ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) VerySleepy — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="../handling_compatibility_breakages.html" rel="next" title="Handling compatibility breakages"/>
+<link href="tracy.html" rel="prev" title="Tracy"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/profiling/very_sleepy" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="verysleepy">
+<span id="doc-profiler-very-sleepy"></span><h1>VerySleepy<a class="headerlink" href="#verysleepy" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Please see the <a class="reference internal" href="index.html#doc-sampling-profilers"><span class="std std-ref">sampling profiler instructions</span></a> for more information.</p>
+</div>
+<ul class="simple">
+<li><p>Start the Godot editor or your project first.
+If you start the Project Manager, make sure to edit or run a project first.
+Otherwise, the profiler will not track the child process since the Project Manager
+will spawn a child process for every project edited or run.</p></li>
+<li><p>Open <a class="reference external" href="https://github.com/VerySleepy/verysleepy">VerySleepy</a> and
+select the Godot executable in the list of processes on the left:</p></li>
+</ul>
+<img alt="../../../_images/cpp_profiler_verysleepy_select_process.png" src="../../../_images/cpp_profiler_verysleepy_select_process.png"/>
+<ul class="simple">
+<li><p>Click the <strong>Profile All</strong> button on the right to start profiling.</p></li>
+<li><p>Perform the actions you wish to profile in the editor or project. When you're done, click <strong>Stop</strong> (<em>not</em> Abort).</p></li>
+<li><p>Wait for the results window to appear.</p></li>
+<li><p>Once the results window appears, filter the view to remove external modules (such as the graphics driver).
+You can filter by module by finding a line whose <strong>Module</strong> matches the Godot
+executable name, right-clicking that line then choosing
+<strong>Filter Module to &lt;Godot executable name&gt;</strong> in the dropdown that appears.</p></li>
+<li><p>Your results window should now look something like this:</p></li>
+</ul>
+<img alt="../../../_images/cpp_profiler_verysleepy_results_filtered.png" src="../../../_images/cpp_profiler_verysleepy_results_filtered.png"/>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

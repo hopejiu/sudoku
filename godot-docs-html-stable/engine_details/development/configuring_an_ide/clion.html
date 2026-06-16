@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="CLion" property="og:title"/>
+
+
+
+<meta content="CLion is a JetBrains IDE for C++ that's free for individual, non-commercial development. Importing the project: CLion can import a project's compilation database file, commonly named comp..." property="og:description"/>
+<meta content="CLion is a JetBrains IDE for C++ that's free for individual, non-commercial development. Importing the project: CLion can import a project's compilation database file, commonly named comp..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) CLion — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="code_blocks.html" rel="next" title="Code::Blocks"/>
+<link href="android_studio.html" rel="prev" title="Android Studio"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/configuring_an_ide/clion" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="clion">
+<span id="doc-configuring-an-ide-clion"></span><h1>CLion<a class="headerlink" href="#clion" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://www.jetbrains.com/clion/">CLion</a> is a
+<a class="reference external" href="https://www.jetbrains.com/">JetBrains</a> IDE for C++ that's free for individual, non-commercial development.</p>
+<section id="importing-the-project">
+<h2>Importing the project<a class="headerlink" href="#importing-the-project" title="Link to this heading"></a></h2>
+<p>CLion can import a project's <a class="reference external" href="https://clang.llvm.org/docs/JSONCompilationDatabase.html">compilation database file</a>, commonly named <code class="docutils literal notranslate"><span class="pre">compile_commands.json</span></code>. To generate the compilation database file, open the terminal, change to the Godot root directory, and run:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">scons</span><span class="w"> </span><span class="n">compiledb</span><span class="o">=</span><span class="n">yes</span><span class="w"> </span><span class="n">compile_commands</span><span class="o">.</span><span class="vi">json</span>
+</pre></div>
+</div>
+<p>Then, open the Godot root directory with CLion and wait for the project to be fully
+indexed. If code completion, parameter information, or refactoring are not enabled,
+you will need to load the project with CMake. To do this, find the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>
+file in the <code class="docutils literal notranslate"><span class="pre">platform\android\java\nativeSrcsConfigs</span></code> directory, right click and
+select <span class="role-button role-ui">Load CMake Project</span>. Once the project reloads, a <code class="docutils literal notranslate"><span class="pre">godot</span></code> build configuration
+will be added. This configuration can be safely deleted as the CMake file will not
+build the project and only exists for loading the project in JetBrains IDEs.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Windows Users:</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">compile_commands.json</span></code> to load correctly in CLion, you must first have the Visual Studio toolchain configured for CLion.</p>
+<ul class="simple">
+<li><p>Navigate to <strong>Preferences &gt; Build, Execution, Deployment &gt; Toolchains</strong></p></li>
+<li><p>Click the <strong>+</strong> button and select  <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span></code></p></li>
+<li><p>CLion will attempt to detect your Visual Studio installation. If it is unsuccessful, use the file icon to the right of <code class="docutils literal notranslate"><span class="pre">Toolset:</span></code> to select the directory with your Visual Studio installation.</p></li>
+</ul>
+<p>You may exit and reload CLion and it will reload <code class="docutils literal notranslate"><span class="pre">compile_commands.json</span></code></p>
+</div>
+</div></blockquote>
+<figure class="align-center">
+<img alt="../../../_images/clion_visual_studio_toolchain.webp" src="../../../_images/clion_visual_studio_toolchain.webp"/>
+</figure>
+</section>
+<section id="compiling-and-debugging-the-project">
+<h2>Compiling and debugging the project<a class="headerlink" href="#compiling-and-debugging-the-project" title="Link to this heading"></a></h2>
+<p>CLion does not support compiling and debugging Godot via SCons out of the box. This can be achieved by creating a custom build target and run configuration in CLion. Before creating a custom build target, you must <a class="reference internal" href="../compiling/index.html#toc-devel-compiling"><span class="std std-ref">compile Godot</span></a> once on the command line, to generate the Godot executable. Open the terminal, change into the Godot root directory, and execute:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">scons</span><span class="w"> </span><span class="n">dev_build</span><span class="o">=</span><span class="n">yes</span>
+</pre></div>
+</div>
+<p>To add a custom build target that invokes SCons for compilation:</p>
+<ul class="simple">
+<li><p>Open CLion and navigate to <strong>Preferences &gt; Build, Execution, Deployment &gt; Custom Build Targets</strong></p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-preferences.png" src="../../../_images/clion-preferences.png"/>
+</figure>
+<ul class="simple">
+<li><p>Click <strong>Add target</strong> and give the target a name, e.g. <code class="docutils literal notranslate"><span class="pre">Godot</span> <span class="pre">debug</span></code>.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-target.png" src="../../../_images/clion-target.png"/>
+</figure>
+<ul class="simple">
+<li><p>Click <strong>...</strong> next to the <strong>Build:</strong> selectbox, then click the <strong>+</strong> button in the <strong>External Tools</strong> dialog to add a new external tool.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-external-tools.png" src="../../../_images/clion-external-tools.png"/>
+</figure>
+<ul>
+<li><p>Give the tool a name, e.g. <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">Godot</span> <span class="pre">debug</span></code>, set <strong>Program</strong> to <code class="docutils literal notranslate"><span class="pre">scons</span></code>, set <strong>Arguments</strong> to the compilation settings you want (see <a class="reference internal" href="../compiling/index.html#toc-devel-compiling"><span class="std std-ref">compiling Godot</span></a>), and set the <strong>Working directory</strong> to <code class="docutils literal notranslate"><span class="pre">$ProjectFileDir$</span></code>, which equals the Godot root directory. Click <strong>OK</strong> to create the tool.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CLion does not expand shell commands like <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">-j$(nproc)</span></code>. Use concrete values instead, e.g. <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">-j8</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-create-build-tool.webp" src="../../../_images/clion-create-build-tool.webp"/>
+</figure>
+<ul class="simple">
+<li><p>Back in the <strong>External Tools</strong> dialog, click the <strong>+</strong> again to add a second external tool for cleaning the Godot build via SCons. Give the tool a name, e.g. <code class="docutils literal notranslate"><span class="pre">Clean</span> <span class="pre">Godot</span> <span class="pre">debug</span></code>, set <strong>Program</strong> to <code class="docutils literal notranslate"><span class="pre">scons</span></code>, set <strong>Arguments</strong> to <code class="docutils literal notranslate"><span class="pre">-c</span></code> (which will clean the build), and set the <strong>Working directory</strong> to <code class="docutils literal notranslate"><span class="pre">$ProjectFileDir$</span></code>. Click <strong>OK</strong> to create the tool.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-create-clean-tool.png" src="../../../_images/clion-create-clean-tool.png"/>
+</figure>
+<ul class="simple">
+<li><p>Close the <strong>External Tools</strong> dialog. In the <strong>Custom Build Target</strong> dialog for the custom <code class="docutils literal notranslate"><span class="pre">Godot</span> <span class="pre">debug</span></code> build target, select the <strong>Build Godot debug</strong> tool from the <strong>Build</strong> select box, and select the <strong>Clean Godot debug</strong> tool from the <strong>Clean</strong> select box. Click <strong>OK</strong> to create the custom build target.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-select-tools.png" src="../../../_images/clion-select-tools.png"/>
+</figure>
+<ul class="simple">
+<li><p>In the main IDE window, click <strong>Add Configuration</strong>.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-add-configuration.png" src="../../../_images/clion-add-configuration.png"/>
+</figure>
+<ul class="simple">
+<li><p>In the <strong>Run/Debug Configuration</strong> dialog, click <strong>Add new...</strong>, then select <strong>Custom Build Application</strong> to create a new custom run/debug configuration.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-add-custom-build-application.png" src="../../../_images/clion-add-custom-build-application.png"/>
+</figure>
+<ul class="simple">
+<li><p>Give the run/debug configuration a name, e.g. <code class="docutils literal notranslate"><span class="pre">Godot</span> <span class="pre">debug</span></code>, select the <code class="docutils literal notranslate"><span class="pre">Godot</span> <span class="pre">debug</span></code> custom build target as the <strong>Target</strong>. Select the Godot executable in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder as the <strong>Executable</strong>, and set the <strong>Program arguments</strong> to <code class="docutils literal notranslate"><span class="pre">--editor</span> <span class="pre">--path</span> <span class="pre">path-to-your-project/</span></code>, where <code class="docutils literal notranslate"><span class="pre">path-to-your-project/</span></code> should be a path pointing to an existing Godot project. If you omit the <code class="docutils literal notranslate"><span class="pre">--path</span></code> argument, you will only be able to debug the Godot Project Manager window. Click <strong>OK</strong> to create the run/debug configuration.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-run-configuration.png" src="../../../_images/clion-run-configuration.png"/>
+</figure>
+<p>You can now build, run, debug, profile, and Valgrind check the Godot editor via the run configuration.</p>
+<figure class="align-center">
+<img alt="../../../_images/clion-build-run.png" src="../../../_images/clion-build-run.png"/>
+</figure>
+<p>When playing a scene, the Godot editor will spawn a separate process. You can debug this process in CLion by going to <strong>Run &gt; Attach to process...</strong>, typing <code class="docutils literal notranslate"><span class="pre">godot</span></code>, and selecting the Godot process with the highest <strong>pid</strong> (process ID), which will usually be the running project.</p>
+</section>
+<section id="ignoring-object-and-library-files">
+<h2>Ignoring object and library files<a class="headerlink" href="#ignoring-object-and-library-files" title="Link to this heading"></a></h2>
+<p>After building Godot in CLion, you may see the object and library files showing up in the <strong>Project</strong> view.</p>
+<figure class="align-center">
+<img alt="../../../_images/clion-object-library-files-in-project-view.webp" src="../../../_images/clion-object-library-files-in-project-view.webp"/>
+</figure>
+<p>You can configure CLion to ignore those files:</p>
+<ul class="simple">
+<li><p>Open CLion and navigate to <strong>Preferences &gt; Editor &gt; File Types &gt; Ignored Files and Folders</strong></p></li>
+<li><p>Click the <strong>+</strong> button to add <code class="docutils literal notranslate"><span class="pre">*.o</span></code> and <code class="docutils literal notranslate"><span class="pre">*.a</span></code> to the list. In Windows, you would add <code class="docutils literal notranslate"><span class="pre">*.obj</span></code> and <code class="docutils literal notranslate"><span class="pre">*.dll</span></code>.</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/clion-ignore-object-library-files.webp" src="../../../_images/clion-ignore-object-library-files.webp"/>
+</figure>
+<p>Now, the files should be ignored in the Project view.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

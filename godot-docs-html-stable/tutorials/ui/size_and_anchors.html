@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Size and anchors" property="og:title"/>
+
+
+
+<meta content="If a game was always going to be run on the same device and at the same resolution, positioning controls would be a simple matter of setting the position and size of each one of them. Unfortunately..." property="og:description"/>
+<meta content="If a game was always going to be run on the same device and at the same resolution, positioning controls would be a simple matter of setting the position and size of each one of them. Unfortunately..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Size and anchors — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="gui_containers.html" rel="next" title="Using Containers"/>
+<link href="index.html" rel="prev" title="User interface (UI)"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/ui/size_and_anchors" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="size-and-anchors">
+<span id="doc-size-and-anchors"></span><h1>Size and anchors<a class="headerlink" href="#size-and-anchors" title="Link to this heading"></a></h1>
+<p>If a game was always going to be run on the same device and at the same
+resolution, positioning controls would be a simple matter of setting the
+position and size of each one of them. Unfortunately, that is rarely the
+case.</p>
+<p>While some configurations may be more common than others, devices like
+phones, tablets and portable gaming consoles can vary greatly. Therefore,
+we often have to account for different aspect ratios, resolutions and user
+scaling.</p>
+<p>There are several ways to account for this, but for now, let's just imagine
+that the screen resolution has changed and the controls need to be
+re-positioned. Some will need to follow the bottom of the screen, others
+the top of the screen, or maybe the right or left margins.</p>
+<img alt="../../_images/anchors.png" src="../../_images/anchors.png"/>
+<p>This is done by editing the <em>anchor offsets</em> of controls, which behave similar
+to a margin. To access these settings, you will first need to select the <em>Custom</em>
+anchor preset.</p>
+<p>Each control has four anchor offsets: left, right, bottom, and top, which correspond
+to the respective edges of the control. By default, all of
+them represent a distance in pixels relative to the top-left corner of
+the parent control or (in case there is no parent control) the viewport.</p>
+<img alt="../../_images/offset.webp" src="../../_images/offset.webp"/>
+<p>So to make the control wider you can make the right offset larger and/or
+make the left offset smaller. This lets you set the exact placement
+and shape of the control.</p>
+<p>The <em>anchor</em> properties adjust where the offsets are relative <em>to</em>.
+Each offset has an individual anchor that can be adjusted from the
+beginning to the end of the parent. So the vertical (top, bottom) anchors
+adjust from <code class="docutils literal notranslate"><span class="pre">0.0</span></code> (top of parent) to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (bottom of parent) with <code class="docutils literal notranslate"><span class="pre">0.5</span></code> being
+the center, and the control offsets will be placed relative to that
+point. The horizontal (left, right) anchors similarly adjust from left to
+right of the parent.</p>
+<p>Note that when you wish the edge of a control to be above or left of the
+anchor point, you must change the offset value to be negative.</p>
+<p>For example: when horizontal anchors are changed to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, the offset values
+become relative to the top-right corner of the parent control or viewport.</p>
+<img alt="../../_images/offset_end.webp" src="../../_images/offset_end.webp"/>
+<p>Adjusting the two horizontal or the two vertical anchors to different
+values will make the control change size when the parent control does.
+Here, the control is set to anchor its bottom-right corner to the
+parent's bottom-right, while the top-left control offsets are still
+anchored to the top-left of the parent, so when re-sizing the parent,
+the control will always cover it, leaving a 20 pixel offset:</p>
+<img alt="../../_images/offset_around.webp" src="../../_images/offset_around.webp"/>
+<section id="centering-a-control">
+<h2>Centering a control<a class="headerlink" href="#centering-a-control" title="Link to this heading"></a></h2>
+<p>To center a control in its parent, set its anchors to <code class="docutils literal notranslate"><span class="pre">0.5</span></code> and each offset
+to half of its relevant dimension. For example, the code below shows how
+a TextureRect can be centered in its parent:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">TextureRect</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">load</span><span class="p">(</span><span class="s2">"res://icon.png"</span><span class="p">)</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">anchor_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">anchor_right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">anchor_top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">anchor_bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="k">var</span><span class="w"> </span><span class="n">texture_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rect</span><span class="o">.</span><span class="vi">texture</span><span class="o">.</span><span class="nf">get_size</span><span class="p">()</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">offset_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">texture_size</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">offset_right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture_size</span><span class="o">.</span><span class="vi">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">offset_top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">texture_size</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">rect</span><span class="o">.</span><span class="vi">offset_bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture_size</span><span class="o">.</span><span class="vi">y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<span class="nf">add_child</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextureRect</span><span class="p">();</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">Texture</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"res://icon.png"</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">AnchorLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">AnchorRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">AnchorTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">AnchorBottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">textureSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rect</span><span class="p">.</span><span class="n">Texture</span><span class="p">.</span><span class="n">GetSize</span><span class="p">();</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">OffsetLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">textureSize</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">OffsetRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">textureSize</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">OffsetTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">textureSize</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">OffsetBottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">textureSize</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">AddChild</span><span class="p">(</span><span class="n">rect</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Setting each anchor to <code class="docutils literal notranslate"><span class="pre">0.5</span></code> moves the reference point for the offsets to
+the center of its parent. From there, we set negative offsets so that
+the control gets its natural size.</p>
+</section>
+<section id="anchor-presets">
+<h2>Anchor Presets<a class="headerlink" href="#anchor-presets" title="Link to this heading"></a></h2>
+<p>Instead of manually adjusting the offset and anchor values, you can use the
+toolbar's Anchor menu, above the viewport. Besides centering, it gives you many
+options to align and resize control nodes.</p>
+<img alt="../../_images/anchor_presets.webp" src="../../_images/anchor_presets.webp"/>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

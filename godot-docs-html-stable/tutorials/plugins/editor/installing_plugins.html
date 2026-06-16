@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Installing plugins" property="og:title"/>
+
+
+
+<meta content="Godot features an editor plugin system with numerous plugins developed by the community. Plugins can extend the editor's functionality with new nodes, additional docks, convenience features, a..." property="og:description"/>
+<meta content="Godot features an editor plugin system with numerous plugins developed by the community. Plugins can extend the editor's functionality with new nodes, additional docks, convenience features, a..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Installing plugins — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="making_plugins.html" rel="next" title="Making plugins"/>
+<link href="index.html" rel="prev" title="Editor plugins"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/plugins/editor/installing_plugins" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="installing-plugins">
+<span id="doc-installing-plugins"></span><h1>Installing plugins<a class="headerlink" href="#installing-plugins" title="Link to this heading"></a></h1>
+<p>Godot features an editor plugin system with numerous plugins developed by the
+community. Plugins can extend the editor's functionality with new nodes,
+additional docks, convenience features, and more.</p>
+<section id="finding-plugins">
+<h2>Finding plugins<a class="headerlink" href="#finding-plugins" title="Link to this heading"></a></h2>
+<p>The preferred way to find Godot plugins is to use the
+<a class="reference external" href="https://godotengine.org/asset-library/">Asset Library</a>. While it can be
+browsed online, it's more convenient to use it directly from the editor.
+To do so, click the <strong>AssetLib</strong> tab at the top of the editor:</p>
+<img alt="../../../_images/installing_plugins_assetlib_tab.webp" src="../../../_images/installing_plugins_assetlib_tab.webp"/>
+<p>You can also find assets on code hosting websites such as GitHub.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some repositories describe themselves as "plugins" but may not actually be
+<em>editor</em> plugins. This is especially the case for scripts that are intended
+to be used in a running project. You don't need to enable such plugins to
+use them. Download them and extract the files in your project folder.</p>
+<p>One way to distinguish editor plugins from non-editor plugins is to look for
+a <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> file in the repository that hosts the plugin. If the
+repository contains a <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code> file in a folder placed in the
+<code class="docutils literal notranslate"><span class="pre">addons/</span></code> folder, then it is an editor plugin.</p>
+</div>
+</section>
+<section id="installing-a-plugin">
+<h2>Installing a plugin<a class="headerlink" href="#installing-a-plugin" title="Link to this heading"></a></h2>
+<p>To install a plugin, download it as a ZIP archive. On the Asset Library, this
+can be done using the <strong>Download</strong> button, either from the editor or using the
+Web interface.</p>
+<p>On GitHub, if a plugin has <em>tags</em> (versions) declared, go to the <strong>Releases</strong>
+tab to download a stable release. This ensures you download a version that was
+declared to be stable by its author.</p>
+<p>On GitHub, if the plugin doesn't have any <em>tags</em> declared, use the <strong>Download ZIP</strong>
+button to download a ZIP of the latest revision:</p>
+<img alt="../../../_images/installing_plugins_github_download_zip.png" src="../../../_images/installing_plugins_github_download_zip.png"/>
+<p>Extract the ZIP archive and move the <code class="docutils literal notranslate"><span class="pre">addons/</span></code> folder it contains into your
+project folder. If your project already contains an <code class="docutils literal notranslate"><span class="pre">addons/</span></code> folder, move the
+plugin's <code class="docutils literal notranslate"><span class="pre">addons/</span></code> folder into your project folder to merge the new folder
+contents with the existing one. Your file manager may ask you whether to write
+into the folder; answer <strong>Yes</strong>. No files will be overwritten in the process.</p>
+</section>
+<section id="enabling-a-plugin">
+<span id="doc-installing-plugins-enabling-a-plugin"></span><h2>Enabling a plugin<a class="headerlink" href="#enabling-a-plugin" title="Link to this heading"></a></h2>
+<p>To enable the freshly installed plugin, open <strong>Project &gt; Project Settings</strong> at
+the top of the editor then go the <strong>Plugins</strong> tab. If the plugin was packaged
+correctly, you should see it in the list of plugins. Click on the
+<strong>Enable</strong> checkbox to enable the plugin.</p>
+<img alt="../../../_images/installing_plugins_project_settings.webp" src="../../../_images/installing_plugins_project_settings.webp"/>
+<p>You can use the plugin immediately after enabling it; there's no need to restart
+the editor. Likewise, disabling a plugin can be done without having to restart
+the editor.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

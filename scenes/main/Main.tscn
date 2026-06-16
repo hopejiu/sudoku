@@ -1,0 +1,177 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/Main.gd" id="1"]
+
+[node name="Main" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+
+[node name="TitleLabel" type="Label" parent="VBox/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 1
+text = "游戏集合"
+
+[node name="SettingsBtn" type="Button" parent="VBox/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "主题"
+
+[node name="CardArea" type="CenterContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SudokuCard" type="Panel" parent="VBox/CardArea"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -80
+offset_top = -60
+offset_right = 80
+offset_bottom = 60
+
+[node name="CardVBox" type="VBoxContainer" parent="VBox/CardArea/SudokuCard"]
+layout_mode = 0
+offset_left = 8
+offset_top = 8
+offset_right = -8
+offset_bottom = -8
+
+[node name="CardIcon" type="TextureRect" parent="VBox/CardArea/SudokuCard/CardVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 0
+
+[node name="CardLabel" type="Label" parent="VBox/CardArea/SudokuCard/CardVBox"]
+layout_mode = 2
+text = "数独"
+horizontal_alignment = 1
+
+[node name="PopupOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+visible = false
+
+[node name="Center" type="CenterContainer" parent="PopupOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PopupPanel" type="Panel" parent="PopupOverlay/Center"]
+layout_mode = 0
+offset_left = -120
+offset_top = -80
+offset_right = 120
+offset_bottom = 80
+
+[node name="PopupVBox" type="VBoxContainer" parent="PopupOverlay/Center/PopupPanel"]
+layout_mode = 0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+
+[node name="ContinueBtn" type="Button" parent="PopupOverlay/Center/PopupPanel/PopupVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "继续上局游戏"
+
+[node name="NewGameBtn" type="Button" parent="PopupOverlay/Center/PopupPanel/PopupVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "开启新游戏"
+
+[node name="HistoryBtn" type="Button" parent="PopupOverlay/Center/PopupPanel/PopupVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "历史记录"
+
+[node name="DifficultyOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+visible = false
+
+[node name="Center" type="CenterContainer" parent="DifficultyOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DiffPanel" type="Panel" parent="DifficultyOverlay/Center"]
+layout_mode = 0
+offset_left = -140
+offset_top = -70
+offset_right = 140
+offset_bottom = 70
+
+[node name="DiffVBox" type="VBoxContainer" parent="DifficultyOverlay/Center/DiffPanel"]
+layout_mode = 0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+
+[node name="DiffTitle" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+text = "选择难度"
+horizontal_alignment = 1
+
+[node name="DiffSliderRow" type="HBoxContainer" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+
+[node name="DiffLabel" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow"]
+layout_mode = 2
+text = "难度"
+
+[node name="DiffSlider" type="HSlider" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 16.0
+step = 1.0
+value = 8.0
+
+[node name="DiffValue" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "8"
+
+[node name="DiffBtnRow" type="HBoxContainer" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+
+[node name="DiffCancel" type="Button" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "取消"
+
+[node name="DiffConfirm" type="Button" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "确认"

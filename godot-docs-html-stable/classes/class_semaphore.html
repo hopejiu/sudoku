@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Semaphore" property="og:title"/>
+
+
+
+<meta content="Inherits: RefCounted&lt; Object A synchronization mechanism used to control access to a shared resource by Thread s. Description: A synchronization semaphore that can be used to synchronize multipl..." property="og:description"/>
+<meta content="Inherits: RefCounted&lt; Object A synchronization mechanism used to control access to a shared resource by Thread s. Description: A synchronization semaphore that can be used to synchronize multipl..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Semaphore — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_shaderincludedb.html" rel="next" title="ShaderIncludeDB"/>
+<link href="class_scriptlanguageextension.html" rel="prev" title="ScriptLanguageExtension"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_semaphore" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="semaphore">
+<span id="class-semaphore"></span><h1>Semaphore<a class="headerlink" href="#semaphore" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A synchronization mechanism used to control access to a shared resource by <a class="reference internal" href="class_thread.html#class-thread"><span class="std std-ref">Thread</span></a>s.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A synchronization semaphore that can be used to synchronize multiple <a class="reference internal" href="class_thread.html#class-thread"><span class="std std-ref">Thread</span></a>s. Initialized to zero on creation. For a binary version, see <a class="reference internal" href="class_mutex.html#class-mutex"><span class="std std-ref">Mutex</span></a>.</p>
+<p><strong>Warning:</strong> Semaphores must be used carefully to avoid deadlocks.</p>
+<p><strong>Warning:</strong> To guarantee that the operating system is able to perform proper cleanup (no crashes, no deadlocks), these conditions must be met:</p>
+<ul class="simple">
+<li><p>When a <strong>Semaphore</strong>'s reference count reaches zero and it is therefore destroyed, no threads must be waiting on it.</p></li>
+<li><p>When a <a class="reference internal" href="class_thread.html#class-thread"><span class="std std-ref">Thread</span></a>'s reference count reaches zero and it is therefore destroyed, it must not be waiting on any semaphore.</p></li>
+</ul>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/performance/using_multiple_threads.html"><span class="doc">Using multiple threads</span></a></p></li>
+<li><p><a class="reference internal" href="../tutorials/performance/thread_safe_apis.html"><span class="doc">Thread-safe APIs</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-semaphore-method-post"><span class="std std-ref">post</span></a>(count: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 1)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-semaphore-method-try-wait"><span class="std std-ref">try_wait</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-semaphore-method-wait"><span class="std std-ref">wait</span></a>()</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-semaphore-method-post"><abbr title="No return value.">void</abbr> <strong>post</strong>(count: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 1) <a class="reference internal" href="#class-semaphore-method-post"><span class="std std-ref">🔗</span></a></p>
+<p>Lowers the <strong>Semaphore</strong>, allowing one thread in, or more if <code class="docutils literal notranslate"><span class="pre">count</span></code> is specified.</p>
+<p class="classref-method" id="class-semaphore-method-try-wait"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>try_wait</strong>() <a class="reference internal" href="#class-semaphore-method-try-wait"><span class="std std-ref">🔗</span></a></p>
+<p>Like <a class="reference internal" href="#class-semaphore-method-wait"><span class="std std-ref">wait()</span></a>, but won't block, so if the value is zero, fails immediately and returns <code class="docutils literal notranslate"><span class="pre">false</span></code>. If non-zero, it returns <code class="docutils literal notranslate"><span class="pre">true</span></code> to report success.</p>
+<p class="classref-method" id="class-semaphore-method-wait"><abbr title="No return value.">void</abbr> <strong>wait</strong>() <a class="reference internal" href="#class-semaphore-method-wait"><span class="std std-ref">🔗</span></a></p>
+<p>Waits for the <strong>Semaphore</strong>, if its value is zero, blocks until non-zero.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

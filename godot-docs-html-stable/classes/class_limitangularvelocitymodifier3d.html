@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="LimitAngularVelocityModifier3D" property="og:title"/>
+
+
+
+<meta content="Inherits: SkeletonModifier3D&lt; Node3D&lt; Node&lt; Object Limit bone rotation angular velocity. Description: This modifier limits bone rotation angular velocity by comparing poses between previou..." property="og:description"/>
+<meta content="Inherits: SkeletonModifier3D&lt; Node3D&lt; Node&lt; Object Limit bone rotation angular velocity. Description: This modifier limits bone rotation angular velocity by comparing poses between previou..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) LimitAngularVelocityModifier3D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_line2d.html" rel="next" title="Line2D"/>
+<link href="class_lightoccluder2d.html" rel="prev" title="LightOccluder2D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_limitangularvelocitymodifier3d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="limitangularvelocitymodifier3d">
+<span id="class-limitangularvelocitymodifier3d"></span><h1>LimitAngularVelocityModifier3D<a class="headerlink" href="#limitangularvelocitymodifier3d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_skeletonmodifier3d.html#class-skeletonmodifier3d"><span class="std std-ref">SkeletonModifier3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Limit bone rotation angular velocity.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This modifier limits bone rotation angular velocity by comparing poses between previous and current frame.</p>
+<p>You can add bone chains by specifying their root and end bones, then add the bones between them to a list. Modifier processes either that list or the bones excluding those in the list depending on the option <a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-exclude"><span class="std std-ref">exclude</span></a>.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-chain-count"><span class="std std-ref">chain_count</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-exclude"><span class="std std-ref">exclude</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-joint-count"><span class="std std-ref">joint_count</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-max-angular-velocity"><span class="std std-ref">max_angular_velocity</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">6.2831855</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-clear-chains"><span class="std std-ref">clear_chains</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-end-bone"><span class="std std-ref">get_end_bone</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-end-bone-name"><span class="std std-ref">get_end_bone_name</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-root-bone"><span class="std std-ref">get_root_bone</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-root-bone-name"><span class="std std-ref">get_root_bone_name</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-reset"><span class="std std-ref">reset</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-end-bone"><span class="std std-ref">set_end_bone</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-end-bone-name"><span class="std std-ref">set_end_bone_name</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-root-bone"><span class="std std-ref">set_root_bone</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-root-bone-name"><span class="std std-ref">set_root_bone_name</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-limitangularvelocitymodifier3d-property-chain-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>chain_count</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-chain-count"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_chain_count</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_chain_count</strong>()</p></li>
+</ul>
+<p>The number of chains.</p>
+<p class="classref-property" id="class-limitangularvelocitymodifier3d-property-exclude"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>exclude</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-exclude"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_exclude</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_exclude</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the modifier processes bones not included in the bone list.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">false</span></code>, the bones processed by the modifier are equal to the bone list.</p>
+<p class="classref-property" id="class-limitangularvelocitymodifier3d-property-joint-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>joint_count</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-joint-count"><span class="std std-ref">🔗</span></a></p>
+<p>The number of joints in the list which created by chains dynamically.</p>
+<p class="classref-property" id="class-limitangularvelocitymodifier3d-property-max-angular-velocity"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>max_angular_velocity</strong> = <code class="docutils literal notranslate"><span class="pre">6.2831855</span></code> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-property-max-angular-velocity"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_max_angular_velocity</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_max_angular_velocity</strong>()</p></li>
+</ul>
+<p>The maximum angular velocity per second.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-clear-chains"><abbr title="No return value.">void</abbr> <strong>clear_chains</strong>() <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-clear-chains"><span class="std std-ref">🔗</span></a></p>
+<p>Clear all chains.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-get-end-bone"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_end_bone</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-end-bone"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the end bone index of the bone chain.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-get-end-bone-name"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_end_bone_name</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-end-bone-name"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the end bone name of the bone chain.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-get-root-bone"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_root_bone</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-root-bone"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the root bone index of the bone chain.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-get-root-bone-name"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_root_bone_name</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-get-root-bone-name"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the root bone name of the bone chain.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-reset"><abbr title="No return value.">void</abbr> <strong>reset</strong>() <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-reset"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the reference pose for angle comparison to the current pose with the influence of constraints removed. This function is automatically triggered when joints change or upon activation.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-set-end-bone"><abbr title="No return value.">void</abbr> <strong>set_end_bone</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-end-bone"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the end bone index of the bone chain.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-set-end-bone-name"><abbr title="No return value.">void</abbr> <strong>set_end_bone_name</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-end-bone-name"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the end bone name of the bone chain.</p>
+<p><strong>Note:</strong> End bone must be the root bone or a child of the root bone.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-set-root-bone"><abbr title="No return value.">void</abbr> <strong>set_root_bone</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-root-bone"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the root bone index of the bone chain.</p>
+<p class="classref-method" id="class-limitangularvelocitymodifier3d-method-set-root-bone-name"><abbr title="No return value.">void</abbr> <strong>set_root_bone_name</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, bone_name: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-limitangularvelocitymodifier3d-method-set-root-bone-name"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the root bone name of the bone chain.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

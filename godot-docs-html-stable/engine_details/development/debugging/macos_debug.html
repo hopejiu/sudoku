@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Debugging on macOS" property="og:title"/>
+
+
+
+<meta content="Debugging Godot editor: Attaching a debugger to the signed macOS process requires the &quot;com.apple.security.get-task-allow&quot; entitlement, which is not enabled by default, since apps can'..." property="og:description"/>
+<meta content="Debugging Godot editor: Attaching a debugger to the signed macOS process requires the &quot;com.apple.security.get-task-allow&quot; entitlement, which is not enabled by default, since apps can'..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Debugging on macOS — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="vulkan/index.html" rel="next" title="Vulkan"/>
+<link href="using_sanitizers.html" rel="prev" title="Using sanitizers"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/debugging/macos_debug" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="debugging-on-macos">
+<h1>Debugging on macOS<a class="headerlink" href="#debugging-on-macos" title="Link to this heading"></a></h1>
+<section id="debugging-godot-editor">
+<h2>Debugging Godot editor<a class="headerlink" href="#debugging-godot-editor" title="Link to this heading"></a></h2>
+<p>Attaching a debugger to the signed macOS process requires the "com.apple.security.get-task-allow" entitlement, which is not enabled by default, since apps can't be notarized as long as it is enabled.
+If you want to debug an official build of the editor it should be re-signed with the proper entitlements.</p>
+<p>Create an <code class="docutils literal notranslate"><span class="pre">editor.entitlements</span></code> text file with the following contents:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span><span class="w"> </span><span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dict&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.cs.allow-dyld-environment-variables<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.cs.allow-jit<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.cs.allow-unsigned-executable-memory<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.cs.disable-executable-page-protection<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.cs.disable-library-validation<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.device.audio-input<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.device.camera<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;key&gt;</span>com.apple.security.get-task-allow<span class="nt">&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></div>
+</div>
+<p>Then use the following command to re-sign the editor:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">codesign</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">--</span><span class="n">deep</span><span class="w"> </span><span class="o">--</span><span class="n">force</span><span class="w"> </span><span class="o">--</span><span class="n">options</span><span class="o">=</span><span class="n">runtime</span><span class="w"> </span><span class="o">--</span><span class="n">entitlements</span><span class="w"> </span><span class="o">./</span><span class="n">editor</span><span class="o">.</span><span class="vi">entitlements</span><span class="w"> </span><span class="o">./</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="nc">Godot</span><span class="o">.</span><span class="vi">app</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-exported-project">
+<h2>Debugging exported project<a class="headerlink" href="#debugging-exported-project" title="Link to this heading"></a></h2>
+<p>To allow debugging, select the <code class="docutils literal notranslate"><span class="pre">codesign\debugging</span></code> (<code class="docutils literal notranslate"><span class="pre">com.apple.security.get-task-allow</span></code>) entitlement during the export. When it is selected, notarization is not supported and should be disabled.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

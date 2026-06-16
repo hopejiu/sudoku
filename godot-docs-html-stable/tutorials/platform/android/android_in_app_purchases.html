@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Android in-app purchases" property="og:title"/>
+
+
+
+<meta content="Godot offers a first-party GodotGooglePlayBilling Android plugin compatible with Godot 4.2+ which uses the Google Play Billing library. Usage: Getting started: Make sure you have enabled and succes..." property="og:description"/>
+<meta content="Godot offers a first-party GodotGooglePlayBilling Android plugin compatible with Godot 4.2+ which uses the Google Play Billing library. Usage: Getting started: Make sure you have enabled and succes..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Android in-app purchases — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="javaclasswrapper_and_androidruntimeplugin.html" rel="next" title="Integrating with Android APIs"/>
+<link href="android_plugin.html" rel="prev" title="Godot Android plugins"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/platform/android/android_in_app_purchases" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="android-in-app-purchases">
+<span id="doc-android-in-app-purchases"></span><h1>Android in-app purchases<a class="headerlink" href="#android-in-app-purchases" title="Link to this heading"></a></h1>
+<p>Godot offers a first-party <code class="docutils literal notranslate"><span class="pre">GodotGooglePlayBilling</span></code> Android plugin compatible with Godot 4.2+ which uses the <a class="reference external" href="https://developer.android.com/google/play/billing">Google Play Billing library</a>.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="getting-started">
+<h3>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h3>
+<p>Make sure you have enabled and successfully set up <a class="reference internal" href="../../export/android_gradle_build.html#doc-android-gradle-build"><span class="std std-ref">Android Gradle Builds</span></a>.
+Follow the installation instructions on the <code class="docutils literal notranslate"><span class="pre">GodotGooglePlayBilling</span></code> <a class="reference external" href="https://github.com/godotengine/godot-google-play-billing">github page</a>.</p>
+</section>
+<section id="initialize-the-plugin">
+<h3>Initialize the plugin<a class="headerlink" href="#initialize-the-plugin" title="Link to this heading"></a></h3>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">GodotGooglePlayBilling</span></code> API:</p>
+<ol class="arabic simple">
+<li><p>Access the <code class="docutils literal notranslate"><span class="pre">BillingClient</span></code>.</p></li>
+<li><p>Connect to its signals to receive billing results.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">start_connection</span></code>.</p></li>
+</ol>
+<p>Initialization example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">billing_client</span><span class="p">:</span><span class="w"> </span><span class="nc">BillingClient</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">connected</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_connected</span><span class="p">)</span><span class="w"> </span><span class="c1"># No params</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">disconnected</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_disconnected</span><span class="p">)</span><span class="w"> </span><span class="c1"># No params</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">connect_error</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_connect_error</span><span class="p">)</span><span class="w"> </span><span class="c1"># response_code: int, debug_message: String</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">query_product_details_response</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_query_product_details_response</span><span class="p">)</span><span class="w"> </span><span class="c1"># response: Dictionary</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">query_purchases_response</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_query_purchases_response</span><span class="p">)</span><span class="w"> </span><span class="c1"># response: Dictionary</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">on_purchase_updated</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_purchase_updated</span><span class="p">)</span><span class="w"> </span><span class="c1"># response: Dictionary</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">consume_purchase_response</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_consume_purchase_response</span><span class="p">)</span><span class="w"> </span><span class="c1"># response: Dictionary</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="vi">acknowledge_purchase_response</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_acknowledge_purchase_response</span><span class="p">)</span><span class="w"> </span><span class="c1"># response: Dictionary</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="nf">start_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The API must be in a connected state prior to use. The <code class="docutils literal notranslate"><span class="pre">connected</span></code> signal is sent
+when the connection process succeeds. You can also use <code class="docutils literal notranslate"><span class="pre">is_ready()</span></code> to determine if the plugin
+is ready for use. The <code class="docutils literal notranslate"><span class="pre">get_connection_state()</span></code> function returns the current connection state
+of the plugin.</p>
+<p>Return values for <code class="docutils literal notranslate"><span class="pre">get_connection_state()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matches BillingClient.ConnectionState in the Play Billing Library.</span>
+<span class="c1"># Access in your script as: BillingClient.ConnectionState.CONNECTED</span>
+<span class="k">enum</span><span class="w"> </span><span class="n">ConnectionState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DISCONNECTED</span><span class="p">,</span><span class="w"> </span><span class="c1"># This client was not yet connected to billing service or was already closed.</span>
+<span class="w">    </span><span class="n">CONNECTING</span><span class="p">,</span><span class="w"> </span><span class="c1"># This client is currently in process of connecting to billing service.</span>
+<span class="w">    </span><span class="n">CONNECTED</span><span class="p">,</span><span class="w"> </span><span class="c1"># This client is currently connected to billing service.</span>
+<span class="w">    </span><span class="n">CLOSED</span><span class="p">,</span><span class="w"> </span><span class="c1"># This client was already closed and shouldn't be used again.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="query-available-items">
+<h3>Query available items<a class="headerlink" href="#query-available-items" title="Link to this heading"></a></h3>
+<p>Once the API has connected, query product IDs using <cite>query_product_details()</cite>. You must successfully complete
+a product details query before calling the <code class="docutils literal notranslate"><span class="pre">purchase()</span></code>, <code class="docutils literal notranslate"><span class="pre">purchase_subscription()</span></code>, or <code class="docutils literal notranslate"><span class="pre">update_subscription()</span></code> functions,
+or they will return an error. <code class="docutils literal notranslate"><span class="pre">query_product_details()</span></code> takes two parameters: an array
+of product ID strings and the type of product being queried.
+The product type should be <code class="docutils literal notranslate"><span class="pre">BillingClient.ProductType.INAPP</span></code> for normal in-app purchases or <code class="docutils literal notranslate"><span class="pre">BillingClient.ProductType.SUBS</span></code> for subscriptions.
+The ID strings in the array should match the product IDs defined in the Google Play Console entry
+for your app.</p>
+<p>Example use of <code class="docutils literal notranslate"><span class="pre">query_product_details()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_connected</span><span class="p">():</span>
+<span class="w">  </span><span class="n">billing_client</span><span class="o">.</span><span class="nf">query_product_details</span><span class="p">([</span><span class="s2">"my_iap_item"</span><span class="p">],</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">ProductType</span><span class="o">.</span><span class="vi">INAPP</span><span class="p">)</span><span class="w"> </span><span class="c1"># BillingClient.ProductType.SUBS for subscriptions.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_query_product_details_response</span><span class="p">(</span><span class="n">query_result</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">response_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">BillingResponseCode</span><span class="o">.</span><span class="vi">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Product details query success"</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">available_product</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">product_details</span><span class="p">:</span>
+<span class="w">            </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">available_product</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Product details query failed"</span><span class="p">)</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"response_code: "</span><span class="p">,</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">response_code</span><span class="p">,</span><span class="w"> </span><span class="s2">"debug_message: "</span><span class="p">,</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">debug_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="query-user-purchases">
+<h3>Query user purchases<a class="headerlink" href="#query-user-purchases" title="Link to this heading"></a></h3>
+<p>To retrieve a user's purchases, call the <code class="docutils literal notranslate"><span class="pre">query_purchases()</span></code> function passing
+a product type to query. The product type should be
+<code class="docutils literal notranslate"><span class="pre">BillingClient.ProductType.INAPP</span></code> for normal in-app purchases or <code class="docutils literal notranslate"><span class="pre">BillingClient.ProductType.SUBS</span></code> for subscriptions.
+The <code class="docutils literal notranslate"><span class="pre">query_purchases_response</span></code> signal is sent with the result.
+The signal has a single parameter: a <a class="reference internal" href="../../../classes/class_dictionary.html#class-dictionary"><span class="std std-ref">Dictionary</span></a> with
+a response code and either an array of purchases or a debug message.
+Only active subscriptions and non-consumed one-time purchases are
+included in the purchase array.</p>
+<p>Example use of <code class="docutils literal notranslate"><span class="pre">query_purchases()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_query_purchases</span><span class="p">():</span>
+<span class="w">    </span><span class="n">billing_client</span><span class="o">.</span><span class="nf">query_purchases</span><span class="p">(</span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">ProductType</span><span class="o">.</span><span class="vi">INAPP</span><span class="p">)</span><span class="w"> </span><span class="c1"># Or BillingClient.ProductType.SUBS for subscriptions.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_query_purchases_response</span><span class="p">(</span><span class="n">query_result</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">response_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">BillingResponseCode</span><span class="o">.</span><span class="vi">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Purchase query success"</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">purchase</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">purchases</span><span class="p">:</span>
+<span class="w">            </span><span class="nf">_process_purchase</span><span class="p">(</span><span class="n">purchase</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Purchase query failed"</span><span class="p">)</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"response_code: "</span><span class="p">,</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">response_code</span><span class="p">,</span><span class="w"> </span><span class="s2">"debug_message: "</span><span class="p">,</span><span class="w"> </span><span class="n">query_result</span><span class="o">.</span><span class="vi">debug_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="purchase-an-item">
+<h3>Purchase an item<a class="headerlink" href="#purchase-an-item" title="Link to this heading"></a></h3>
+<p>To launch the billing flow for an item: Use <code class="docutils literal notranslate"><span class="pre">purchase()</span></code> for in-app products, passing the product ID string.
+Use <code class="docutils literal notranslate"><span class="pre">purchase_subscription()</span></code> for subscriptions, passing the product ID and base plan ID. You may also optionally provide an offer ID.</p>
+<p>For both <code class="docutils literal notranslate"><span class="pre">purchase()</span></code> and <code class="docutils literal notranslate"><span class="pre">purchase_subscription()</span></code>, you can optionally pass a boolean to indicate whether
+offers are <a class="reference external" href="https://developer.android.com/google/play/billing/integrate#personalized-price">personallised</a></p>
+<p>Reminder: you <strong>must</strong> query the product details for an item before you can
+pass it to <code class="docutils literal notranslate"><span class="pre">purchase()</span></code>.
+This method returns a dictionary indicating whether the billing flow was successfully launched.
+It includes a response code and either an array of purchases or a debug message.</p>
+<p>Example use of <code class="docutils literal notranslate"><span class="pre">purchase()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">billing_client</span><span class="o">.</span><span class="nf">purchase</span><span class="p">(</span><span class="s2">"my_iap_item"</span><span class="p">)</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">BillingResponseCode</span><span class="o">.</span><span class="vi">OK</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Billing flow launch success"</span><span class="p">)</span>
+<span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Billing flow launch failed"</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"response_code: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="p">,</span><span class="w"> </span><span class="s2">"debug_message: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">debug_message</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result of the purchase will be sent through the <code class="docutils literal notranslate"><span class="pre">on_purchases_updated</span></code> signal.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_purchases_updated</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">BillingResponseCode</span><span class="o">.</span><span class="vi">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Purchase update received"</span><span class="p">)</span>
+<span class="w">        </span><span class="k k-ControlFlow">for</span><span class="w"> </span><span class="n">purchase</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">purchases</span><span class="p">:</span>
+<span class="w">            </span><span class="nf">_process_purchase</span><span class="p">(</span><span class="n">purchase</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Purchase update error"</span><span class="p">)</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"response_code: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="p">,</span><span class="w"> </span><span class="s2">"debug_message: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">debug_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="processing-a-purchase-item">
+<h3>Processing a purchase item<a class="headerlink" href="#processing-a-purchase-item" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">query_purchases_response</span></code> and <code class="docutils literal notranslate"><span class="pre">on_purchases_updated</span></code> signals provide an array
+of purchases in <a class="reference internal" href="../../../classes/class_dictionary.html#class-dictionary"><span class="std std-ref">Dictionary</span></a> format. The purchase Dictionary
+includes keys that map to values of the Google Play Billing
+<a class="reference external" href="https://developer.android.com/reference/com/android/billingclient/api/Purchase">Purchase</a> class.</p>
+<p>Purchase fields:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">order_id</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="n">purchase_token</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="n">package_name</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="n">purchase_state</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span>
+<span class="n">purchase_time</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="p">(</span><span class="n">milliseconds</span><span class="w"> </span><span class="n">since</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">epoch </span><span class="p">(</span><span class="nc">Jan</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1970</span><span class="p">))</span>
+<span class="n">original_json</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="n">is_acknowledged</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span>
+<span class="n">is_auto_renewing</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">bool</span>
+<span class="n">quantity</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span>
+<span class="n">signature</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span>
+<span class="n">product_ids</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">PackedStringArray</span>
+</pre></div>
+</div>
+</section>
+<section id="check-purchase-state">
+<h3>Check purchase state<a class="headerlink" href="#check-purchase-state" title="Link to this heading"></a></h3>
+<p>Check the <code class="docutils literal notranslate"><span class="pre">purchase_state</span></code> value of a purchase to determine if a
+purchase was completed or is still pending.</p>
+<p>PurchaseState values:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matches Purchase.PurchaseState in the Play Billing Library</span>
+<span class="c1"># Access in your script as: BillingClient.PurchaseState.PURCHASED</span>
+<span class="k">enum</span><span class="w"> </span><span class="n">PurchaseState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">UNSPECIFIED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PURCHASED</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PENDING</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If a purchase is in a <code class="docutils literal notranslate"><span class="pre">PENDING</span></code> state, you should not award the contents of the
+purchase or do any further processing of the purchase until it reaches the
+<code class="docutils literal notranslate"><span class="pre">PURCHASED</span></code> state. If you have a store interface, you may wish to display
+information about pending purchases needing to be completed in the Google Play Store.
+For more details on pending purchases, see
+<a class="reference external" href="https://developer.android.com/google/play/billing/integrate#pending">Handling pending transactions</a>
+in the Google Play Billing Library documentation.</p>
+</section>
+<section id="consumables">
+<h3>Consumables<a class="headerlink" href="#consumables" title="Link to this heading"></a></h3>
+<p>If your in-app item is not a one-time purchase but a consumable item (e.g. coins) which can be purchased
+multiple times, you can consume an item by calling <code class="docutils literal notranslate"><span class="pre">consume_purchase()</span></code> passing
+the <code class="docutils literal notranslate"><span class="pre">purchase_token</span></code> value from the purchase dictionary.
+Calling <code class="docutils literal notranslate"><span class="pre">consume_purchase()</span></code> automatically acknowledges a purchase.
+Consuming a product allows the user to purchase it again, it will no longer appear
+in subsequent <code class="docutils literal notranslate"><span class="pre">query_purchases()</span></code> calls unless it is repurchased.</p>
+<p>Example use of <code class="docutils literal notranslate"><span class="pre">consume_purchase()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process_purchase</span><span class="p">(</span><span class="n">purchase</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="s2">"my_consumable_iap_item"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">purchase</span><span class="o">.</span><span class="vi">product_ids</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">purchase</span><span class="o">.</span><span class="vi">purchase_state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">PurchaseState</span><span class="o">.</span><span class="vi">PURCHASED</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Add code to store payment so we can reconcile the purchase token</span>
+<span class="w">        </span><span class="c1"># in the completion callback against the original purchase</span>
+<span class="w">        </span><span class="n">billing_client</span><span class="o">.</span><span class="nf">consume_purchase</span><span class="p">(</span><span class="n">purchase</span><span class="o">.</span><span class="vi">purchase_token</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_consume_purchase_response</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">BillingResponseCode</span><span class="o">.</span><span class="vi">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Consume purchase success"</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">_handle_purchase_token</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="vi">token</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Consume purchase failed"</span><span class="p">)</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"response_code: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="p">,</span><span class="w"> </span><span class="s2">"debug_message: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">debug_message</span><span class="p">,</span><span class="w"> </span><span class="s2">"purchase_token: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">token</span><span class="p">)</span>
+<span class="c1"># Find the product associated with the purchase token and award the</span>
+<span class="c1"># product if successful</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_handle_purchase_token</span><span class="p">(</span><span class="n">purchase_token</span><span class="p">,</span><span class="w"> </span><span class="n">purchase_successful</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># check/award logic, remove purchase from tracking list</span>
+</pre></div>
+</div>
+</section>
+<section id="acknowledging-purchases">
+<h3>Acknowledging purchases<a class="headerlink" href="#acknowledging-purchases" title="Link to this heading"></a></h3>
+<p>If your in-app item is a one-time purchase, you must acknowledge the purchase by
+calling the <code class="docutils literal notranslate"><span class="pre">acknowledge_purchase()</span></code> function, passing the <code class="docutils literal notranslate"><span class="pre">purchase_token</span></code>
+value from the purchase dictionary. If you do not acknowledge a purchase within
+three days, the user automatically receives a refund, and Google Play revokes the purchase.
+If you are calling <code class="docutils literal notranslate"><span class="pre">comsume_purchase()</span></code> it automatically acknowledges the purchase and
+you do not need to call <code class="docutils literal notranslate"><span class="pre">acknowledge_purchase()</span></code>.</p>
+<p>Example use of <code class="docutils literal notranslate"><span class="pre">acknowledge_purchase()</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process_purchase</span><span class="p">(</span><span class="n">purchase</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="s2">"my_one_time_iap_item"</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">purchase</span><span class="o">.</span><span class="vi">product_ids</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="p">\</span>
+<span class="w">            </span><span class="n">purchase</span><span class="o">.</span><span class="vi">purchase_state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">PurchaseState</span><span class="o">.</span><span class="vi">PURCHASED</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="p">\</span>
+<span class="w">            </span><span class="ow">not</span><span class="w"> </span><span class="n">purchase</span><span class="o">.</span><span class="vi">is_acknowledged</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Add code to store payment so we can reconcile the purchase token</span>
+<span class="w">        </span><span class="c1"># in the completion callback against the original purchase</span>
+<span class="w">        </span><span class="n">billing_client</span><span class="o">.</span><span class="nf">acknowledge_purchase</span><span class="p">(</span><span class="n">purchase</span><span class="o">.</span><span class="vi">purchase_token</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_acknowledge_purchase_response</span><span class="p">(</span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">BillingResponseCode</span><span class="o">.</span><span class="vi">OK</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Acknowledge purchase success"</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">_handle_purchase_token</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="vi">token</span><span class="p">,</span><span class="w"> </span><span class="l">true</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"Acknowledge purchase failed"</span><span class="p">)</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="s2">"response_code: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">response_code</span><span class="p">,</span><span class="w"> </span><span class="s2">"debug_message: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">debug_message</span><span class="p">,</span><span class="w"> </span><span class="s2">"purchase_token: "</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="vi">token</span><span class="p">)</span>
+<span class="c1"># Find the product associated with the purchase token and award the</span>
+<span class="c1"># product if successful</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_handle_purchase_token</span><span class="p">(</span><span class="n">purchase_token</span><span class="p">,</span><span class="w"> </span><span class="n">purchase_successful</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># check/award logic, remove purchase from tracking list</span>
+</pre></div>
+</div>
+</section>
+<section id="subscriptions">
+<h3>Subscriptions<a class="headerlink" href="#subscriptions" title="Link to this heading"></a></h3>
+<p>Subscriptions work mostly like regular in-app items. Use <code class="docutils literal notranslate"><span class="pre">BillingClient.ProductType.SUBS</span></code> as the second
+argument to <code class="docutils literal notranslate"><span class="pre">query_product_details()</span></code> to get subscription details. Pass <code class="docutils literal notranslate"><span class="pre">BillingClient.ProductType.SUBS</span></code>
+to <code class="docutils literal notranslate"><span class="pre">query_purchases()</span></code> to get subscription purchase details.</p>
+<p>You can check <code class="docutils literal notranslate"><span class="pre">is_auto_renewing</span></code> in the a subscription purchase
+returned from <code class="docutils literal notranslate"><span class="pre">query_purchases()</span></code> to see if a user has cancelled an
+auto-renewing subscription.</p>
+<p>You need to acknowledge new subscription purchases, but not automatic
+subscription renewals.</p>
+<p>If you support upgrading or downgrading between different subscription levels,
+you should use <code class="docutils literal notranslate"><span class="pre">update_subscription()</span></code> to use the subscription update flow to
+change an active subscription. Like <code class="docutils literal notranslate"><span class="pre">purchase()</span></code>, results are returned by the
+<code class="docutils literal notranslate"><span class="pre">on_purchases_updated</span></code> signal.
+These are the parameters of <code class="docutils literal notranslate"><span class="pre">update_subscription()</span></code>:</p>
+<ol class="arabic simple">
+<li><p>old_purchase_token: The purchase token of the currently active subscription</p></li>
+<li><p>replacement_mode: The replacement mode to apply to the subscription</p></li>
+<li><p>product_id: The product ID of the new subscription to switch to</p></li>
+<li><p>base_plan_id: The base plan ID of the target subscription</p></li>
+<li><p>offer_id: The offer ID under the base plan (optional)</p></li>
+<li><p>is_offer_personalized: Whether to enable personalized pricing (optional)</p></li>
+</ol>
+<p>The replacement modes values are defined as:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access in your script as: BillingClient.ReplacementMode.WITH_TIME_PRORATION</span>
+<span class="k">enum</span><span class="w"> </span><span class="n">ReplacementMode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1"># Unknown...</span>
+<span class="w">    </span><span class="n">UNKNOWN_REPLACEMENT_MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># The new plan takes effect immediately, and the remaining time will be prorated and credited to the user.</span>
+<span class="w">    </span><span class="c1"># Note: This is the default behavior.</span>
+<span class="w">    </span><span class="n">WITH_TIME_PRORATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># The new plan takes effect immediately, and the billing cycle remains the same.</span>
+<span class="w">    </span><span class="n">CHARGE_PRORATED_PRICE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># The new plan takes effect immediately, and the new price will be charged on next recurrence time.</span>
+<span class="w">    </span><span class="n">WITHOUT_PRORATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># Replacement takes effect immediately, and the user is charged full price of new plan and</span>
+<span class="w">    </span><span class="c1"># is given a full billing cycle of subscription, plus remaining prorated time from the old plan.</span>
+<span class="w">    </span><span class="n">CHARGE_FULL_PRICE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># The new purchase takes effect immediately, the new plan will take effect when the old item expires.</span>
+<span class="w">    </span><span class="n">DEFERRED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Default behavior is <code class="docutils literal notranslate"><span class="pre">WITH_TIME_PRORATION</span></code>.</p>
+<p>Example use of <code class="docutils literal notranslate"><span class="pre">update_subscription</span></code>:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">billing_client</span><span class="o">.</span><span class="nf">update_subscription</span><span class="p">(</span><span class="n">_active_subscription_purchase</span><span class="o">.</span><span class="vi">purchase_token</span><span class="p">,</span><span class="w"> </span><span class="p">\</span>
+<span class="w">                    </span><span class="nc">BillingClient</span><span class="o">.</span><span class="vi">ReplacementMode</span><span class="o">.</span><span class="vi">WITH_TIME_PRORATION</span><span class="p">,</span><span class="w"> </span><span class="s2">"new_sub_product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"base_plan_id"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

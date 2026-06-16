@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXRSpatialComponentPlaneAlignmentList" property="og:title"/>
+
+
+
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: OpenXRSpatialComponentData&lt; RefCounted&lt; Object Object for storing the queries plane alignment result data. Des..." property="og:description"/>
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: OpenXRSpatialComponentData&lt; RefCounted&lt; Object Object for storing the queries plane alignment result data. Des..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXRSpatialComponentPlaneAlignmentList — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_openxrspatialcomponentplanesemanticlabellist.html" rel="next" title="OpenXRSpatialComponentPlaneSemanticLabelList"/>
+<link href="class_openxrspatialcomponentpersistencelist.html" rel="prev" title="OpenXRSpatialComponentPersistenceList"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_openxrspatialcomponentplanealignmentlist" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxrspatialcomponentplanealignmentlist">
+<span id="class-openxrspatialcomponentplanealignmentlist"></span><h1>OpenXRSpatialComponentPlaneAlignmentList<a class="headerlink" href="#openxrspatialcomponentplanealignmentlist" title="Link to this heading"></a></h1>
+<p><strong>Experimental:</strong> This class may be changed or removed in future versions.</p>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_openxrspatialcomponentdata.html#class-openxrspatialcomponentdata"><span class="std std-ref">OpenXRSpatialComponentData</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Object for storing the queries plane alignment result data.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Object for storing the queries plane alignment result data when calling <a class="reference internal" href="class_openxrspatialentityextension.html#class-openxrspatialentityextension-method-query-snapshot"><span class="std std-ref">OpenXRSpatialEntityExtension.query_snapshot()</span></a>.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">PlaneAlignment</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrspatialcomponentplanealignmentlist-method-get-plane-alignment"><span class="std std-ref">get_plane_alignment</span></a>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-openxrspatialcomponentplanealignmentlist-planealignment">enum <strong>PlaneAlignment</strong>: <a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-openxrspatialcomponentplanealignmentlist-constant-plane-alignment-horizontal-upward"><a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">PlaneAlignment</span></a> <strong>PLANE_ALIGNMENT_HORIZONTAL_UPWARD</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Plane is facing upward.</p>
+<p class="classref-enumeration-constant" id="class-openxrspatialcomponentplanealignmentlist-constant-plane-alignment-horizontal-downward"><a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">PlaneAlignment</span></a> <strong>PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Plane is facing downwards.</p>
+<p class="classref-enumeration-constant" id="class-openxrspatialcomponentplanealignmentlist-constant-plane-alignment-vertical"><a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">PlaneAlignment</span></a> <strong>PLANE_ALIGNMENT_VERTICAL</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Plane is vertically aligned.</p>
+<p class="classref-enumeration-constant" id="class-openxrspatialcomponentplanealignmentlist-constant-plane-alignment-arbitrary"><a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">PlaneAlignment</span></a> <strong>PLANE_ALIGNMENT_ARBITRARY</strong> = <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>Plane has an arbitrary alignment.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-openxrspatialcomponentplanealignmentlist-method-get-plane-alignment"><a class="reference internal" href="#enum-openxrspatialcomponentplanealignmentlist-planealignment"><span class="std std-ref">PlaneAlignment</span></a> <strong>get_plane_alignment</strong>(index: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-openxrspatialcomponentplanealignmentlist-method-get-plane-alignment"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the plane alignment for the parent entity at this <code class="docutils literal notranslate"><span class="pre">index</span></code>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

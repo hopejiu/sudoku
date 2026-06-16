@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="GodotInstance" property="og:title"/>
+
+
+
+<meta content="Inherits: Object Provides access to an embedded Godot instance. Description: GodotInstance represents a running Godot instance that is controlled from an outside codebase, without a perpetual main ..." property="og:description"/>
+<meta content="Inherits: Object Provides access to an embedded Godot instance. Description: GodotInstance represents a running Godot instance that is controlled from an outside codebase, without a perpetual main ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) GodotInstance — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_hashingcontext.html" rel="next" title="HashingContext"/>
+<link href="class_gltfobjectmodelproperty.html" rel="prev" title="GLTFObjectModelProperty"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_godotinstance" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="godotinstance">
+<span id="class-godotinstance"></span><h1>GodotInstance<a class="headerlink" href="#godotinstance" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Provides access to an embedded Godot instance.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>GodotInstance represents a running Godot instance that is controlled from an outside codebase, without a perpetual main loop. It is created by the C API <code class="docutils literal notranslate"><span class="pre">libgodot_create_godot_instance</span></code>. Only one may be created per process.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-focus-in"><span class="std std-ref">focus_in</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-focus-out"><span class="std std-ref">focus_out</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-is-started"><span class="std std-ref">is_started</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-iteration"><span class="std std-ref">iteration</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-pause"><span class="std std-ref">pause</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-resume"><span class="std std-ref">resume</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-godotinstance-method-start"><span class="std std-ref">start</span></a>()</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-godotinstance-method-focus-in"><abbr title="No return value.">void</abbr> <strong>focus_in</strong>() <a class="reference internal" href="#class-godotinstance-method-focus-in"><span class="std std-ref">🔗</span></a></p>
+<p>Notifies the instance that it is now in focus.</p>
+<p class="classref-method" id="class-godotinstance-method-focus-out"><abbr title="No return value.">void</abbr> <strong>focus_out</strong>() <a class="reference internal" href="#class-godotinstance-method-focus-out"><span class="std std-ref">🔗</span></a></p>
+<p>Notifies the instance that it is now not in focus.</p>
+<p class="classref-method" id="class-godotinstance-method-is-started"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_started</strong>() <a class="reference internal" href="#class-godotinstance-method-is-started"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this instance has been fully started.</p>
+<p class="classref-method" id="class-godotinstance-method-iteration"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>iteration</strong>() <a class="reference internal" href="#class-godotinstance-method-iteration"><span class="std std-ref">🔗</span></a></p>
+<p>Runs a single iteration of the main loop. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the engine is attempting to quit.</p>
+<p class="classref-method" id="class-godotinstance-method-pause"><abbr title="No return value.">void</abbr> <strong>pause</strong>() <a class="reference internal" href="#class-godotinstance-method-pause"><span class="std std-ref">🔗</span></a></p>
+<p>Notifies the instance that it is going to be paused.</p>
+<p class="classref-method" id="class-godotinstance-method-resume"><abbr title="No return value.">void</abbr> <strong>resume</strong>() <a class="reference internal" href="#class-godotinstance-method-resume"><span class="std std-ref">🔗</span></a></p>
+<p>Notifies the instance that it is being resumed.</p>
+<p class="classref-method" id="class-godotinstance-method-start"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>start</strong>() <a class="reference internal" href="#class-godotinstance-method-start"><span class="std std-ref">🔗</span></a></p>
+<p>Finishes this instance's startup sequence. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

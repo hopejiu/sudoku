@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<meta content="Default editor shortcuts" property="og:title"/>
+
+
+
+<meta content="Many Godot editor functions can be executed with keyboard shortcuts. This page lists functions which have associated shortcuts by default, but many others are available for customization in editor ..." property="og:description"/>
+<meta content="Many Godot editor functions can be executed with keyboard shortcuts. This page lists functions which have associated shortcuts by default, but many others are available for customization in editor ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Default editor shortcuts — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="customizing_editor.html" rel="next" title="Customizing the interface"/>
+<link href="script_editor.html" rel="prev" title="Script Editor"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/editor/default_key_mapping" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+<div class="admonition attention article-status">
+<p class="first admonition-title">Work in progress</p>
+<p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.6</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+</div>
+</div>
+<section id="default-editor-shortcuts">
+<span id="doc-default-key-mapping"></span><h1>Default editor shortcuts<a class="headerlink" href="#default-editor-shortcuts" title="Link to this heading"></a></h1>
+<p>Many Godot editor functions can be executed with keyboard shortcuts. This page
+lists functions which have associated shortcuts by default, but many others are
+available for customization in editor settings as well. To change keys associated
+with these and other actions navigate to <strong>Editor &gt; Editor Settings &gt; Shortcuts</strong>.</p>
+<p>While some actions are universal, a lot of shortcuts are specific to individual
+tools. For this reason it is possible for some key combinations to be assigned
+to more than one function. The correct action will be performed depending on the
+context.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While Windows and Linux builds of the editor share most of the default settings,
+some shortcuts may differ for macOS version. This is done for better integration
+of the editor into macOS ecosystem. Users fluent with standard shortcuts on that
+OS should find Godot Editor's default key mapping intuitive.</p>
+</div>
+<section id="general-editor-actions">
+<h2>General editor actions<a class="headerlink" href="#general-editor-actions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Open 2D Workspace</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F1</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/editor_2d</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Open 3D Workspace</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F2</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/editor_3d</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Open Script Editor</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/editor_script</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Search Help</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F1</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Space</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/editor_help</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Distraction Free Mode</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F11</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/distraction_free_mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Next Scene Tab</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Tab</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Tab</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/next_tab</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Previous Scene Tab</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Tab</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Tab</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/prev_tab</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Filter Files</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">P</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">P</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/filter_files</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Open Scene</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/open_scene</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Close Scene</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">W</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">W</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/close_scene</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Reopen Closed Scene</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">T</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">T</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/reopen_closed_scene</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Save Scene</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/save_scene</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Save Scene As</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/save_scene_as</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Save All Scenes</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/save_all_scenes</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Quick Open</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/quick_open</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Quick Open Scene</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/quick_open_scene</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Quick Open Script</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/quick_open_script</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Undo</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/undo</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Redo</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/redo</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Quit</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Q</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Q</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/file_quit</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Quit to Project List</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Q</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Q</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/quit_to_project_list</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Take Screenshot</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F12</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F12</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/take_screenshot</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Fullscreen</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F11</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/fullscreen_mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Play</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F5</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/play</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Pause Scene</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F7</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Y</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/pause_scene</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F8</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">.</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/stop</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Play Scene</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F6</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/play_scene</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Play Custom Scene</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F5</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/play_custom_scene</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Expand Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F12</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F12</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/bottom_panel_expand</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Command Palette</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">P</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">P</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/command_palette</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bottom-panels">
+<h2>Bottom panels<a class="headerlink" href="#bottom-panels" title="Link to this heading"></a></h2>
+<p>Only bottom panels that are always available have a default shortcut assigned.
+Others must be manually bound in the Editor Settings if desired.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Toggle Last Opened Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">J</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">J</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/toggle_last_opened_bottom_panel</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Toggle Animation Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">N</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">N</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bottom_panels/toggle_animation_bottom_panel</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Audio Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">A</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">A</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bottom_panels/toggle_audio_bottom_panel</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Toggle Debugger Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bottom_panels/toggle_debugger_bottom_panel</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle FileSystem Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bottom_panels/toggle_filesystem_bottom_panel</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Toggle Output Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">O</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bottom_panels/toggle_output_bottom_panel</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Shader Editor Bottom Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bottom_panels/toggle_shader_editor_bottom_panel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="d-canvasitem-editor">
+<h2>2D / CanvasItem editor<a class="headerlink" href="#d-canvasitem-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zoom In</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">=</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">=</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/zoom_plus</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Zoom Out</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">-</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">-</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/zoom_minus</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Zoom Reset</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">0</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">0</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/zoom_reset</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Pan View</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Space</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Space</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/pan_view</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Select Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/select_mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Move Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/move_mode</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Rotate Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/rotate_mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Scale Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/scale_mode</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Ruler Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/ruler_mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Use Smart Snap</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/use_smart_snap</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Use Grid Snap</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/use_grid_snap</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Multiply grid step by 2</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">*</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">*</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/multiply_grid_step</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Divide grid step by 2</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">/</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">/</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/divide_grid_step</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Always Show Grid</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">G</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">G</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/show_grid</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Show Helpers</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">H</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">H</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/show_helpers</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Show Guides</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Y</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Y</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/show_guides</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Center Selection</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/center_selection</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Frame Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/frame_selection</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Preview Canvas Scale</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">P</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">P</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/preview_canvas_scale</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Insert Key</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Ins</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Ins</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/anim_insert_key</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Insert Key (Existing Tracks)</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ins</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Ins</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/anim_insert_key_existing_tracks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Make Custom Bones from Nodes</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/skeleton_make_bones</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Clear Pose</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">canvas_item_editor/anim_clear_pose</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="d-spatial-editor">
+<span id="doc-default-key-mapping-shortcuts-spatial-editor"></span><h2>3D / Spatial editor<a class="headerlink" href="#d-spatial-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Toggle Freelook</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_toggle</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Freelook Left</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">A</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">A</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_left</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Freelook Right</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">D</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">D</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_right</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Freelook Forward</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_forward</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Freelook Backwards</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_backwards</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Freelook Up</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_up</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Freelook Down</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_down</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Freelook Speed Modifier</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Shift</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Shift</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_speed_modifier</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Freelook Slow Modifier</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Alt</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Opt</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/freelook_slow_modifier</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Select Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/tool_select</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Move Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/tool_move</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rotate Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/tool_rotate</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Scale Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/tool_scale</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Use Local Space</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">T</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">T</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/local_coords</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Use Snap</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Y</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Y</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/snap</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Snap Object to Floor</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">PgDown</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">PgDown</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/snap_to_floor</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Top View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">7</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">7</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/top_view</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Bottom View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">7</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">7</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/bottom_view</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Front View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/front_view</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rear View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/rear_view</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Right View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/right_view</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Left View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/left_view</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Switch Perspective/Orthogonal View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">5</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Num</kbd> <kbd class="kbd docutils literal notranslate">5</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/switch_perspective_orthogonal</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Insert Animation Key</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">K</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">K</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/insert_anim_key</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Focus Origin</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">O</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">O</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/focus_origin</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Focus Selection</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/focus_selection</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Align Transform with View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">M</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">M</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/align_transform_with_view</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Align Rotation with View</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/align_rotation_with_view</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>1 Viewport</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">1</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/1_viewport</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2 Viewports</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/2_viewports</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>2 Viewports (Alt)</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">2</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/2_viewports_alt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>3 Viewports</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/3_viewports</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3 Viewports (Alt)</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">3</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/3_viewports_alt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>4 Viewports</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">4</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">4</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spatial_editor/4_viewports</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="text-editor">
+<span id="doc-default-key-mapping-shortcuts-text-editor"></span><h2>Text editor<a class="headerlink" href="#text-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cut</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/cut</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Copy</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/copy</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Paste</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">V</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">V</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/paste</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Select All</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">A</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">A</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/select_all</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Find</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/find</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Find Next</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F3</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/find_next</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Find Previous</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/find_previous</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Find in Files</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/find_in_files</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Replace</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/replace</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Replace in Files</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/replace_in_files</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Undo</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/undo</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Redo</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Y</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Y</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/redo</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Move Up</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/move_up</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Move Down</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/move_down</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Delete Line</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/delete_line</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Toggle Comment</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/toggle_comment</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Fold/Unfold Line</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/toggle_fold_line</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplicate Lines</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/duplicate_lines</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Duplicate Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/duplicate_selection</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Select Down</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">common/ui_text_caret_add_below</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Select Up</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">common/ui_text_caret_add_above</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Select Next Occurrence</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">common/ui_text_add_selection_for_next_occurrence</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Complete Symbol</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Space</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Space</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/complete_symbol</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Evaluate Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">E</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">E</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/evaluate_selection</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Trim Trailing Whitespace</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">T</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">T</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/trim_trailing_whitespace</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Uppercase</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F4</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F4</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/convert_to_uppercase</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Lowercase</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F5</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F5</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/convert_to_lowercase</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Capitalize</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F6</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F6</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/capitalize</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Convert Indent to Spaces</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Y</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Y</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/convert_indent_to_spaces</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Convert Indent to Tabs</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">I</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">I</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/convert_indent_to_tabs</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Auto Indent</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">I</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">I</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/auto_indent</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Toggle Bookmark</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/toggle_bookmark</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Go to Next Bookmark</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/goto_next_bookmark</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Go to Previous Bookmark</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/goto_previous_bookmark</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Go to Function</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">J</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/goto_function</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Go to Line</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/goto_line</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Breakpoint</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F9</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">B</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/toggle_breakpoint</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Remove All Breakpoints</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F9</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F9</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/remove_all_breakpoints</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Go to Next Breakpoint</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">.</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">.</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/goto_next_breakpoint</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Go to Previous Breakpoint</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">,</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">,</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/goto_previous_breakpoint</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Contextual Help</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F1</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Space</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_text_editor/contextual_help</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="script-editor">
+<h2>Script editor<a class="headerlink" href="#script-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Find</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/find</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Find Next</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F3</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F3</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/find_next</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Find Previous</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F3</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F3</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/find_previous</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Find in Files</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/find_in_files</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Move Up</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/window_move_up</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Move Down</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/window_move_down</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Next Script</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">.</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">.</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/next_script</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Previous Script</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">,</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">,</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/prev_script</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Reopen Closed Script</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">T</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">T</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/reopen_closed_script</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Save</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/save</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Save All</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/save_all</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Soft Reload Script</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/reload_script_soft</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>History Previous</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Left</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Left</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/history_previous</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>History Next</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Right</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Right</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/history_next</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Close</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">W</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">W</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/close_file</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Run</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/run_file</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Scripts Panel</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">\</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">\</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/toggle_scripts_panel</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Zoom In</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">=</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">=</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/zoom_in</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Zoom Out</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">-</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">-</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/zoom_out</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Zoom</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">0</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">0</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">script_editor/reset_zoom</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="editor-output">
+<h2>Editor output<a class="headerlink" href="#editor-output" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Copy Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/copy_output</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Clear Output</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">K</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">editor/clear_output</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="debugger">
+<h2>Debugger<a class="headerlink" href="#debugger" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Step Into</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F11</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F11</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">debugger/step_into</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Step Over</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F10</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F10</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">debugger/step_over</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Continue</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F12</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F12</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">debugger/continue</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="file-dialog">
+<h2>File dialog<a class="headerlink" href="#file-dialog" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Go Back</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Left</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Left</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/go_back</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Go Forward</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Right</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Right</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/go_forward</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Go Up</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/go_up</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Refresh</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F5</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F5</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/refresh</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Hidden Files</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">H</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">H</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/toggle_hidden_files</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Toggle Favorite</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/toggle_favorite</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Toggle Mode</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">V</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Opt</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">V</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/toggle_mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Create Folder</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">N</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">N</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/create_folder</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Delete</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Del</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">BkSp</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/delete</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Focus Path</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">L</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">G</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/focus_path</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Move Favorite Up</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/move_favorite_up</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Move Favorite Down</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_dialog/move_favorite_down</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filesystem-dock">
+<h2>FileSystem dock<a class="headerlink" href="#filesystem-dock" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Copy Path</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">filesystem_dock/copy_path</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplicate</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">filesystem_dock/duplicate</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Delete</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Del</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">BkSp</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">filesystem_dock/delete</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scene-tree-dock">
+<h2>Scene tree dock<a class="headerlink" href="#scene-tree-dock" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Add Child Node</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">A</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">A</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/add_child_node</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Batch Rename</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F2</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">F2</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/batch_rename</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Copy Node Path</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/copy_node_path</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Delete</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Del</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">BkSp</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/delete</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Force Delete</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Del</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Del</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/delete_no_confirm</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplicate</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/duplicate</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Move Up</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Up</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/move_up</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Move Down</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Down</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene_tree/move_down</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="animation-track-editor">
+<h2>Animation track editor<a class="headerlink" href="#animation-track-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Duplicate Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">animation_editor/duplicate_selection</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplicate Transposed</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">D</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">animation_editor/duplicate_selection_transposed</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Delete Selection</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Del</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">BkSp</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">animation_editor/delete_selection</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Go to Next Step</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Right</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Right</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">animation_editor/goto_next_step</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Go to Previous Step</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Left</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Left</kbd> <kbd class="kbd docutils literal notranslate">Arrow</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">animation_editor/goto_prev_step</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tilemap-editor">
+<h2>TileMap editor<a class="headerlink" href="#tilemap-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Select</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/selection_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cut Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/cut</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Copy Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/copy</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Paste Selection</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">V</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">V</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/paste</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Delete Selection</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Del</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">BkSp</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/delete</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cancel</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Esc</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Esc</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/cancel</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Paint</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">D</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">D</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/paint_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Line</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">L</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">L</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/line_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Rect</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/rect_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Bucket</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">B</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">B</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/bucket_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Picker</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">P</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">P</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/picker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Eraser</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/eraser</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Flip Horizontally</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">C</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">C</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/flip_tile_horizontal</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Flip Vertically</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">V</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">V</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/flip_tile_vertical</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Rotate Left</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Z</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Z</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/rotate_tile_left</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rotate Right</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">X</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">X</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tiles_editor/rotate_tile_right</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tileset-editor">
+<h2>TileSet Editor<a class="headerlink" href="#tileset-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Next Coordinate</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">PgDown</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">PgDown</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/next_shape</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Previous Coordinate</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">PgUp</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">PgUp</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/previous_shape</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Region Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">1</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">1</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_region</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Collision Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">2</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">2</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_collision</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Occlusion Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">3</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">3</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_occlusion</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Navigation Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">4</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">4</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_navigation</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Bitmask Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">5</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">5</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_bitmask</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Priority Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">6</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">6</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_priority</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Icon Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">7</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">7</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_icon</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Z Index Mode</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">8</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">8</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tileset_editor/editmode_z_index</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gridmap-editor">
+<h2>GridMap Editor<a class="headerlink" href="#gridmap-editor" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Previous Floor</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">1</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">1</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/previous_floor</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Next Floor</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">3</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">3</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/next_floor</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Edit X Axis</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">Z</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/edit_x_axis</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Edit Y Axis</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/edit_y_axis</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Edit Z Axis</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Shift</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">C</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/edit_z_axis</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Transform</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">T</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">T</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/transform_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Selection</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Q</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/selection_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Erase</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">W</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/erase_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Paint</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">E</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/paint_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Pick</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">R</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/pick_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Fill</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Z</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Z</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/fill_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Move</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">X</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">X</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/move_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Duplicate</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">C</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">C</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/duplicate_tool</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Delete</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">V</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">V</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/delete_tool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Cursor Rotate X</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">A</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">A</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/cursor_rotate_x</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cursor Rotate Y</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">S</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/cursor_rotate_y</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Cursor Rotate Z</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">D</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">D</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grid_map/cursor_rotate_z</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="project-manager">
+<h2>Project manager<a class="headerlink" href="#project-manager" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action name</p></th>
+<th class="head"><p>Windows, Linux</p></th>
+<th class="head"><p>macOS</p></th>
+<th class="head"><p>Editor setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>New Project</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">N</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">N</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/new_project</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Import Project</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">I</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">I</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/import_project</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Scan for Projects</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">S</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/scan_projects</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Edit Project</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">E</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">E</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/edit_project</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Run Project</p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/run_project</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rename Project</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">F2</kbd></p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Enter</kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/rename_project</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Remove Project</p></td>
+<td><p><kbd class="kbd docutils literal notranslate">Delete</kbd></p></td>
+<td><p><kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">BkSp</kbd></kbd></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">project_manager/remove_project</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

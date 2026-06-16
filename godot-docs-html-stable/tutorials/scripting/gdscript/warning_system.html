@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="GDScript warning system" property="og:title"/>
+
+
+
+<meta content="The GDScript warning system complements static typing(but it can work without static typing too). It's here to help you avoid mistakes that are hard to spot during development, and that may le..." property="og:description"/>
+<meta content="The GDScript warning system complements static typing(but it can work without static typing too). It's here to help you avoid mistakes that are hard to spot during development, and that may le..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) GDScript warning system — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="gdscript_format_string.html" rel="next" title="GDScript format strings"/>
+<link href="static_typing.html" rel="prev" title="Static typing in GDScript"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/scripting/gdscript/warning_system" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="gdscript-warning-system">
+<span id="doc-gdscript-warning-system"></span><h1>GDScript warning system<a class="headerlink" href="#gdscript-warning-system" title="Link to this heading"></a></h1>
+<p>The GDScript warning system complements <a class="reference internal" href="static_typing.html#doc-gdscript-static-typing"><span class="std std-ref">static typing</span></a>
+(but it can work without static typing too). It's here to help you avoid
+mistakes that are hard to spot during development, and that may lead
+to runtime errors.</p>
+<p>You can configure warnings in the Project Settings under the section
+called <strong>GDScript</strong>:</p>
+<img alt="../../../_images/typed_gdscript_warning_system_settings.webp" src="../../../_images/typed_gdscript_warning_system_settings.webp"/>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must enable <strong>Advanced Settings</strong> in order to see the
+GDScript section in the sidebar. You can also search for "GDScript" when
+Advanced Settings is off.</p>
+</div>
+<p>You can find a list of warnings for the active GDScript file in the
+script editor's status bar. The example below has 2 warnings:</p>
+<img alt="../../../_images/typed_gdscript_warning_example.webp" src="../../../_images/typed_gdscript_warning_example.webp"/>
+<p>To ignore single warnings within a file, use the
+<a class="reference internal" href="../../../classes/class_%40gdscript.html#class-gdscript-annotation-warning-ignore"><span class="std std-ref">@warning_ignore</span></a> annotation.
+You can click on the ignore link to the left of the warning's description.
+Godot will add an annotation above the corresponding line and the code
+won't trigger the corresponding warning anymore:</p>
+<img alt="../../../_images/typed_gdscript_warning_system_ignore.webp" src="../../../_images/typed_gdscript_warning_system_ignore.webp"/>
+<p>To ignore multiple warnings in a region within a file, use the
+<a class="reference internal" href="../../../classes/class_%40gdscript.html#class-gdscript-annotation-warning-ignore-start"><span class="std std-ref">@warning_ignore_start</span></a>
+and <a class="reference internal" href="../../../classes/class_%40gdscript.html#class-gdscript-annotation-warning-ignore-restore"><span class="std std-ref">@warning_ignore_restore</span></a>
+annotations. You can omit <code class="docutils literal notranslate"><span class="pre">@warning_ignore_restore</span></code> if you want to ignore
+the specified warning types until the end of the file.</p>
+<p>Warnings won't prevent the game from running, but you can turn them into
+errors if you'd like. This way your game won't compile unless you fix
+all warnings. Head to the <code class="docutils literal notranslate"><span class="pre">GDScript</span></code> section of the Project Settings to
+turn on this option to the warning that you want. Here's the same file as
+the previous example with the warning <code class="docutils literal notranslate"><span class="pre">unused_variable</span></code> as an error turned on:</p>
+<img alt="../../../_images/typed_gdscript_warning_system_errors.webp" src="../../../_images/typed_gdscript_warning_system_errors.webp"/>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

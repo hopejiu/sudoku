@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Using MultiMeshInstance3D" property="og:title"/>
+
+
+
+<meta content="Introduction: In a normal scenario, you would use a MeshInstance3D node to display a 3D mesh like a human model for the main character, but in some cases, you would like to create multiple instance..." property="og:description"/>
+<meta content="Introduction: In a normal scenario, you would use a MeshInstance3D node to display a 3D mesh like a human model for the main character, but in some cases, you would like to create multiple instance..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Using MultiMeshInstance3D — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="mesh_lod.html" rel="next" title="Mesh level of detail (LOD)"/>
+<link href="3d_antialiasing.html" rel="prev" title="3D antialiasing"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/3d/using_multi_mesh_instance" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+<div class="admonition attention article-status">
+<p class="first admonition-title">Work in progress</p>
+<p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.6</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+</div>
+</div>
+<section id="using-multimeshinstance3d">
+<span id="doc-using-multi-mesh-instance"></span><h1>Using MultiMeshInstance3D<a class="headerlink" href="#using-multimeshinstance3d" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In a normal scenario, you would use a <a class="reference internal" href="../../classes/class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a>
+node to display a 3D mesh like a human model for the main character, but in some
+cases, you would like to create multiple instances of the same mesh in a scene.
+You <em>could</em> duplicate the same node multiple times and adjust the transforms
+manually. This may be a tedious process and the result may look mechanical.
+Also, this method is not conducive to rapid iterations.
+<a class="reference internal" href="../../classes/class_multimeshinstance3d.html#class-multimeshinstance3d"><span class="std std-ref">MultiMeshInstance3D</span></a> is one of the possible
+solutions to this problem.</p>
+<p>MultiMeshInstance3D, as the name suggests, creates multiple copies of a
+MeshInstance over a surface of a specific mesh. An example would be having a
+tree mesh populate a landscape mesh with trees of random scales and orientations.</p>
+</section>
+<section id="setting-up-the-nodes">
+<h2>Setting up the nodes<a class="headerlink" href="#setting-up-the-nodes" title="Link to this heading"></a></h2>
+<p>The basic setup requires three nodes: the MultiMeshInstance3D node
+and two MeshInstance3D nodes.</p>
+<p>One node is used as the target, the surface mesh that you want to place multiple meshes
+on. In the tree example, this would be the landscape.</p>
+<p>The other node is used as the source, the mesh that you want to have duplicated.
+In the tree case, this would be the tree itself.</p>
+<p>In our example, we would use a <a class="reference internal" href="../../classes/class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> node as the root node of
+the scene. Your scene tree would look like this:</p>
+<img alt="../../_images/multimesh_scene_tree.png" src="../../_images/multimesh_scene_tree.png"/>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For simplicity's sake, this tutorial uses built-in primitives.</p>
+</div>
+<p>Now you have everything ready. Select the MultiMeshInstance3D node and look at the
+toolbar, you should see an extra button called <code class="docutils literal notranslate"><span class="pre">MultiMesh</span></code> next to <code class="docutils literal notranslate"><span class="pre">View</span></code>.
+Click it and select <em>Populate surface</em> in the dropdown menu. A new window titled
+<em>Populate MultiMesh</em> will pop up.</p>
+<img alt="../../_images/multimesh_toolbar.png" src="../../_images/multimesh_toolbar.png"/>
+<img alt="../../_images/multimesh_settings.png" src="../../_images/multimesh_settings.png"/>
+</section>
+<section id="multimesh-settings">
+<h2>MultiMesh settings<a class="headerlink" href="#multimesh-settings" title="Link to this heading"></a></h2>
+<p>Below are descriptions of the options.</p>
+<section id="target-surface">
+<h3>Target Surface<a class="headerlink" href="#target-surface" title="Link to this heading"></a></h3>
+<p>The mesh used as the target surface on which to place copies of your
+source mesh.</p>
+</section>
+<section id="source-mesh">
+<h3>Source Mesh<a class="headerlink" href="#source-mesh" title="Link to this heading"></a></h3>
+<p>The mesh you want duplicated on the target surface.</p>
+</section>
+<section id="mesh-up-axis">
+<h3>Mesh Up Axis<a class="headerlink" href="#mesh-up-axis" title="Link to this heading"></a></h3>
+<p>The axis used as the up axis of the source mesh.</p>
+</section>
+<section id="random-rotation">
+<h3>Random Rotation<a class="headerlink" href="#random-rotation" title="Link to this heading"></a></h3>
+<p>Randomizing the rotation around the up axis of the source mesh.</p>
+</section>
+<section id="random-tilt">
+<h3>Random Tilt<a class="headerlink" href="#random-tilt" title="Link to this heading"></a></h3>
+<p>Randomizing the overall rotation of the source mesh.</p>
+</section>
+<section id="random-scale">
+<h3>Random Scale<a class="headerlink" href="#random-scale" title="Link to this heading"></a></h3>
+<p>Randomizing the scale of the source mesh.</p>
+</section>
+<section id="scale">
+<h3>Scale<a class="headerlink" href="#scale" title="Link to this heading"></a></h3>
+<p>The scale of the source mesh that will be placed over the target surface.</p>
+</section>
+<section id="amount">
+<h3>Amount<a class="headerlink" href="#amount" title="Link to this heading"></a></h3>
+<p>The amount of mesh instances placed over the target surface.</p>
+<p>Select the target surface. In the tree case, this should be the landscape node.
+The source mesh should be the tree node. Adjust the other parameters
+according to your preference. Press <code class="docutils literal notranslate"><span class="pre">Populate</span></code> and multiple copies of the
+source mesh will be placed over the target mesh. If you are satisfied with the
+result, you can delete the mesh instance used as the source mesh.</p>
+<p>The end result should look like this:</p>
+<img alt="../../_images/multimesh_result.png" src="../../_images/multimesh_result.png"/>
+<p>To change the result, repeat the previous steps with different parameters.</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

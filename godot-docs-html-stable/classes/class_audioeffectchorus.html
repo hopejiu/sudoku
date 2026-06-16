@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="AudioEffectChorus" property="og:title"/>
+
+
+
+<meta content="Inherits: AudioEffect&lt; Resource&lt; RefCounted&lt; Object Adds a chorus audio effect. Description: Adds a chorus audio effect. The effect applies a filter with voices to duplicate the audio sour..." property="og:description"/>
+<meta content="Inherits: AudioEffect&lt; Resource&lt; RefCounted&lt; Object Adds a chorus audio effect. Description: Adds a chorus audio effect. The effect applies a filter with voices to duplicate the audio sour..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) AudioEffectChorus — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_audioeffectcompressor.html" rel="next" title="AudioEffectCompressor"/>
+<link href="class_audioeffectcapture.html" rel="prev" title="AudioEffectCapture"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_audioeffectchorus" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="audioeffectchorus">
+<span id="class-audioeffectchorus"></span><h1>AudioEffectChorus<a class="headerlink" href="#audioeffectchorus" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_audioeffect.html#class-audioeffect"><span class="std std-ref">AudioEffect</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Adds a chorus audio effect.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Adds a chorus audio effect. The effect applies a filter with voices to duplicate the audio source and manipulate it through the filter.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/audio/audio_buses.html"><span class="doc">Audio buses</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-dry"><span class="std std-ref">dry</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-1-cutoff-hz"><span class="std std-ref">voice/1/cutoff_hz</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8000.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-1-delay-ms"><span class="std std-ref">voice/1/delay_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">15.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-1-depth-ms"><span class="std std-ref">voice/1/depth_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-1-level-db"><span class="std std-ref">voice/1/level_db</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-1-pan"><span class="std std-ref">voice/1/pan</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-0.5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-1-rate-hz"><span class="std std-ref">voice/1/rate_hz</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-2-cutoff-hz"><span class="std std-ref">voice/2/cutoff_hz</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8000.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-2-delay-ms"><span class="std std-ref">voice/2/delay_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">20.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-2-depth-ms"><span class="std std-ref">voice/2/depth_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-2-level-db"><span class="std std-ref">voice/2/level_db</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-2-pan"><span class="std std-ref">voice/2/pan</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-2-rate-hz"><span class="std std-ref">voice/2/rate_hz</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-3-cutoff-hz"><span class="std std-ref">voice/3/cutoff_hz</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-3-delay-ms"><span class="std std-ref">voice/3/delay_ms</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-3-depth-ms"><span class="std std-ref">voice/3/depth_ms</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-3-level-db"><span class="std std-ref">voice/3/level_db</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-3-pan"><span class="std std-ref">voice/3/pan</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-3-rate-hz"><span class="std std-ref">voice/3/rate_hz</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-4-cutoff-hz"><span class="std std-ref">voice/4/cutoff_hz</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-4-delay-ms"><span class="std std-ref">voice/4/delay_ms</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-4-depth-ms"><span class="std std-ref">voice/4/depth_ms</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-4-level-db"><span class="std std-ref">voice/4/level_db</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-4-pan"><span class="std std-ref">voice/4/pan</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-4-rate-hz"><span class="std std-ref">voice/4/rate_hz</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-voice-count"><span class="std std-ref">voice_count</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-property-wet"><span class="std std-ref">wet</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-get-voice-cutoff-hz"><span class="std std-ref">get_voice_cutoff_hz</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-get-voice-delay-ms"><span class="std std-ref">get_voice_delay_ms</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-get-voice-depth-ms"><span class="std std-ref">get_voice_depth_ms</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-get-voice-level-db"><span class="std std-ref">get_voice_level_db</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-get-voice-pan"><span class="std std-ref">get_voice_pan</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-get-voice-rate-hz"><span class="std std-ref">get_voice_rate_hz</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-set-voice-cutoff-hz"><span class="std std-ref">set_voice_cutoff_hz</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, cutoff_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-set-voice-delay-ms"><span class="std std-ref">set_voice_delay_ms</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, delay_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-set-voice-depth-ms"><span class="std std-ref">set_voice_depth_ms</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, depth_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-set-voice-level-db"><span class="std std-ref">set_voice_level_db</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, level_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-set-voice-pan"><span class="std std-ref">set_voice_pan</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pan: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectchorus-method-set-voice-rate-hz"><span class="std std-ref">set_voice_rate_hz</span></a>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, rate_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-audioeffectchorus-property-dry"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>dry</strong> = <code class="docutils literal notranslate"><span class="pre">1.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-dry"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_dry</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_dry</strong>()</p></li>
+</ul>
+<p>The effect's raw signal.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-1-cutoff-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/1/cutoff_hz</strong> = <code class="docutils literal notranslate"><span class="pre">8000.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-1-cutoff-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, cutoff_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's cutoff frequency.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-1-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/1/delay_ms</strong> = <code class="docutils literal notranslate"><span class="pre">15.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-1-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, delay_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's signal delay.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-1-depth-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/1/depth_ms</strong> = <code class="docutils literal notranslate"><span class="pre">2.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-1-depth-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, depth_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice filter's depth.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-1-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/1/level_db</strong> = <code class="docutils literal notranslate"><span class="pre">0.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-1-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, level_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's volume.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-1-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/1/pan</strong> = <code class="docutils literal notranslate"><span class="pre">-0.5</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-1-pan"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pan: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's pan level.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-1-rate-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/1/rate_hz</strong> = <code class="docutils literal notranslate"><span class="pre">0.8</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-1-rate-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, rate_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's filter rate.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-2-cutoff-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/2/cutoff_hz</strong> = <code class="docutils literal notranslate"><span class="pre">8000.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-2-cutoff-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, cutoff_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's cutoff frequency.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-2-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/2/delay_ms</strong> = <code class="docutils literal notranslate"><span class="pre">20.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-2-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, delay_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's signal delay.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-2-depth-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/2/depth_ms</strong> = <code class="docutils literal notranslate"><span class="pre">3.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-2-depth-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, depth_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice filter's depth.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-2-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/2/level_db</strong> = <code class="docutils literal notranslate"><span class="pre">0.0</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-2-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, level_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's volume.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-2-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/2/pan</strong> = <code class="docutils literal notranslate"><span class="pre">0.5</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-2-pan"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pan: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's pan level.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-2-rate-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/2/rate_hz</strong> = <code class="docutils literal notranslate"><span class="pre">1.2</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-2-rate-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, rate_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's filter rate.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-3-cutoff-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/3/cutoff_hz</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-3-cutoff-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, cutoff_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's cutoff frequency.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-3-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/3/delay_ms</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-3-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, delay_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's signal delay.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-3-depth-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/3/depth_ms</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-3-depth-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, depth_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice filter's depth.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-3-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/3/level_db</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-3-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, level_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's volume.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-3-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/3/pan</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-3-pan"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pan: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's pan level.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-3-rate-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/3/rate_hz</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-3-rate-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, rate_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's filter rate.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-4-cutoff-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/4/cutoff_hz</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-4-cutoff-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, cutoff_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's cutoff frequency.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-4-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/4/delay_ms</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-4-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, delay_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's signal delay.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-4-depth-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/4/depth_ms</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-4-depth-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, depth_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice filter's depth.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-4-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/4/level_db</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-4-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, level_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's volume.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-4-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/4/pan</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-4-pan"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pan: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's pan level.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-4-rate-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>voice/4/rate_hz</strong> <a class="reference internal" href="#class-audioeffectchorus-property-voice-4-rate-hz"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, rate_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>The voice's filter rate.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-voice-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>voice_count</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-voice-count"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_voice_count</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_voice_count</strong>()</p></li>
+</ul>
+<p>The number of voices in the effect.</p>
+<p class="classref-property" id="class-audioeffectchorus-property-wet"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>wet</strong> = <code class="docutils literal notranslate"><span class="pre">0.5</span></code> <a class="reference internal" href="#class-audioeffectchorus-property-wet"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_wet</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_wet</strong>()</p></li>
+</ul>
+<p>The effect's processed signal.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-audioeffectchorus-method-get-voice-cutoff-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectchorus-method-get-voice-cutoff-hz"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-get-voice-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectchorus-method-get-voice-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-get-voice-depth-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectchorus-method-get-voice-depth-ms"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-get-voice-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectchorus-method-get-voice-level-db"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-get-voice-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectchorus-method-get-voice-pan"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-get-voice-rate-hz"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectchorus-method-get-voice-rate-hz"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-set-voice-cutoff-hz"><abbr title="No return value.">void</abbr> <strong>set_voice_cutoff_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, cutoff_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audioeffectchorus-method-set-voice-cutoff-hz"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-set-voice-delay-ms"><abbr title="No return value.">void</abbr> <strong>set_voice_delay_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, delay_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audioeffectchorus-method-set-voice-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-set-voice-depth-ms"><abbr title="No return value.">void</abbr> <strong>set_voice_depth_ms</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, depth_ms: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audioeffectchorus-method-set-voice-depth-ms"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-set-voice-level-db"><abbr title="No return value.">void</abbr> <strong>set_voice_level_db</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, level_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audioeffectchorus-method-set-voice-level-db"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-set-voice-pan"><abbr title="No return value.">void</abbr> <strong>set_voice_pan</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pan: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audioeffectchorus-method-set-voice-pan"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p class="classref-method" id="class-audioeffectchorus-method-set-voice-rate-hz"><abbr title="No return value.">void</abbr> <strong>set_voice_rate_hz</strong>(voice_idx: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, rate_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audioeffectchorus-method-set-voice-rate-hz"><span class="std std-ref">🔗</span></a></p>
+<div class="contribute docutils container">
+<p>There is currently no description for this method. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

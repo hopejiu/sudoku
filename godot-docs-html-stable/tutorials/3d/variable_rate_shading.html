@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Variable rate shading" property="og:title"/>
+
+
+
+<meta content="What is variable rate shading?: In modern 3D rendering engines, shaders are much more complex compared to before. The advent of physically-based rendering, real-time global illumination and screen-..." property="og:description"/>
+<meta content="What is variable rate shading?: In modern 3D rendering engines, shaders are much more complex compared to before. The advent of physically-based rendering, real-time global illumination and screen-..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Variable rate shading — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="csg_tools.html" rel="next" title="Prototyping levels with CSG"/>
+<link href="resolution_scaling.html" rel="prev" title="Resolution scaling"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/3d/variable_rate_shading" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="variable-rate-shading">
+<span id="doc-variable-rate-shading"></span><h1>Variable rate shading<a class="headerlink" href="#variable-rate-shading" title="Link to this heading"></a></h1>
+<section id="what-is-variable-rate-shading">
+<h2>What is variable rate shading?<a class="headerlink" href="#what-is-variable-rate-shading" title="Link to this heading"></a></h2>
+<p>In modern 3D rendering engines, shaders are much more complex compared to
+before. The advent of physically-based rendering, real-time global illumination
+and screen-space effects has increased the number of <em>per-pixel</em> shading that
+must be performed to render each frame. Additionally, screen resolutions also
+have increased a lot, with 1440p and 4K now being common target resolutions.
+As a result, the total shading cost in scene rendering usually represents
+a significant amount of the time taken to render each frame.</p>
+<p>Variable rate shading (VRS) is a method of decreasing this shading cost by
+reducing the resolution of <em>per-pixel</em> shading (also called <em>fragment</em> shading),
+while keeping the original resolution for rendering geometry. This means geometry
+edges remain as sharp as they would without VRS. VRS can be combined with any
+<a class="reference internal" href="3d_antialiasing.html#doc-3d-antialiasing"><span class="std std-ref">3D antialiasing</span></a> technique (MSAA, FXAA, TAA, SSAA).</p>
+<p>VRS allows specifying the shading quality in a local manner, which makes it
+possible to have certain parts of the viewport receive more detailed shading
+than others. This is particularly useful in virtual reality (VR) to achieve
+<em>foveated rendering</em>, where the center of the viewport is more detailed than the
+edges.</p>
+<p>Here's a scene rendered with rate shading disabled then enabled, using the
+density map linked at the bottom of this page:</p>
+<figure class="align-center" id="id1">
+<img alt="Variable rate shading disabled in textured scene" src="../../_images/variable_rate_shading_textured_disabled.webp"/>
+<figcaption>
+<p><span class="caption-text">Variable rate shading disabled in textured scene</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<img alt="Variable rate shading enabled in textured scene (lower quality, but higher performance)" src="../../_images/variable_rate_shading_textured_enabled.webp"/>
+<figcaption>
+<p><span class="caption-text">Variable rate shading enabled in textured scene (lower quality, but higher performance)</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>When used in scenes with low-frequency detail (such as scenes with a
+stylized/low-poly aesthetic), it's possible to achieve similar performance gains,
+but with less reduction in visual quality:</p>
+<figure class="align-center" id="id3">
+<img alt="Variable rate shading disabled in untextured scene" src="../../_images/variable_rate_shading_untextured_disabled.webp"/>
+<figcaption>
+<p><span class="caption-text">Variable rate shading disabled in untextured scene</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<img alt="Variable rate shading enabled in untextured scene (lower quality, but higher performance)" src="../../_images/variable_rate_shading_untextured_enabled.webp"/>
+<figcaption>
+<p><span class="caption-text">Variable rate shading enabled in untextured scene (lower quality, but higher performance)</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="hardware-support">
+<h2>Hardware support<a class="headerlink" href="#hardware-support" title="Link to this heading"></a></h2>
+<p>Variable rate shading is only supported on specific GPUs:</p>
+<p><strong>Desktop:</strong></p>
+<ul class="simple">
+<li><p>NVIDIA Turing and newer (including GTX 1600 series)</p></li>
+<li><p>AMD RDNA2 and newer (both integrated and dedicated GPUs – including Steam Deck)</p></li>
+<li><p>Intel Arc Alchemist and newer <strong>(dedicated GPUs only)</strong></p>
+<ul>
+<li><p>Intel integrated graphics do not support variable rate shading.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Mobile SoCs:</strong></p>
+<ul class="simple">
+<li><p>Snapdragon 888 and newer</p></li>
+<li><p>MediaTek Dimensity 9000 and newer</p></li>
+<li><p>ARM Mali-G615 and newer</p></li>
+</ul>
+<p>As of January 2023, Apple and Raspberry Pi GPUs do not support variable rate shading.</p>
+</section>
+<section id="using-variable-rate-shading-in-godot">
+<h2>Using variable rate shading in Godot<a class="headerlink" href="#using-variable-rate-shading-in-godot" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both Forward+ and Mobile renderers support variable rate
+shading. VRS can be used in both pancake (non-XR) and XR display modes.</p>
+<p>The Compatibility renderer does <strong>not</strong> support variable rate shading.
+For XR, you can use <a class="reference internal" href="../xr/openxr_settings.html#doc-openxr-settings-foveation-level"><span class="std std-ref">foveation level</span></a>
+as an alternative.</p>
+</div>
+<p>In the advanced Project Settings, the <strong>Rendering &gt; VRS</strong> section offers settings
+to control variable rate shading on the root viewport:</p>
+<ul class="simple">
+<li><p><strong>Mode:</strong> Controls the variable rate shading mode. <strong>Disabled</strong> disables
+variable rate shading. <strong>Texture</strong> uses a manually authored texture to set
+shading density (see the property below). <strong>XR</strong> automatically generates a
+texture suited for foveated rendering in virtual/augmented reality.</p></li>
+<li><p><strong>Texture:</strong> The texture to use to control shading density on the root
+viewport. Only used if <strong>Mode</strong> is <strong>Texture</strong>.</p></li>
+</ul>
+<p>For custom viewports, the VRS mode and texture must be set manually to the
+<a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> node.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On unsupported hardware, there is no visual difference when variable rate
+shading is enabled. You can check whether hardware supports variable rate
+shading by running the editor or project with the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>
+<a class="reference internal" href="../editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">command line argument</span></a>.</p>
+</div>
+<section id="creating-a-vrs-density-map">
+<h3>Creating a VRS density map<a class="headerlink" href="#creating-a-vrs-density-map" title="Link to this heading"></a></h3>
+<p>If using the <strong>Texture</strong> VRS mode, you <em>must</em> set a texture to be used as a
+density map. Otherwise, no effect will be visible.</p>
+<p>You can create your own VRS density map manually using an image editor, or
+generate it using another method (e.g. on the CPU using the Image class, or on
+the GPU using a shader). However, beware of performance implications when
+generating a VRS image dynamically. If opting for dynamic generation, make sure
+the VRS image generation process is fast enough to avoid outweighing the
+performance gains from VRS.</p>
+<p>The texture must follow these rules:</p>
+<ul class="simple">
+<li><p>The texture <em>must</em> use a lossless compression format so that colors can be
+matched precisely.</p></li>
+<li><p>The following VRS densities are mapped to various colors, with brighter colors
+representing a lower level of shading precision:</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Density</p></th>
+<th class="head"><p>Color</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1×1 (highest detail)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(0,</span> <span class="pre">0,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#000000</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1×2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(0,</span> <span class="pre">85,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#005500</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2×1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(85,</span> <span class="pre">0,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#550000</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2×2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(85,</span> <span class="pre">85,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#555500</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2×4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(85,</span> <span class="pre">170,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#55aa00</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4×2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(170,</span> <span class="pre">85,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#aa5500</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4×4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(170,</span> <span class="pre">170,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#aaaa00</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4×8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(170,</span> <span class="pre">255,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#aaff00</span></code></p></td>
+<td><p>Not supported on most hardware.</p></td>
+</tr>
+<tr class="row-even"><td><p>8×4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(255,</span> <span class="pre">170,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#ffaa00</span></code></p></td>
+<td><p>Not supported on most hardware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>8×8 (lowest detail)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgb(255,</span> <span class="pre">255,</span> <span class="pre">0)</span> <span class="pre">-</span> <span class="pre">#ffff00</span></code></p></td>
+<td><p>Not supported on most hardware.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, this VRS density texture provides the highest shading density in
+the center of the viewport, and the lowest shading density in the corners:</p>
+<figure class="align-center" id="id5">
+<img alt="Example VRS density map texture, simulating foveated rendering" src="../../_images/variable_rate_shading_texture_example.webp"/>
+<figcaption>
+<p><span class="caption-text">Example VRS density map texture, simulating foveated rendering</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>There are no size or aspect ratio requirements for the VRS density texture.
+However, there is no benefit to using a VRS density map that is larger than the
+viewport resolution divided by the GPU's <em>tile size</em>. The tile size is what
+determines the smallest area of pixels where the shading density can be changed
+separately from other tiles. On most GPUs, this tile size is 8×8 pixels. You can
+view the tile size by running Godot with the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> command line
+argument, as it's printed in the VRS debugging information.</p>
+<p>Therefore, sticking to a relatively low resolution such as 256×256 (square) or
+480×270 (16:9) is recommended. Depending on your use cases, a square texture may
+be more suited compared to a texture that matches the most common viewport
+aspect ratio in your project (such as 16:9).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When using variable rate shading, you can use a negative
+<a class="reference internal" href="resolution_scaling.html#doc-resolution-scaling-mipmap-bias"><span class="std std-ref">texture mipmap LOD bias</span></a>
+to reduce blurriness in areas with reduced shading rate.</p>
+<p>Note that the texture LOD bias is set globally, so this will also affect
+areas of the viewport with full shading rate. Don't use values that are too
+low, or textures will appear grainy.</p>
+</div>
+</section>
+<section id="performance-comparison">
+<h3>Performance comparison<a class="headerlink" href="#performance-comparison" title="Link to this heading"></a></h3>
+<p>To give an idea of how much VRS can improve performance in theory, here's a
+performance comparison with the textured example scene shown at the top of this
+page. The VRS density map example present on this page is used.</p>
+<p>Results were captured on a GeForce RTX 4090 with the NVIDIA 525.60.11 driver.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resolution</p></th>
+<th class="head"><p>VRS disabled</p></th>
+<th class="head"><p>VRS enabled</p></th>
+<th class="head"><p>Performance improvement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1920×1080 (Full HD)</p></td>
+<td><p>2832 FPS</p></td>
+<td><p>3136 FPS</p></td>
+<td><p>+10.7%</p></td>
+</tr>
+<tr class="row-odd"><td><p>2560×1440 (QHD)</p></td>
+<td><p>2008 FPS</p></td>
+<td><p>2256 FPS</p></td>
+<td><p>+12.3%</p></td>
+</tr>
+<tr class="row-even"><td><p>3840×2160 (4K)</p></td>
+<td><p>1236 FPS</p></td>
+<td><p>1436 FPS</p></td>
+<td><p>+16.2%</p></td>
+</tr>
+<tr class="row-odd"><td><p>7680×4320 (8K)</p></td>
+<td><p>384 FPS</p></td>
+<td><p>473 FPS</p></td>
+<td><p>+23.1%</p></td>
+</tr>
+</tbody>
+</table>
+<p>In terms of performance improvements, variable rate shading is more beneficial
+at higher target resolutions. The reduction in visual quality is also less
+noticeable at high resolutions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For non-VR games, you will probably have to use a less aggressive VRS texture
+than what was used in this example. As a result, the effective performance
+gains will be lower.</p>
+</div>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

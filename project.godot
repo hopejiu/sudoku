@@ -1,0 +1,28 @@
+; 游戏集合 - 数独模块
+; Godot 4.x project configuration
+
+[application]
+config/name="游戏集合"
+config/description="数独游戏 - 难度可调的经典数独体验"
+run/main_scene="res://scenes/main/Main.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://assets/icons/app_icon.svg"
+
+[gui]
+theme/custom="res://themes/classic.theme"
+theme/theme_color_saturation=1.0
+theme/theme_contrast=0.1
+
+[rendering]
+renderer/rendering_method="forward_plus"
+
+[input]
+; 方向键导航（桌面端）
+ui_left=[{"keycode": 65, "type": 0}, {"keycode": 4194319, "type": 0}]
+ui_right=[{"keycode": 68, "type": 0}, {"keycode": 4194321, "type": 0}]
+ui_up=[{"keycode": 87, "type": 0}, {"keycode": 4194320, "type": 0}]
+ui_down=[{"keycode": 83, "type": 0}, {"keycode": 4194322, "type": 0}]
+
+[autoload]
+SaveManager="*res://autoload/SaveManager.gd"
+ThemeManager="*res://autoload/ThemeManager.gd"

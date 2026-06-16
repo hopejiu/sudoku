@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="CSGCylinder3D" property="og:title"/>
+
+
+
+<meta content="Inherits: CSGPrimitive3D&lt; CSGShape3D&lt; GeometryInstance3D&lt; VisualInstance3D&lt; Node3D&lt; Node&lt; Object A CSG Cylinder shape. Description: This node allows you to create a cylinder (or c..." property="og:description"/>
+<meta content="Inherits: CSGPrimitive3D&lt; CSGShape3D&lt; GeometryInstance3D&lt; VisualInstance3D&lt; Node3D&lt; Node&lt; Object A CSG Cylinder shape. Description: This node allows you to create a cylinder (or c..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) CSGCylinder3D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_csgmesh3d.html" rel="next" title="CSGMesh3D"/>
+<link href="class_csgcombiner3d.html" rel="prev" title="CSGCombiner3D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_csgcylinder3d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="csgcylinder3d">
+<span id="class-csgcylinder3d"></span><h1>CSGCylinder3D<a class="headerlink" href="#csgcylinder3d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_csgprimitive3d.html#class-csgprimitive3d"><span class="std std-ref">CSGPrimitive3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_csgshape3d.html#class-csgshape3d"><span class="std std-ref">CSGShape3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_geometryinstance3d.html#class-geometryinstance3d"><span class="std std-ref">GeometryInstance3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_visualinstance3d.html#class-visualinstance3d"><span class="std std-ref">VisualInstance3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A CSG Cylinder shape.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This node allows you to create a cylinder (or cone) for use with the CSG system.</p>
+<p><strong>Note:</strong> CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a <a class="reference internal" href="class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> with a <a class="reference internal" href="class_primitivemesh.html#class-primitivemesh"><span class="std std-ref">PrimitiveMesh</span></a>. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/3d/csg_tools.html"><span class="doc">Prototyping levels with CSG</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgcylinder3d-property-cone"><span class="std std-ref">cone</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgcylinder3d-property-height"><span class="std std-ref">height</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgcylinder3d-property-material"><span class="std std-ref">material</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgcylinder3d-property-radius"><span class="std std-ref">radius</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgcylinder3d-property-sides"><span class="std std-ref">sides</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-csgcylinder3d-property-smooth-faces"><span class="std std-ref">smooth_faces</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-csgcylinder3d-property-cone"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>cone</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-csgcylinder3d-property-cone"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_cone</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_cone</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code> a cone is created, the <a class="reference internal" href="#class-csgcylinder3d-property-radius"><span class="std std-ref">radius</span></a> will only apply to one side.</p>
+<p class="classref-property" id="class-csgcylinder3d-property-height"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>height</strong> = <code class="docutils literal notranslate"><span class="pre">2.0</span></code> <a class="reference internal" href="#class-csgcylinder3d-property-height"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_height</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_height</strong>()</p></li>
+</ul>
+<p>The height of the cylinder.</p>
+<p class="classref-property" id="class-csgcylinder3d-property-material"><a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a> <strong>material</strong> <a class="reference internal" href="#class-csgcylinder3d-property-material"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_material</strong>(value: <a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a> <strong>get_material</strong>()</p></li>
+</ul>
+<p>The material used to render the cylinder.</p>
+<p class="classref-property" id="class-csgcylinder3d-property-radius"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>radius</strong> = <code class="docutils literal notranslate"><span class="pre">0.5</span></code> <a class="reference internal" href="#class-csgcylinder3d-property-radius"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_radius</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_radius</strong>()</p></li>
+</ul>
+<p>The radius of the cylinder.</p>
+<p class="classref-property" id="class-csgcylinder3d-property-sides"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>sides</strong> = <code class="docutils literal notranslate"><span class="pre">8</span></code> <a class="reference internal" href="#class-csgcylinder3d-property-sides"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_sides</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_sides</strong>()</p></li>
+</ul>
+<p>The number of sides of the cylinder, the higher this number the more detail there will be in the cylinder.</p>
+<p class="classref-property" id="class-csgcylinder3d-property-smooth-faces"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>smooth_faces</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-csgcylinder3d-property-smooth-faces"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_smooth_faces</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>get_smooth_faces</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code> the normals of the cylinder are set to give a smooth effect making the cylinder seem rounded. If <code class="docutils literal notranslate"><span class="pre">false</span></code> the cylinder will have a flat shaded look.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

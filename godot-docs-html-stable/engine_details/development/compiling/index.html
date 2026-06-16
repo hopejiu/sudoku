@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Building from source" property="og:title"/>
+
+
+
+<meta content="Godot prides itself on being very easy to build, by C++ project standards. Godot uses the SCons build system, and after the initial setup compiling the engine for your current platform should be as..." property="og:description"/>
+<meta content="Godot prides itself on being very easy to build, by C++ project standards. Godot uses the SCons build system, and after the initial setup compiling the engine for your current platform should be as..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Building from source — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="getting_source.html" rel="next" title="Getting the source"/>
+<link href="../configuring_an_ide/xcode.html" rel="prev" title="Xcode"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/compiling/index" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="building-from-source">
+<span id="doc-compiling-index"></span><h1>Building from source<a class="headerlink" href="#building-from-source" title="Link to this heading"></a></h1>
+<p>Godot prides itself on being very easy to build, by C++ project standards.
+<a class="reference internal" href="../../../about/faq.html#doc-faq-why-scons"><span class="std std-ref">Godot uses the SCons build system</span></a>, and after the initial
+setup compiling the engine for your current platform should be as easy as running:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons
+</pre></div>
+</div>
+<p>But you will probably need to use at least some of the available options to configure
+the build to match your specific needs, be it a custom engine fork, a lightweight build
+stripped of extra modules, or an executable targeting engine development.</p>
+<p>The articles below should help you navigate configuration options available, as well as
+prerequisites required to compile Godot exactly the way you need.</p>
+<h2 class="rubric">Basics of building Godot</h2>
+<p>Let's start with basics, and learn how to get Godot's source code, and then which options
+to use to compile it regardless of your target platform.</p>
+<div class="toctree-wrapper compound" id="toc-devel-compiling">
+</div>
+<h2 class="rubric">Building for target platforms</h2>
+<p>Below you can find instructions for compiling the engine for your specific target platform.
+Note that Godot supports cross-compilation, which means you can compile it for a target platform
+that doesn't match your current platform (say, target Linux while being on Windows). The guides
+will try their best to cover all possible situations.</p>
+<div class="toctree-wrapper compound" id="toc-devel-compiling-platforms">
+</div>
+<h2 class="rubric">Other compilation targets and options</h2>
+<p>Some additional universal compilation options require further setup. Namely, while Godot
+does have C#/.NET support as a part of its main codebase, it does not get compiled by
+default to reduce the executable size for users who don't need C# for their projects.</p>
+<p>Articles below explain how to configure the buildsystem for cases like this, and also
+cover some optimization techniques.</p>
+<div class="toctree-wrapper compound" id="toc-devel-compiling-options">
+</div>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

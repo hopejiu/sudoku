@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="2D meshes" property="og:title"/>
+
+
+
+<meta content="Introduction: In 3D, meshes are used to display the world. In 2D, they are rare as images are used more often. Godot's 2D engine is a pure two-dimensional engine, so it can't really displ..." property="og:description"/>
+<meta content="Introduction: In 3D, meshes are used to display the world. In 2D, they are rare as images are used more often. Godot's 2D engine is a pure two-dimensional engine, so it can't really displ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) 2D meshes — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="2d_sprite_animation.html" rel="next" title="2D sprite animation"/>
+<link href="2d_lights_and_shadows.html" rel="prev" title="2D lights and shadows"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/2d/2d_meshes" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+<div class="admonition attention article-status">
+<p class="first admonition-title">Work in progress</p>
+<p>
+        The content of this page was not yet updated for Godot
+        <code class="docutils literal notranslate">4.6</code>
+        and may be <strong>outdated</strong>. If you know how to improve this page or you can confirm
+        that it's up to date, feel free to <a href="https://github.com/godotengine/godot-docs">open a pull request</a>.
+      </p>
+</div>
+</div>
+<section id="d-meshes">
+<span id="doc-2d-meshes"></span><h1>2D meshes<a class="headerlink" href="#d-meshes" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In 3D, meshes are used to display the world. In 2D, they are rare as images are used more often.
+Godot's 2D engine is a pure two-dimensional engine, so it can't really display 3D meshes directly (although it can be done
+via <code class="docutils literal notranslate"><span class="pre">Viewport</span></code> and <code class="docutils literal notranslate"><span class="pre">ViewportTexture</span></code>).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you are interested in displaying 3D meshes on a 2D viewport, see the <a class="reference internal" href="../shaders/using_viewport_as_texture.html#doc-viewport-as-texture"><span class="std std-ref">Using a SubViewport as a texture</span></a> tutorial.</p>
+</div>
+<p>2D meshes are meshes that contain two-dimensional geometry (Z can be omitted or ignored) instead of 3D.
+You can experiment creating them yourself using <code class="docutils literal notranslate"><span class="pre">SurfaceTool</span></code> from code and displaying them in a <code class="docutils literal notranslate"><span class="pre">MeshInstance2D</span></code> node.</p>
+<p>Currently, the only way to generate a 2D mesh within the editor is by either importing an OBJ file as a mesh, or converting it from a Sprite2D.</p>
+</section>
+<section id="optimizing-pixels-drawn">
+<h2>Optimizing pixels drawn<a class="headerlink" href="#optimizing-pixels-drawn" title="Link to this heading"></a></h2>
+<p>This workflow is useful for optimizing 2D drawing in some situations. When drawing large images with transparency, Godot will draw the whole quad to the screen. The large transparent areas will still be drawn.</p>
+<p>This can affect performance, especially on mobile devices, when drawing very large images (generally screen sized),
+or layering multiple images on top of each other with large transparent areas (for example, when using <code class="docutils literal notranslate"><span class="pre">ParallaxBackground</span></code>).</p>
+<p>Converting to a mesh will ensure that only the opaque parts will be drawn and the rest will be ignored.</p>
+</section>
+<section id="converting-sprite2ds-to-2d-meshes">
+<h2>Converting Sprite2Ds to 2D meshes<a class="headerlink" href="#converting-sprite2ds-to-2d-meshes" title="Link to this heading"></a></h2>
+<p>You can take advantage of this optimization by converting a <code class="docutils literal notranslate"><span class="pre">Sprite2D</span></code> to a <code class="docutils literal notranslate"><span class="pre">MeshInstance2D</span></code>.
+Start with an image that contains large amounts of transparency on the edges, like this tree:</p>
+<img alt="../../_images/mesh2d1.png" src="../../_images/mesh2d1.png"/>
+<p>Put it in a <code class="docutils literal notranslate"><span class="pre">Sprite2D</span></code> and select "Convert to MeshInstance2D" from the menu:</p>
+<img alt="../../_images/mesh2d2.webp" src="../../_images/mesh2d2.webp"/>
+<p>A dialog will appear, showing a preview of how the 2D mesh will be created:</p>
+<img alt="../../_images/mesh2d3.webp" src="../../_images/mesh2d3.webp"/>
+<p>The default values are good enough for many cases, but you can change growth and simplification according to your needs:</p>
+<img alt="../../_images/mesh2d4.webp" src="../../_images/mesh2d4.webp"/>
+<p>Finally, push the <span class="role-button role-ui">Convert 2D Mesh</span> button and your Sprite2D will be replaced:</p>
+<img alt="../../_images/mesh2d5.webp" src="../../_images/mesh2d5.webp"/>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

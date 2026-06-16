@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="StreamPeerGZIP" property="og:title"/>
+
+
+
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: StreamPeer&lt; RefCounted&lt; Object A stream peer that handles GZIP and deflate compression/decompression. Descript..." property="og:description"/>
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: StreamPeer&lt; RefCounted&lt; Object A stream peer that handles GZIP and deflate compression/decompression. Descript..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) StreamPeerGZIP — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_streampeersocket.html" rel="next" title="StreamPeerSocket"/>
+<link href="class_streampeerextension.html" rel="prev" title="StreamPeerExtension"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_streampeergzip" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="streampeergzip">
+<span id="class-streampeergzip"></span><h1>StreamPeerGZIP<a class="headerlink" href="#streampeergzip" title="Link to this heading"></a></h1>
+<p><strong>Experimental:</strong> This class may be changed or removed in future versions.</p>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_streampeer.html#class-streampeer"><span class="std std-ref">StreamPeer</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A stream peer that handles GZIP and deflate compression/decompression.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This class allows to compress or decompress data using GZIP/deflate in a streaming fashion. This is particularly useful when compressing or decompressing files that have to be sent through the network without needing to allocate them all in memory.</p>
+<p>After starting the stream via <a class="reference internal" href="#class-streampeergzip-method-start-compression"><span class="std std-ref">start_compression()</span></a> (or <a class="reference internal" href="#class-streampeergzip-method-start-decompression"><span class="std std-ref">start_decompression()</span></a>), calling <a class="reference internal" href="class_streampeer.html#class-streampeer-method-put-partial-data"><span class="std std-ref">StreamPeer.put_partial_data()</span></a> on this stream will compress (or decompress) the data, writing it to the internal buffer. Calling <a class="reference internal" href="class_streampeer.html#class-streampeer-method-get-available-bytes"><span class="std std-ref">StreamPeer.get_available_bytes()</span></a> will return the pending bytes in the internal buffer, and <a class="reference internal" href="class_streampeer.html#class-streampeer-method-get-partial-data"><span class="std std-ref">StreamPeer.get_partial_data()</span></a> will retrieve the compressed (or decompressed) bytes from it. When the stream is over, you must call <a class="reference internal" href="#class-streampeergzip-method-finish"><span class="std std-ref">finish()</span></a> to ensure the internal buffer is properly flushed (make sure to call <a class="reference internal" href="class_streampeer.html#class-streampeer-method-get-available-bytes"><span class="std std-ref">StreamPeer.get_available_bytes()</span></a> on last time to check if more data needs to be read after that).</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-streampeergzip-method-clear"><span class="std std-ref">clear</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeergzip-method-finish"><span class="std std-ref">finish</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeergzip-method-start-compression"><span class="std std-ref">start_compression</span></a>(use_deflate: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, buffer_size: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 65535)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeergzip-method-start-decompression"><span class="std std-ref">start_decompression</span></a>(use_deflate: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, buffer_size: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 65535)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-streampeergzip-method-clear"><abbr title="No return value.">void</abbr> <strong>clear</strong>() <a class="reference internal" href="#class-streampeergzip-method-clear"><span class="std std-ref">🔗</span></a></p>
+<p>Clears this stream, resetting the internal state.</p>
+<p class="classref-method" id="class-streampeergzip-method-finish"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>finish</strong>() <a class="reference internal" href="#class-streampeergzip-method-finish"><span class="std std-ref">🔗</span></a></p>
+<p>Finalizes the stream, compressing any buffered chunk left.</p>
+<p>You must call it only when you are compressing.</p>
+<p class="classref-method" id="class-streampeergzip-method-start-compression"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>start_compression</strong>(use_deflate: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, buffer_size: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 65535) <a class="reference internal" href="#class-streampeergzip-method-start-compression"><span class="std std-ref">🔗</span></a></p>
+<p>Start the stream in compression mode with the given <code class="docutils literal notranslate"><span class="pre">buffer_size</span></code>, if <code class="docutils literal notranslate"><span class="pre">use_deflate</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> uses deflate instead of GZIP.</p>
+<p class="classref-method" id="class-streampeergzip-method-start-decompression"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>start_decompression</strong>(use_deflate: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false, buffer_size: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> = 65535) <a class="reference internal" href="#class-streampeergzip-method-start-decompression"><span class="std std-ref">🔗</span></a></p>
+<p>Start the stream in decompression mode with the given <code class="docutils literal notranslate"><span class="pre">buffer_size</span></code>, if <code class="docutils literal notranslate"><span class="pre">use_deflate</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> uses deflate instead of GZIP.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

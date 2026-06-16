@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Exporting for Android" property="og:title"/>
+
+
+
+<meta content="Exporting for Android has fewer requirements than compiling Godot for Android. The following steps detail what is needed to set up the Android SDK and the engine. Install OpenJDK 17: Download and i..." property="og:description"/>
+<meta content="Exporting for Android has fewer requirements than compiling Godot for Android. The following steps detail what is needed to set up the Android SDK and the engine. Install OpenJDK 17: Download and i..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Exporting for Android — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="exporting_for_ios.html" rel="next" title="Exporting for iOS"/>
+<link href="exporting_for_macos.html" rel="prev" title="Exporting for macOS"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/export/exporting_for_android" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="exporting-for-android">
+<span id="doc-exporting-for-android"></span><h1>Exporting for Android<a class="headerlink" href="#exporting-for-android" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>This page describes how to export a Godot project to Android.
+If you're looking to compile export template binaries from source instead,
+read <a class="reference internal" href="../../engine_details/development/compiling/compiling_for_android.html#doc-compiling-for-android"><span class="std std-ref">Compiling for Android</span></a>.</p>
+</div>
+<p>Exporting for Android has fewer requirements than compiling Godot for Android.
+The following steps detail what is needed to set up the Android SDK and the engine.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Projects written in C# can be exported to Android as of Godot 4.2, but support
+is experimental and <a class="reference internal" href="../scripting/c_sharp/index.html#doc-c-sharp-platforms"><span class="std std-ref">some limitations apply</span></a>.</p>
+</div>
+<section id="install-openjdk-17">
+<h2>Install OpenJDK 17<a class="headerlink" href="#install-openjdk-17" title="Link to this heading"></a></h2>
+<p>Download and install <a class="reference external" href="https://adoptium.net/temurin/releases/?variant=openjdk17&amp;version=17&amp;os=any&amp;arch=any">OpenJDK 17</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Higher versions of the JDK are also supported, but we recommend using JDK 17 for optimal compatibility and stability.</p>
+</div>
+</section>
+<section id="download-the-android-sdk">
+<h2>Download the Android SDK<a class="headerlink" href="#download-the-android-sdk" title="Link to this heading"></a></h2>
+<p>Download and install the Android SDK.</p>
+<ul class="simple">
+<li><p>You can install the Android SDK using <a class="reference external" href="https://developer.android.com/studio/">Android Studio Iguana (version 2023.2.1) or later</a>.</p>
+<ul>
+<li><p>Run it once to complete the SDK setup using these <a class="reference external" href="https://developer.android.com/studio/intro/update#sdk-manager">instructions</a>.</p></li>
+<li><p>Ensure that the <a class="reference external" href="https://developer.android.com/studio/intro/update#required">required packages</a> are installed as well.</p>
+<ul>
+<li><p>Android SDK Platform-Tools version 35.0.0 or later</p></li>
+<li><p>Android SDK Build-Tools version 35.0.1</p></li>
+<li><p>Android SDK Platform 35</p></li>
+<li><p>Android SDK Command-line Tools (latest)</p></li>
+</ul>
+</li>
+<li><p>Ensure that the <a class="reference external" href="https://developer.android.com/studio/projects/install-ndk">NDK and CMake are installed and configured</a>.</p>
+<ul>
+<li><p>CMake version 3.10.2.4988404</p></li>
+<li><p>NDK version r28b (28.1.13356709)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Alternatively, you can install the Android SDK with the <cite>sdkmanager</cite> command line tool.</p>
+<ul>
+<li><p>Install the command line tools package using these <a class="reference external" href="https://developer.android.com/tools/sdkmanager">instructions</a>.</p></li>
+<li><p>Once the command line tools are installed, run the following <cite>sdkmanager</cite> command to complete the setup process:</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">sdkmanager</span><span class="w"> </span><span class="o">--</span><span class="n">sdk_root</span><span class="o">=&lt;</span><span class="n">android_sdk_path</span><span class="o">&gt;</span><span class="w"> </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="s2">"build-tools;35.0.1"</span><span class="w"> </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="s2">"cmdline-tools;latest"</span><span class="w"> </span><span class="s2">"cmake;3.10.2.4988404"</span><span class="w"> </span><span class="s2">"ndk;28.1.13356709"</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using Linux,
+<strong>do not use an Android SDK provided by your distribution's repositories as it will often be outdated</strong>.</p>
+</div>
+</section>
+<section id="setting-it-up-in-godot">
+<h2>Setting it up in Godot<a class="headerlink" href="#setting-it-up-in-godot" title="Link to this heading"></a></h2>
+<p>Enter the Editor Settings screen (under the Godot tab for macOS, or the Editor tab
+for other platforms). This screen contains the editor settings for the user
+account in the computer (it's independent of the project).</p>
+<img alt="../../_images/editorsettings.png" src="../../_images/editorsettings.png"/>
+<p>Scroll down to the section where the Android settings are located:</p>
+<img alt="../../_images/android_editor_settings.webp" src="../../_images/android_editor_settings.webp"/>
+<p>In that screen, 2 paths need to be set:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Java</span> <span class="pre">SDK</span> <span class="pre">Path</span></code> should be the location where OpenJDK 17 was installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Android</span> <span class="pre">SDK</span> <span class="pre">Path</span></code> should be the location where the Android SDK was installed. This directory should contain <code class="docutils literal notranslate"><span class="pre">platform-tools/adb</span></code>.
+- For example <code class="docutils literal notranslate"><span class="pre">%LOCALAPPDATA%\Android\Sdk\</span></code> on Windows or <code class="docutils literal notranslate"><span class="pre">/Users/$USER/Library/Android/sdk/</span></code> on macOS.</p></li>
+</ul>
+<p>Once that is configured, everything is ready to export to Android!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you get an error saying <em>"Could not install to device."</em>, make sure
+you do not have an application with the same Android package name already
+installed on the device (but signed with a different key).</p>
+<p>If you have an application with the same Android package name but a
+different signing key already installed on the device, you <strong>must</strong> remove
+the application in question from the Android device before exporting to
+Android again.</p>
+</div>
+</section>
+<section id="providing-launcher-icons">
+<h2>Providing launcher icons<a class="headerlink" href="#providing-launcher-icons" title="Link to this heading"></a></h2>
+<p>Launcher icons are used by Android launcher apps to represent your application to users. Godot only requires high-resolution icons (for <code class="docutils literal notranslate"><span class="pre">xxxhdpi</span></code> density screens) and will automatically generate lower-resolution variants.</p>
+<p>There are three types of icons:</p>
+<ul class="simple">
+<li><p><strong>Main Icon:</strong> The "classic" icon. This will be used on all Android versions up to Android 8 (Oreo), exclusive. Must be at least 192×192 px.</p></li>
+<li><p><strong>Adaptive Icons:</strong> Starting from Android 8 (inclusive), <a class="reference external" href="https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive">Adaptive Icons</a> were introduced. Applications will need to include separate background and foreground icons to have a native look. The user's launcher application will control the icon's animation and masking. Must be at least 432×432 px.</p></li>
+<li><p><strong>Themed Icons (optional):</strong> Starting from Android 13 (inclusive), Themed Icons were introduced. Applications will need to include a monochrome icon to enable this feature. The user's launcher application will control the icon's theme. Must be at least 432×432 px.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>It's important to adhere to some rules when designing adaptive icons. <a class="reference external" href="https://medium.com/google-design/designing-adaptive-icons-515af294c783">Google Design has provided a nice article</a> that helps to understand those rules and some of the capabilities of adaptive icons.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The most important adaptive icon design rule is to have your icon critical elements inside the safe zone: a centered circle with a diameter of 66dp (264 pixels on <code class="docutils literal notranslate"><span class="pre">xxxhdpi</span></code>) to avoid being clipped by the launcher.</p>
+</div>
+<p>If you don't provide the requested icons (except for Monochrome), Godot will replace them using a fallback chain, trying the next in line when the current one fails:</p>
+<ul class="simple">
+<li><p><strong>Main Icon:</strong> Provided main icon -&gt; Project icon -&gt; Default Godot main icon.</p></li>
+<li><p><strong>Adaptive Icon Foreground:</strong> Provided foreground icon -&gt; Provided main icon -&gt; Project icon -&gt; Default Godot foreground icon.</p></li>
+<li><p><strong>Adaptive Icon Background:</strong> Provided background icon -&gt; Default Godot background icon.</p></li>
+</ul>
+<p>It's highly recommended to provide all the requested icons with their specified resolutions.
+This way, your application will look great on all Android devices and versions.</p>
+</section>
+<section id="exporting-for-google-play-store">
+<h2>Exporting for Google Play Store<a class="headerlink" href="#exporting-for-google-play-store" title="Link to this heading"></a></h2>
+<p>All new apps uploaded to Google Play after August 2021 must be an AAB (Android App Bundle)
+file.</p>
+<p>Uploading an AAB or APK to Google's Play Store requires you to sign using a non-debug
+keystore file; such a file can be generated like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>keytool<span class="w"> </span>-v<span class="w"> </span>-genkey<span class="w"> </span>-keystore<span class="w"> </span>mygame.keystore<span class="w"> </span>-alias<span class="w"> </span>mygame<span class="w"> </span>-keyalg<span class="w"> </span>RSA<span class="w"> </span>-validity<span class="w"> </span><span class="m">10000</span>
+</pre></div>
+</div>
+<p>This keystore and key are used to verify your developer identity, remember the password and keep it in a safe place!
+It is suggested to use only upper and lowercase letters and numbers. Special characters may cause errors.
+Use Google's Android Developer guides to learn more about <a class="reference external" href="https://developer.android.com/studio/publish/app-signing">app signing</a>.</p>
+<p>Now fill in the following forms in your Android Export Presets:</p>
+<img alt="../../_images/editor-export-presets-android.png" src="../../_images/editor-export-presets-android.png"/>
+<ul class="simple">
+<li><p><strong>Release:</strong> Enter the path to the keystore file you just generated.</p></li>
+<li><p><strong>Release User:</strong> Replace with the key alias.</p></li>
+<li><p><strong>Release Password:</strong> Key password. Note that the keystore password and the key password currently have to be the same.</p></li>
+</ul>
+<p>Don't forget to uncheck the <strong>Export With Debug</strong> checkbox while exporting.</p>
+<img alt="../../_images/export-with-debug-button.png" src="../../_images/export-with-debug-button.png"/>
+</section>
+<section id="optimizing-the-file-size">
+<h2>Optimizing the file size<a class="headerlink" href="#optimizing-the-file-size" title="Link to this heading"></a></h2>
+<p>If you're working with APKs and not AABs, by default, the APK will contain native
+libraries for both ARMv7 and ARMv8 architectures. This increases its size significantly.
+To create a smaller file, uncheck either <strong>Armeabi-v 7a</strong> or <strong>Arm 64 -v 8a</strong> in
+your project's Android export preset. This will create an APK that only contains
+a library for a single architecture. Note that applications targeting ARMv7 can
+also run on ARMv8 devices, but the opposite is not true. The reason you don't do
+this to save space with AABs is that Google automatically splits up the AAB on their
+backend, so the user only downloads what they need.</p>
+<p>You can optimize the size further by compiling an Android export template with
+only the features you need. See <a class="reference internal" href="../../engine_details/development/compiling/optimizing_for_size.html#doc-optimizing-for-size"><span class="std std-ref">Optimizing a build for size</span></a> for more
+information.</p>
+</section>
+<section id="environment-variables">
+<h2>Environment variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h2>
+<p>You can use the following environment variables to set export options outside of
+the editor. During the export process, these override the values that you set in
+the export menu.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Android export environment variables</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Export option</p></th>
+<th class="head"><p>Environment variable</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Encryption / Encryption Key</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_SCRIPT_ENCRYPTION_KEY</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Options / Keystore / Debug</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID_KEYSTORE_DEBUG_PATH</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Options / Keystore / Debug User</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID_KEYSTORE_DEBUG_USER</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Options / Keystore / Debug Password</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Options / Keystore / Release</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID_KEYSTORE_RELEASE_PATH</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Options / Keystore / Release User</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID_KEYSTORE_RELEASE_USER</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Options / Keystore / Release Password</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="export-options">
+<h2>Export options<a class="headerlink" href="#export-options" title="Link to this heading"></a></h2>
+<p>You can find a full list of export options available in the
+<a class="reference internal" href="../../classes/class_editorexportplatformandroid.html#class-editorexportplatformandroid"><span class="std std-ref">EditorExportPlatformAndroid</span></a> class reference.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

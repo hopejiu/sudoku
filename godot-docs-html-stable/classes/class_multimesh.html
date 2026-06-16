@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<meta content="MultiMesh" property="og:title"/>
+
+
+
+<meta content="Inherits: Resource&lt; RefCounted&lt; Object Provides high-performance drawing of a mesh multiple times using GPU instancing. Description: MultiMesh provides low-level mesh instancing. Drawing thou..." property="og:description"/>
+<meta content="Inherits: Resource&lt; RefCounted&lt; Object Provides high-performance drawing of a mesh multiple times using GPU instancing. Description: MultiMesh provides low-level mesh instancing. Drawing thou..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) MultiMesh — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_navigationmesh.html" rel="next" title="NavigationMesh"/>
+<link href="class_missingresource.html" rel="prev" title="MissingResource"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_multimesh" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="multimesh">
+<span id="class-multimesh"></span><h1>MultiMesh<a class="headerlink" href="#multimesh" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Provides high-performance drawing of a mesh multiple times using GPU instancing.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>MultiMesh provides low-level mesh instancing. Drawing thousands of <a class="reference internal" href="class_meshinstance3d.html#class-meshinstance3d"><span class="std std-ref">MeshInstance3D</span></a> nodes can be slow, since each object is submitted to the GPU then drawn individually.</p>
+<p>MultiMesh is much faster as it can draw thousands of instances with a single draw call, resulting in less API overhead.</p>
+<p>As a drawback, if the instances are too far away from each other, performance may be reduced as every single instance will always render (they are spatially indexed as one, for the whole object).</p>
+<p>Since instances may have any behavior, the AABB used for visibility must be provided by the user.</p>
+<p><strong>Note:</strong> A MultiMesh is a single object, therefore the same maximum lights per object restriction applies. This means, that once the maximum lights are consumed by one or more instances, the rest of the MultiMesh instances will <strong>not</strong> receive any lighting.</p>
+<p><strong>Note:</strong> Blend Shapes will be ignored if used in a MultiMesh.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/3d/using_multi_mesh_instance.html"><span class="doc">Using MultiMeshInstance</span></a></p></li>
+<li><p><a class="reference internal" href="../tutorials/performance/using_multimesh.html"><span class="doc">Optimization using MultiMeshes</span></a></p></li>
+<li><p><a class="reference internal" href="../tutorials/performance/vertex_animation/animating_thousands_of_fish.html"><span class="doc">Animating thousands of fish with MultiMeshInstance</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-buffer"><span class="std std-ref">buffer</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PackedFloat32Array()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-color-array"><span class="std std-ref">color_array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-custom-aabb"><span class="std std-ref">custom_aabb</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AABB(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-custom-data-array"><span class="std std-ref">custom_data_array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-instance-count"><span class="std std-ref">instance_count</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_mesh.html#class-mesh"><span class="std std-ref">Mesh</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-mesh"><span class="std std-ref">mesh</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">PhysicsInterpolationQuality</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-physics-interpolation-quality"><span class="std std-ref">physics_interpolation_quality</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-transform-2d-array"><span class="std std-ref">transform_2d_array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-transform-array"><span class="std std-ref">transform_array</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">TransformFormat</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-transform-format"><span class="std std-ref">transform_format</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-use-colors"><span class="std std-ref">use_colors</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-use-custom-data"><span class="std std-ref">use_custom_data</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-property-visible-instance-count"><span class="std std-ref">visible_instance_count</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-get-aabb"><span class="std std-ref">get_aabb</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-get-instance-color"><span class="std std-ref">get_instance_color</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-get-instance-custom-data"><span class="std std-ref">get_instance_custom_data</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-get-instance-transform"><span class="std std-ref">get_instance_transform</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-get-instance-transform-2d"><span class="std std-ref">get_instance_transform_2d</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-reset-instance-physics-interpolation"><span class="std std-ref">reset_instance_physics_interpolation</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-reset-instances-physics-interpolation"><span class="std std-ref">reset_instances_physics_interpolation</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-set-buffer-interpolated"><span class="std std-ref">set_buffer_interpolated</span></a>(buffer_curr: <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a>, buffer_prev: <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-set-instance-color"><span class="std std-ref">set_instance_color</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, color: <a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-set-instance-custom-data"><span class="std std-ref">set_instance_custom_data</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, custom_data: <a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-set-instance-transform"><span class="std std-ref">set_instance_transform</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, transform: <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-multimesh-method-set-instance-transform-2d"><span class="std std-ref">set_instance_transform_2d</span></a>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, transform: <a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-multimesh-transformformat">enum <strong>TransformFormat</strong>: <a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-multimesh-constant-transform-2d"><a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">TransformFormat</span></a> <strong>TRANSFORM_2D</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Use this when using 2D transforms.</p>
+<p class="classref-enumeration-constant" id="class-multimesh-constant-transform-3d"><a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">TransformFormat</span></a> <strong>TRANSFORM_3D</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Use this when using 3D transforms.</p>
+<p class="classref-enumeration" id="enum-multimesh-physicsinterpolationquality">enum <strong>PhysicsInterpolationQuality</strong>: <a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-multimesh-constant-interp-quality-fast"><a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">PhysicsInterpolationQuality</span></a> <strong>INTERP_QUALITY_FAST</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Always interpolate using Basis lerping, which can produce warping artifacts in some situations.</p>
+<p class="classref-enumeration-constant" id="class-multimesh-constant-interp-quality-high"><a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">PhysicsInterpolationQuality</span></a> <strong>INTERP_QUALITY_HIGH</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Attempt to interpolate using Basis slerping (spherical linear interpolation) where possible, otherwise fall back to lerping.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-multimesh-property-buffer"><a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> <strong>buffer</strong> = <code class="docutils literal notranslate"><span class="pre">PackedFloat32Array()</span></code> <a class="reference internal" href="#class-multimesh-property-buffer"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_buffer</strong>(value: <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> <strong>get_buffer</strong>()</p></li>
+</ul>
+<div class="contribute docutils container">
+<p>There is currently no description for this property. Please help us by <a class="reference external" href="https://contributing.godotengine.org/en/latest/documentation/class_reference.html">contributing one</a>!</p>
+</div>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> for more details.</p>
+<p class="classref-property" id="class-multimesh-property-color-array"><a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a> <strong>color_array</strong> <a class="reference internal" href="#class-multimesh-property-color-array"><span class="std std-ref">🔗</span></a></p>
+<p><strong>Deprecated:</strong> Accessing this property is very slow. Use <a class="reference internal" href="#class-multimesh-method-set-instance-color"><span class="std std-ref">set_instance_color()</span></a> and <a class="reference internal" href="#class-multimesh-method-get-instance-color"><span class="std std-ref">get_instance_color()</span></a> instead.</p>
+<p>Array containing each <a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a> used by all instances of this mesh.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a> for more details.</p>
+<p class="classref-property" id="class-multimesh-property-custom-aabb"><a class="reference internal" href="class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a> <strong>custom_aabb</strong> = <code class="docutils literal notranslate"><span class="pre">AABB(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> <a class="reference internal" href="#class-multimesh-property-custom-aabb"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_custom_aabb</strong>(value: <a class="reference internal" href="class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a> <strong>get_custom_aabb</strong>()</p></li>
+</ul>
+<p>Custom AABB for this MultiMesh resource. Setting this manually prevents costly runtime AABB recalculations.</p>
+<p class="classref-property" id="class-multimesh-property-custom-data-array"><a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a> <strong>custom_data_array</strong> <a class="reference internal" href="#class-multimesh-property-custom-data-array"><span class="std std-ref">🔗</span></a></p>
+<p><strong>Deprecated:</strong> Accessing this property is very slow. Use <a class="reference internal" href="#class-multimesh-method-set-instance-custom-data"><span class="std std-ref">set_instance_custom_data()</span></a> and <a class="reference internal" href="#class-multimesh-method-get-instance-custom-data"><span class="std std-ref">get_instance_custom_data()</span></a> instead.</p>
+<p>Array containing each custom data value used by all instances of this mesh, as a <a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a>.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedcolorarray.html#class-packedcolorarray"><span class="std std-ref">PackedColorArray</span></a> for more details.</p>
+<p class="classref-property" id="class-multimesh-property-instance-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>instance_count</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-multimesh-property-instance-count"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_instance_count</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_instance_count</strong>()</p></li>
+</ul>
+<p>Number of instances that will get drawn. This clears and (re)sizes the buffers. Setting data format or flags afterwards will have no effect.</p>
+<p>By default, all instances are drawn but you can limit this with <a class="reference internal" href="#class-multimesh-property-visible-instance-count"><span class="std std-ref">visible_instance_count</span></a>.</p>
+<p class="classref-property" id="class-multimesh-property-mesh"><a class="reference internal" href="class_mesh.html#class-mesh"><span class="std std-ref">Mesh</span></a> <strong>mesh</strong> <a class="reference internal" href="#class-multimesh-property-mesh"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_mesh</strong>(value: <a class="reference internal" href="class_mesh.html#class-mesh"><span class="std std-ref">Mesh</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_mesh.html#class-mesh"><span class="std std-ref">Mesh</span></a> <strong>get_mesh</strong>()</p></li>
+</ul>
+<p><a class="reference internal" href="class_mesh.html#class-mesh"><span class="std std-ref">Mesh</span></a> resource to be instanced.</p>
+<p>The looks of the individual instances can be modified using <a class="reference internal" href="#class-multimesh-method-set-instance-color"><span class="std std-ref">set_instance_color()</span></a> and <a class="reference internal" href="#class-multimesh-method-set-instance-custom-data"><span class="std std-ref">set_instance_custom_data()</span></a>.</p>
+<p class="classref-property" id="class-multimesh-property-physics-interpolation-quality"><a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">PhysicsInterpolationQuality</span></a> <strong>physics_interpolation_quality</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-multimesh-property-physics-interpolation-quality"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_physics_interpolation_quality</strong>(value: <a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">PhysicsInterpolationQuality</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-multimesh-physicsinterpolationquality"><span class="std std-ref">PhysicsInterpolationQuality</span></a> <strong>get_physics_interpolation_quality</strong>()</p></li>
+</ul>
+<p>Choose whether to use an interpolation method that favors speed or quality.</p>
+<p>When using low physics tick rates (typically below 20) or high rates of object rotation, you may get better results from the high quality setting.</p>
+<p><strong>Note:</strong> Fast quality does not equate to low quality. Except in the special cases mentioned above, the quality should be comparable to high quality.</p>
+<p class="classref-property" id="class-multimesh-property-transform-2d-array"><a class="reference internal" href="class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a> <strong>transform_2d_array</strong> <a class="reference internal" href="#class-multimesh-property-transform-2d-array"><span class="std std-ref">🔗</span></a></p>
+<p><strong>Deprecated:</strong> Accessing this property is very slow. Use <a class="reference internal" href="#class-multimesh-method-set-instance-transform-2d"><span class="std std-ref">set_instance_transform_2d()</span></a> and <a class="reference internal" href="#class-multimesh-method-get-instance-transform-2d"><span class="std std-ref">get_instance_transform_2d()</span></a> instead.</p>
+<p>Array containing each <a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a> value used by all instances of this mesh, as a <a class="reference internal" href="class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a>. Each transform is divided into 3 <a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a> values corresponding to the transforms' <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">origin</span></code>.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedvector2array.html#class-packedvector2array"><span class="std std-ref">PackedVector2Array</span></a> for more details.</p>
+<p class="classref-property" id="class-multimesh-property-transform-array"><a class="reference internal" href="class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a> <strong>transform_array</strong> <a class="reference internal" href="#class-multimesh-property-transform-array"><span class="std std-ref">🔗</span></a></p>
+<p><strong>Deprecated:</strong> Accessing this property is very slow. Use <a class="reference internal" href="#class-multimesh-method-set-instance-transform"><span class="std std-ref">set_instance_transform()</span></a> and <a class="reference internal" href="#class-multimesh-method-get-instance-transform"><span class="std std-ref">get_instance_transform()</span></a> instead.</p>
+<p>Array containing each <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> value used by all instances of this mesh, as a <a class="reference internal" href="class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a>. Each transform is divided into 4 <a class="reference internal" href="class_vector3.html#class-vector3"><span class="std std-ref">Vector3</span></a> values corresponding to the transforms' <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, and <code class="docutils literal notranslate"><span class="pre">origin</span></code>.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedvector3array.html#class-packedvector3array"><span class="std std-ref">PackedVector3Array</span></a> for more details.</p>
+<p class="classref-property" id="class-multimesh-property-transform-format"><a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">TransformFormat</span></a> <strong>transform_format</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-multimesh-property-transform-format"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_transform_format</strong>(value: <a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">TransformFormat</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-multimesh-transformformat"><span class="std std-ref">TransformFormat</span></a> <strong>get_transform_format</strong>()</p></li>
+</ul>
+<p>Format of transform used to transform mesh, either 2D or 3D.</p>
+<p class="classref-property" id="class-multimesh-property-use-colors"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>use_colors</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-multimesh-property-use-colors"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_use_colors</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_using_colors</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the <strong>MultiMesh</strong> will use color data (see <a class="reference internal" href="#class-multimesh-method-set-instance-color"><span class="std std-ref">set_instance_color()</span></a>). Can only be set when <a class="reference internal" href="#class-multimesh-property-instance-count"><span class="std std-ref">instance_count</span></a> is <code class="docutils literal notranslate"><span class="pre">0</span></code> or less. This means that you need to call this method before setting the instance count, or temporarily reset it to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p class="classref-property" id="class-multimesh-property-use-custom-data"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>use_custom_data</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-multimesh-property-use-custom-data"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_use_custom_data</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_using_custom_data</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the <strong>MultiMesh</strong> will use custom data (see <a class="reference internal" href="#class-multimesh-method-set-instance-custom-data"><span class="std std-ref">set_instance_custom_data()</span></a>). Can only be set when <a class="reference internal" href="#class-multimesh-property-instance-count"><span class="std std-ref">instance_count</span></a> is <code class="docutils literal notranslate"><span class="pre">0</span></code> or less. This means that you need to call this method before setting the instance count, or temporarily reset it to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p class="classref-property" id="class-multimesh-property-visible-instance-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>visible_instance_count</strong> = <code class="docutils literal notranslate"><span class="pre">-1</span></code> <a class="reference internal" href="#class-multimesh-property-visible-instance-count"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_visible_instance_count</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_visible_instance_count</strong>()</p></li>
+</ul>
+<p>Limits the number of instances drawn, -1 draws all instances. Changing this does not change the sizes of the buffers.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-multimesh-method-get-aabb"><a class="reference internal" href="class_aabb.html#class-aabb"><span class="std std-ref">AABB</span></a> <strong>get_aabb</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-multimesh-method-get-aabb"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the visibility axis-aligned bounding box in local space.</p>
+<p class="classref-method" id="class-multimesh-method-get-instance-color"><a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a> <strong>get_instance_color</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-multimesh-method-get-instance-color"><span class="std std-ref">🔗</span></a></p>
+<p>Gets a specific instance's color multiplier.</p>
+<p class="classref-method" id="class-multimesh-method-get-instance-custom-data"><a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a> <strong>get_instance_custom_data</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-multimesh-method-get-instance-custom-data"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the custom data that has been set for a specific instance.</p>
+<p class="classref-method" id="class-multimesh-method-get-instance-transform"><a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> <strong>get_instance_transform</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-multimesh-method-get-instance-transform"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> of a specific instance.</p>
+<p class="classref-method" id="class-multimesh-method-get-instance-transform-2d"><a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a> <strong>get_instance_transform_2d</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-multimesh-method-get-instance-transform-2d"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the <a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a> of a specific instance.</p>
+<p class="classref-method" id="class-multimesh-method-reset-instance-physics-interpolation"><abbr title="No return value.">void</abbr> <strong>reset_instance_physics_interpolation</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-multimesh-method-reset-instance-physics-interpolation"><span class="std std-ref">🔗</span></a></p>
+<p>When using <em>physics interpolation</em>, this function allows you to prevent interpolation on an instance in the current physics tick.</p>
+<p>This allows you to move instances instantaneously, and should usually be used when initially placing an instance such as a bullet to prevent graphical glitches.</p>
+<p class="classref-method" id="class-multimesh-method-reset-instances-physics-interpolation"><abbr title="No return value.">void</abbr> <strong>reset_instances_physics_interpolation</strong>() <a class="reference internal" href="#class-multimesh-method-reset-instances-physics-interpolation"><span class="std std-ref">🔗</span></a></p>
+<p>When using <em>physics interpolation</em>, this function allows you to prevent interpolation for all instances in the current physics tick.</p>
+<p>This allows you to move all instances instantaneously, and should usually be used when initially placing instances to prevent graphical glitches.</p>
+<p class="classref-method" id="class-multimesh-method-set-buffer-interpolated"><abbr title="No return value.">void</abbr> <strong>set_buffer_interpolated</strong>(buffer_curr: <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a>, buffer_prev: <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a>) <a class="reference internal" href="#class-multimesh-method-set-buffer-interpolated"><span class="std std-ref">🔗</span></a></p>
+<p>An alternative to setting the <a class="reference internal" href="#class-multimesh-property-buffer"><span class="std std-ref">buffer</span></a> property, which can be used with <em>physics interpolation</em>. This method takes two arrays, and can set the data for the current and previous tick in one go. The renderer will automatically interpolate the data at each frame.</p>
+<p>This is useful for situations where the order of instances may change from physics tick to tick, such as particle systems.</p>
+<p>When the order of instances is coherent, the simpler alternative of setting <a class="reference internal" href="#class-multimesh-property-buffer"><span class="std std-ref">buffer</span></a> can still be used with interpolation.</p>
+<p class="classref-method" id="class-multimesh-method-set-instance-color"><abbr title="No return value.">void</abbr> <strong>set_instance_color</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, color: <a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a>) <a class="reference internal" href="#class-multimesh-method-set-instance-color"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the color of a specific instance by <em>multiplying</em> the mesh's existing vertex colors. This allows for different color tinting per instance.</p>
+<p><strong>Note:</strong> Each component is stored in 32 bits in the Forward+ and Mobile rendering methods, but is packed into 16 bits in the Compatibility rendering method.</p>
+<p>For the color to take effect, ensure that <a class="reference internal" href="#class-multimesh-property-use-colors"><span class="std std-ref">use_colors</span></a> is <code class="docutils literal notranslate"><span class="pre">true</span></code> on the <strong>MultiMesh</strong> and <a class="reference internal" href="class_basematerial3d.html#class-basematerial3d-property-vertex-color-use-as-albedo"><span class="std std-ref">BaseMaterial3D.vertex_color_use_as_albedo</span></a> is <code class="docutils literal notranslate"><span class="pre">true</span></code> on the material. If you intend to set an absolute color instead of tinting, make sure the material's albedo color is set to pure white (<code class="docutils literal notranslate"><span class="pre">Color(1,</span> <span class="pre">1,</span> <span class="pre">1)</span></code>).</p>
+<p class="classref-method" id="class-multimesh-method-set-instance-custom-data"><abbr title="No return value.">void</abbr> <strong>set_instance_custom_data</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, custom_data: <a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a>) <a class="reference internal" href="#class-multimesh-method-set-instance-custom-data"><span class="std std-ref">🔗</span></a></p>
+<p>Sets custom data for a specific instance. <code class="docutils literal notranslate"><span class="pre">custom_data</span></code> is a <a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a> type only to contain 4 floating-point numbers.</p>
+<p><strong>Note:</strong> Each number is stored in 32 bits in the Forward+ and Mobile rendering methods, but is packed into 16 bits in the Compatibility rendering method.</p>
+<p>For the custom data to be used, ensure that <a class="reference internal" href="#class-multimesh-property-use-custom-data"><span class="std std-ref">use_custom_data</span></a> is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>This custom instance data has to be manually accessed in your custom shader using <code class="docutils literal notranslate"><span class="pre">INSTANCE_CUSTOM</span></code>.</p>
+<p class="classref-method" id="class-multimesh-method-set-instance-transform"><abbr title="No return value.">void</abbr> <strong>set_instance_transform</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, transform: <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a>) <a class="reference internal" href="#class-multimesh-method-set-instance-transform"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> for a specific instance.</p>
+<p class="classref-method" id="class-multimesh-method-set-instance-transform-2d"><abbr title="No return value.">void</abbr> <strong>set_instance_transform_2d</strong>(instance: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, transform: <a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a>) <a class="reference internal" href="#class-multimesh-method-set-instance-transform-2d"><span class="std std-ref">🔗</span></a></p>
+<p>Sets the <a class="reference internal" href="class_transform2d.html#class-transform2d"><span class="std std-ref">Transform2D</span></a> for a specific instance.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

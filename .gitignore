@@ -1,0 +1,11 @@
+# Godot 编辑器生成
+.godot/
+*.import
+*.uid
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# Godot 头显运行二进制（体积大，勿提交）
+exe_headless/godot

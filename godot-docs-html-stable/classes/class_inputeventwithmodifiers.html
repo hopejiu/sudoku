@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="InputEventWithModifiers" property="og:title"/>
+
+
+
+<meta content="Inherits: InputEventFromWindow&lt; InputEvent&lt; Resource&lt; RefCounted&lt; Object Inherited By: InputEventGesture, InputEventKey, InputEventMouse Abstract base class for input events affected by..." property="og:description"/>
+<meta content="Inherits: InputEventFromWindow&lt; InputEvent&lt; Resource&lt; RefCounted&lt; Object Inherited By: InputEventGesture, InputEventKey, InputEventMouse Abstract base class for input events affected by..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) InputEventWithModifiers — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_jointlimitation3d.html" rel="next" title="JointLimitation3D"/>
+<link href="class_inputeventshortcut.html" rel="prev" title="InputEventShortcut"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_inputeventwithmodifiers" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="inputeventwithmodifiers">
+<span id="class-inputeventwithmodifiers"></span><h1>InputEventWithModifiers<a class="headerlink" href="#inputeventwithmodifiers" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_inputeventfromwindow.html#class-inputeventfromwindow"><span class="std std-ref">InputEventFromWindow</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_inputevent.html#class-inputevent"><span class="std std-ref">InputEvent</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p><strong>Inherited By:</strong> <a class="reference internal" href="class_inputeventgesture.html#class-inputeventgesture"><span class="std std-ref">InputEventGesture</span></a>, <a class="reference internal" href="class_inputeventkey.html#class-inputeventkey"><span class="std std-ref">InputEventKey</span></a>, <a class="reference internal" href="class_inputeventmouse.html#class-inputeventmouse"><span class="std std-ref">InputEventMouse</span></a></p>
+<p>Abstract base class for input events affected by modifier keys like <kbd class="kbd docutils literal notranslate">Shift</kbd> and <kbd class="kbd docutils literal notranslate">Alt</kbd>.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Stores information about mouse, keyboard, and touch gesture input events. This includes information about which modifier keys are pressed, such as <kbd class="kbd docutils literal notranslate">Shift</kbd> or <kbd class="kbd docutils literal notranslate">Alt</kbd>. See <a class="reference internal" href="class_node.html#class-node-private-method-input"><span class="std std-ref">Node._input()</span></a>.</p>
+<p><strong>Note:</strong> Modifier keys are considered modifiers only when used in combination with another key. As a result, their corresponding member variables, such as <a class="reference internal" href="#class-inputeventwithmodifiers-property-ctrl-pressed"><span class="std std-ref">ctrl_pressed</span></a>, will return <code class="docutils literal notranslate"><span class="pre">false</span></code> if the key is pressed on its own.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/inputs/inputevent.html"><span class="doc">Using InputEvent</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-property-alt-pressed"><span class="std std-ref">alt_pressed</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-property-command-or-control-autoremap"><span class="std std-ref">command_or_control_autoremap</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-property-ctrl-pressed"><span class="std std-ref">ctrl_pressed</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-property-meta-pressed"><span class="std std-ref">meta_pressed</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-property-shift-pressed"><span class="std std-ref">shift_pressed</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="This value is an integer composed as a bitmask of the following flags.">BitField</abbr>[<a class="reference internal" href="class_%40globalscope.html#enum-globalscope-keymodifiermask"><span class="std std-ref">KeyModifierMask</span></a>]</p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-method-get-modifiers-mask"><span class="std std-ref">get_modifiers_mask</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-inputeventwithmodifiers-method-is-command-or-control-pressed"><span class="std std-ref">is_command_or_control_pressed</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-inputeventwithmodifiers-property-alt-pressed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>alt_pressed</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-inputeventwithmodifiers-property-alt-pressed"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_alt_pressed</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_alt_pressed</strong>()</p></li>
+</ul>
+<p>State of the <kbd class="kbd docutils literal notranslate">Alt</kbd> modifier.</p>
+<p class="classref-property" id="class-inputeventwithmodifiers-property-command-or-control-autoremap"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>command_or_control_autoremap</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-inputeventwithmodifiers-property-command-or-control-autoremap"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_command_or_control_autoremap</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_command_or_control_autoremap</strong>()</p></li>
+</ul>
+<p>Automatically use <kbd class="kbd docutils literal notranslate">Meta</kbd> (<kbd class="kbd docutils literal notranslate">Cmd</kbd>) on macOS and <kbd class="kbd docutils literal notranslate">Ctrl</kbd> on other platforms. If <code class="docutils literal notranslate"><span class="pre">true</span></code>, <a class="reference internal" href="#class-inputeventwithmodifiers-property-ctrl-pressed"><span class="std std-ref">ctrl_pressed</span></a> and <a class="reference internal" href="#class-inputeventwithmodifiers-property-meta-pressed"><span class="std std-ref">meta_pressed</span></a> cannot be set.</p>
+<p class="classref-property" id="class-inputeventwithmodifiers-property-ctrl-pressed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>ctrl_pressed</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-inputeventwithmodifiers-property-ctrl-pressed"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_ctrl_pressed</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_ctrl_pressed</strong>()</p></li>
+</ul>
+<p>State of the <kbd class="kbd docutils literal notranslate">Ctrl</kbd> modifier.</p>
+<p class="classref-property" id="class-inputeventwithmodifiers-property-meta-pressed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>meta_pressed</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-inputeventwithmodifiers-property-meta-pressed"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_meta_pressed</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_meta_pressed</strong>()</p></li>
+</ul>
+<p>State of the <kbd class="kbd docutils literal notranslate">Meta</kbd> modifier. On Windows and Linux, this represents the Windows key (sometimes called "meta" or "super" on Linux). On macOS, this represents the Command key.</p>
+<p class="classref-property" id="class-inputeventwithmodifiers-property-shift-pressed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>shift_pressed</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-inputeventwithmodifiers-property-shift-pressed"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_shift_pressed</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_shift_pressed</strong>()</p></li>
+</ul>
+<p>State of the <kbd class="kbd docutils literal notranslate">Shift</kbd> modifier.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-inputeventwithmodifiers-method-get-modifiers-mask"><abbr title="This value is an integer composed as a bitmask of the following flags.">BitField</abbr>[<a class="reference internal" href="class_%40globalscope.html#enum-globalscope-keymodifiermask"><span class="std std-ref">KeyModifierMask</span></a>] <strong>get_modifiers_mask</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-inputeventwithmodifiers-method-get-modifiers-mask"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the keycode combination of modifier keys.</p>
+<p class="classref-method" id="class-inputeventwithmodifiers-method-is-command-or-control-pressed"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_command_or_control_pressed</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-inputeventwithmodifiers-method-is-command-or-control-pressed"><span class="std std-ref">🔗</span></a></p>
+<p>On macOS, returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <kbd class="kbd docutils literal notranslate">Meta</kbd> (<kbd class="kbd docutils literal notranslate">Cmd</kbd>) is pressed.</p>
+<p>On other platforms, returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <kbd class="kbd docutils literal notranslate">Ctrl</kbd> is pressed.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

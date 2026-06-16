@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ResourcePreloader" property="og:title"/>
+
+
+
+<meta content="Inherits: Node&lt; Object A node used to preload sub-resources inside a scene. Description: This node is used to preload sub-resources inside a scene, so when the scene is loaded, all the resources..." property="og:description"/>
+<meta content="Inherits: Node&lt; Object A node used to preload sub-resources inside a scene. Description: This node is used to preload sub-resources inside a scene, so when the scene is loaded, all the resources..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ResourcePreloader — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_retargetmodifier3d.html" rel="next" title="RetargetModifier3D"/>
+<link href="class_remotetransform3d.html" rel="prev" title="RemoteTransform3D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_resourcepreloader" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="resourcepreloader">
+<span id="class-resourcepreloader"></span><h1>ResourcePreloader<a class="headerlink" href="#resourcepreloader" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A node used to preload sub-resources inside a scene.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This node is used to preload sub-resources inside a scene, so when the scene is loaded, all the resources are ready to use and can be retrieved from the preloader. You can add the resources using the ResourcePreloader tab when the node is selected.</p>
+<p>GDScript has a simplified <a class="reference internal" href="class_%40gdscript.html#class-gdscript-method-preload"><span class="std std-ref">@GDScript.preload()</span></a> built-in method which can be used in most situations, leaving the use of <strong>ResourcePreloader</strong> for more advanced scenarios.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-resourcepreloader-method-add-resource"><span class="std std-ref">add_resource</span></a>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, resource: <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourcepreloader-method-get-resource"><span class="std std-ref">get_resource</span></a>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourcepreloader-method-get-resource-list"><span class="std std-ref">get_resource_list</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourcepreloader-method-has-resource"><span class="std std-ref">has_resource</span></a>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-resourcepreloader-method-remove-resource"><span class="std std-ref">remove_resource</span></a>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-resourcepreloader-method-rename-resource"><span class="std std-ref">rename_resource</span></a>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, newname: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-resourcepreloader-method-add-resource"><abbr title="No return value.">void</abbr> <strong>add_resource</strong>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, resource: <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a>) <a class="reference internal" href="#class-resourcepreloader-method-add-resource"><span class="std std-ref">🔗</span></a></p>
+<p>Adds a resource to the preloader with the given <code class="docutils literal notranslate"><span class="pre">name</span></code>. If a resource with the given <code class="docutils literal notranslate"><span class="pre">name</span></code> already exists, the new resource will be renamed to "<code class="docutils literal notranslate"><span class="pre">name</span></code> N" where N is an incrementing number starting from 2.</p>
+<p class="classref-method" id="class-resourcepreloader-method-get-resource"><a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>get_resource</strong>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-resourcepreloader-method-get-resource"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the resource associated to <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+<p class="classref-method" id="class-resourcepreloader-method-get-resource-list"><a class="reference internal" href="class_packedstringarray.html#class-packedstringarray"><span class="std std-ref">PackedStringArray</span></a> <strong>get_resource_list</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-resourcepreloader-method-get-resource-list"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the list of resources inside the preloader.</p>
+<p class="classref-method" id="class-resourcepreloader-method-has-resource"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>has_resource</strong>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-resourcepreloader-method-has-resource"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the preloader contains a resource associated to <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+<p class="classref-method" id="class-resourcepreloader-method-remove-resource"><abbr title="No return value.">void</abbr> <strong>remove_resource</strong>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <a class="reference internal" href="#class-resourcepreloader-method-remove-resource"><span class="std std-ref">🔗</span></a></p>
+<p>Removes the resource associated to <code class="docutils literal notranslate"><span class="pre">name</span></code> from the preloader.</p>
+<p class="classref-method" id="class-resourcepreloader-method-rename-resource"><abbr title="No return value.">void</abbr> <strong>rename_resource</strong>(name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, newname: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <a class="reference internal" href="#class-resourcepreloader-method-rename-resource"><span class="std std-ref">🔗</span></a></p>
+<p>Renames a resource inside the preloader from <code class="docutils literal notranslate"><span class="pre">name</span></code> to <code class="docutils literal notranslate"><span class="pre">newname</span></code>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

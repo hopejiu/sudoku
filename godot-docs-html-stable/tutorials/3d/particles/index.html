@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Particle systems (3D)" property="og:title"/>
+
+
+
+<meta content="This section of the tutorial covers (3D) GPU-accelerated particle systems. Most of the things discussed here apply to CPU particles as well. Introduction You can use particle systems to simulate co..." property="og:description"/>
+<meta content="This section of the tutorial covers (3D) GPU-accelerated particle systems. Most of the things discussed here apply to CPU particles as well. Introduction You can use particle systems to simulate co..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Particle systems (3D) — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="creating_a_3d_particle_system.html" rel="next" title="Creating a 3D particle system"/>
+<link href="../physical_light_and_camera_units.html" rel="prev" title="Physical light and camera units"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/3d/particles/index" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="particle-systems-3d">
+<span id="doc-3d-particles"></span><h1>Particle systems (3D)<a class="headerlink" href="#particle-systems-3d" title="Link to this heading"></a></h1>
+<p>This section of the tutorial covers (3D) GPU-accelerated particle systems. Most of the things
+discussed here apply to CPU particles as well.</p>
+<h2 class="rubric">Introduction</h2>
+<p>You can use particle systems to simulate complex physical effects like fire, sparks,
+smoke, magical effects, and many more. They are very well suited for creating dynamic and organic
+behavior and adding "life" to your scenes.</p>
+<p>The idea is that a particle is emitted at a fixed interval and with a fixed lifetime. During
+its lifetime, every particle will have the same base behavior. What makes each particle different
+from the others and creates the organic look is the randomness that you can add to most of its
+parameters and behaviors.</p>
+<p>Every particle system you create in Godot consists of two main parts: particles and emitters.</p>
+<h3 class="rubric">Particles</h3>
+<p>A particle is the visible part of a particle system. It's what you see on the screen when a particle
+system is active: The tiny specks of dust, the flames of a fire, the glowing orbs of a magical
+effect. You can have anywhere between a couple hundred and tens of thousands of particles in a
+single system. You can randomize a particle's size, its speed and movement direction, and change its
+color over the course of its lifetime. When you think of a fire, you can think of all the little
+embers flying away from it as individual particles.</p>
+<h3 class="rubric">Emitters</h3>
+<p>An emitter is what's creating the particles. Emitters are usually not visible, but they can have
+a shape. That shape controls where and how particles are spawned, for example whether they should fill
+a room like dust or shoot away from a single point like a fountain. Going back to the fire example,
+an emitter would be the heat at the center of the fire that creates the embers and the flames.</p>
+<h3 class="rubric">Node overview</h3>
+<figure class="align-right" id="id1">
+<img alt="A list of nodes related to 3D particles" src="../../../_images/particle_nodes.webp"/>
+<figcaption>
+<p><span class="caption-text">All 3D particle nodes available in Godot</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>There are two types of 3D particle systems in Godot: <a class="reference internal" href="../../../classes/class_gpuparticles3d.html#class-gpuparticles3d"><span class="std std-ref">GPUParticles3D</span></a>, which are processed on the GPU,
+and <a class="reference internal" href="../../../classes/class_cpuparticles3d.html#class-cpuparticles3d"><span class="std std-ref">CPUParticles3D</span></a>, which are processed on the CPU.</p>
+<p>CPU particle systems are less flexible than their GPU counterpart, but they work on a wider range of hardware and
+provide better support for older devices and mobile phones. Because they are processed on the CPU,
+they are not as performant as GPU particle systems and can't render as many individual particles.
+In addition they currently do not have all the available options GPU particles have for control.</p>
+<p>GPU particle systems run on the GPU and can render hundreds of thousands of particles on modern
+hardware. You can write custom particle shaders for them, which makes them very flexible. You can
+also make them interact with the environment by using attractor and collision nodes.</p>
+<p>There are three particle attractor nodes: <a class="reference internal" href="../../../classes/class_gpuparticlesattractorbox3d.html#class-gpuparticlesattractorbox3d"><span class="std std-ref">GPUParticlesAttractorBox3D</span></a>, <a class="reference internal" href="../../../classes/class_gpuparticlesattractorsphere3d.html#class-gpuparticlesattractorsphere3d"><span class="std std-ref">GPUParticlesAttractorSphere3D</span></a>,
+and <a class="reference internal" href="../../../classes/class_gpuparticlesattractorvectorfield3d.html#class-gpuparticlesattractorvectorfield3d"><span class="std std-ref">GPUParticlesAttractorVectorField3D</span></a>. An attractor node applies a force to all particles
+in its reach and pulls them closer or pushes them away based on the direction of that force.</p>
+<p>There are several particle collision nodes. <a class="reference internal" href="../../../classes/class_gpuparticlescollisionbox3d.html#class-gpuparticlescollisionbox3d"><span class="std std-ref">GPUParticlesCollisionBox3D</span></a> and
+<a class="reference internal" href="../../../classes/class_gpuparticlescollisionsphere3d.html#class-gpuparticlescollisionsphere3d"><span class="std std-ref">GPUParticlesCollisionSphere3D</span></a> are the simple ones. You can use them to create basic
+shapes like boxes, a floor, or a wall that particles collide with. The other two nodes provide
+more complex collision behavior. The <a class="reference internal" href="../../../classes/class_gpuparticlescollisionsdf3d.html#class-gpuparticlescollisionsdf3d"><span class="std std-ref">GPUParticlesCollisionSDF3D</span></a> is useful when you want
+indoor scenes to collide with particles without having to create all the individual box and sphere
+colliders by hand. If you want particles to collide with large outdoor scenes, you would use the
+<a class="reference internal" href="../../../classes/class_gpuparticlescollisionheightfield3d.html#class-gpuparticlescollisionheightfield3d"><span class="std std-ref">GPUParticlesCollisionHeightField3D</span></a> node. It creates a heightmap of your world and the
+objects in it and uses that for large-scale particle collisions.</p>
+<h2 class="rubric">Basic usage</h2>
+<div class="toctree-wrapper compound" id="toc-particles-basic">
+</div>
+<h2 class="rubric">Advanced topics</h2>
+<div class="toctree-wrapper compound" id="toc-particles-advanced">
+</div>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

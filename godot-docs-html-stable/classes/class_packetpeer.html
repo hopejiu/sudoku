@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="PacketPeer" property="og:title"/>
+
+
+
+<meta content="Inherits: RefCounted&lt; Object Inherited By: ENetPacketPeer, MultiplayerPeer, PacketPeerDTLS, PacketPeerExtension, PacketPeerStream, PacketPeerUDP, WebRTCDataChannel, WebSocketPeer Abstraction and..." property="og:description"/>
+<meta content="Inherits: RefCounted&lt; Object Inherited By: ENetPacketPeer, MultiplayerPeer, PacketPeerDTLS, PacketPeerExtension, PacketPeerStream, PacketPeerUDP, WebRTCDataChannel, WebSocketPeer Abstraction and..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) PacketPeer — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_packetpeerdtls.html" rel="next" title="PacketPeerDTLS"/>
+<link href="class_packeddatacontainerref.html" rel="prev" title="PackedDataContainerRef"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_packetpeer" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="packetpeer">
+<span id="class-packetpeer"></span><h1>PacketPeer<a class="headerlink" href="#packetpeer" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p><strong>Inherited By:</strong> <a class="reference internal" href="class_enetpacketpeer.html#class-enetpacketpeer"><span class="std std-ref">ENetPacketPeer</span></a>, <a class="reference internal" href="class_multiplayerpeer.html#class-multiplayerpeer"><span class="std std-ref">MultiplayerPeer</span></a>, <a class="reference internal" href="class_packetpeerdtls.html#class-packetpeerdtls"><span class="std std-ref">PacketPeerDTLS</span></a>, <a class="reference internal" href="class_packetpeerextension.html#class-packetpeerextension"><span class="std std-ref">PacketPeerExtension</span></a>, <a class="reference internal" href="class_packetpeerstream.html#class-packetpeerstream"><span class="std std-ref">PacketPeerStream</span></a>, <a class="reference internal" href="class_packetpeerudp.html#class-packetpeerudp"><span class="std std-ref">PacketPeerUDP</span></a>, <a class="reference internal" href="class_webrtcdatachannel.html#class-webrtcdatachannel"><span class="std std-ref">WebRTCDataChannel</span></a>, <a class="reference internal" href="class_websocketpeer.html#class-websocketpeer"><span class="std std-ref">WebSocketPeer</span></a></p>
+<p>Abstraction and base class for packet-based protocols.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>PacketPeer is an abstraction and base class for packet-based protocols (such as UDP). It provides an API for sending and receiving packets both as raw data or variables. This makes it easy to transfer data over a protocol, without having to encode data as low-level bytes or having to worry about network ordering.</p>
+<p><strong>Note:</strong> When exporting to Android, make sure to enable the <code class="docutils literal notranslate"><span class="pre">INTERNET</span></code> permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-property-encode-buffer-max-size"><span class="std std-ref">encode_buffer_max_size</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8388608</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-method-get-available-packet-count"><span class="std std-ref">get_available_packet_count</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-method-get-packet"><span class="std std-ref">get_packet</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-method-get-packet-error"><span class="std std-ref">get_packet_error</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-method-get-var"><span class="std std-ref">get_var</span></a>(allow_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-method-put-packet"><span class="std std-ref">put_packet</span></a>(buffer: <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-packetpeer-method-put-var"><span class="std std-ref">put_var</span></a>(var: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>, full_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-packetpeer-property-encode-buffer-max-size"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>encode_buffer_max_size</strong> = <code class="docutils literal notranslate"><span class="pre">8388608</span></code> <a class="reference internal" href="#class-packetpeer-property-encode-buffer-max-size"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_encode_buffer_max_size</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_encode_buffer_max_size</strong>()</p></li>
+</ul>
+<p>Maximum buffer size allowed when encoding <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>s. Raise this value to support heavier memory allocations.</p>
+<p>The <a class="reference internal" href="#class-packetpeer-method-put-var"><span class="std std-ref">put_var()</span></a> method allocates memory on the stack, and the buffer used will grow automatically to the closest power of two to match the size of the <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>. If the <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> is bigger than <a class="reference internal" href="#class-packetpeer-property-encode-buffer-max-size"><span class="std std-ref">encode_buffer_max_size</span></a>, the method will error out with <a class="reference internal" href="class_%40globalscope.html#class-globalscope-constant-err-out-of-memory"><span class="std std-ref">@GlobalScope.ERR_OUT_OF_MEMORY</span></a>.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-packetpeer-method-get-available-packet-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_available_packet_count</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-packetpeer-method-get-available-packet-count"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the number of packets currently available in the ring-buffer.</p>
+<p class="classref-method" id="class-packetpeer-method-get-packet"><a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a> <strong>get_packet</strong>() <a class="reference internal" href="#class-packetpeer-method-get-packet"><span class="std std-ref">🔗</span></a></p>
+<p>Gets a raw packet.</p>
+<p class="classref-method" id="class-packetpeer-method-get-packet-error"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>get_packet_error</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-packetpeer-method-get-packet-error"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the error state of the last packet received (via <a class="reference internal" href="#class-packetpeer-method-get-packet"><span class="std std-ref">get_packet()</span></a> and <a class="reference internal" href="#class-packetpeer-method-get-var"><span class="std std-ref">get_var()</span></a>).</p>
+<p class="classref-method" id="class-packetpeer-method-get-var"><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> <strong>get_var</strong>(allow_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false) <a class="reference internal" href="#class-packetpeer-method-get-var"><span class="std std-ref">🔗</span></a></p>
+<p>Gets a Variant. If <code class="docutils literal notranslate"><span class="pre">allow_objects</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, decoding objects is allowed.</p>
+<p>Internally, this uses the same decoding mechanism as the <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-bytes-to-var"><span class="std std-ref">@GlobalScope.bytes_to_var()</span></a> method.</p>
+<p><strong>Warning:</strong> Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.</p>
+<p class="classref-method" id="class-packetpeer-method-put-packet"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>put_packet</strong>(buffer: <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>) <a class="reference internal" href="#class-packetpeer-method-put-packet"><span class="std std-ref">🔗</span></a></p>
+<p>Sends a raw packet.</p>
+<p class="classref-method" id="class-packetpeer-method-put-var"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>put_var</strong>(var: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>, full_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false) <a class="reference internal" href="#class-packetpeer-method-put-var"><span class="std std-ref">🔗</span></a></p>
+<p>Sends a <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> as a packet. If <code class="docutils literal notranslate"><span class="pre">full_objects</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, encoding objects is allowed (and can potentially include code).</p>
+<p>Internally, this uses the same encoding mechanism as the <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-var-to-bytes"><span class="std std-ref">@GlobalScope.var_to_bytes()</span></a> method.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

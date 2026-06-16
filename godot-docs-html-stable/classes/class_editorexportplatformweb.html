@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="EditorExportPlatformWeb" property="og:title"/>
+
+
+
+<meta content="Inherits: EditorExportPlatform&lt; RefCounted&lt; Object Exporter for the Web. Description: The Web exporter customizes how a web build is handled. In the editor's &quot;Export&quot; window, i..." property="og:description"/>
+<meta content="Inherits: EditorExportPlatform&lt; RefCounted&lt; Object Exporter for the Web. Description: The Web exporter customizes how a web build is handled. In the editor's &quot;Export&quot; window, i..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) EditorExportPlatformWeb — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_editorexportplatformwindows.html" rel="next" title="EditorExportPlatformWindows"/>
+<link href="class_editorexportplatformvisionos.html" rel="prev" title="EditorExportPlatformVisionOS"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_editorexportplatformweb" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="editorexportplatformweb">
+<span id="class-editorexportplatformweb"></span><h1>EditorExportPlatformWeb<a class="headerlink" href="#editorexportplatformweb" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_editorexportplatform.html#class-editorexportplatform"><span class="std std-ref">EditorExportPlatform</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Exporter for the Web.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The Web exporter customizes how a web build is handled. In the editor's "Export" window, it is created when adding a new "Web" preset.</p>
+<p><strong>Note:</strong> Godot on Web is rendered inside a <code class="docutils literal notranslate"><span class="pre">&lt;canvas&gt;</span></code> tag. Normally, the canvas cannot be positioned or resized manually, but otherwise acts as the main <a class="reference internal" href="class_window.html#class-window"><span class="std std-ref">Window</span></a> of the application.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/export/exporting_for_web.html"><span class="doc">Exporting for the Web</span></a></p></li>
+<li><p><a class="reference internal" href="../tutorials/platform/web/index.html"><span class="doc">Web documentation index</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-custom-template-debug"><span class="std std-ref">custom_template/debug</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-custom-template-release"><span class="std std-ref">custom_template/release</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-html-canvas-resize-policy"><span class="std std-ref">html/canvas_resize_policy</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-html-custom-html-shell"><span class="std std-ref">html/custom_html_shell</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-html-experimental-virtual-keyboard"><span class="std std-ref">html/experimental_virtual_keyboard</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-html-export-icon"><span class="std std-ref">html/export_icon</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-html-focus-canvas-on-start"><span class="std std-ref">html/focus_canvas_on_start</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-html-head-include"><span class="std std-ref">html/head_include</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-background-color"><span class="std std-ref">progressive_web_app/background_color</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-display"><span class="std std-ref">progressive_web_app/display</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-enabled"><span class="std std-ref">progressive_web_app/enabled</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-ensure-cross-origin-isolation-headers"><span class="std std-ref">progressive_web_app/ensure_cross_origin_isolation_headers</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-icon-144x144"><span class="std std-ref">progressive_web_app/icon_144x144</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-icon-180x180"><span class="std std-ref">progressive_web_app/icon_180x180</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-icon-512x512"><span class="std std-ref">progressive_web_app/icon_512x512</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-offline-page"><span class="std std-ref">progressive_web_app/offline_page</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-orientation"><span class="std std-ref">progressive_web_app/orientation</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-threads-emscripten-pool-size"><span class="std std-ref">threads/emscripten_pool_size</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-threads-godot-pool-size"><span class="std std-ref">threads/godot_pool_size</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-variant-extensions-support"><span class="std std-ref">variant/extensions_support</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-variant-thread-support"><span class="std std-ref">variant/thread_support</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-vram-texture-compression-for-desktop"><span class="std std-ref">vram_texture_compression/for_desktop</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-editorexportplatformweb-property-vram-texture-compression-for-mobile"><span class="std std-ref">vram_texture_compression/for_mobile</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-editorexportplatformweb-property-custom-template-debug"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>custom_template/debug</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-custom-template-debug"><span class="std std-ref">🔗</span></a></p>
+<p>File path to the custom export template used for debug builds. If left empty, the default template is used.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-custom-template-release"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>custom_template/release</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-custom-template-release"><span class="std std-ref">🔗</span></a></p>
+<p>File path to the custom export template used for release builds. If left empty, the default template is used.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-html-canvas-resize-policy"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>html/canvas_resize_policy</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-html-canvas-resize-policy"><span class="std std-ref">🔗</span></a></p>
+<p>Determines how the canvas should be resized by Godot.</p>
+<ul class="simple">
+<li><p><strong>None:</strong> The canvas is not automatically resized.</p></li>
+<li><p><strong>Project:</strong> The size of the canvas is dependent on the <a class="reference internal" href="class_projectsettings.html#class-projectsettings"><span class="std std-ref">ProjectSettings</span></a>.</p></li>
+<li><p><strong>Adaptive:</strong> The canvas is automatically resized to fit as much of the web page as possible.</p></li>
+</ul>
+<p class="classref-property" id="class-editorexportplatformweb-property-html-custom-html-shell"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>html/custom_html_shell</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-html-custom-html-shell"><span class="std std-ref">🔗</span></a></p>
+<p>The custom HTML page that wraps the exported web build. If left empty, the default HTML shell is used.</p>
+<p>For more information, see the <a class="reference internal" href="../tutorials/platform/web/customizing_html5_shell.html"><span class="doc">Customizing HTML5 Shell</span></a> tutorial.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-html-experimental-virtual-keyboard"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>html/experimental_virtual_keyboard</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-html-experimental-virtual-keyboard"><span class="std std-ref">🔗</span></a></p>
+<p><strong>Experimental:</strong> This property may be changed or removed in future versions.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, embeds support for a virtual keyboard into the web page, which is shown when necessary on touchscreen devices.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-html-export-icon"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>html/export_icon</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-html-export-icon"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the project icon will be used as the favicon for this application's web page.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-html-focus-canvas-on-start"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>html/focus_canvas_on_start</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-html-focus-canvas-on-start"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the canvas will be focused as soon as the application is loaded, if the browser window is already in focus.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-html-head-include"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>html/head_include</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-html-head-include"><span class="std std-ref">🔗</span></a></p>
+<p>Additional HTML tags to include inside the <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code>, such as <code class="docutils literal notranslate"><span class="pre">&lt;meta&gt;</span></code> tags.</p>
+<p><strong>Note:</strong> You do not need to add a <code class="docutils literal notranslate"><span class="pre">&lt;title&gt;</span></code> tag, as it is automatically included based on the project's name.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-background-color"><a class="reference internal" href="class_color.html#class-color"><span class="std std-ref">Color</span></a> <strong>progressive_web_app/background_color</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-background-color"><span class="std std-ref">🔗</span></a></p>
+<p>The background color used behind the web application.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-display"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>progressive_web_app/display</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-display"><span class="std std-ref">🔗</span></a></p>
+<p>The <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Manifest/display/">display mode</a> to use for this progressive web application. Different browsers and platforms may not behave the same.</p>
+<ul class="simple">
+<li><p><strong>Fullscreen:</strong> Displays the app in fullscreen and hides all of the browser's UI elements.</p></li>
+<li><p><strong>Standalone:</strong> Displays the app in a separate window and hides all of the browser's UI elements.</p></li>
+<li><p><strong>Minimal UI:</strong> Displays the app in a separate window and only shows the browser's UI elements for navigation.</p></li>
+<li><p><strong>Browser:</strong> Displays the app as a normal web page.</p></li>
+</ul>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-enabled"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>progressive_web_app/enabled</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-enabled"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, turns this web build into a <a class="reference external" href="https://en.wikipedia.org/wiki/Progressive_web_app">progressive web application</a> (PWA).</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-ensure-cross-origin-isolation-headers"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>progressive_web_app/ensure_cross_origin_isolation_headers</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-ensure-cross-origin-isolation-headers"><span class="std std-ref">🔗</span></a></p>
+<p>When enabled, the progressive web app will make sure that each request has cross-origin isolation headers (COEP/COOP).</p>
+<p>This can simplify the setup to serve the exported game.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-icon-144x144"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>progressive_web_app/icon_144x144</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-icon-144x144"><span class="std std-ref">🔗</span></a></p>
+<p>File path to the smallest icon for this web application. If not defined, defaults to the project icon.</p>
+<p><strong>Note:</strong> If the icon is not 144×144, it will be automatically resized for the final build.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-icon-180x180"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>progressive_web_app/icon_180x180</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-icon-180x180"><span class="std std-ref">🔗</span></a></p>
+<p>File path to the small icon for this web application. If not defined, defaults to the project icon.</p>
+<p><strong>Note:</strong> If the icon is not 180×180, it will be automatically resized for the final build.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-icon-512x512"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>progressive_web_app/icon_512x512</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-icon-512x512"><span class="std std-ref">🔗</span></a></p>
+<p>File path to the largest icon for this web application. If not defined, defaults to the project icon.</p>
+<p><strong>Note:</strong> If the icon is not 512×512, it will be automatically resized for the final build.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-offline-page"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>progressive_web_app/offline_page</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-offline-page"><span class="std std-ref">🔗</span></a></p>
+<p>The page to display, should the server hosting the page not be available. This page is saved in the client's machine.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-progressive-web-app-orientation"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>progressive_web_app/orientation</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-progressive-web-app-orientation"><span class="std std-ref">🔗</span></a></p>
+<p>The orientation to use when the web application is run through a mobile device.</p>
+<ul class="simple">
+<li><p><strong>Any:</strong> No orientation is forced.</p></li>
+<li><p><strong>Landscape:</strong> Forces a horizontal layout (wider than it is taller).</p></li>
+<li><p><strong>Portrait:</strong> Forces a vertical layout (taller than it is wider).</p></li>
+</ul>
+<p class="classref-property" id="class-editorexportplatformweb-property-threads-emscripten-pool-size"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>threads/emscripten_pool_size</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-threads-emscripten-pool-size"><span class="std std-ref">🔗</span></a></p>
+<p>The number of threads that emscripten will allocate at startup. A smaller value will allocate fewer threads and consume fewer system resources, but you may run the risk of running out of threads in the pool and needing to allocate more threads at run time which may cause a deadlock.</p>
+<p><strong>Note:</strong> Some browsers have a hard cap on the number of threads that can be allocated, so it is best to be cautious and keep this number low.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-threads-godot-pool-size"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>threads/godot_pool_size</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-threads-godot-pool-size"><span class="std std-ref">🔗</span></a></p>
+<p>Override for the default size of the <a class="reference internal" href="class_workerthreadpool.html#class-workerthreadpool"><span class="std std-ref">WorkerThreadPool</span></a>. This setting is used when <a class="reference internal" href="class_projectsettings.html#class-projectsettings-property-threading-worker-pool-max-threads"><span class="std std-ref">ProjectSettings.threading/worker_pool/max_threads</span></a> size is set to <code class="docutils literal notranslate"><span class="pre">-1</span></code> (which it is by default). This size must be smaller than <a class="reference internal" href="#class-editorexportplatformweb-property-threads-emscripten-pool-size"><span class="std std-ref">threads/emscripten_pool_size</span></a> otherwise deadlocks may occur.</p>
+<p>When using threads, this size needs to be large enough to accommodate features that rely on having a dedicated thread like <a class="reference internal" href="class_projectsettings.html#class-projectsettings-property-physics-2d-run-on-separate-thread"><span class="std std-ref">ProjectSettings.physics/2d/run_on_separate_thread</span></a> or <a class="reference internal" href="class_projectsettings.html#class-projectsettings-property-rendering-driver-threads-thread-model"><span class="std std-ref">ProjectSettings.rendering/driver/threads/thread_model</span></a>. In general, it is best to ensure that this is at least <code class="docutils literal notranslate"><span class="pre">4</span></code> and is at least <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">3</span></code> less than <a class="reference internal" href="#class-editorexportplatformweb-property-threads-emscripten-pool-size"><span class="std std-ref">threads/emscripten_pool_size</span></a>.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-variant-extensions-support"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>variant/extensions_support</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-variant-extensions-support"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code> enables <a class="reference internal" href="class_gdextension.html#class-gdextension"><span class="std std-ref">GDExtension</span></a> support for this web build.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-variant-thread-support"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>variant/thread_support</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-variant-thread-support"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the exported game will support threads. It requires <a class="reference external" href="https://web.dev/articles/coop-coep">a "cross-origin isolated" website</a>, which may be difficult to set up and is limited for security reasons (such as not being able to communicate with third-party websites).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">false</span></code>, the exported game will not support threads. As a result, it is more prone to performance and audio issues, but will only require to be run on an HTTPS website.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-vram-texture-compression-for-desktop"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>vram_texture_compression/for_desktop</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-vram-texture-compression-for-desktop"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, allows textures to be optimized for desktop through the S3TC/BPTC algorithm.</p>
+<p class="classref-property" id="class-editorexportplatformweb-property-vram-texture-compression-for-mobile"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>vram_texture_compression/for_mobile</strong> <a class="reference internal" href="#class-editorexportplatformweb-property-vram-texture-compression-for-mobile"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code> allows textures to be optimized for mobile through the ETC2/ASTC algorithm.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

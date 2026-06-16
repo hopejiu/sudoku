@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<meta content="WorldEnvironment" property="og:title"/>
+
+
+
+<meta content="Inherits: Node&lt; Object Default environment properties for the entire scene (post-processing effects, lighting and background settings). Description: The WorldEnvironment node is used to configur..." property="og:description"/>
+<meta content="Inherits: Node&lt; Object Default environment properties for the entire scene (post-processing effects, lighting and background settings). Description: The WorldEnvironment node is used to configur..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) WorldEnvironment — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_xranchor3d.html" rel="next" title="XRAnchor3D"/>
+<link href="class_window.html" rel="prev" title="Window"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_worldenvironment" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="worldenvironment">
+<span id="class-worldenvironment"></span><h1>WorldEnvironment<a class="headerlink" href="#worldenvironment" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Default environment properties for the entire scene (post-processing effects, lighting and background settings).</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The <strong>WorldEnvironment</strong> node is used to configure the default <a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> for the scene.</p>
+<p>The parameters defined in the <strong>WorldEnvironment</strong> can be overridden by an <a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> node set on the current <a class="reference internal" href="class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a>. Additionally, only one <strong>WorldEnvironment</strong> may be instantiated in a given scene at a time.</p>
+<p>The <strong>WorldEnvironment</strong> allows the user to specify default lighting parameters (e.g. ambient lighting), various post-processing effects (e.g. SSAO, DOF, Tonemapping), and how to draw the background (e.g. solid color, skybox). Usually, these are added in order to improve the realism/color balance of the scene.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/3d/environment_and_post_processing.html"><span class="doc">Environment and post-processing</span></a></p></li>
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2742">3D Material Testers Demo</a></p></li>
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2710">Third Person Shooter (TPS) Demo</a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_cameraattributes.html#class-cameraattributes"><span class="std std-ref">CameraAttributes</span></a></p></td>
+<td><p><a class="reference internal" href="#class-worldenvironment-property-camera-attributes"><span class="std std-ref">camera_attributes</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_compositor.html#class-compositor"><span class="std std-ref">Compositor</span></a></p></td>
+<td><p><a class="reference internal" href="#class-worldenvironment-property-compositor"><span class="std std-ref">compositor</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a></p></td>
+<td><p><a class="reference internal" href="#class-worldenvironment-property-environment"><span class="std std-ref">environment</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-worldenvironment-property-camera-attributes"><a class="reference internal" href="class_cameraattributes.html#class-cameraattributes"><span class="std std-ref">CameraAttributes</span></a> <strong>camera_attributes</strong> <a class="reference internal" href="#class-worldenvironment-property-camera-attributes"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_camera_attributes</strong>(value: <a class="reference internal" href="class_cameraattributes.html#class-cameraattributes"><span class="std std-ref">CameraAttributes</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_cameraattributes.html#class-cameraattributes"><span class="std std-ref">CameraAttributes</span></a> <strong>get_camera_attributes</strong>()</p></li>
+</ul>
+<p>The default <a class="reference internal" href="class_cameraattributes.html#class-cameraattributes"><span class="std std-ref">CameraAttributes</span></a> resource to use if none set on the <a class="reference internal" href="class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a>.</p>
+<p class="classref-property" id="class-worldenvironment-property-compositor"><a class="reference internal" href="class_compositor.html#class-compositor"><span class="std std-ref">Compositor</span></a> <strong>compositor</strong> <a class="reference internal" href="#class-worldenvironment-property-compositor"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_compositor</strong>(value: <a class="reference internal" href="class_compositor.html#class-compositor"><span class="std std-ref">Compositor</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_compositor.html#class-compositor"><span class="std std-ref">Compositor</span></a> <strong>get_compositor</strong>()</p></li>
+</ul>
+<p>The default <a class="reference internal" href="class_compositor.html#class-compositor"><span class="std std-ref">Compositor</span></a> resource to use if none set on the <a class="reference internal" href="class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a>.</p>
+<p class="classref-property" id="class-worldenvironment-property-environment"><a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> <strong>environment</strong> <a class="reference internal" href="#class-worldenvironment-property-environment"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_environment</strong>(value: <a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> <strong>get_environment</strong>()</p></li>
+</ul>
+<p>The <a class="reference internal" href="class_environment.html#class-environment"><span class="std std-ref">Environment</span></a> resource used by this <strong>WorldEnvironment</strong>, defining the default properties.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

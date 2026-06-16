@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Cross-compiling for iOS on Linux" property="og:title"/>
+
+
+
+<meta content="The procedure for this is somewhat complex and requires a lot of steps, but once you have the environment properly configured you can compile Godot for iOS anytime you want. Disclaimer: While it is..." property="og:description"/>
+<meta content="The procedure for this is somewhat complex and requires a lot of steps, but once you have the environment properly configured you can compile Godot for iOS anytime you want. Disclaimer: While it is..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Cross-compiling for iOS on Linux — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="compiling_with_dotnet.html" rel="next" title="Compiling with .NET"/>
+<link href="compiling_for_web.html" rel="prev" title="Compiling for the Web"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/compiling/cross-compiling_for_ios_on_linux" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="cross-compiling-for-ios-on-linux">
+<span id="doc-cross-compiling-for-ios-on-linux"></span><h1>Cross-compiling for iOS on Linux<a class="headerlink" href="#cross-compiling-for-ios-on-linux" title="Link to this heading"></a></h1>
+<p>The procedure for this is somewhat complex and requires a lot of steps,
+but once you have the environment properly configured you can
+compile Godot for iOS anytime you want.</p>
+<section id="disclaimer">
+<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Link to this heading"></a></h2>
+<p>While it is possible to compile for iOS on a Linux environment, Apple is
+very restrictive about the tools to be used (especially hardware-wise),
+allowing pretty much only their products to be used for development. So
+this is <strong>not official</strong>. However, in 2010 Apple said they relaxed some of the
+<a class="reference external" href="https://developer.apple.com/app-store/review/guidelines/">App Store review guidelines</a>
+to allow any tool to be used, as long as the resulting binary does not
+download any code, which means it should be OK to use the procedure
+described here and cross-compiling the binary.</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.apple.com/download/all/?q=Xcode">XCode with the iOS SDK</a>
+(you must be logged into an Apple ID to download Xcode).</p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org">Clang &gt;= 3.5</a> for your development
+machine installed and in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. It has to be version &gt;= 3.5
+to target <code class="docutils literal notranslate"><span class="pre">arm64</span></code> architecture.</p></li>
+<li><p><a class="reference external" href="https://mackyle.github.io/xar/">xar</a> and <a class="reference external" href="https://github.com/NiklasRosenstein/pbzx">pbzx</a>
+(required to extract the <code class="docutils literal notranslate"><span class="pre">.xip</span></code> archive Xcode comes in).</p>
+<ul>
+<li><p>For building xar and pbzx, you may want to follow
+<a class="reference external" href="https://gist.github.com/phracker/1944ce190e01963c550566b749bd2b54">this guide</a>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/tpoechtrager/cctools-port">cctools-port</a>
+for the needed build tools. The procedure for building is quite
+peculiar and is described below.</p>
+<ul>
+<li><p>This also has some extra dependencies: automake, autogen, libtool.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="configuring-the-environment">
+<h2>Configuring the environment<a class="headerlink" href="#configuring-the-environment" title="Link to this heading"></a></h2>
+<section id="preparing-the-sdk">
+<h3>Preparing the SDK<a class="headerlink" href="#preparing-the-sdk" title="Link to this heading"></a></h3>
+<p>Extract the Xcode <code class="docutils literal notranslate"><span class="pre">.xip</span></code> file you downloaded from Apple's developer website:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>xcode
+xar<span class="w"> </span>-xf<span class="w"> </span>/path/to/Xcode_X.x.xip<span class="w"> </span>-C<span class="w"> </span>xcode
+pbzx<span class="w"> </span>-n<span class="w"> </span>Content<span class="w"> </span><span class="p">|</span><span class="w"> </span>cpio<span class="w"> </span>-i
+<span class="o">[</span>...<span class="o">]</span>
+<span class="c1">######### Blocks</span>
+</pre></div>
+</div>
+<p>Note that for the commands below, you will need to replace the version (<code class="docutils literal notranslate"><span class="pre">x.x</span></code>)
+with whatever iOS SDK version you're using. If you don't know your iPhone SDK
+version, you can see the JSON file inside of
+<code class="docutils literal notranslate"><span class="pre">Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs</span></code>.</p>
+<p>Extract the iOS SDK:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">IOS_SDK_VERSION</span><span class="o">=</span><span class="s2">"x.x"</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>iPhoneSDK/iPhoneOS<span class="si">${</span><span class="nv">IOS_SDK_VERSION</span><span class="si">}</span>.sdk
+cp<span class="w"> </span>-r<span class="w"> </span>xcode/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/*<span class="w"> </span>iPhoneSDK/iPhoneOS<span class="si">${</span><span class="nv">IOS_SDK_VERSION</span><span class="si">}</span>.sdk
+cp<span class="w"> </span>-r<span class="w"> </span>xcode/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/*<span class="w"> </span>iPhoneSDK/iPhoneOS<span class="si">${</span><span class="nv">IOS_SDK_VERSION</span><span class="si">}</span>.sdk/usr/include/c++
+fusermount<span class="w"> </span>-u<span class="w"> </span>xcode
+</pre></div>
+</div>
+<p>Pack the SDK so that cctools can use it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>iPhoneSDK
+tar<span class="w"> </span>-cf<span class="w"> </span>-<span class="w"> </span>*<span class="w"> </span><span class="p">|</span><span class="w"> </span>xz<span class="w"> </span>-9<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span>iPhoneOS<span class="si">${</span><span class="nv">IOS_SDK_VERSION</span><span class="si">}</span>.sdk.tar.xz
+</pre></div>
+</div>
+</section>
+<section id="toolchain">
+<h3>Toolchain<a class="headerlink" href="#toolchain" title="Link to this heading"></a></h3>
+<p>Build cctools:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tpoechtrager/cctools-port.git
+<span class="nb">cd</span><span class="w"> </span>cctools-port/usage_examples/ios_toolchain
+./build.sh<span class="w"> </span>/path/iPhoneOS<span class="si">${</span><span class="nv">IOS_SDK_VERSION</span><span class="si">}</span>.sdk.tar.xz<span class="w"> </span>arm64
+</pre></div>
+</div>
+<p>Copy the tools to a nicer place. Note that the SCons scripts for
+building will look under <code class="docutils literal notranslate"><span class="pre">usr/bin</span></code> inside the directory you provide
+for the toolchain binaries, so you must copy to such subdirectory, akin
+to the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/iostoolchain/usr"</span>
+cp<span class="w"> </span>-r<span class="w"> </span>target/bin<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/iostoolchain/usr/"</span>
+</pre></div>
+</div>
+<p>Now you should have the iOS toolchain binaries in
+<code class="docutils literal notranslate"><span class="pre">$HOME/iostoolchain/usr/bin</span></code>.</p>
+</section>
+</section>
+<section id="compiling-godot-for-iphone">
+<h2>Compiling Godot for iPhone<a class="headerlink" href="#compiling-godot-for-iphone" title="Link to this heading"></a></h2>
+<p>Once you've done the above steps, you should keep two things in your
+environment: the built toolchain and the iPhoneOS SDK directory. Those
+can stay anywhere you want since you have to provide their paths to the
+SCons build command.</p>
+<p>For the iPhone platform to be detected, you need the <code class="docutils literal notranslate"><span class="pre">OSXCROSS_IOS</span></code>
+environment variable defined to anything.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">OSXCROSS_IOS</span><span class="o">=</span><span class="s2">"anything"</span>
+</pre></div>
+</div>
+<p>Now you can compile for iPhone using SCons like the standard Godot
+way, with some additional arguments to provide the correct paths:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>scons<span class="w"> </span><span class="nv">platform</span><span class="o">=</span>ios<span class="w"> </span><span class="nv">arch</span><span class="o">=</span>arm64<span class="w"> </span><span class="nv">target</span><span class="o">=</span>template_release<span class="w"> </span><span class="nv">IOS_SDK_PATH</span><span class="o">=</span><span class="s2">"/path/to/iPhoneSDK"</span><span class="w"> </span><span class="nv">IOS_TOOLCHAIN_PATH</span><span class="o">=</span><span class="s2">"/path/to/iostoolchain"</span><span class="w"> </span><span class="nv">ios_triple</span><span class="o">=</span><span class="s2">"arm-apple-darwin11-"</span>
+</pre></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

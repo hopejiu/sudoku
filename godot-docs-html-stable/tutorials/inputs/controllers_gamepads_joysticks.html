@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Controllers, gamepads, and joysticks" property="og:title"/>
+
+
+
+<meta content="Godot supports hundreds of controller models out of the box. Controllers are supported on Windows, macOS, Linux, Android, iOS, and Web. Note that more specialized devices such as steering wheels, r..." property="og:description"/>
+<meta content="Godot supports hundreds of controller models out of the box. Controllers are supported on Windows, macOS, Linux, Android, iOS, and Web. Note that more specialized devices such as steering wheels, r..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Controllers, gamepads, and joysticks — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="controller_features.html" rel="next" title="Controller features"/>
+<link href="custom_mouse_cursor.html" rel="prev" title="Customizing the mouse cursor"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/inputs/controllers_gamepads_joysticks" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="controllers-gamepads-and-joysticks">
+<span id="doc-controllers-gamepads-joysticks"></span><h1>Controllers, gamepads, and joysticks<a class="headerlink" href="#controllers-gamepads-and-joysticks" title="Link to this heading"></a></h1>
+<p>Godot supports hundreds of controller models out of the box.
+Controllers are supported on Windows, macOS, Linux, Android, iOS, and Web.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since Godot 4.5, the engine relies on <a class="reference external" href="https://www.libsdl.org/index.php">SDL 3</a>
+for controller support on Windows, macOS, and Linux. This means the list of
+supported controllers and their behavior should closely match what is available
+in other games and engines using SDL 3. Note that SDL is only used for input,
+not for windowing or sound.</p>
+<p>Prior to Godot 4.5, the engine used its own controller support code.
+This can cause certain controllers to behave incorrectly.
+This custom code is still used to support controllers on Android, iOS,
+and Web, so it may result in issues appearing only on those platforms.</p>
+</div>
+<p>Note that more specialized devices such as steering wheels, rudder pedals and
+<a class="reference external" href="https://en.wikipedia.org/wiki/HOTAS">HOTAS</a> are less tested and may not
+always work as expected. Overriding force feedback for those devices is also not
+implemented yet. If you have access to one of those devices, don't hesitate to
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/CONTRIBUTING.md#reporting-bugs">report bugs on GitHub</a>.</p>
+<p>In this guide, you will learn:</p>
+<ul class="simple">
+<li><p><strong>How to write your input logic to support both keyboard and controller inputs.</strong></p></li>
+<li><p><strong>How controllers can behave differently from keyboard/mouse input.</strong></p></li>
+<li><p><strong>Troubleshooting issues with controllers in Godot.</strong></p></li>
+</ul>
+<section id="supporting-universal-input">
+<h2>Supporting universal input<a class="headerlink" href="#supporting-universal-input" title="Link to this heading"></a></h2>
+<p>Thanks to Godot's input action system, Godot makes it possible to support both
+keyboard and controller input without having to write separate code paths.
+Instead of hardcoding keys or controller buttons in your scripts, you should
+create <em>input actions</em> in the Project Settings which will then refer to
+specified key and controller inputs.</p>
+<p>Input actions are explained in detail on the <a class="reference internal" href="inputevent.html#doc-inputevent"><span class="std std-ref">Using InputEvent</span></a> page.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike keyboard input, supporting both mouse and controller input for an
+action (such as looking around in a first-person game) will require
+different code paths since these have to be handled separately.</p>
+</div>
+<section id="which-input-singleton-method-should-i-use">
+<h3>Which Input singleton method should I use?<a class="headerlink" href="#which-input-singleton-method-should-i-use" title="Link to this heading"></a></h3>
+<p>There are 3 ways to get input in an analog-aware way:</p>
+<ul class="simple">
+<li><p>When you have two axes (such as joystick or WASD movement) and want both
+axes to behave as a single input, use <code class="docutils literal notranslate"><span class="pre">Input.get_vector()</span></code>:</p></li>
+</ul>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># `velocity` will be a Vector2 between `Vector2(-1.0, -1.0)` and `Vector2(1.0, 1.0)`.</span>
+<span class="c1"># This handles deadzone in a correct way for most use cases.</span>
+<span class="c1"># The resulting deadzone will have a circular shape as it generally should.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_vector</span><span class="p">(</span><span class="s2">"move_left"</span><span class="p">,</span><span class="w"> </span><span class="s2">"move_right"</span><span class="p">,</span><span class="w"> </span><span class="s2">"move_forward"</span><span class="p">,</span><span class="w"> </span><span class="s2">"move_back"</span><span class="p">)</span>
+<span class="c1"># The line below is similar to `get_vector()`, except that it handles</span>
+<span class="c1"># the deadzone in a less optimal way. The resulting deadzone will have</span>
+<span class="c1"># a square-ish shape when it should ideally have a circular shape.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span>
+<span class="w">        </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"move_right"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"move_left"</span><span class="p">),</span>
+<span class="w">        </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"move_back"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"move_forward"</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="nf">limit_length</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// `velocity` will be a Vector2 between `Vector2(-1.0, -1.0)` and `Vector2(1.0, 1.0)`.</span>
+<span class="c1">// This handles deadzone in a correct way for most use cases.</span>
+<span class="c1">// The resulting deadzone will have a circular shape as it generally should.</span>
+<span class="n">Vector2</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetVector</span><span class="p">(</span><span class="s">"move_left"</span><span class="p">,</span><span class="w"> </span><span class="s">"move_right"</span><span class="p">,</span><span class="w"> </span><span class="s">"move_forward"</span><span class="p">,</span><span class="w"> </span><span class="s">"move_back"</span><span class="p">);</span>
+<span class="c1">// The line below is similar to `get_vector()`, except that it handles</span>
+<span class="c1">// the deadzone in a less optimal way. The resulting deadzone will have</span>
+<span class="c1">// a square-ish shape when it should ideally have a circular shape.</span>
+<span class="n">Vector2</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector2</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"move_right"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"move_left"</span><span class="p">),</span>
+<span class="w">        </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"move_back"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"move_forward"</span><span class="p">)</span>
+<span class="p">).</span><span class="n">LimitLength</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<ul class="simple">
+<li><p>When you have one axis that can go both ways (such as a throttle on a
+flight stick), or when you want to handle separate axes individually,
+use <code class="docutils literal notranslate"><span class="pre">Input.get_axis()</span></code>:</p></li>
+</ul>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># `walk` will be a floating-point number between `-1.0` and `1.0`.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_axis</span><span class="p">(</span><span class="s2">"move_left"</span><span class="p">,</span><span class="w"> </span><span class="s2">"move_right"</span><span class="p">)</span>
+<span class="c1"># The line above is a shorter form of:</span>
+<span class="k">var</span><span class="w"> </span><span class="n">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"move_right"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"move_left"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// `walk` will be a floating-point number between `-1.0` and `1.0`.</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetAxis</span><span class="p">(</span><span class="s">"move_left"</span><span class="p">,</span><span class="w"> </span><span class="s">"move_right"</span><span class="p">);</span>
+<span class="c1">// The line above is a shorter form of:</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">walk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"move_right"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"move_left"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<ul class="simple">
+<li><p>For other types of analog input, such as handling a trigger or handling
+one direction at a time, use <code class="docutils literal notranslate"><span class="pre">Input.get_action_strength()</span></code>:</p></li>
+</ul>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># `strength` will be a floating-point number between `0.0` and `1.0`.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">strength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">get_action_strength</span><span class="p">(</span><span class="s2">"accelerate"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// `strength` will be a floating-point number between `0.0` and `1.0`.</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">strength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">GetActionStrength</span><span class="p">(</span><span class="s">"accelerate"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>For non-analog digital/boolean input (only "pressed" or "not pressed" values),
+such as controller buttons, mouse buttons or keyboard keys,
+use <code class="docutils literal notranslate"><span class="pre">Input.is_action_pressed()</span></code>:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># `jumping` will be a boolean with a value of `true` or `false`.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">jumping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="s2">"jump"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// `jumping` will be a boolean with a value of `true` or `false`.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">jumping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span><span class="p">.</span><span class="n">IsActionPressed</span><span class="p">(</span><span class="s">"jump"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need to know whether an input was <em>just</em> pressed in the previous
+frame, use <code class="docutils literal notranslate"><span class="pre">Input.is_action_just_pressed()</span></code> instead of
+<code class="docutils literal notranslate"><span class="pre">Input.is_action_pressed()</span></code>. Unlike <code class="docutils literal notranslate"><span class="pre">Input.is_action_pressed()</span></code> which
+returns <code class="docutils literal notranslate"><span class="pre">true</span></code> as long as the input is
+held, <code class="docutils literal notranslate"><span class="pre">Input.is_action_just_pressed()</span></code> will only return <code class="docutils literal notranslate"><span class="pre">true</span></code> for one
+frame after the button has been pressed.</p>
+</div>
+</section>
+</section>
+<section id="vibration">
+<h2>Vibration<a class="headerlink" href="#vibration" title="Link to this heading"></a></h2>
+<p>Vibration (also called <em>haptic feedback</em>) can be used to enhance the feel of a
+game. For instance, in a racing game, you can convey the surface the car is
+currently driving on through vibration, or create a sudden vibration on a crash.</p>
+<p>Use the Input singleton's
+<a class="reference internal" href="../../classes/class_input.html#class-input-method-start-joy-vibration"><span class="std std-ref">start_joy_vibration</span></a> method to
+start vibrating a gamepad. Use
+<a class="reference internal" href="../../classes/class_input.html#class-input-method-stop-joy-vibration"><span class="std std-ref">stop_joy_vibration</span></a> to stop
+vibration early (useful if no duration was specified when starting).</p>
+<p>On mobile devices, you can also use
+<a class="reference internal" href="../../classes/class_input.html#class-input-method-vibrate-handheld"><span class="std std-ref">vibrate_handheld</span></a> to vibrate the
+device itself (independently from the gamepad). On Android, this requires the
+<code class="docutils literal notranslate"><span class="pre">VIBRATE</span></code> permission to be enabled in the Android export preset before
+exporting the project.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vibration can be uncomfortable for certain players. Make sure to provide an
+in-game slider to disable vibration or reduce its intensity.</p>
+</div>
+</section>
+<section id="differences-between-keyboard-mouse-and-controller-input">
+<h2>Differences between keyboard/mouse and controller input<a class="headerlink" href="#differences-between-keyboard-mouse-and-controller-input" title="Link to this heading"></a></h2>
+<p>If you're used to handling keyboard and mouse input, you may be surprised by how
+controllers handle specific situations.</p>
+<section id="dead-zone">
+<h3>Dead zone<a class="headerlink" href="#dead-zone" title="Link to this heading"></a></h3>
+<p>Unlike keyboards and mice, controllers offer axes with <em>analog</em> inputs. The
+upside of analog inputs is that they offer additional flexibility for actions.
+Unlike digital inputs which can only provide strengths of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code>,
+an analog input can provide <em>any</em> strength between <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. The
+downside is that without a deadzone system, an analog axis' strength will never
+be equal to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> due to how the controller is physically built. Instead, it
+will linger at a low value such as <code class="docutils literal notranslate"><span class="pre">0.062</span></code>. This phenomenon is known as
+<em>drifting</em> and can be more noticeable on old or faulty controllers.</p>
+<p>Let's take a racing game as a real-world example. Thanks to analog inputs, we
+can steer the car slowly in one direction or another. However, without a
+deadzone system, the car would slowly steer by itself even if the player isn't
+touching the joystick. This is because the directional axis strength won't be
+equal to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> when we expect it to. Since we don't want our car to steer by
+itself in this case, we define a "dead zone" value of <code class="docutils literal notranslate"><span class="pre">0.2</span></code> which will ignore
+all input whose strength is lower than <code class="docutils literal notranslate"><span class="pre">0.2</span></code>. An ideal dead zone value is high
+enough to ignore the input caused by joystick drifting, but is low enough to not
+ignore actual input from the player.</p>
+<p>Godot features a built-in deadzone system to tackle this problem. The default
+value is <code class="docutils literal notranslate"><span class="pre">0.5</span></code>, but you can adjust it on a per-action basis in the Project
+Settings' Input Map tab. For <code class="docutils literal notranslate"><span class="pre">Input.get_vector()</span></code>, the deadzone can be
+specified as an optional 5th parameter. If not specified, it will calculate the
+average deadzone value from all of the actions in the vector.</p>
+</section>
+<section id="echo-events">
+<h3>"Echo" events<a class="headerlink" href="#echo-events" title="Link to this heading"></a></h3>
+<p>Unlike keyboard input, holding down a controller button such as a D-pad
+direction will <strong>not</strong> generate repeated input events at fixed intervals (also
+known as "echo" events). This is because the operating system never sends "echo"
+events for controller input in the first place.</p>
+<p>If you want controller buttons to send echo events, you will have to generate
+<a class="reference internal" href="../../classes/class_inputevent.html#class-inputevent"><span class="std std-ref">InputEvent</span></a> objects by code and parse them using
+<a class="reference internal" href="../../classes/class_input.html#class-input-method-parse-input-event"><span class="std std-ref">Input.parse_input_event()</span></a>
+at regular intervals. This can be accomplished
+with the help of a <a class="reference internal" href="../../classes/class_timer.html#class-timer"><span class="std std-ref">Timer</span></a> node.</p>
+</section>
+<section id="window-focus">
+<h3>Window focus<a class="headerlink" href="#window-focus" title="Link to this heading"></a></h3>
+<p>Unlike keyboard input, controller inputs can be seen by <strong>all</strong> windows on the
+operating system, including unfocused windows.</p>
+<p>While this is useful for
+<a class="reference external" href="https://nucleus-coop.github.io/">third-party split screen functionality</a>,
+it can also have adverse effects. Players may accidentally send controller inputs
+to the running project while interacting with another window.</p>
+<p>If you wish to ignore events when the project window isn't focused, you will
+need to create an <a class="reference internal" href="../scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">autoload</span></a> called <code class="docutils literal notranslate"><span class="pre">Focus</span></code>
+with the following script and use it to check all your inputs:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># Focus.gd</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+<span class="k">var</span><span class="w"> </span><span class="n">focused</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_notification</span><span class="p">(</span><span class="n">what</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">match</span><span class="w"> </span><span class="n">what</span><span class="p">:</span>
+<span class="w">        </span><span class="n">NOTIFICATION_APPLICATION_FOCUS_OUT</span><span class="p">:</span>
+<span class="w">            </span><span class="n">focused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+<span class="w">        </span><span class="n">NOTIFICATION_APPLICATION_FOCUS_IN</span><span class="p">:</span>
+<span class="w">            </span><span class="n">focused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">input_is_action_pressed</span><span class="p">(</span><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">StringName</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">focused</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">false</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">event_is_action_pressed</span><span class="p">(</span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="nb">InputEvent</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">StringName</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">focused</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="nf">is_action_pressed</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">false</span>
+</pre></div>
+</div>
+<p>Then, instead of using <code class="docutils literal notranslate"><span class="pre">Input.is_action_pressed(action)</span></code>, use
+<code class="docutils literal notranslate"><span class="pre">Focus.input_is_action_pressed(action)</span></code> where <code class="docutils literal notranslate"><span class="pre">action</span></code> is the name of
+the input action. Also, instead of using <code class="docutils literal notranslate"><span class="pre">event.is_action_pressed(action)</span></code>,
+use <code class="docutils literal notranslate"><span class="pre">Focus.event_is_action_pressed(event,</span> <span class="pre">action)</span></code> where <code class="docutils literal notranslate"><span class="pre">event</span></code> is an
+InputEvent reference and <code class="docutils literal notranslate"><span class="pre">action</span></code> is the name of the input action.</p>
+</section>
+<section id="power-saving-prevention">
+<h3>Power saving prevention<a class="headerlink" href="#power-saving-prevention" title="Link to this heading"></a></h3>
+<p>Unlike keyboard and mouse input, controller inputs do <strong>not</strong> inhibit sleep and
+power saving measures (such as turning off the screen after a certain amount of
+time has passed).</p>
+<p>To combat this, Godot enables power saving prevention by default when a project
+is running. If you notice the system is turning off its display when playing
+with a gamepad, check the value of <strong>Display &gt; Window &gt; Energy Saving &gt; Keep Screen On</strong>
+in the Project Settings.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can view a list of
+<a class="reference external" href="https://github.com/godotengine/godot/issues?q=is%3Aopen+is%3Aissue+label%3Atopic%3Ainput+gamepad">known issues with controller support</a>
+on GitHub.</p>
+</div>
+<section id="my-controller-isn-t-recognized-by-godot">
+<h3>My controller isn't recognized by Godot.<a class="headerlink" href="#my-controller-isn-t-recognized-by-godot" title="Link to this heading"></a></h3>
+<p>First, check that your controller is recognized by other applications. You can
+use the <a class="reference external" href="https://hardwaretester.com/gamepad">Gamepad Tester</a> website to confirm
+that your controller is recognized.</p>
+<p>On Windows Godot only supports up to 4 controllers at a time. This is
+because Godot uses the XInput API, which is limited to supporting 4 controllers
+at once. Additional controllers above this limit are ignored by Godot.</p>
+</section>
+<section id="my-controller-has-incorrectly-mapped-buttons-or-axes">
+<h3>My controller has incorrectly mapped buttons or axes.<a class="headerlink" href="#my-controller-has-incorrectly-mapped-buttons-or-axes" title="Link to this heading"></a></h3>
+<p>First, if your controller provides some kind of firmware update utility,
+make sure to run it to get the latest fixes from the manufacturer. For instance,
+Xbox One and Xbox Series controllers can have their firmware updated using the
+<a class="reference external" href="https://www.microsoft.com/en-us/p/xbox-accessories/9nblggh30xj3">Xbox Accessories app</a>.
+(This application only runs on Windows, so you have to use a Windows machine
+or a Windows virtual machine with USB support to update the controller's firmware.)
+After updating the controller's firmware, unpair the controller and pair it again
+with your PC if you are using the controller in wireless mode.</p>
+<p>If buttons are incorrectly mapped, this may be due to an erroneous mapping from
+the SDL game controller database used by Godot or the
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/input/godotcontrollerdb.txt">Godot game controller database</a>.
+In this case, you will need to create a custom mapping for your controller.</p>
+<p>There are many ways to create mappings. One option is to use the mapping wizard
+in the <a class="reference external" href="https://godotengine.org/asset-library/asset/2785">official Joypads demo</a>.
+Once you have a working mapping for your controller, you can test it by defining
+the <code class="docutils literal notranslate"><span class="pre">SDL_GAMECONTROLLERCONFIG</span></code> environment variable before running Godot:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-4-TGludXgvbWFjT1M=" name="TGludXgvbWFjT1M=" role="tab" tabindex="0">Linux/macOS</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-4-V2luZG93cyAoY21kKQ==" name="V2luZG93cyAoY21kKQ==" role="tab" tabindex="-1">Windows (cmd)</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-4-V2luZG93cyAoUG93ZXJTaGVsbCk=" name="V2luZG93cyAoUG93ZXJTaGVsbCk=" role="tab" tabindex="-1">Windows (PowerShell)</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-4-TGludXgvbWFjT1M=" name="TGludXgvbWFjT1M=" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SDL_GAMECONTROLLERCONFIG</span><span class="o">=</span><span class="s2">"your:mapping:here"</span>
+./path/to/godot.x86_64
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-V2luZG93cyAoY21kKQ==" name="V2luZG93cyAoY21kKQ==" role="tabpanel" tabindex="0"><div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="nv">SDL_GAMECONTROLLERCONFIG</span><span class="p">=</span>your:mapping:here
+<span class="k">path</span>\to\godot.exe
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-4-V2luZG93cyAoUG93ZXJTaGVsbCk=" name="V2luZG93cyAoUG93ZXJTaGVsbCk=" role="tabpanel" tabindex="0"><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$env:SDL_GAMECONTROLLERCONFIG</span><span class="p">=</span><span class="s2">"your:mapping:here"</span>
+<span class="n">path</span><span class="p">\</span><span class="n">to</span><span class="p">\</span><span class="n">godot</span><span class="p">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+</div></div>
+<p>To test mappings on non-desktop platforms or to distribute your project with
+additional controller mappings, you can add them by calling
+<a class="reference internal" href="../../classes/class_input.html#class-input-method-add-joy-mapping"><span class="std std-ref">Input.add_joy_mapping()</span></a>
+as early as possible in a script's <code class="docutils literal notranslate"><span class="pre">_ready()</span></code> function.</p>
+<p>Once you are satisfied with the custom mapping, you can contribute it for
+the next Godot version by opening a pull request on the
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/input/godotcontrollerdb.txt">Godot game controller database</a>.</p>
+</section>
+<section id="my-controller-works-on-a-given-platform-but-not-on-another-platform">
+<h3>My controller works on a given platform, but not on another platform.<a class="headerlink" href="#my-controller-works-on-a-given-platform-but-not-on-another-platform" title="Link to this heading"></a></h3>
+<section id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Link to this heading"></a></h4>
+<p>If you're using a self-compiled engine binary, make sure it was compiled with
+udev support. This is enabled by default, but it is possible to disable udev
+support by specifying <code class="docutils literal notranslate"><span class="pre">udev=no</span></code> on the SCons command line. If you're using an
+engine binary supplied by a Linux distribution, double-check whether it was
+compiled with udev support.</p>
+<p>Controllers can still work without udev support, but it is less reliable as
+regular polling must be used to check for controllers being connected or
+disconnected during gameplay (hotplugging).</p>
+</section>
+<section id="android-ios">
+<h4>Android/iOS<a class="headerlink" href="#android-ios" title="Link to this heading"></a></h4>
+<p>As described at the top of the page, controller support on mobile platforms relies
+on a custom implementation instead of using SDL for input. This means controller
+support may be less reliable than on desktop platforms.</p>
+<p>Support for SDL-based controller input on mobile platforms is
+<a class="reference external" href="https://github.com/godotengine/godot/pull/109645">planned</a>
+in a future release.</p>
+</section>
+<section id="web">
+<h4>Web<a class="headerlink" href="#web" title="Link to this heading"></a></h4>
+<p>Web controller support is often less reliable compared to "native" platforms.
+The quality of controller support tends to vary wildly across browsers. As a
+result, you may have to instruct your players to use a different browser if they
+can't get their controller to work.</p>
+<p>Like for mobile platforms, support for SDL-based controller input on the web platform
+is <a class="reference external" href="https://github.com/godotengine/godot/pull/109645">planned</a> in a future release.</p>
+</section>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

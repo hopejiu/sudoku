@@ -1,0 +1,215 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/SudokuGame.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/SudokuGrid.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/sudoku/NumberKeyboard.tscn" id="3"]
+
+[node name="SudokuGame" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+
+[node name="LeftGroup" type="HBoxContainer" parent="VBox/TopBar"]
+layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="VBox/TopBar/LeftGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "难度 8"
+
+[node name="TimerLabel" type="Label" parent="VBox/TopBar/LeftGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00"
+
+[node name="Spacer" type="Control" parent="VBox/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightGroup" type="HBoxContainer" parent="VBox/TopBar"]
+layout_mode = 2
+
+[node name="HintLabel" type="Label" parent="VBox/TopBar/RightGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+
+[node name="UndoBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "←"
+
+[node name="HintBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "?"
+
+[node name="PauseBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "⏸"
+
+[node name="Grid" type="Control" parent="VBox"]
+script = ExtResource("2")
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NumberKeyboard" parent="VBox" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+visible = false
+
+[node name="Center" type="CenterContainer" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PausePanel" type="Panel" parent="PauseOverlay/Center"]
+layout_mode = 0
+offset_left = -120
+offset_top = -100
+offset_right = 120
+offset_bottom = 100
+
+[node name="PauseVBox" type="VBoxContainer" parent="PauseOverlay/Center/PausePanel"]
+layout_mode = 0
+offset_left = 16
+offset_top = 16
+offset_right = -16
+offset_bottom = -16
+
+[node name="PauseTitle" type="Label" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+layout_mode = 2
+text = "暂停"
+horizontal_alignment = 1
+
+[node name="ResumeBtn" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "继续"
+
+[node name="RestartBtn" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "重新开始"
+
+[node name="MainMenuBtn" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "返回主界面"
+
+[node name="ConfirmLabel" type="Label" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+visible = false
+
+[node name="ConfirmBtnRow" type="HBoxContainer" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+layout_mode = 2
+visible = false
+
+[node name="ConfirmYes" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+text = "确定"
+
+[node name="ConfirmNo" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+text = "取消"
+
+[node name="VictoryOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+mouse_filter = 2
+visible = false
+
+[node name="Center" type="CenterContainer" parent="VictoryOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Popup" type="Panel" parent="VictoryOverlay/Center"]
+layout_mode = 0
+offset_left = -160
+offset_top = -140
+offset_right = 160
+offset_bottom = 140
+
+[node name="VBox" type="VBoxContainer" parent="VictoryOverlay/Center/Popup"]
+layout_mode = 0
+offset_left = 16
+offset_top = 16
+offset_right = -16
+offset_bottom = -16
+
+[node name="VTitle" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
+layout_mode = 2
+text = "通关！"
+horizontal_alignment = 1
+
+[node name="VTimeLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "用时: 00:00"
+horizontal_alignment = 1
+
+[node name="VHintLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "提示次数: 0"
+horizontal_alignment = 1
+
+[node name="VStreakLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="EasyBtn" type="Button" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "降低难度"
+
+[node name="SameBtn" type="Button" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "维持难度"
+
+[node name="HardBtn" type="Button" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "增加难度"

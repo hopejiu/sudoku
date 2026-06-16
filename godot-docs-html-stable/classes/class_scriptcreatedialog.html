@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ScriptCreateDialog" property="og:title"/>
+
+
+
+<meta content="Inherits: ConfirmationDialog&lt; AcceptDialog&lt; Window&lt; Viewport&lt; Node&lt; Object Godot editor's popup dialog for creating new Script files. Description: The ScriptCreateDialog creates..." property="og:description"/>
+<meta content="Inherits: ConfirmationDialog&lt; AcceptDialog&lt; Window&lt; Viewport&lt; Node&lt; Object Godot editor's popup dialog for creating new Script files. Description: The ScriptCreateDialog creates..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ScriptCreateDialog — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_scripteditor.html" rel="next" title="ScriptEditor"/>
+<link href="class_rootmotionview.html" rel="prev" title="RootMotionView"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_scriptcreatedialog" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="scriptcreatedialog">
+<span id="class-scriptcreatedialog"></span><h1>ScriptCreateDialog<a class="headerlink" href="#scriptcreatedialog" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_confirmationdialog.html#class-confirmationdialog"><span class="std std-ref">ConfirmationDialog</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_acceptdialog.html#class-acceptdialog"><span class="std std-ref">AcceptDialog</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_window.html#class-window"><span class="std std-ref">Window</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Godot editor's popup dialog for creating new <a class="reference internal" href="class_script.html#class-script"><span class="std std-ref">Script</span></a> files.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The <strong>ScriptCreateDialog</strong> creates script files according to a given template for a given scripting language. The standard use is to configure its fields prior to calling one of the <a class="reference internal" href="class_window.html#class-window-method-popup"><span class="std std-ref">Window.popup()</span></a> methods.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">dialog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ScriptCreateDialog</span><span class="o">.</span><span class="nf">new</span><span class="p">();</span>
+<span class="w">    </span><span class="n">dialog</span><span class="o">.</span><span class="nf">config</span><span class="p">(</span><span class="s2">"Node"</span><span class="p">,</span><span class="w"> </span><span class="s2">"res://new_node.gd"</span><span class="p">)</span><span class="w"> </span><span class="c1"># For in-engine types.</span>
+<span class="w">    </span><span class="n">dialog</span><span class="o">.</span><span class="nf">config</span><span class="p">(</span><span class="s2">"</span><span class="se">\"</span><span class="s2">res://base_node.gd</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span><span class="w"> </span><span class="s2">"res://derived_node.gd"</span><span class="p">)</span><span class="w"> </span><span class="c1"># For script types.</span>
+<span class="w">    </span><span class="n">dialog</span><span class="o">.</span><span class="nf">popup_centered</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">dialog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ScriptCreateDialog</span><span class="p">();</span>
+<span class="w">    </span><span class="n">dialog</span><span class="p">.</span><span class="n">Config</span><span class="p">(</span><span class="s">"Node"</span><span class="p">,</span><span class="w"> </span><span class="s">"res://NewNode.cs"</span><span class="p">);</span><span class="w"> </span><span class="c1">// For in-engine types.</span>
+<span class="w">    </span><span class="n">dialog</span><span class="p">.</span><span class="n">Config</span><span class="p">(</span><span class="s">"\"res://BaseNode.cs\""</span><span class="p">,</span><span class="w"> </span><span class="s">"res://DerivedNode.cs"</span><span class="p">);</span><span class="w"> </span><span class="c1">// For script types.</span>
+<span class="w">    </span><span class="n">dialog</span><span class="p">.</span><span class="n">PopupCentered</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p>dialog_hide_on_ok</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code> (overrides <a class="reference internal" href="class_acceptdialog.html#class-acceptdialog-property-dialog-hide-on-ok"><span class="std std-ref">AcceptDialog</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p>ok_button_text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">"Create"</span></code> (overrides <a class="reference internal" href="class_acceptdialog.html#class-acceptdialog-property-ok-button-text"><span class="std std-ref">AcceptDialog</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p>title</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">"Attach</span> <span class="pre">Node</span> <span class="pre">Script"</span></code> (overrides <a class="reference internal" href="class_window.html#class-window-property-title"><span class="std std-ref">Window</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-scriptcreatedialog-method-config"><span class="std std-ref">config</span></a>(inherits: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, path: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, built_in_enabled: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = true, load_enabled: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = true)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="signals">
+<h2>Signals<a class="headerlink" href="#signals" title="Link to this heading"></a></h2>
+<p class="classref-signal" id="class-scriptcreatedialog-signal-script-created"><strong>script_created</strong>(script: <a class="reference internal" href="class_script.html#class-script"><span class="std std-ref">Script</span></a>) <a class="reference internal" href="#class-scriptcreatedialog-signal-script-created"><span class="std std-ref">🔗</span></a></p>
+<p>Emitted when the user clicks the OK button.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-scriptcreatedialog-method-config"><abbr title="No return value.">void</abbr> <strong>config</strong>(inherits: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, path: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, built_in_enabled: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = true, load_enabled: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = true) <a class="reference internal" href="#class-scriptcreatedialog-method-config"><span class="std std-ref">🔗</span></a></p>
+<p>Prefills required fields to configure the ScriptCreateDialog for use.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXRFutureExtension" property="og:title"/>
+
+
+
+<meta content="Inherits: OpenXRExtensionWrapper&lt; Object The OpenXR Future extension allows for asynchronous APIs to be used. Description: This is a support extension in OpenXR that allows other OpenXR extensio..." property="og:description"/>
+<meta content="Inherits: OpenXRExtensionWrapper&lt; Object The OpenXR Future extension allows for asynchronous APIs to be used. Description: This is a support extension in OpenXR that allows other OpenXR extensio..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXRFutureExtension — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_openxrfutureresult.html" rel="next" title="OpenXRFutureResult"/>
+<link href="class_openxrframesynthesisextension.html" rel="prev" title="OpenXRFrameSynthesisExtension"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_openxrfutureextension" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxrfutureextension">
+<span id="class-openxrfutureextension"></span><h1>OpenXRFutureExtension<a class="headerlink" href="#openxrfutureextension" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_openxrextensionwrapper.html#class-openxrextensionwrapper"><span class="std std-ref">OpenXRExtensionWrapper</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>The OpenXR Future extension allows for asynchronous APIs to be used.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This is a support extension in OpenXR that allows other OpenXR extensions to start asynchronous functions and get a callback after this function finishes. It is not intended for consumption within GDScript but can be accessed from GDExtension.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-openxrfutureextension-method-cancel-future"><span class="std std-ref">cancel_future</span></a>(future: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrfutureextension-method-is-active"><span class="std std-ref">is_active</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_openxrfutureresult.html#class-openxrfutureresult"><span class="std std-ref">OpenXRFutureResult</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrfutureextension-method-register-future"><span class="std std-ref">register_future</span></a>(future: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, on_success: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> = Callable())</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-openxrfutureextension-method-cancel-future"><abbr title="No return value.">void</abbr> <strong>cancel_future</strong>(future: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-openxrfutureextension-method-cancel-future"><span class="std std-ref">🔗</span></a></p>
+<p>Cancels an in-progress future. <code class="docutils literal notranslate"><span class="pre">future</span></code> must be an <code class="docutils literal notranslate"><span class="pre">XrFutureEXT</span></code> value previously returned by an API that started an asynchronous function.</p>
+<p class="classref-method" id="class-openxrfutureextension-method-is-active"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_active</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-openxrfutureextension-method-is-active"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if futures are available in the OpenXR runtime used. This function will only return a usable result after OpenXR has been initialized.</p>
+<p class="classref-method" id="class-openxrfutureextension-method-register-future"><a class="reference internal" href="class_openxrfutureresult.html#class-openxrfutureresult"><span class="std std-ref">OpenXRFutureResult</span></a> <strong>register_future</strong>(future: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, on_success: <a class="reference internal" href="class_callable.html#class-callable"><span class="std std-ref">Callable</span></a> = Callable()) <a class="reference internal" href="#class-openxrfutureextension-method-register-future"><span class="std std-ref">🔗</span></a></p>
+<p>Register an OpenXR Future object so we monitor for completion. <code class="docutils literal notranslate"><span class="pre">future</span></code> must be an <code class="docutils literal notranslate"><span class="pre">XrFutureEXT</span></code> value previously returned by an API that started an asynchronous function.</p>
+<p>You can optionally specify <code class="docutils literal notranslate"><span class="pre">on_success</span></code>, it will be invoked on successful completion of the future.</p>
+<p>Or you can use the returned <a class="reference internal" href="class_openxrfutureresult.html#class-openxrfutureresult"><span class="std std-ref">OpenXRFutureResult</span></a> object to <code class="docutils literal notranslate"><span class="pre">await</span></code> its <a class="reference internal" href="class_openxrfutureresult.html#class-openxrfutureresult-signal-completed"><span class="std std-ref">OpenXRFutureResult.completed</span></a> signal.</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">future_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenXRFutureExtension</span><span class="o">.</span><span class="nf">register_future</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="k">await</span><span class="w"> </span><span class="n">future_result</span><span class="o">.</span><span class="vi">completed</span>
+<span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">future_result</span><span class="o">.</span><span class="nf">get_status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">OpenXRFutureResult</span><span class="o">.</span><span class="vi">RESULT_FINISHED</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Handle your success</span>
+<span class="w">    </span><span class="k k-ControlFlow">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

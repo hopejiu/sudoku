@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Overview of Godot's key concepts" property="og:title"/>
+
+
+
+<meta content="Every game engine revolves around abstractions you use to build your applications. In Godot, a game is a tree of nodes that you group together into scenes. You can then wire these nodes so they can..." property="og:description"/>
+<meta content="Every game engine revolves around abstractions you use to build your applications. In Godot, a game is a tree of nodes that you group together into scenes. You can then wire these nodes so they can..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Overview of Godot's key concepts — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="first_look_at_the_editor.html" rel="next" title="First look at Godot's interface"/>
+<link href="learn_to_code_with_gdscript.html" rel="prev" title="Learn to code with GDScript"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="getting_started/introduction/key_concepts_overview" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="overview-of-godot-s-key-concepts">
+<span id="doc-key-concepts-overview"></span><h1>Overview of Godot's key concepts<a class="headerlink" href="#overview-of-godot-s-key-concepts" title="Link to this heading"></a></h1>
+<p>Every game engine revolves around abstractions you use to build your
+applications. In Godot, a game is a <strong>tree</strong> of <strong>nodes</strong> that you group
+together into <strong>scenes</strong>. You can then wire these nodes so they can communicate
+using <strong>signals</strong>.</p>
+<p>These are the four concepts you will learn here. We're going to look at them
+briefly to give you a sense of how the engine works. In the getting started
+series, you will get to use them in practice.</p>
+<section id="scenes">
+<span id="doc-key-concepts-overview-scenes"></span><h2>Scenes<a class="headerlink" href="#scenes" title="Link to this heading"></a></h2>
+<p>In Godot, you break down your game in reusable scenes. A scene can be a character,
+a weapon, a menu in the user interface, a single house, an entire level, or
+anything you can think of. Godot's scenes are flexible; they fill the role of
+both prefabs and scenes in some other game engines.</p>
+<img alt="../../_images/key_concepts_main_menu.webp" src="../../_images/key_concepts_main_menu.webp"/>
+<p>You can also nest scenes. For example, you can put your character in a level,
+and drag and drop a scene as a child of it.</p>
+<img alt="../../_images/key_concepts_scene_example.webp" src="../../_images/key_concepts_scene_example.webp"/>
+</section>
+<section id="nodes">
+<h2>Nodes<a class="headerlink" href="#nodes" title="Link to this heading"></a></h2>
+<p>A scene is composed of one or more <strong>nodes</strong>. Nodes are your game's smallest
+building blocks that you arrange into trees. Here's an example of a character's
+nodes.</p>
+<img alt="../../_images/key_concepts_character_nodes.webp" src="../../_images/key_concepts_character_nodes.webp"/>
+<p>It is made of a <code class="docutils literal notranslate"><span class="pre">CharacterBody2D</span></code> node named "Player", a <code class="docutils literal notranslate"><span class="pre">Camera2D</span></code>, a
+<code class="docutils literal notranslate"><span class="pre">Sprite2D</span></code>, and a <code class="docutils literal notranslate"><span class="pre">CollisionShape2D</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The node names end with "2D" because this is a 2D scene. Their 3D
+counterparts have names that end with "3D". Be aware that "Spatial"
+Nodes are now called "Node3D" starting with Godot 4.</p>
+</div>
+<p>Notice how nodes and scenes look the same in the editor. When you save a tree of
+nodes as a scene, it then shows as a single node, with its internal structure
+hidden in the editor.</p>
+<p>Godot provides an extensive library of base node types you can combine and
+extend to build more powerful ones. 2D, 3D, or user interface, you will do most
+things with these nodes.</p>
+<img alt="../../_images/key_concepts_node_menu.webp" src="../../_images/key_concepts_node_menu.webp"/>
+</section>
+<section id="the-scene-tree">
+<h2>The scene tree<a class="headerlink" href="#the-scene-tree" title="Link to this heading"></a></h2>
+<p>All your game's scenes come together in the <strong>scene tree</strong>, literally a tree of
+scenes. And as scenes are trees of nodes, the scene tree also is a tree of
+nodes. But it's easier to think of your game in terms of scenes as they can
+represent characters, weapons, doors, or your user interface.</p>
+<img alt="../../_images/key_concepts_scene_tree.webp" src="../../_images/key_concepts_scene_tree.webp"/>
+</section>
+<section id="signals">
+<span id="doc-key-concepts-signals"></span><h2>Signals<a class="headerlink" href="#signals" title="Link to this heading"></a></h2>
+<p>Nodes emit signals when some event occurs. This feature allows you to make
+nodes communicate without hard-wiring them in code. It gives you a lot of
+flexibility in how you structure your scenes.</p>
+<img alt="../../_images/key_concepts_signals.webp" src="../../_images/key_concepts_signals.webp"/>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Signals are Godot's version of the <em>observer</em> pattern. You can read
+more about it here:
+<a class="reference external" href="https://gameprogrammingpatterns.com/observer.html">https://gameprogrammingpatterns.com/observer.html</a></p>
+</div>
+<p>For example, buttons emit a signal when pressed. You can connect a piece of code
+to this signal which will run in reaction to this event, like starting the game
+or opening a menu.</p>
+<p>Other built-in signals can tell you when two objects collided, when a character
+or monster entered a given area, and much more. You can also define new signals
+tailored to your game.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>Nodes, scenes, the scene tree, and signals are four core concepts in Godot that
+you will manipulate all the time.</p>
+<p>Nodes are your game's smallest building blocks. You combine them to create scenes
+that you then combine and nest into the scene tree. You can then use signals to
+make nodes react to events in other nodes or different scene tree branches.</p>
+<p>After this short breakdown, you probably have many questions. Bear with us as
+you will get many answers throughout the getting started series.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="SpringArm3D" property="og:title"/>
+
+
+
+<meta content="Inherits: Node3D&lt; Node&lt; Object A 3D raycast that dynamically moves its children near the collision point. Description: SpringArm3D casts a ray or a shape along its Z axis and moves all its di..." property="og:description"/>
+<meta content="Inherits: Node3D&lt; Node&lt; Object A 3D raycast that dynamically moves its children near the collision point. Description: SpringArm3D casts a ray or a shape along its Z axis and moves all its di..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) SpringArm3D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_springbonecollision3d.html" rel="next" title="SpringBoneCollision3D"/>
+<link href="class_spotlight3d.html" rel="prev" title="SpotLight3D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_springarm3d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="springarm3d">
+<span id="class-springarm3d"></span><h1>SpringArm3D<a class="headerlink" href="#springarm3d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A 3D raycast that dynamically moves its children near the collision point.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p><strong>SpringArm3D</strong> casts a ray or a shape along its Z axis and moves all its direct children to the collision point, with an optional margin. This is useful for 3rd person cameras that move closer to the player when inside a tight space (you may need to exclude the player's collider from the <strong>SpringArm3D</strong>'s collision check).</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/3d/spring_arm.html"><span class="doc">Third-person camera with spring arm</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-property-collision-mask"><span class="std std-ref">collision_mask</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-property-margin"><span class="std std-ref">margin</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.01</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_shape3d.html#class-shape3d"><span class="std std-ref">Shape3D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-property-shape"><span class="std std-ref">shape</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-property-spring-length"><span class="std std-ref">spring_length</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-method-add-excluded-object"><span class="std std-ref">add_excluded_object</span></a>(RID: <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-method-clear-excluded-objects"><span class="std std-ref">clear_excluded_objects</span></a>()</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-method-get-hit-length"><span class="std std-ref">get_hit_length</span></a>()</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-springarm3d-method-remove-excluded-object"><span class="std std-ref">remove_excluded_object</span></a>(RID: <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-springarm3d-property-collision-mask"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>collision_mask</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-springarm3d-property-collision-mask"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_collision_mask</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_collision_mask</strong>()</p></li>
+</ul>
+<p>The layers against which the collision check will be done. See <a class="reference external" href="../tutorials/physics/physics_introduction.html#collision-layers-and-masks">Collision layers and masks</a> in the documentation for more information.</p>
+<p class="classref-property" id="class-springarm3d-property-margin"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>margin</strong> = <code class="docutils literal notranslate"><span class="pre">0.01</span></code> <a class="reference internal" href="#class-springarm3d-property-margin"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_margin</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_margin</strong>()</p></li>
+</ul>
+<p>When the collision check is made, a candidate length for the SpringArm3D is given.</p>
+<p>The margin is then subtracted to this length and the translation is applied to the child objects of the SpringArm3D.</p>
+<p>This margin is useful for when the SpringArm3D has a <a class="reference internal" href="class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> as a child node: without the margin, the <a class="reference internal" href="class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> would be placed on the exact point of collision, while with the margin the <a class="reference internal" href="class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> would be placed close to the point of collision.</p>
+<p class="classref-property" id="class-springarm3d-property-shape"><a class="reference internal" href="class_shape3d.html#class-shape3d"><span class="std std-ref">Shape3D</span></a> <strong>shape</strong> <a class="reference internal" href="#class-springarm3d-property-shape"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_shape</strong>(value: <a class="reference internal" href="class_shape3d.html#class-shape3d"><span class="std std-ref">Shape3D</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_shape3d.html#class-shape3d"><span class="std std-ref">Shape3D</span></a> <strong>get_shape</strong>()</p></li>
+</ul>
+<p>The <a class="reference internal" href="class_shape3d.html#class-shape3d"><span class="std std-ref">Shape3D</span></a> to use for the SpringArm3D.</p>
+<p>When the shape is set, the SpringArm3D will cast the <a class="reference internal" href="class_shape3d.html#class-shape3d"><span class="std std-ref">Shape3D</span></a> on its z axis instead of performing a ray cast.</p>
+<p class="classref-property" id="class-springarm3d-property-spring-length"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>spring_length</strong> = <code class="docutils literal notranslate"><span class="pre">1.0</span></code> <a class="reference internal" href="#class-springarm3d-property-spring-length"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_length</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_length</strong>()</p></li>
+</ul>
+<p>The maximum extent of the SpringArm3D. This is used as a length for both the ray and the shape cast used internally to calculate the desired position of the SpringArm3D's child nodes.</p>
+<p>To know more about how to perform a shape cast or a ray cast, please consult the <a class="reference internal" href="class_physicsdirectspacestate3d.html#class-physicsdirectspacestate3d"><span class="std std-ref">PhysicsDirectSpaceState3D</span></a> documentation.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-springarm3d-method-add-excluded-object"><abbr title="No return value.">void</abbr> <strong>add_excluded_object</strong>(RID: <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a>) <a class="reference internal" href="#class-springarm3d-method-add-excluded-object"><span class="std std-ref">🔗</span></a></p>
+<p>Adds the <a class="reference internal" href="class_physicsbody3d.html#class-physicsbody3d"><span class="std std-ref">PhysicsBody3D</span></a> object with the given <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a> to the list of <a class="reference internal" href="class_physicsbody3d.html#class-physicsbody3d"><span class="std std-ref">PhysicsBody3D</span></a> objects excluded from the collision check.</p>
+<p class="classref-method" id="class-springarm3d-method-clear-excluded-objects"><abbr title="No return value.">void</abbr> <strong>clear_excluded_objects</strong>() <a class="reference internal" href="#class-springarm3d-method-clear-excluded-objects"><span class="std std-ref">🔗</span></a></p>
+<p>Clears the list of <a class="reference internal" href="class_physicsbody3d.html#class-physicsbody3d"><span class="std std-ref">PhysicsBody3D</span></a> objects excluded from the collision check.</p>
+<p class="classref-method" id="class-springarm3d-method-get-hit-length"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_hit_length</strong>() <a class="reference internal" href="#class-springarm3d-method-get-hit-length"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the spring arm's current length.</p>
+<p class="classref-method" id="class-springarm3d-method-remove-excluded-object"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>remove_excluded_object</strong>(RID: <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a>) <a class="reference internal" href="#class-springarm3d-method-remove-excluded-object"><span class="std std-ref">🔗</span></a></p>
+<p>Removes the given <a class="reference internal" href="class_rid.html#class-rid"><span class="std std-ref">RID</span></a> from the list of <a class="reference internal" href="class_physicsbody3d.html#class-physicsbody3d"><span class="std std-ref">PhysicsBody3D</span></a> objects excluded from the collision check.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

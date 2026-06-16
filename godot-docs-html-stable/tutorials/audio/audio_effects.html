@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Audio effects" property="og:title"/>
+
+
+
+<meta content="Godot includes several audio effects that can be added to an audio bus to alter every sound file that goes through that bus. Try them all out to get a sense of how they alter sound. Here follows a ..." property="og:description"/>
+<meta content="Godot includes several audio effects that can be added to an audio bus to alter every sound file that goes through that bus. Try them all out to get a sense of how they alter sound. Here follows a ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Audio effects — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="audio_streams.html" rel="next" title="Audio streams"/>
+<link href="audio_buses.html" rel="prev" title="Audio buses"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/audio/audio_effects" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="audio-effects">
+<span id="doc-audio-effects"></span><h1>Audio effects<a class="headerlink" href="#audio-effects" title="Link to this heading"></a></h1>
+<p>Godot includes several audio effects that can be added to an audio bus to
+alter every sound file that goes through that bus.</p>
+<img alt="../../_images/audio_buses4.webp" src="../../_images/audio_buses4.webp"/>
+<p>Try them all out to get a sense of how they alter sound. Here follows a short
+description of the available effects:</p>
+<section id="amplify">
+<h2>Amplify<a class="headerlink" href="#amplify" title="Link to this heading"></a></h2>
+<p>Amplify changes the volume of the signal. Some care needs to be taken, though:
+setting the level too high can make the sound digitally clip, which can produce
+unpleasant crackles and pops.</p>
+</section>
+<section id="bandlimit-and-bandpass">
+<h2>BandLimit and BandPass<a class="headerlink" href="#bandlimit-and-bandpass" title="Link to this heading"></a></h2>
+<p>These are resonant filters which block frequencies around the <em>Cutoff</em> point.
+BandPass can be used to simulate sound passing through an old telephone line or
+megaphone. Modulating the BandPass frequency can simulate the sound of a wah-wah
+guitar pedal, think of the guitar in Jimi Hendrix's <em>Voodoo Child (Slight
+Return)</em>.</p>
+</section>
+<section id="capture">
+<h2>Capture<a class="headerlink" href="#capture" title="Link to this heading"></a></h2>
+<p>The Capture effect copies the audio frames of the audio bus that it is on into
+an internal buffer. This can be used to capture data from the microphone
+or to transmit audio over the network in real-time.</p>
+</section>
+<section id="chorus">
+<h2>Chorus<a class="headerlink" href="#chorus" title="Link to this heading"></a></h2>
+<p>As the name of the effect implies, the Chorus effect makes a single audio sample
+sound like an entire chorus. It does this by duplicating a signal and very
+slightly altering the timing and pitch of each duplicate, and varying that
+over time via an LFO (low frequency oscillator). The duplicate(s) are then
+mixed back together with the original signal, producing a lush, wide, and
+large sound. Although chorus is traditionally used for voices, it can be
+desirable with almost any type of sound.</p>
+</section>
+<section id="compressor">
+<h2>Compressor<a class="headerlink" href="#compressor" title="Link to this heading"></a></h2>
+<p>A dynamic range compressor automatically attenuates (ducks) the level of the incoming
+signal when its amplitude exceeds a certain threshold. The level of attenuation
+applied is proportional to how far the incoming audio exceeds the threshold.
+The compressor's Ratio parameter controls the degree of attenuation.
+One of the main uses of a compressor is to reduce the dynamic range of signals
+with very loud and quiet parts. Reducing the dynamic range of a signal
+can make it fit more comfortably in a mix.</p>
+<p>The compressor has many uses. For example:</p>
+<ul class="simple">
+<li><p>It can be used in the Master bus to compress the whole output prior to being hit by a limiter, making the effect of the limiter much more subtle.</p></li>
+<li><p>It can be used in voice channels to ensure they sound as even as possible.</p></li>
+<li><p>It can be <em>sidechained</em> by another sound source. This means it can reduce the sound level
+of one signal using the level of another audio bus for threshold detection.
+This technique is very common in video game mixing to "duck" the level of
+music or sound effects when in-game or multiplayer voices need to be fully audible.</p></li>
+<li><p>It can accentuate transients by using a slower attack.
+This can make sound effects more punchy.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your goal is to prevent a signal from exceeding a given amplitude
+altogether, rather than to reduce the dynamic range of the signal,
+a <a class="reference internal" href="#doc-audio-buses-limiter"><span class="std std-ref">limiter</span></a> is likely a better choice
+than a compressor for this purpose. However, applying compression before
+a limiter is still good practice.</p>
+</div>
+</section>
+<section id="delay">
+<h2>Delay<a class="headerlink" href="#delay" title="Link to this heading"></a></h2>
+<p>Digital delay essentially duplicates a signal and repeats it at a specified
+speed with a volume level that decays for each repeat. Delay is great for
+simulating the acoustic space of a canyon or large room, where sound bounces
+have a lot of <em>delay</em> between their repeats. This is in contrast to reverb,
+which has a more natural and blurred sound to it. Using this in conjunction
+with reverb can create very natural sounding environments!</p>
+</section>
+<section id="distortion">
+<h2>Distortion<a class="headerlink" href="#distortion" title="Link to this heading"></a></h2>
+<p>Makes the sound distorted. Godot offers several types of distortion:</p>
+<ul class="simple">
+<li><p><em>Overdrive</em> sounds like a guitar distortion pedal or megaphone. Sounds distorted with this sound like they're coming through
+a low-quality speaker or device.</p></li>
+<li><p><em>Tan</em> sounds like another interesting flavor of overdrive.</p></li>
+<li><p><em>Bit crushing</em> clamps the amplitude of the signal, making it sound flat and crunchy.</p></li>
+</ul>
+<p>All three types of distortion can add higher frequency sounds to an original sound, making it stand out better in a mix.</p>
+</section>
+<section id="eq">
+<h2>EQ<a class="headerlink" href="#eq" title="Link to this heading"></a></h2>
+<p>EQ is what all other equalizers inherit from. It can be extended with Custom
+scripts to create an equalizer with a custom number of bands.</p>
+</section>
+<section id="eq6-eq10-eq21">
+<h2>EQ6, EQ10, EQ21<a class="headerlink" href="#eq6-eq10-eq21" title="Link to this heading"></a></h2>
+<p>Godot provides three equalizers with different numbers of bands, which
+are represented in the title (6, 10, and 21 bands, respectively).
+An equalizer on the Master bus can be useful for cutting low and high
+frequencies that the device's speakers can't reproduce well.
+For example, phone or tablet speakers usually don't reproduce
+low frequency sounds well, and could make a limiter or compressor
+attenuate sounds that aren't even audible to the user anyway.</p>
+<p>Note: The equalizer effect can be disabled when headphones are plugged in, giving the user the best of both worlds.</p>
+</section>
+<section id="filter">
+<h2>Filter<a class="headerlink" href="#filter" title="Link to this heading"></a></h2>
+<p>Filter is what all other filters inherit from and should not be used directly.</p>
+</section>
+<section id="hardlimiter">
+<h2>HardLimiter<a class="headerlink" href="#hardlimiter" title="Link to this heading"></a></h2>
+<p>A limiter is similar to a compressor, but it's less flexible and designed to
+prevent a signal's amplitude exceeding a given dB threshold. Adding a limiter to the final point of
+the Master bus is good practice, as it offers an easy safeguard against clipping.</p>
+</section>
+<section id="highpassfilter">
+<h2>HighPassFilter<a class="headerlink" href="#highpassfilter" title="Link to this heading"></a></h2>
+<p>Cuts frequencies below a specific <em>Cutoff</em> frequency.
+HighPassFilter is used to reduce the bass content of a
+signal.</p>
+</section>
+<section id="highshelffilter">
+<h2>HighShelfFilter<a class="headerlink" href="#highshelffilter" title="Link to this heading"></a></h2>
+<p>Reduces all frequencies above a specific <em>Cutoff</em> frequency.</p>
+</section>
+<section id="limiter">
+<span id="doc-audio-buses-limiter"></span><h2>Limiter<a class="headerlink" href="#limiter" title="Link to this heading"></a></h2>
+<p>This is the old limiter effect, and it is recommended to use the new HardLimiter
+effect instead.</p>
+<p>Here is an example of how this effect works, if the ceiling is set to -12 dB, and the
+threshold is 0 dB, all samples going through get reduced by 12dB. This changes the
+waveform of the sound and introduces distortion.</p>
+<p>This effect is being kept to preserve compatibility, however it should be considered
+deprecated.</p>
+</section>
+<section id="lowpassfilter">
+<h2>LowPassFilter<a class="headerlink" href="#lowpassfilter" title="Link to this heading"></a></h2>
+<p>Cuts frequencies above a specific <em>Cutoff</em> frequency and can also resonate
+(boost frequencies close to the <em>Cutoff</em> frequency). Low pass filters can be
+used to simulate "muffled" sound. For instance, underwater sounds, sounds
+blocked by walls, or distant sounds.</p>
+</section>
+<section id="lowshelffilter">
+<h2>LowShelfFilter<a class="headerlink" href="#lowshelffilter" title="Link to this heading"></a></h2>
+<p>Reduces all frequencies below a specific <em>Cutoff</em> frequency.</p>
+</section>
+<section id="notchfilter">
+<h2>NotchFilter<a class="headerlink" href="#notchfilter" title="Link to this heading"></a></h2>
+<p>The opposite of the BandPassFilter, it removes a band of sound from the
+frequency spectrum at a given <em>Cutoff</em> frequency.</p>
+</section>
+<section id="panner">
+<h2>Panner<a class="headerlink" href="#panner" title="Link to this heading"></a></h2>
+<p>The Panner allows the stereo balance of a signal to be adjusted between
+the left and right channels. Headphones are recommended when configuring in this effect.</p>
+</section>
+<section id="phaser">
+<h2>Phaser<a class="headerlink" href="#phaser" title="Link to this heading"></a></h2>
+<p>This effect is formed by de-phasing two duplicates of the same sound so
+they cancel each other out in an interesting way. Phaser produces a
+pleasant whooshing sound that moves back and forth through the audio
+spectrum, and can be a great way to create sci-fi effects or Darth
+Vader-like voices.</p>
+</section>
+<section id="pitchshift">
+<h2>PitchShift<a class="headerlink" href="#pitchshift" title="Link to this heading"></a></h2>
+<p>This effect allows the adjustment of the signal's pitch independently of its
+speed. All frequencies can be increased/decreased with minimal effect on
+transients. PitchShift can be useful to create unusually high or deep voices.
+Do note that altering pitch can sound unnatural when pushed outside of a
+narrow window.</p>
+</section>
+<section id="record">
+<h2>Record<a class="headerlink" href="#record" title="Link to this heading"></a></h2>
+<p>The Record effect allows the user to record sound from a microphone.</p>
+</section>
+<section id="reverb">
+<h2>Reverb<a class="headerlink" href="#reverb" title="Link to this heading"></a></h2>
+<p>Reverb simulates rooms of different sizes. It has adjustable parameters that can
+be tweaked to obtain the sound of a specific room. Reverb is commonly outputted
+from <a class="reference internal" href="../../classes/class_area3d.html#class-area3d"><span class="std std-ref">Area3Ds</span></a>
+(see <a class="reference internal" href="audio_streams.html#doc-audio-streams-reverb-buses"><span class="std std-ref">Reverb buses</span></a>), or to apply
+a "chamber" feel to all sounds.</p>
+</section>
+<section id="spectrumanalyzer">
+<h2>SpectrumAnalyzer<a class="headerlink" href="#spectrumanalyzer" title="Link to this heading"></a></h2>
+<p>This effect doesn't alter audio, instead, you add this effect to buses you want
+a spectrum analysis of. This would typically be used for audio visualization.
+Visualizing voices can be a great way to draw attention to them without just
+increasing their volume.
+A demo project using this can be found <a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/audio/spectrum">here</a>.</p>
+</section>
+<section id="stereoenhance">
+<h2>StereoEnhance<a class="headerlink" href="#stereoenhance" title="Link to this heading"></a></h2>
+<p>This effect uses a few algorithms to enhance a signal's stereo width.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ShaderGlobalsOverride" property="og:title"/>
+
+
+
+<meta content="Inherits: Node&lt; Object A node used to override global shader parameters' values in a scene. Description: Similar to how a WorldEnvironment node can be used to override the environment while..." property="og:description"/>
+<meta content="Inherits: Node&lt; Object A node used to override global shader parameters' values in a scene. Description: Similar to how a WorldEnvironment node can be used to override the environment while..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ShaderGlobalsOverride — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_shapecast2d.html" rel="next" title="ShapeCast2D"/>
+<link href="class_separator.html" rel="prev" title="Separator"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_shaderglobalsoverride" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="shaderglobalsoverride">
+<span id="class-shaderglobalsoverride"></span><h1>ShaderGlobalsOverride<a class="headerlink" href="#shaderglobalsoverride" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A node used to override global shader parameters' values in a scene.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Similar to how a <a class="reference internal" href="class_worldenvironment.html#class-worldenvironment"><span class="std std-ref">WorldEnvironment</span></a> node can be used to override the environment while a specific scene is loaded, <strong>ShaderGlobalsOverride</strong> can be used to override global shader parameters temporarily. Once the node is removed, the project-wide values for the global shader parameters are restored. See the <a class="reference internal" href="class_renderingserver.html#class-renderingserver"><span class="std std-ref">RenderingServer</span></a> <code class="docutils literal notranslate"><span class="pre">global_shader_parameter_*</span></code> methods for more information.</p>
+<p><strong>Note:</strong> Only one <strong>ShaderGlobalsOverride</strong> can be used per scene. If there is more than one <strong>ShaderGlobalsOverride</strong> node in the scene tree, only the first node (in tree order) will be taken into account.</p>
+<p><strong>Note:</strong> All <strong>ShaderGlobalsOverride</strong> nodes are made part of a <code class="docutils literal notranslate"><span class="pre">"shader_overrides_group"</span></code> group when they are added to the scene tree. The currently active <strong>ShaderGlobalsOverride</strong> node also has a <code class="docutils literal notranslate"><span class="pre">"shader_overrides_group_active"</span></code> group added to it. You can use this to check which <strong>ShaderGlobalsOverride</strong> node is currently active.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/shaders/shader_reference/shading_language.html"><span class="doc">Shading language</span></a></p></li>
+</ul>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

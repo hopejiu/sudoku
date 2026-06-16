@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OpenXRSpatialCapabilityConfigurationBaseHeader" property="og:title"/>
+
+
+
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: RefCounted&lt; Object Inherited By: OpenXRSpatialCapabilityConfigurationAnchor, OpenXRSpatialCapabilityConfiguration..." property="og:description"/>
+<meta content="Experimental: This class may be changed or removed in future versions. Inherits: RefCounted&lt; Object Inherited By: OpenXRSpatialCapabilityConfigurationAnchor, OpenXRSpatialCapabilityConfiguration..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OpenXRSpatialCapabilityConfigurationBaseHeader — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_openxrspatialcapabilityconfigurationmicroqrcode.html" rel="next" title="OpenXRSpatialCapabilityConfigurationMicroQrCode"/>
+<link href="class_openxrspatialcapabilityconfigurationaruco.html" rel="prev" title="OpenXRSpatialCapabilityConfigurationAruco"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_openxrspatialcapabilityconfigurationbaseheader" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="openxrspatialcapabilityconfigurationbaseheader">
+<span id="class-openxrspatialcapabilityconfigurationbaseheader"></span><h1>OpenXRSpatialCapabilityConfigurationBaseHeader<a class="headerlink" href="#openxrspatialcapabilityconfigurationbaseheader" title="Link to this heading"></a></h1>
+<p><strong>Experimental:</strong> This class may be changed or removed in future versions.</p>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p><strong>Inherited By:</strong> <a class="reference internal" href="class_openxrspatialcapabilityconfigurationanchor.html#class-openxrspatialcapabilityconfigurationanchor"><span class="std std-ref">OpenXRSpatialCapabilityConfigurationAnchor</span></a>, <a class="reference internal" href="class_openxrspatialcapabilityconfigurationapriltag.html#class-openxrspatialcapabilityconfigurationapriltag"><span class="std std-ref">OpenXRSpatialCapabilityConfigurationAprilTag</span></a>, <a class="reference internal" href="class_openxrspatialcapabilityconfigurationaruco.html#class-openxrspatialcapabilityconfigurationaruco"><span class="std std-ref">OpenXRSpatialCapabilityConfigurationAruco</span></a>, <a class="reference internal" href="class_openxrspatialcapabilityconfigurationmicroqrcode.html#class-openxrspatialcapabilityconfigurationmicroqrcode"><span class="std std-ref">OpenXRSpatialCapabilityConfigurationMicroQrCode</span></a>, <a class="reference internal" href="class_openxrspatialcapabilityconfigurationplanetracking.html#class-openxrspatialcapabilityconfigurationplanetracking"><span class="std std-ref">OpenXRSpatialCapabilityConfigurationPlaneTracking</span></a>, <a class="reference internal" href="class_openxrspatialcapabilityconfigurationqrcode.html#class-openxrspatialcapabilityconfigurationqrcode"><span class="std std-ref">OpenXRSpatialCapabilityConfigurationQrCode</span></a></p>
+<p>Wrapper base class for OpenXR Spatial Capability Configuration headers.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Wrapper base class for OpenXR Spatial Capability Configuration headers. This class needs to be implemented for each capability configuration structure usable within OpenXR's spatial entities system.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-private-method-get-configuration"><span class="std std-ref">_get_configuration</span></a>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-private-method-has-valid-configuration"><span class="std std-ref">_has_valid_configuration</span></a>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-method-has-valid-configuration"><span class="std std-ref">has_valid_configuration</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-openxrspatialcapabilityconfigurationbaseheader-private-method-get-configuration"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>_get_configuration</strong>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-private-method-get-configuration"><span class="std std-ref">🔗</span></a></p>
+<p>Return a pointer (encoded as an <code class="docutils literal notranslate"><span class="pre">int64_t</span></code>) to a struct holding the spatial capability configuration data. The memory for this struct should remain accessible as long as this object remains instantiated.</p>
+<p class="classref-method" id="class-openxrspatialcapabilityconfigurationbaseheader-private-method-has-valid-configuration"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>_has_valid_configuration</strong>() <abbr title="This method should typically be overridden by the user to have any effect.">virtual</abbr> <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-private-method-has-valid-configuration"><span class="std std-ref">🔗</span></a></p>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this object contains a valid configuration that can be retrieved when calling <a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-private-method-get-configuration"><span class="std std-ref">_get_configuration()</span></a>.</p>
+<p class="classref-method" id="class-openxrspatialcapabilityconfigurationbaseheader-method-has-valid-configuration"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>has_valid_configuration</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-openxrspatialcapabilityconfigurationbaseheader-method-has-valid-configuration"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this object contains a valid configuration that can be used when calling <a class="reference internal" href="class_openxrspatialentityextension.html#class-openxrspatialentityextension-method-create-spatial-context"><span class="std std-ref">OpenXRSpatialEntityExtension.create_spatial_context()</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

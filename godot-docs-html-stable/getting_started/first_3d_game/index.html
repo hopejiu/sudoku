@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Your first 3D game" property="og:title"/>
+
+
+
+<meta content="In this step-by-step tutorial series, you will create your first complete 3D game with Godot. By the end of the series, you will have a simple yet finished project of your own like the animated gif..." property="og:description"/>
+<meta content="In this step-by-step tutorial series, you will create your first complete 3D game with Godot. By the end of the series, you will have a simple yet finished project of your own like the animated gif..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Your first 3D game — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="01.game_setup.html" rel="next" title="Setting up the game area"/>
+<link href="../first_2d_game/07.finishing-up.html" rel="prev" title="Finishing up"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="getting_started/first_3d_game/index" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="your-first-3d-game">
+<span id="doc-your-first-3d-game"></span><h1>Your first 3D game<a class="headerlink" href="#your-first-3d-game" title="Link to this heading"></a></h1>
+<p>In this step-by-step tutorial series, you will create your first complete 3D
+game with Godot. By the end of the series, you will have a simple yet finished
+project of your own like the animated gif below.</p>
+<p><img alt="image0" src="../../_images/squash-the-creeps-final.gif"/></p>
+<p>The game we'll code here is similar to <a class="reference internal" href="../first_2d_game/index.html#doc-your-first-2d-game"><span class="std std-ref">Your first 2D game</span></a>, with a twist:
+you can now jump and your goal is to squash the creeps. This way, you will both
+<strong>recognize patterns</strong> you learned in the previous tutorial and <strong>build upon
+them</strong> with new code and features.</p>
+<p>You will learn to:</p>
+<ul class="simple">
+<li><p>Work with 3D coordinates with a jumping mechanic.</p></li>
+<li><p>Use kinematic bodies to move 3D characters and detect when and how they
+collide.</p></li>
+<li><p>Use physics layers and a group to detect interactions with specific entities.</p></li>
+<li><p>Code basic procedural gameplay by instancing monsters at regular time
+intervals.</p></li>
+<li><p>Design a movement animation and change its speed at runtime.</p></li>
+<li><p>Draw a user interface on a 3D game.</p></li>
+</ul>
+<p>And more.</p>
+<p>This tutorial is for beginners who followed the complete getting started series.
+We'll start slow with detailed instructions and shorten them as we do similar
+steps. If you're an experienced programmer, you can browse the complete demo's
+source code here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/squash_the_creeps">Squash the Creeps source code (GDScript)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/godotengine/godot-demo-projects/tree/master/mono/squash_the_creeps">Squash the Creeps source code (C#)</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can follow this series without having done the 2D one. However, if
+you're new to game development, we recommend you to start with 2D. 3D game
+code is always more complex and the 2D series will give you foundations to
+follow along more comfortably.</p>
+</div>
+<p>We prepared some game assets so we can jump straight to the code. You can
+download them here: <a class="reference external" href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/3d_squash_the_creeps_starter.zip">Squash the Creeps assets</a>.</p>
+<p>We will first work on a basic prototype for the player's movement. We will then
+add the monsters that we'll spawn randomly around the screen. After that, we'll
+implement the jump and squashing mechanic before refining the game with some
+nice animation. We'll wrap up with the score and the retry screen.</p>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="toc-learn-first-3d-game">
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

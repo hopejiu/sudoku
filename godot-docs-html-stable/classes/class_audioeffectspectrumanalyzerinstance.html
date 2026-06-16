@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="AudioEffectSpectrumAnalyzerInstance" property="og:title"/>
+
+
+
+<meta content="Inherits: AudioEffectInstance&lt; RefCounted&lt; Object Queryable instance of an AudioEffectSpectrumAnalyzer. Description: The runtime part of an AudioEffectSpectrumAnalyzer, which can be used to q..." property="og:description"/>
+<meta content="Inherits: AudioEffectInstance&lt; RefCounted&lt; Object Queryable instance of an AudioEffectSpectrumAnalyzer. Description: The runtime part of an AudioEffectSpectrumAnalyzer, which can be used to q..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) AudioEffectSpectrumAnalyzerInstance — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_audiosample.html" rel="next" title="AudioSample"/>
+<link href="class_audioeffectinstance.html" rel="prev" title="AudioEffectInstance"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_audioeffectspectrumanalyzerinstance" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="audioeffectspectrumanalyzerinstance">
+<span id="class-audioeffectspectrumanalyzerinstance"></span><h1>AudioEffectSpectrumAnalyzerInstance<a class="headerlink" href="#audioeffectspectrumanalyzerinstance" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_audioeffectinstance.html#class-audioeffectinstance"><span class="std std-ref">AudioEffectInstance</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Queryable instance of an <a class="reference internal" href="class_audioeffectspectrumanalyzer.html#class-audioeffectspectrumanalyzer"><span class="std std-ref">AudioEffectSpectrumAnalyzer</span></a>.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The runtime part of an <a class="reference internal" href="class_audioeffectspectrumanalyzer.html#class-audioeffectspectrumanalyzer"><span class="std std-ref">AudioEffectSpectrumAnalyzer</span></a>, which can be used to query the magnitude of a frequency range on its host bus.</p>
+<p>An instance of this class can be obtained with <a class="reference internal" href="class_audioserver.html#class-audioserver-method-get-bus-effect-instance"><span class="std std-ref">AudioServer.get_bus_effect_instance()</span></a>.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2762">Audio Spectrum Visualizer Demo</a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectspectrumanalyzerinstance-method-get-magnitude-for-frequency-range"><span class="std std-ref">get_magnitude_for_frequency_range</span></a>(from_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>, to_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>, mode: <a class="reference internal" href="#enum-audioeffectspectrumanalyzerinstance-magnitudemode"><span class="std std-ref">MagnitudeMode</span></a> = 1) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-audioeffectspectrumanalyzerinstance-magnitudemode">enum <strong>MagnitudeMode</strong>: <a class="reference internal" href="#enum-audioeffectspectrumanalyzerinstance-magnitudemode"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-audioeffectspectrumanalyzerinstance-constant-magnitude-average"><a class="reference internal" href="#enum-audioeffectspectrumanalyzerinstance-magnitudemode"><span class="std std-ref">MagnitudeMode</span></a> <strong>MAGNITUDE_AVERAGE</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Use the average value across the frequency range as magnitude.</p>
+<p class="classref-enumeration-constant" id="class-audioeffectspectrumanalyzerinstance-constant-magnitude-max"><a class="reference internal" href="#enum-audioeffectspectrumanalyzerinstance-magnitudemode"><span class="std std-ref">MagnitudeMode</span></a> <strong>MAGNITUDE_MAX</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Use the maximum value of the frequency range as magnitude.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-audioeffectspectrumanalyzerinstance-method-get-magnitude-for-frequency-range"><a class="reference internal" href="class_vector2.html#class-vector2"><span class="std std-ref">Vector2</span></a> <strong>get_magnitude_for_frequency_range</strong>(from_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>, to_hz: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>, mode: <a class="reference internal" href="#enum-audioeffectspectrumanalyzerinstance-magnitudemode"><span class="std std-ref">MagnitudeMode</span></a> = 1) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audioeffectspectrumanalyzerinstance-method-get-magnitude-for-frequency-range"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the magnitude of the frequencies from <code class="docutils literal notranslate"><span class="pre">from_hz</span></code> to <code class="docutils literal notranslate"><span class="pre">to_hz</span></code> in linear energy as a Vector2. The <code class="docutils literal notranslate"><span class="pre">x</span></code> component of the return value represents the left stereo channel, and <code class="docutils literal notranslate"><span class="pre">y</span></code> represents the right channel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode</span></code> determines how the frequency range will be processed.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

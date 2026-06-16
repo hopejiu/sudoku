@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Godot Android plugins" property="og:title"/>
+
+
+
+<meta content="Introduction: Android plugins are powerful tools to extend the capabilities of the Godot engine by tapping into the functionality provided by Android platforms and ecosystem. For example in Godot 4..." property="og:description"/>
+<meta content="Introduction: Android plugins are powerful tools to extend the capabilities of the Godot engine by tapping into the functionality provided by Android platforms and ecosystem. For example in Godot 4..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Godot Android plugins — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="android_in_app_purchases.html" rel="next" title="Android in-app purchases"/>
+<link href="android_library.html" rel="prev" title="Godot Android library"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/platform/android/android_plugin" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="godot-android-plugins">
+<span id="doc-android-plugin"></span><h1>Godot Android plugins<a class="headerlink" href="#godot-android-plugins" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Android plugins are powerful tools to extend the capabilities of the Godot engine
+by tapping into the functionality provided by Android platforms and ecosystem.</p>
+<p>For example in Godot 4, Android plugins are used to support multiple Android-based
+XR platforms without encumbering the core codebase with vendor specific code or binaries.</p>
+</section>
+<section id="android-plugin">
+<h2>Android plugin<a class="headerlink" href="#android-plugin" title="Link to this heading"></a></h2>
+<p><strong>Version 1 (v1)</strong> of the Android plugin system was introduced in Godot 3 and compatible with Godot 4.0 and 4.1.
+That version allowed developers to augment the Godot engine with Java, Kotlin and native functionality.</p>
+<p>Starting in Godot 4.2, Android plugins built on the v1 architecture are now deprecated.
+Instead, Godot 4.2 introduces a new <strong>Version 2 (v2)</strong> architecture for Android plugins.</p>
+<section id="v2-architecture">
+<h3>v2 Architecture<a class="headerlink" href="#v2-architecture" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Godot Android plugin leverages the <a class="reference internal" href="../../export/android_gradle_build.html#doc-android-gradle-build"><span class="std std-ref">Gradle build system</span></a>.</p>
+</div>
+<p>Building on the previous v1 architecture, Android plugins continue to be derived from the
+<a class="reference external" href="https://developer.android.com/studio/projects/android-library#aar-contents">Android archive library</a>.</p>
+<p>At its core, a Godot Android plugin v2 is an Android library with a dependency on the <a class="reference internal" href="android_library.html#doc-android-library"><span class="std std-ref">Godot Android library</span></a>,
+and a custom Android library manifest.</p>
+<p>This architecture allows Android plugins to extend the functionality of the engine with:</p>
+<ul class="simple">
+<li><p>Android platform APIs</p></li>
+<li><p>Android libraries</p></li>
+<li><p>Kotlin and Java libraries</p></li>
+<li><p>Native libraries (via JNI)</p></li>
+<li><p>GDExtension libraries</p></li>
+</ul>
+<p>Each plugin has an init class extending from the <a class="reference external" href="https://github.com/godotengine/godot/blob/0a7f75ec7b465604b6496c8f5f1d638aed250d6d/platform/android/java/lib/src/org/godotengine/godot/plugin/GodotPlugin.java#L80">GodotPlugin</a> class
+which is provided by the <a class="reference internal" href="android_library.html#doc-android-library"><span class="std std-ref">Godot Android library</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">GodotPlugin</span></code> class provides APIs to access the running Godot instance and hook into its lifecycle. It is loaded at runtime by the Godot engine.</p>
+</section>
+<section id="v2-packaging-format">
+<h3>v2 Packaging format<a class="headerlink" href="#v2-packaging-format" title="Link to this heading"></a></h3>
+<p>v1 Android plugins required a custom <code class="docutils literal notranslate"><span class="pre">gdap</span></code> configuration file that was used by the Godot Editor to detect and load them.
+However this approach had several drawbacks, primary ones being that it lacked flexibility and departed from the <a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugins.html">existing
+Godot EditorExportPlugin format, delivery and installation flow</a>.</p>
+<p>This has been resolved for v2 Android plugins by deprecating the <code class="docutils literal notranslate"><span class="pre">gdap</span></code> packaging and configuration mechanism in favor of
+the existing Godot <code class="docutils literal notranslate"><span class="pre">EditorExportPlugin</span></code> packaging format.
+The <code class="docutils literal notranslate"><span class="pre">EditorExportPlugin</span></code> API in turn has been extended to properly support Android plugins.</p>
+</section>
+</section>
+<section id="building-a-v2-android-plugin">
+<h2>Building a v2 Android plugin<a class="headerlink" href="#building-a-v2-android-plugin" title="Link to this heading"></a></h2>
+<p>A github project template <strong>is provided</strong> at <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template">https://github.com/m4gr3d/Godot-Android-Plugin-Template</a> as a <strong>quickstart for building
+Godot Android plugins for Godot 4.2+</strong>.
+You can follow the <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template#readme">template README</a>
+to set up your own Godot Android plugin project.</p>
+<p>To provide further understanding, here is a break-down of the steps used to create the project template:</p>
+<ol class="arabic">
+<li><p>Create an Android library module using <a class="reference external" href="https://developer.android.com/studio/projects/android-library">these instructions</a></p></li>
+<li><p>Add the Godot Android library as a dependency by updating the module's <code class="docutils literal notranslate"><span class="pre">gradle</span></code> <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template/blob/main/plugin/build.gradle.kts#L42">build file</a>:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dependencies {
+    implementation("org.godotengine:godot:4.2.0.stable")
+}
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<blockquote>
+<div><p>The Godot Android library is <a class="reference external" href="https://central.sonatype.com/artifact/org.godotengine/godot">hosted on MavenCentral</a>, and updated for each release.</p>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p>Create <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template/blob/a01286b4cb459133bf07b11dfabdfd3980268797/plugin/src/main/java/org/godotengine/plugin/android/template/GodotAndroidPlugin.kt#L10">GodotAndroidPlugin</a>, an init class for the plugin extending <a class="reference external" href="https://github.com/godotengine/godot/blob/0a7f75ec7b465604b6496c8f5f1d638aed250d6d/platform/android/java/lib/src/org/godotengine/godot/plugin/GodotPlugin.java#L80">GodotPlugin</a>.</p>
+<blockquote>
+<div><ul>
+<li><p>If the plugin exposes Kotlin or Java methods to be called from GDScript, they must be annotated with <a class="reference external" href="https://github.com/godotengine/godot/blob/0a7f75ec7b465604b6496c8f5f1d638aed250d6d/platform/android/java/lib/src/org/godotengine/godot/plugin/UsedByGodot.java#L45">@UsedByGodot</a>. The name called from GDScript <strong>must match the method name exactly</strong>. There is <strong>no</strong> coercing <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> to <code class="docutils literal notranslate"><span class="pre">camelCase</span></code>. For example, from GDScript:</p>
+<blockquote>
+<div><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">has_singleton</span><span class="p">(</span><span class="s2">"MyPlugin"</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">"MyPlugin"</span><span class="p">)</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">singleton</span><span class="o">.</span><span class="nf">myPluginFunction</span><span class="p">(</span><span class="s2">"World"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>If the plugin uses <a class="reference external" href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html">signals</a>, the init class must return the set of signals used by overriding <a class="reference external" href="https://github.com/godotengine/godot/blob/fa3428ff25bc577d2a3433090478a6d615567056/platform/android/java/lib/src/org/godotengine/godot/plugin/GodotPlugin.java#L302">GodotPlugin::getPluginSignals()</a>. To emit signals, the plugin can use the <a class="reference external" href="https://github.com/godotengine/godot/blob/0a7f75ec7b465604b6496c8f5f1d638aed250d6d/platform/android/java/lib/src/org/godotengine/godot/plugin/GodotPlugin.java#L317">GodotPlugin::emitSignal(...) method</a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update the plugin <code class="docutils literal notranslate"><span class="pre">AndroidManifest.xml</span></code> <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template/blob/main/plugin/src/main/AndroidManifest.xml">file</a> with the following meta-data:</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;meta-data</span>
+<span class="w">    </span><span class="na">android:name=</span><span class="s">"org.godotengine.plugin.v2.[PluginName]"</span>
+<span class="w">    </span><span class="na">android:value=</span><span class="s">"[plugin.init.ClassFullName]"</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<blockquote>
+<div><p>Where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PluginName</span></code> is the name of the plugin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plugin.init.ClassFullName</span></code> is the full component name (package + class name) of the plugin init class (e.g: <code class="docutils literal notranslate"><span class="pre">org.godotengine.plugin.android.template.GodotAndroidPlugin</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Create the <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template/tree/main/plugin/export_scripts_template">EditorExportPlugin configuration</a> to package the plugin. The steps used to create the configuration can be seen in the <a class="reference internal" href="#packaging-a-v2-android-plugin">Packaging a v2 Android plugin</a> section.</p></li>
+</ol>
+<section id="building-a-v2-android-plugin-with-gdextension-capabilities">
+<h3>Building a v2 Android plugin with GDExtension capabilities<a class="headerlink" href="#building-a-v2-android-plugin-with-gdextension-capabilities" title="Link to this heading"></a></h3>
+<p>Similar to GDNative support in v1 Android plugins, v2 Android plugins support the ability to integrate GDExtension capabilities.</p>
+<p>A github project template is provided at <a class="reference external" href="https://github.com/m4gr3d/GDExtension-Android-Plugin-Template">https://github.com/m4gr3d/GDExtension-Android-Plugin-Template</a> as a quickstart for building
+GDExtension Android plugins for Godot 4.2+.
+You can follow the <a class="reference external" href="https://github.com/m4gr3d/GDExtension-Android-Plugin-Template#readme">template's README</a>
+to set up your own Godot Android plugin project.</p>
+</section>
+<section id="migrating-a-v1-android-plugin-to-v2">
+<h3>Migrating a v1 Android plugin to v2<a class="headerlink" href="#migrating-a-v1-android-plugin-to-v2" title="Link to this heading"></a></h3>
+<p>Use the following steps if you have a v1 Android plugin you want to migrate to v2:</p>
+<ol class="arabic">
+<li><p>Update the plugin's manifest file:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">org.godotengine.plugin.v1</span></code> prefix to <code class="docutils literal notranslate"><span class="pre">org.godotengine.plugin.v2</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Update the Godot Android library build dependency:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You can continue using the <code class="docutils literal notranslate"><span class="pre">godot-lib.&lt;version&gt;.&lt;status&gt;.aar</span></code> binary from <a class="reference external" href="https://godotengine.org/download">Godot's download page</a> if that's your preference. Make sure it's updated to the latest stable version.</p></li>
+<li><p>Or you can switch to the MavenCentral provided dependency:</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">implementation</span><span class="p">(</span><span class="s2">"org.godotengine:godot:4.2.0.stable"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>After updating the Godot Android library dependency, sync or build the plugin and resolve any compile errors:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Godot</span></code> instance provided by <code class="docutils literal notranslate"><span class="pre">GodotPlugin::getGodot()</span></code> no longer has access to an <code class="docutils literal notranslate"><span class="pre">android.content.Context</span></code> reference. Use <code class="docutils literal notranslate"><span class="pre">GodotPlugin::getActivity()</span></code> instead.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Delete the <code class="docutils literal notranslate"><span class="pre">gdap</span></code> configuration file(s) and follow the instructions in the <a class="reference internal" href="#packaging-a-v2-android-plugin">Packaging a v2 Android plugin</a> section to set up the plugin configuration.</p></li>
+</ol>
+</section>
+</section>
+<section id="packaging-a-v2-android-plugin">
+<h2>Packaging a v2 Android plugin<a class="headerlink" href="#packaging-a-v2-android-plugin" title="Link to this heading"></a></h2>
+<p>As mentioned, a v2 Android plugin is now provided to the Godot Editor as an <code class="docutils literal notranslate"><span class="pre">EditorExportPlugin</span></code> plugin, so it shares a lot of the <a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/plugins/editor/making_plugins.html#creating-a-plugin">same packaging steps</a>.</p>
+<ol class="arabic">
+<li><p>Add the plugin output binaries within the plugin directory (e.g: in <code class="docutils literal notranslate"><span class="pre">addons/&lt;plugin_name&gt;/</span></code>)</p></li>
+<li><p>Add the <a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/plugins/editor/making_plugins.html#the-script-file">tool script</a> for the export functionality within the plugin directory (e.g: in <code class="docutils literal notranslate"><span class="pre">addons/&lt;plugin_name&gt;/</span></code>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The created script must be a <code class="docutils literal notranslate"><span class="pre">@tool</span></code> script, or else it will not work properly</p></li>
+<li><p>The export tool script is used to configure the Android plugin and hook it within the Godot Editor's export process. It should look something like this:</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nd">@tool</span>
+<span class="k">extends</span><span class="w"> </span><span class="nb">EditorPlugin</span>
+<span class="c1"># A class member to hold the editor export plugin during its lifecycle.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">export_plugin</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">AndroidExportPlugin</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_enter_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Initialization of the plugin goes here.</span>
+<span class="w">    </span><span class="n">export_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AndroidExportPlugin</span><span class="o">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">add_export_plugin</span><span class="p">(</span><span class="n">export_plugin</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_exit_tree</span><span class="p">():</span>
+<span class="w">    </span><span class="c1"># Clean-up of the plugin goes here.</span>
+<span class="w">    </span><span class="nf">remove_export_plugin</span><span class="p">(</span><span class="n">export_plugin</span><span class="p">)</span>
+<span class="w">    </span><span class="n">export_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">null</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AndroidExportPlugin</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nb">EditorExportPlugin</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Plugin's name.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">_plugin_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&lt;plugin_name&gt;"</span>
+<span class="w">    </span><span class="c1"># Specifies which platform is supported by the plugin.</span>
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_supports_platform</span><span class="p">(</span><span class="n">platform</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">platform</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">EditorExportPlatformAndroid</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">true</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="l">false</span>
+<span class="w">    </span><span class="c1"># Return the paths of the plugin's AAR binaries relative to the 'addons' directory.</span>
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_android_libraries</span><span class="p">(</span><span class="n">platform</span><span class="p">,</span><span class="w"> </span><span class="n">debug</span><span class="p">):</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">debug</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedStringArray</span><span class="p">([</span><span class="s2">"&lt;paths_to_debug_android_plugin_aar_binaries&gt;"</span><span class="p">])</span>
+<span class="w">        </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">            </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="nb nb-Type">PackedStringArray</span><span class="p">([</span><span class="s2">"&lt;paths_to_release_android_plugin_aar_binaries&gt;"</span><span class="p">])</span>
+<span class="w">    </span><span class="c1"># Return the plugin's name.</span>
+<span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_get_name</span><span class="p">():</span>
+<span class="w">        </span><span class="k k-ControlFlow">return</span><span class="w"> </span><span class="n">_plugin_name</span>
+<span class="o">-</span><span class="w"> </span><span class="nc">Here</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">set</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="err">`</span><span class="nb">EditorExportPlugin</span><span class="w"> </span><span class="n">APIs</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">stable</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="o">&gt;</span><span class="err">`</span><span class="n">_</span><span class="w"> </span><span class="n">most</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">tool</span><span class="w"> </span><span class="n">script</span><span class="p">:</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_supports_platform</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-supports-platform&gt;`_: returns ``true`` if the plugin supports the given platform. For Android plugins, this must return ``true`` when ``platform`` is `EditorExportPlatformAndroid &lt;https://docs.godotengine.org/en/stable/classes/class_editorexportplatformandroid.html&gt;`_</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_get_android_libraries</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-get-android-libraries&gt;`_: retrieve the local paths of the Android libraries binaries (AAR files) provided by the plugin</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_get_android_dependencies</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-get-android-dependencies&gt;`_: retrieve the set of Android maven dependencies (e.g: `org.godot.example:my-plugin:0.0.0`) provided by the plugin</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_get_android_dependencies_maven_repos</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-get-android-dependencies-maven-repos&gt;`_: retrieve the urls of the maven repos for the android dependencies provided by ``_get_android_dependencies``</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_get_android_manifest_activity_element_contents</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-get-android-manifest-activity-element-contents&gt;`_: update the contents of the `&lt;activity&gt;` element in the generated Android manifest</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_get_android_manifest_application_element_contents</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-get-android-manifest-application-element-contents&gt;`_: update the contents of the `&lt;application&gt;` element in the generated Android manifest</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="err">`</span><span class="n">_get_android_manifest_element_contents</span><span class="w"> </span><span class="o">&lt;</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="vi">godotengine</span><span class="o">.</span><span class="vi">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">class_editorexportplugin</span><span class="o">.</span><span class="vi">html</span><span class="c1">#class-editorexportplugin-method-get-android-manifest-element-contents&gt;`_: update the contents of the `&lt;manifest&gt;` element in the generated Android manifest</span>
+<span class="w">    </span><span class="nc">The</span><span class="w"> </span><span class="err">``</span><span class="n">_get_android_manifest_</span><span class="o">*</span><span class="err">``</span><span class="w"> </span><span class="n">methods</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">changes</span>
+<span class="w">    </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">app</span><span class="s1">'s manifest which are preserved when the Godot Editor is updated, resolving a long standing issue with v1 Android plugins.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code>. This is an INI file with metadata about your plugin:</p></li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">plugin</span><span class="p">]</span>
+<span class="n">name</span><span class="o">=</span><span class="s2">"&lt;plugin_name&gt;"</span>
+<span class="n">description</span><span class="o">=</span><span class="s2">"&lt;plugin_description&gt;"</span>
+<span class="n">author</span><span class="o">=</span><span class="s2">"&lt;plugin_author&gt;"</span>
+<span class="n">version</span><span class="o">=</span><span class="s2">"&lt;plugin_version&gt;"</span>
+<span class="n">script</span><span class="o">=</span><span class="s2">"&lt;relative_path_to_the_export_tool_script&gt;"</span>
+</pre></div>
+</div>
+<p>For reference, here is the <a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template/tree/main/plugin/export_scripts_template">folder structure for the Godot Android plugin project template</a>.
+At build time, the contents of the <code class="docutils literal notranslate"><span class="pre">export_scripts_template</span></code> directory as well as the generated plugin binaries are copied to the <code class="docutils literal notranslate"><span class="pre">addons/&lt;plugin_name&gt;</span></code> directory:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export_scripts_template/
+|
++--export_plugin.gd         # export plugin tool script
+|
++--plugin.cfg               # plugin INI file
+</pre></div>
+</div>
+<section id="packaging-a-v2-android-plugin-with-gdextension-capabilities">
+<h3>Packaging a v2 Android plugin with GDExtension capabilities<a class="headerlink" href="#packaging-a-v2-android-plugin-with-gdextension-capabilities" title="Link to this heading"></a></h3>
+<p>For GDExtension, we follow the same steps as for <a class="reference internal" href="#packaging-a-v2-android-plugin">Packaging a v2 Android plugin</a> and add the <a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/scripting/cpp/gdextension_cpp_example.html#using-the-gdextension-module">GDExtension config file</a> in
+the same location as <code class="docutils literal notranslate"><span class="pre">plugin.cfg</span></code>.</p>
+<p>For reference, here is the <a class="reference external" href="https://github.com/m4gr3d/GDExtension-Android-Plugin-Template/tree/main/plugin/export_scripts_template">folder structure for the GDExtension Android plugin project template</a>.
+At build time, the contents of the <code class="docutils literal notranslate"><span class="pre">export_scripts_template</span></code> directory as well as the generated plugin binaries are copied to the <code class="docutils literal notranslate"><span class="pre">addons/&lt;plugin_name&gt;</span></code> directory:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export_scripts_template/
+|
++--export_plugin.gd         # export plugin tool script
+|
++--plugin.cfg               # plugin INI file
+|
++--plugin.gdextension       # GDExtension config file
+</pre></div>
+</div>
+<p>Here is what the <code class="docutils literal notranslate"><span class="pre">plugin.gdextension</span></code> config file should look like:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">configuration</span><span class="p">]</span>
+<span class="n">entry_symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"plugin_library_init"</span>
+<span class="n">compatibility_minimum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"4.2"</span>
+<span class="n">android_aar_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="p">[</span><span class="n">libraries</span><span class="p">]</span>
+<span class="n">android</span><span class="o">.</span><span class="vi">debug</span><span class="o">.</span><span class="vi">arm64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"res://addons/GDExtensionAndroidPluginTemplate/bin/debug/arm64-v8a/libGDExtensionAndroidPluginTemplate.so"</span>
+<span class="n">android</span><span class="o">.</span><span class="vi">release</span><span class="o">.</span><span class="vi">arm64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"res://addons/GDExtensionAndroidPluginTemplate/bin/release/arm64-v8a/libGDExtensionAndroidPluginTemplate.so"</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Of note is the <code class="docutils literal notranslate"><span class="pre">android_aar_plugin</span></code> field that specifies this GDExtension module is provided as part of a v2 Android plugin.
+During the export process, this will indicate to the Godot Editor that the GDExtension native shared libraries are exported by the Android plugin AAR binaries.</p>
+<p>For GDExtension Android plugins, the plugin init class must override <a class="reference external" href="https://github.com/godotengine/godot/blob/0a7f75ec7b465604b6496c8f5f1d638aed250d6d/platform/android/java/lib/src/org/godotengine/godot/plugin/GodotPlugin.java#L277">GodotPlugin::getPluginGDExtensionLibrariesPaths()</a>,
+and return the paths to the bundled GDExtension libraries config files (<code class="docutils literal notranslate"><span class="pre">*.gdextension</span></code>).</p>
+<p>The paths must be relative to the Android library's <code class="docutils literal notranslate"><span class="pre">assets</span></code> directory.
+At runtime, the plugin will provide these paths to the Godot engine which will use them to load and initialize the bundled GDExtension libraries.</p>
+</section>
+</section>
+<section id="using-a-v2-android-plugin">
+<h2>Using a v2 Android plugin<a class="headerlink" href="#using-a-v2-android-plugin" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Godot 4.2 or higher is required</p></li>
+<li><p>v2 Android plugin requires the use of the <a class="reference external" href="https://docs.godotengine.org/en/stable/classes/class_editorexportplatformandroid.html#class-editorexportplatformandroid-property-gradle-build-use-gradle-build">Gradle build process</a>.</p></li>
+<li><p>The provided github project templates include demo Godot projects for quick testing.</p></li>
+</ul>
+</div>
+<ol class="arabic simple">
+<li><p>Copy the plugin's output directory (<code class="docutils literal notranslate"><span class="pre">addons/&lt;plugin_name&gt;</span></code>) to the target Godot project's directory</p></li>
+<li><p>Open the project in the Godot Editor; the Editor should detect the plugin</p></li>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Project</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Settings...</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Plugins</span></code>, and ensure the plugin is enabled</p></li>
+<li><p>Install the Godot Android build template by clicking on <code class="docutils literal notranslate"><span class="pre">Project</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Install</span> <span class="pre">Android</span> <span class="pre">Build</span> <span class="pre">Template...</span></code></p></li>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Project</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Export...</span></code></p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Export</span></code> window, create an <code class="docutils literal notranslate"><span class="pre">Android</span> <span class="pre">export</span> <span class="pre">preset</span></code></p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Android</span> <span class="pre">export</span> <span class="pre">preset</span></code>, scroll to <code class="docutils literal notranslate"><span class="pre">Gradle</span> <span class="pre">Build</span></code> and set <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">Gradle</span> <span class="pre">Build</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li><p>Update the project's scripts as needed to access the plugin's functionality. For example:</p></li>
+</ol>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">has_singleton</span><span class="p">(</span><span class="s2">"MyPlugin"</span><span class="p">):</span>
+<span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="s2">"MyPlugin"</span><span class="p">)</span>
+<span class="w">        </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">singleton</span><span class="o">.</span><span class="nf">myPluginFunction</span><span class="p">(</span><span class="s2">"World"</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Connect an Android device to your machine and run the project on it</p></li>
+</ol>
+<section id="using-a-v2-android-plugin-as-an-android-library">
+<h3>Using a v2 Android plugin as an Android library<a class="headerlink" href="#using-a-v2-android-plugin-as-an-android-library" title="Link to this heading"></a></h3>
+<p>Since they are also Android libraries, Godot v2 Android plugins can be stripped from their <code class="docutils literal notranslate"><span class="pre">EditorExportPlugin</span></code> packaging and provided as raw <code class="docutils literal notranslate"><span class="pre">AAR</span></code> binaries for use as libraries alongside the <a class="reference internal" href="android_library.html#doc-android-library"><span class="std std-ref">Godot Android library</span></a> by Android apps.</p>
+<p>If targeting this use-case, make sure to include additional instructions for how the <code class="docutils literal notranslate"><span class="pre">AAR</span></code> binaries should be included (e.g: custom additions to the Android app's manifest).</p>
+</section>
+</section>
+<section id="reference-implementations">
+<h2>Reference implementations<a class="headerlink" href="#reference-implementations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Samples/tree/master/plugins">Godot Android Plugins Samples</a></p></li>
+<li><p><a class="reference external" href="https://github.com/m4gr3d/Godot-Android-Plugin-Template">Godot Android Plugin Template</a></p></li>
+<li><p><a class="reference external" href="https://github.com/m4gr3d/GDExtension-Android-Plugin-Template">GDExtension Android Plugin Template</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GodotVR/godot_openxr_loaders">Godot OpenXR Loaders</a></p></li>
+</ul>
+</section>
+<section id="tips-and-guidelines">
+<h2>Tips and Guidelines<a class="headerlink" href="#tips-and-guidelines" title="Link to this heading"></a></h2>
+<section id="simplify-access-to-the-exposed-java-kotlin-apis">
+<h3>Simplify access to the exposed Java / Kotlin APIs<a class="headerlink" href="#simplify-access-to-the-exposed-java-kotlin-apis" title="Link to this heading"></a></h3>
+<p>To make it easier to access the exposed Java / Kotlin APIs in the Godot Editor, it's recommended to
+provide one (or multiple) gdscript wrapper class(es) for your plugin users to interface with.</p>
+<p>For example:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">class_name</span><span class="w"> </span><span class="nc">PluginInterface</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nb nb-Type">Object</span>
+<span class="c c-Doc">## Interface used to access the functionality provided by this plugin.</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_plugin_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"GDExtensionAndroidPluginTemplate"</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_plugin_singleton</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_init</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">has_singleton</span><span class="p">(</span><span class="n">_plugin_name</span><span class="p">):</span>
+<span class="w">        </span><span class="n">_plugin_singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="nf">get_singleton</span><span class="p">(</span><span class="n">_plugin_name</span><span class="p">)</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">printerr</span><span class="p">(</span><span class="s2">"Initialization error: unable to access the java logic"</span><span class="p">)</span>
+<span class="c c-Doc">## Print a 'Hello World' message to the logcat.</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">helloWorld</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">_plugin_singleton</span><span class="p">:</span>
+<span class="w">        </span><span class="n">_plugin_singleton</span><span class="o">.</span><span class="nf">helloWorld</span><span class="p">()</span>
+<span class="w">    </span><span class="k k-ControlFlow">else</span><span class="p">:</span>
+<span class="w">        </span><span class="nb nb-Function">printerr</span><span class="p">(</span><span class="s2">"Initialization error"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="support-using-the-gdextension-functionality-in-the-godot-editor">
+<h3>Support using the GDExtension functionality in the Godot Editor<a class="headerlink" href="#support-using-the-gdextension-functionality-in-the-godot-editor" title="Link to this heading"></a></h3>
+<p>If planning to use the GDExtension functionality in the Godot Editor, it is recommended that the
+GDExtension's native binaries are compiled not just for Android, but also for the OS onto which
+developers / users intend to run the Godot Editor. Not doing so may prevent developers /
+users from writing code that accesses the plugin from within the Godot Editor.</p>
+<p>This may involve creating dummy plugins for the host OS just so the API is published to the
+editor. You can use the <a class="reference external" href="https://github.com/godotengine/godot-cpp-template">godot-cpp-template</a>
+github template for reference on how to do so.</p>
+</section>
+<section id="supported-data-types">
+<h3>Supported data types<a class="headerlink" href="#supported-data-types" title="Link to this heading"></a></h3>
+<p>All data types are supported. Common types are mapped to their Godot equivalents
+(for example, <code class="docutils literal notranslate"><span class="pre">String[]</span></code> is mapped to <code class="docutils literal notranslate"><span class="pre">PackedStringArray()</span></code>), but for other types, you can use <a class="reference external" href="https://docs.godotengine.org/en/stable/tutorials/platform/android/javaclasswrapper_and_androidruntimeplugin.html#javaclasswrapper-godot-singleton">JavaClassWrapper</a> to access it.</p>
+</section>
+<section id="godot-crashes-upon-load">
+<h3>Godot crashes upon load<a class="headerlink" href="#godot-crashes-upon-load" title="Link to this heading"></a></h3>
+<p>Check <a class="reference external" href="https://developer.android.com/tools/logcat">adb logcat</a> for possible problems.</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

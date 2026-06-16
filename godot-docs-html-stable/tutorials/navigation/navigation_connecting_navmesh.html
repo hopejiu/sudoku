@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Connecting navigation meshes" property="og:title"/>
+
+
+
+<meta content="Different NavigationMeshes are automatically merged by the NavigationServer when at least two vertex positions of one edge exactly overlap. To connect over arbitrary distances see Using NavigationL..." property="og:description"/>
+<meta content="Different NavigationMeshes are automatically merged by the NavigationServer when at least two vertex positions of one edge exactly overlap. To connect over arbitrary distances see Using NavigationL..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Connecting navigation meshes — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="navigation_different_actor_types.html" rel="next" title="Support different actor types"/>
+<link href="navigation_debug_tools.html" rel="prev" title="Navigation debug tools"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/navigation/navigation_connecting_navmesh" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="connecting-navigation-meshes">
+<span id="doc-navigation-connecting-navmesh"></span><h1>Connecting navigation meshes<a class="headerlink" href="#connecting-navigation-meshes" title="Link to this heading"></a></h1>
+<p>Different NavigationMeshes are automatically merged by the NavigationServer
+when at least two vertex positions of one edge exactly overlap.</p>
+<p>To connect over arbitrary distances see <a class="reference internal" href="navigation_using_navigationlinks.html#doc-navigation-using-navigationlinks"><span class="std std-ref">Using NavigationLinks</span></a>.</p>
+<img alt="../../_images/navigation_vertex_merge.png" src="../../_images/navigation_vertex_merge.png"/>
+<p>The same is true for multiple NavigationPolygon resources. As long as their
+outline points overlap exactly the NavigationServer will merge them.
+NavigationPolygon outlines must be from different NavigationPolygon resources to connect.</p>
+<p>Overlapping or intersecting outlines on the same NavigationPolygon
+will fail the navigation mesh creation. Overlapping or intersecting
+outlines from different NavigationPolygons will often fail to create the
+navigation region edge connections on the NavigationServer and should be avoided.</p>
+<img alt="../../_images/navigation_vertex_merge2.png" src="../../_images/navigation_vertex_merge2.png"/>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Exactly means exactly for the vertex position merge. Small float errors
+that happen quite regularly with imported meshes will prevent a successful vertex merge.</p>
+</div>
+<p>Alternatively navigation meshes are not merged but still considered as <strong>connected</strong> by
+the NavigationServer when their edges are nearly parallel and within distance
+to each other. The connection distance is defined by the  <code class="docutils literal notranslate"><span class="pre">edge_connection_margin</span></code> for each
+navigation map. In many cases navigation mesh edges cannot properly connect when they partly overlap.
+Better avoid any navigation mesh overlap at all time for a consistent merge behavior.</p>
+<img alt="../../_images/navigation_edge_connection.png" src="../../_images/navigation_edge_connection.png"/>
+<p>If navigation debug is enabled and the NavigationServer active the established navigation mesh connections will be visualized.
+See <a class="reference internal" href="navigation_debug_tools.html#doc-navigation-debug-tools"><span class="std std-ref">Navigation debug tools</span></a> for more info about navigation debug options.</p>
+<p>The default 2D <code class="docutils literal notranslate"><span class="pre">edge_connection_margin</span></code> can be changed in the ProjectSettings under <code class="docutils literal notranslate"><span class="pre">navigation/2d/default_edge_connection_margin</span></code>.</p>
+<p>The default 3D <code class="docutils literal notranslate"><span class="pre">edge_connection_margin</span></code> can be changed in the ProjectSettings under <code class="docutils literal notranslate"><span class="pre">navigation/3d/default_edge_connection_margin</span></code>.</p>
+<p>The edge connection margin value of any navigation map can also be changed at runtime with the NavigationServer API.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tab" tabindex="0">2D GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-MkQgQyM=" name="MkQgQyM=" role="tab" tabindex="-1">2D C#</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tab" tabindex="-1">3D GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-M0QgQyM=" name="M0QgQyM=" role="tab" tabindex="-1">3D C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-MkQgR0RTY3JpcHQ=" name="MkQgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node2D</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># 2D margins are designed to work with 2D "pixel" values.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">default_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_2d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">NavigationServer2D</span><span class="o">.</span><span class="nf">map_set_edge_connection_margin</span><span class="p">(</span><span class="n">default_map_rid</span><span class="p">,</span><span class="w"> </span><span class="mf">50.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-MkQgQyM=" name="MkQgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 2D margins are designed to work with 2D "pixel" values.</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">defaultMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld2D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">NavigationServer2D</span><span class="p">.</span><span class="n">MapSetEdgeConnectionMargin</span><span class="p">(</span><span class="n">defaultMapRid</span><span class="p">,</span><span class="w"> </span><span class="mf">50.0f</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgR0RTY3JpcHQ=" name="M0QgR0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node3D</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># 3D margins are designed to work with 3D world unit values.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">default_map_rid</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">RID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_world_3d</span><span class="p">()</span><span class="o">.</span><span class="nf">get_navigation_map</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">NavigationServer3D</span><span class="o">.</span><span class="nf">map_set_edge_connection_margin</span><span class="p">(</span><span class="n">default_map_rid</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-M0QgQyM=" name="M0QgQyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode3D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node3D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 3D margins are designed to work with 3D world unit values.</span>
+<span class="w">        </span><span class="n">Rid</span><span class="w"> </span><span class="n">defaultMapRid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorld3D</span><span class="p">().</span><span class="n">NavigationMap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">NavigationServer3D</span><span class="p">.</span><span class="n">MapSetEdgeConnectionMargin</span><span class="p">(</span><span class="n">defaultMapRid</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changing the edge connection margin will trigger a full update of all navigation mesh connections on the NavigationServer.</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

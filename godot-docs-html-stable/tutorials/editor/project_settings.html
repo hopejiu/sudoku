@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Project Settings" property="og:title"/>
+
+
+
+<meta content="There are dozens of settings you can change to control a project's execution, including physics, rendering, and windowing settings. These settings can be changed from the Project Settings wind..." property="og:description"/>
+<meta content="There are dozens of settings you can change to control a project's execution, including physics, rendering, and windowing settings. These settings can be changed from the Project Settings wind..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Project Settings — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="script_editor.html" rel="next" title="Script Editor"/>
+<link href="inspector_dock.html" rel="prev" title="Inspector Dock"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/editor/project_settings" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="project-settings">
+<span id="doc-project-settings"></span><h1>Project Settings<a class="headerlink" href="#project-settings" title="Link to this heading"></a></h1>
+<p>There are dozens of settings you can change to control a project's execution,
+including physics, rendering, and windowing settings. These settings can be
+changed from the <strong>Project Settings</strong> window, from code, or by manually editing
+the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file. You can see a full list of settings in the
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings"><span class="std std-ref">ProjectSettings</span></a> class.</p>
+<p>Internally, Godot stores the settings for a project in a <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file,
+a plain text file in INI format. While this is human-readable and version control
+friendly, it's not the most convenient to edit. For that reason, the
+<strong>Project Settings</strong> window is available to edit these settings. To open the
+Project Settings, select <strong>Project &gt; Project Settings</strong> from the main menu.</p>
+<figure class="align-center" id="id1">
+<img alt="../../_images/project_settings_basic.webp" src="../../_images/project_settings_basic.webp"/>
+<figcaption>
+<p><span class="caption-text">The Project Settings window</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <strong>Project Settings</strong> window is mainly used to change settings in the
+<strong>General</strong> tab. Additionally, there are tabs for the
+<a class="reference internal" href="../inputs/input_examples.html#doc-input-examples-input-map"><span class="std std-ref">Input Map</span></a>,
+<a class="reference internal" href="../i18n/internationalizing_games.html#doc-internationalizing-games"><span class="std std-ref">Localization</span></a>,
+<a class="reference internal" href="../scripting/singletons_autoload.html#doc-singletons-autoload"><span class="std std-ref">Globals</span></a>,
+<a class="reference internal" href="../plugins/editor/installing_plugins.html#doc-installing-plugins-enabling-a-plugin"><span class="std std-ref">Plugins</span></a>, and
+<strong>Import Defaults</strong>. Usage of these other tabs is documented elsewhere.</p>
+<section id="changing-project-settings">
+<h2>Changing project settings<a class="headerlink" href="#changing-project-settings" title="Link to this heading"></a></h2>
+<p>The <strong>General</strong> tab of the project settings window works much like the inspector.
+It displays a list of project settings which you can change, just like inspector
+properties. There is a list of categories on the left, which you can use to select
+related groups of settings. You can also search for a specific setting with the
+<strong>Filter Settings</strong> field.</p>
+<p>Each setting has a default value. Settings can be reset to their default values
+by clicking the circular arrow <strong>Reset</strong> button next to each property.</p>
+<section id="changing-project-settings-from-code">
+<h3>Changing project settings from code<a class="headerlink" href="#changing-project-settings-from-code" title="Link to this heading"></a></h3>
+<p>You can use <a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-method-set-setting"><span class="std std-ref">set_setting()</span></a> to
+change a setting's value from code:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb">ProjectSettings</span><span class="o">.</span><span class="nf">set_setting</span><span class="p">(</span><span class="s2">"application/run/max_fps"</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
+<span class="nb">ProjectSettings</span><span class="o">.</span><span class="nf">set_setting</span><span class="p">(</span><span class="s2">"display/window/size/mode"</span><span class="p">,</span><span class="w"> </span><span class="nb">DisplayServer</span><span class="o">.</span><span class="vi">WINDOW_MODE_WINDOWED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ProjectSettings</span><span class="p">.</span><span class="n">SetSetting</span><span class="p">(</span><span class="s">"application/run/max_fps"</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">);</span>
+<span class="n">ProjectSettings</span><span class="p">.</span><span class="n">SetSetting</span><span class="p">(</span><span class="s">"display/window/size/mode"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">DisplayServer</span><span class="p">.</span><span class="n">WindowMode</span><span class="p">.</span><span class="n">Windowed</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>However, many project settings are only read once when the game starts. After
+that, changing the setting with <code class="docutils literal notranslate"><span class="pre">set_setting()</span></code> will have no effect. Instead,
+most settings have a corresponding property or method on a runtime class like
+<a class="reference internal" href="../../classes/class_engine.html#class-engine"><span class="std std-ref">Engine</span></a> or <a class="reference internal" href="../../classes/class_displayserver.html#class-displayserver"><span class="std std-ref">DisplayServer</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nb">Engine</span><span class="o">.</span><span class="vi">max_fps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span>
+<span class="nb">DisplayServer</span><span class="o">.</span><span class="nf">window_set_mode</span><span class="p">(</span><span class="nb">DisplayServer</span><span class="o">.</span><span class="vi">WINDOW_MODE_WINDOWED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Engine</span><span class="p">.</span><span class="n">MaxFps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="n">DisplayServer</span><span class="p">.</span><span class="n">WindowSetMode</span><span class="p">(</span><span class="n">DisplayServer</span><span class="p">.</span><span class="n">WindowMode</span><span class="p">.</span><span class="n">Windowed</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>In general, project settings are duplicated at runtime in the
+<a class="reference internal" href="../../classes/class_engine.html#class-engine"><span class="std std-ref">Engine</span></a>, <a class="reference internal" href="../../classes/class_physicsserver2d.html#class-physicsserver2d"><span class="std std-ref">PhysicsServer2D</span></a>,
+<a class="reference internal" href="../../classes/class_physicsserver3d.html#class-physicsserver3d"><span class="std std-ref">PhysicsServer3D</span></a>,
+<a class="reference internal" href="../../classes/class_renderingserver.html#class-renderingserver"><span class="std std-ref">RenderingServer</span></a>,
+<a class="reference internal" href="../../classes/class_viewport.html#class-viewport"><span class="std std-ref">Viewport</span></a>, or <a class="reference internal" href="../../classes/class_window.html#class-window"><span class="std std-ref">Window</span></a> classes. In the
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings"><span class="std std-ref">ProjectSettings</span></a> class reference, settings
+links to their equivalent runtime property or method.</p>
+</section>
+</section>
+<section id="reading-project-settings">
+<h2>Reading project settings<a class="headerlink" href="#reading-project-settings" title="Link to this heading"></a></h2>
+<p>You can read project settings with
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-method-get-setting"><span class="std std-ref">get_setting()</span></a> or
+<a class="reference internal" href="../../classes/class_projectsettings.html#class-projectsettings-method-get-setting-with-override"><span class="std std-ref">get_setting_with_override()</span></a>:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">max_fps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ProjectSettings</span><span class="o">.</span><span class="nf">get_setting</span><span class="p">(</span><span class="s2">"application/run/max_fps"</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">window_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ProjectSettings</span><span class="o">.</span><span class="nf">get_setting</span><span class="p">(</span><span class="s2">"display/window/size/mode"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">maxFps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ProjectSettings</span><span class="p">.</span><span class="n">GetSetting</span><span class="p">(</span><span class="s">"application/run/max_fps"</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">windowMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DisplayServer</span><span class="p">.</span><span class="n">WindowMode</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span><span class="n">ProjectSettings</span><span class="p">.</span><span class="n">GetSetting</span><span class="p">(</span><span class="s">"display/window/size/mode"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>Since many project settings are only read once at startup, the value in the
+project settings may no longer be accurate. In these cases, it's better to read
+the value from the runtime equivalent property or method:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">max_fps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Engine</span><span class="o">.</span><span class="vi">max_fps</span>
+<span class="k">var</span><span class="w"> </span><span class="n">window_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">DisplayServer</span><span class="o">.</span><span class="nf">window_get_mode</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">maxFps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Engine</span><span class="p">.</span><span class="n">MaxFps</span><span class="p">;</span>
+<span class="n">DisplayServer</span><span class="p">.</span><span class="n">WindowMode</span><span class="w"> </span><span class="n">windowMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DisplayServer</span><span class="p">.</span><span class="n">WindowGetMode</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="manually-editing-project-godot">
+<h2>Manually editing project.godot<a class="headerlink" href="#manually-editing-project-godot" title="Link to this heading"></a></h2>
+<p>You can open the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file using a text editor and manually
+change project settings. Note that if the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file does not have a
+stored value for a particular setting, it is implicitly the default value of
+that setting. This means that if you are manually editing the file, you may
+have to write in both the setting name <em>and</em> the value.</p>
+<p>In general, it is recommended to use the Project Settings window rather than
+manually edit <code class="docutils literal notranslate"><span class="pre">project.godot</span></code>.</p>
+</section>
+<section id="advanced-project-settings">
+<h2>Advanced project settings<a class="headerlink" href="#advanced-project-settings" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id2">
+<img alt="../../_images/project_settings_advanced.webp" src="../../_images/project_settings_advanced.webp"/>
+<figcaption>
+<p><span class="caption-text">The advanced project settings</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>By default, only some project settings are shown. To see all the project
+settings, enable the <strong>Advanced Settings</strong> toggle.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

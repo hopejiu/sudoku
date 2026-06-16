@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Advanced physics interpolation" property="og:title"/>
+
+
+
+<meta content="Although the previous instructions will give satisfactory results in a lot of games, in some cases you will want to go a stage further to get the best possible results and the smoothest possible ex..." property="og:description"/>
+<meta content="Although the previous instructions will give satisfactory results in a lot of games, in some cases you will want to go a stage further to get the best possible results and the smoothest possible ex..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Advanced physics interpolation — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="2d_and_3d_physics_interpolation.html" rel="next" title="2D and 3D physics interpolation"/>
+<link href="using_physics_interpolation.html" rel="prev" title="Using physics interpolation"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/physics/interpolation/advanced_physics_interpolation" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="advanced-physics-interpolation">
+<span id="doc-advanced-physics-interpolation"></span><h1>Advanced physics interpolation<a class="headerlink" href="#advanced-physics-interpolation" title="Link to this heading"></a></h1>
+<p>Although the previous instructions will give satisfactory results in a lot of games,
+in some cases you will want to go a stage further to get the best possible results
+and the smoothest possible experience.</p>
+<section id="exceptions-to-automatic-physics-interpolation">
+<h2>Exceptions to automatic physics interpolation<a class="headerlink" href="#exceptions-to-automatic-physics-interpolation" title="Link to this heading"></a></h2>
+<p>Even with physics interpolation active, there may be some local situations where
+you would benefit from disabling automatic interpolation for a
+<a class="reference internal" href="../../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> (or branch of the <a class="reference internal" href="../../../classes/class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a>), and
+have the finer control of performing interpolation manually.</p>
+<p>This is possible using the <a class="reference internal" href="../../../classes/class_node.html#class-node-property-physics-interpolation-mode"><span class="std std-ref">Node.physics_interpolation_mode</span></a>
+property which is present in all Nodes. If you for example, turn off interpolation
+for a Node, the children will recursively also be affected (as they default to
+inheriting the parent setting). This means you can easily disable interpolation for
+an entire subscene.</p>
+<p>The most common situation where you may want to perform your own interpolation is
+Cameras.</p>
+<section id="cameras">
+<h3>Cameras<a class="headerlink" href="#cameras" title="Link to this heading"></a></h3>
+<p>In many cases, a <a class="reference internal" href="../../../classes/class_camera3d.html#class-camera3d"><span class="std std-ref">Camera3D</span></a> can use automatic interpolation
+just like any other node. However, for best results, especially at low physics tick
+rates, it is recommended that you take a manual approach to camera interpolation.</p>
+<p>This is because viewers are very sensitive to camera movement. For instance, a
+Camera3D that realigns slightly every 1/10th of a second (at 10tps tick rate) will
+often be noticeable. You can get a much smoother result by moving the camera each
+frame in <code class="docutils literal notranslate"><span class="pre">_process</span></code>, and following an interpolated target manually.</p>
+</section>
+<section id="manual-camera-interpolation">
+<h3>Manual camera interpolation<a class="headerlink" href="#manual-camera-interpolation" title="Link to this heading"></a></h3>
+<section id="ensure-the-camera-is-using-global-coordinate-space">
+<h4>Ensure the camera is using global coordinate space<a class="headerlink" href="#ensure-the-camera-is-using-global-coordinate-space" title="Link to this heading"></a></h4>
+<p>The very first step when performing manual camera interpolation is to make sure the
+Camera3D transform is specified in <em>global space</em> rather than inheriting the
+transform of a moving parent. This is because feedback can occur between the
+movement of a parent node of a Camera3D and the movement of the camera Node itself,
+which can mess up the interpolation.</p>
+<p>There are two ways of doing this:</p>
+<ol class="arabic simple">
+<li><p>Move the Camera3D so it is independent on its own branch, rather than being a child of a moving object.</p></li>
+</ol>
+<img alt="../../../_images/fti_camera_worldspace.webp" src="../../../_images/fti_camera_worldspace.webp"/>
+<ol class="arabic simple" start="2">
+<li><p>Call <a class="reference internal" href="../../../classes/class_node3d.html#class-node3d-property-top-level"><span class="std std-ref">Node3D.top_level</span></a> and set this to <code class="docutils literal notranslate"><span class="pre">true</span></code>, which will make the Camera ignore the transform of its parent.</p></li>
+</ol>
+</section>
+<section id="typical-example">
+<h4>Typical example<a class="headerlink" href="#typical-example" title="Link to this heading"></a></h4>
+<p>A typical example of a custom approach is to use the <code class="docutils literal notranslate"><span class="pre">look_at</span></code> function in the
+Camera3D every frame in <code class="docutils literal notranslate"><span class="pre">_process()</span></code> to look at a target node (such as the player).</p>
+<p>But there is a problem. If we use the traditional <code class="docutils literal notranslate"><span class="pre">get_global_transform()</span></code> on a
+Camera3D "target" node, this transform will only focus the Camera3D on the target <em>at
+the current physics tick</em>. This is <em>not</em> what we want, as the camera will jump
+about on each physics tick as the target moves. Even though the camera may be
+updated each frame, this does not help give smooth motion if the <em>target</em> is only
+changing each physics tick.</p>
+</section>
+<section id="get-global-transform-interpolated">
+<h4>get_global_transform_interpolated()<a class="headerlink" href="#get-global-transform-interpolated" title="Link to this heading"></a></h4>
+<p>What we really want to focus the camera on, is not the position of the target on
+the physics tick, but the <em>interpolated</em> position, i.e. the position at which the
+target will be rendered.</p>
+<p>We can do this using the <a class="reference internal" href="../../../classes/class_node3d.html#class-node3d-method-get-global-transform-interpolated"><span class="std std-ref">Node3D.get_global_transform_interpolated</span></a>
+function. This acts exactly like getting <a class="reference internal" href="../../../classes/class_node3d.html#class-node3d-property-global-transform"><span class="std std-ref">Node3D.global_transform</span></a>
+but it gives you the <em>interpolated</em> transform (during a <code class="docutils literal notranslate"><span class="pre">_process()</span></code> call).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">get_global_transform_interpolated()</span></code> should only be used once or
+twice for special cases such as cameras. It should <strong>not</strong> be used
+all over the place in your code (both for performance reasons, and
+to give correct gameplay).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Aside from exceptions like the camera, in most cases, your game logic
+should be in <code class="docutils literal notranslate"><span class="pre">_physics_process()</span></code>. In game logic you should be calling
+<code class="docutils literal notranslate"><span class="pre">get_global_transform()</span></code> or <code class="docutils literal notranslate"><span class="pre">get_transform()</span></code>, which will give the
+current physics transform (in global or local space respectively), which
+is usually what you will want for gameplay code.</p>
+</div>
+</section>
+<section id="example-manual-camera-script">
+<h4>Example manual camera script<a class="headerlink" href="#example-manual-camera-script" title="Link to this heading"></a></h4>
+<p>Here is an example of a simple fixed camera which follows an interpolated target:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Camera3D</span>
+<span class="c1"># Node that the camera will follow</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_target</span>
+<span class="c1"># We will smoothly lerp to follow the target</span>
+<span class="c1"># rather than follow exactly</span>
+<span class="k">var</span><span class="w"> </span><span class="n">_target_pos</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">()</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Find the target node</span>
+<span class="w">    </span><span class="n">_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="s2">"../Player"</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Turn off automatic physics interpolation for the Camera3D,</span>
+<span class="w">    </span><span class="c1"># we will be doing this manually</span>
+<span class="w">    </span><span class="nf">set_physics_interpolation_mode</span><span class="p">(</span><span class="nb">Node</span><span class="o">.</span><span class="vi">PHYSICS_INTERPOLATION_MODE_OFF</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">float</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Find the current interpolated transform of the target</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">tr</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_target</span><span class="o">.</span><span class="nf">get_global_transform_interpolated</span><span class="p">()</span>
+<span class="w">    </span><span class="c1"># Provide some delayed smoothed lerping towards the target position</span>
+<span class="w">    </span><span class="n">_target_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">lerp</span><span class="p">(</span><span class="n">_target_pos</span><span class="p">,</span><span class="w"> </span><span class="n">tr</span><span class="o">.</span><span class="vi">origin</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Function">min</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span>
+<span class="w">    </span><span class="c1"># Fixed camera position, but it will follow the target</span>
+<span class="w">    </span><span class="nf">look_at</span><span class="p">(</span><span class="n">_target_pos</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="mouse-look">
+<h4>Mouse look<a class="headerlink" href="#mouse-look" title="Link to this heading"></a></h4>
+<p>Mouse look is a very common way of controlling cameras. But there is a problem.
+Unlike keyboard input which can be sampled periodically on the physics tick, mouse
+move events can come in continuously. The camera will be expected to react and
+follow these mouse movements on the next frame, rather than waiting until the next
+physics tick.</p>
+<p>In this situation, it can be better to disable physics interpolation for the camera
+node (using <a class="reference internal" href="../../../classes/class_node.html#class-node-property-physics-interpolation-mode"><span class="std std-ref">Node.physics_interpolation_mode</span></a>)
+and directly apply the mouse input to the camera rotation, rather than apply it in
+<code class="docutils literal notranslate"><span class="pre">_physics_process</span></code>.</p>
+<p>Sometimes, especially with cameras, you will want to use a combination of
+interpolation and non-interpolation:</p>
+<ul class="simple">
+<li><p>A first person camera may position the camera at a player location (perhaps using
+<a class="reference internal" href="../../../classes/class_node3d.html#class-node3d-method-get-global-transform-interpolated"><span class="std std-ref">Node3D.get_global_transform_interpolated</span></a>),
+but control the Camera rotation from mouse look <em>without</em> interpolation.</p></li>
+<li><p>A third person camera may similarly determine the look at (target location) of the camera using
+<a class="reference internal" href="../../../classes/class_node3d.html#class-node3d-method-get-global-transform-interpolated"><span class="std std-ref">Node3D.get_global_transform_interpolated</span></a>,
+but position the camera using mouse look <em>without</em> interpolation.</p></li>
+</ul>
+<p>There are many permutations and variations of camera types, but it should be clear
+that in many cases, disabling automatic physics interpolation and handling this
+yourself can give a better result.</p>
+</section>
+</section>
+<section id="disabling-interpolation-on-other-nodes">
+<h3>Disabling interpolation on other nodes<a class="headerlink" href="#disabling-interpolation-on-other-nodes" title="Link to this heading"></a></h3>
+<p>Although cameras are the most common example, there are a number of cases when you
+may wish other nodes to control their own interpolation, or be non-interpolated.
+Consider for example, a player in a top view game whose rotation is controlled by
+mouse look. Disabling physics rotation allows the player rotation to match the
+mouse in real-time.</p>
+</section>
+<section id="multimeshes">
+<h3>MultiMeshes<a class="headerlink" href="#multimeshes" title="Link to this heading"></a></h3>
+<p>Although most visual Nodes follow the single Node single visual instance paradigm,
+MultiMeshes can control several instances from the same Node. Therefore, they have
+some extra functions for controlling interpolation functionality on a
+<em>per-instance</em> basis. You should explore these functions if you are using
+interpolated MultiMeshes.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../classes/class_multimesh.html#class-multimesh-method-reset-instance-physics-interpolation"><span class="std std-ref">MultiMesh.reset_instance_physics_interpolation</span></a></p></li>
+<li><p><a class="reference internal" href="../../../classes/class_multimesh.html#class-multimesh-method-set-buffer-interpolated"><span class="std std-ref">MultiMesh.set_buffer_interpolated</span></a></p></li>
+</ul>
+<p>Full details are in the <a class="reference internal" href="../../../classes/class_multimesh.html#class-multimesh"><span class="std std-ref">MultiMesh</span></a> documentation.</p>
+</section>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

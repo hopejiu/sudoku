@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Keyboard/Controller Navigation and Focus" property="og:title"/>
+
+
+
+<meta content="It is a common requirement for a user interface to have full keyboard and controller support for navigation and interaction. There are two main reasons why this is beneficial for projects: improved..." property="og:description"/>
+<meta content="It is a common requirement for a user interface to have full keyboard and controller support for navigation and interaction. There are two main reasons why this is beneficial for projects: improved..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Keyboard/Controller Navigation and Focus — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="control_node_gallery.html" rel="next" title="Control node gallery"/>
+<link href="custom_gui_controls.html" rel="prev" title="Custom GUI controls"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/ui/gui_navigation" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="keyboard-controller-navigation-and-focus">
+<span id="doc-gui-navigation"></span><h1>Keyboard/Controller Navigation and Focus<a class="headerlink" href="#keyboard-controller-navigation-and-focus" title="Link to this heading"></a></h1>
+<p>It is a common requirement for a user interface to have full keyboard
+and controller support for navigation and interaction. There are two main
+reasons why this is beneficial for projects: improved accessibility (not everyone
+can use mouse or touch controls for interactions), and getting your project
+ready for consoles (or just for people who prefer to game with a controller on PC).</p>
+<p>Navigating between UI elements with keyboard or controller is done by
+changing which node is actively selected. This is also called changing UI focus.
+Every <a class="reference internal" href="../../classes/class_control.html#class-control"><span class="std std-ref">Control</span></a> node in Godot is capable of having focus.
+By default, some control nodes have the ability to automatically grab focus
+reacting to built-in UI actions such as <code class="docutils literal notranslate"><span class="pre">ui_up</span></code>, <code class="docutils literal notranslate"><span class="pre">ui_down</span></code>, <code class="docutils literal notranslate"><span class="pre">ui_focus_next</span></code>, etc.
+These actions can be seen in the project settings in the input map and can be modified.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Because these actions are used for focus they should not be used for any
+gameplay code.</p>
+</div>
+<section id="node-settings">
+<h2>Node settings<a class="headerlink" href="#node-settings" title="Link to this heading"></a></h2>
+<p>In addition to the built-in logic, you can define what is known as focus neighbors
+for each individual control node. This allows to finely tune the path the UI focus
+takes across the user interface of your project. The settings for individual
+nodes can be found in the Inspector dock, under the "Focus" category of the
+"Control" section.</p>
+<img alt="../../_images/focus_settings.png" src="../../_images/focus_settings.png"/>
+<p>Neighbor options are used to define nodes for 4-directional navigation, such
+as using arrow keys or a D-pad on a controller. For example, the bottom neighbor
+will be used when navigating down with the down arrow or by pushing down on
+the D-pad. The "Next" and "Previous" options are used with the focus shift button,
+such as <kbd class="kbd docutils literal notranslate">Tab</kbd> on desktop operating systems.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A node can lose focus if it becomes hidden.</p>
+</div>
+<p>The mode setting defines how a node can be focused. <strong>All</strong> means a node can
+be focused by clicking on it with the mouse, or selecting it with a keyboard
+or controller. <strong>Click</strong> means it can only be focused on by clicking on it.
+Finally, <strong>None</strong> means it can't be focused at all. Different control nodes have
+different default settings for this based on how they are typically used, for
+example, <a class="reference internal" href="../../classes/class_label.html#class-label"><span class="std std-ref">Label</span></a> nodes are set to "None" by default,
+while <a class="reference internal" href="../../classes/class_button.html#class-button"><span class="std std-ref">buttons</span></a> are set to "All".</p>
+<p>Make sure to properly configure your scenes for focus and navigation. If a node has
+no focus neighbor configured, the engine will try to guess the next control automatically.
+This may result in unintended behavior, especially in a complex user interface that doesn't
+have well-defined vertical or horizontal navigation flow.</p>
+</section>
+<section id="necessary-code">
+<h2>Necessary code<a class="headerlink" href="#necessary-code" title="Link to this heading"></a></h2>
+<p>For keyboard and controller navigation to work correctly, any node must be focused by
+using code when the scene starts. Without doing this, pressing buttons or keys won't
+do anything.</p>
+<p>You can use the <a class="reference internal" href="../../classes/class_control.html#class-control-method-grab-focus"><span class="std std-ref">Control.grab_focus()</span></a> method
+to focus a control. Here is a basic example of setting initial focus with code:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$StartButton</span><span class="o">.</span><span class="vi">grab_focus</span><span class="o">.</span><span class="nf">call_deferred</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">Button</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"StartButton"</span><span class="p">).</span><span class="n">GrabFocus</span><span class="p">.</span><span class="n">CallDeferred</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Now when the scene starts, the "Start Button" node will be focused, and the keyboard
+or a controller can be used to navigate between it and other UI elements.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

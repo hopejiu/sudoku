@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Handling compatibility breakages" property="og:title"/>
+
+
+
+<meta content="So you've added a new parameter to a method, changed the return type, changed the type of a parameter, or changed its default value, and now the automated testing is complaining about compatib..." property="og:description"/>
+<meta content="So you've added a new parameter to a method, changed the return type, changed the type of a parameter, or changed its default value, and now the automated testing is complaining about compatib..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Handling compatibility breakages — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../editor/index.html" rel="next" title="Editor development"/>
+<link href="profiling/very_sleepy.html" rel="prev" title="VerySleepy"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/handling_compatibility_breakages" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="handling-compatibility-breakages">
+<span id="doc-handling-compatibility-breakages"></span><h1>Handling compatibility breakages<a class="headerlink" href="#handling-compatibility-breakages" title="Link to this heading"></a></h1>
+<p>So you've added a new parameter to a method, changed the return type,
+changed the type of a parameter, or changed its default value,
+and now the automated testing is complaining about compatibility breakages?</p>
+<p>Breaking compatibility should be avoided, but when necessary there are systems in place
+to handle this in a way that makes the transition as smooth as possible.</p>
+<section id="a-practical-example">
+<h2>A practical example<a class="headerlink" href="#a-practical-example" title="Link to this heading"></a></h2>
+<p>These changes are taken from <a class="reference external" href="https://github.com/godotengine/godot/pull/88047">pull request #88047</a>, which added
+new pathing options to <code class="docutils literal notranslate"><span class="pre">AStarGrid2D</span></code> and other AStar classes.
+Among other changes, these methods were modified in <code class="docutils literal notranslate"><span class="pre">core/math/a_star_grid_2d.h</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_point_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+<span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_id_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_point_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">p_allow_partial_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_id_path</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">p_allow_partial_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This meant adding new compatibility method bindings to the file, which should be in the <code class="docutils literal notranslate"><span class="pre">protected</span></code> section of
+the code, usually placed next to <code class="docutils literal notranslate"><span class="pre">_bind_methods()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef DISABLE_DEPRECATED</span>
+<span class="w">    </span><span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_get_id_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_get_point_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to</span><span class="p">);</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">_bind_compatibility_methods</span><span class="p">();</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>They should start with an <code class="docutils literal notranslate"><span class="pre">_</span></code> to indicate that they are internal, and end with <code class="docutils literal notranslate"><span class="pre">_bind_compat_</span></code> followed by the PR number
+that introduced the change (<code class="docutils literal notranslate"><span class="pre">88047</span></code> in this example). These compatibility methods need to be implemented in a dedicated file,
+like <code class="docutils literal notranslate"><span class="pre">core/math/a_star_grid_2d.compat.inc</span></code> in this case:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">core/math/a_star_grid_2d.compat.inc</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**************************************************************************/</span>
+<span class="cm">/*  a_star_grid_2d.compat.inc                                             */</span>
+<span class="cm">/**************************************************************************/</span>
+<span class="cm">/*                         This file is part of:                          */</span>
+<span class="cm">/*                             GODOT ENGINE                               */</span>
+<span class="cm">/*                        https://godotengine.org                         */</span>
+<span class="cm">/**************************************************************************/</span>
+<span class="cm">/* Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md). */</span>
+<span class="cm">/* Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.                  */</span>
+<span class="cm">/*                                                                        */</span>
+<span class="cm">/* Permission is hereby granted, free of charge, to any person obtaining  */</span>
+<span class="cm">/* a copy of this software and associated documentation files (the        */</span>
+<span class="cm">/* "Software"), to deal in the Software without restriction, including    */</span>
+<span class="cm">/* without limitation the rights to use, copy, modify, merge, publish,    */</span>
+<span class="cm">/* distribute, sublicense, and/or sell copies of the Software, and to     */</span>
+<span class="cm">/* permit persons to whom the Software is furnished to do so, subject to  */</span>
+<span class="cm">/* the following conditions:                                              */</span>
+<span class="cm">/*                                                                        */</span>
+<span class="cm">/* The above copyright notice and this permission notice shall be         */</span>
+<span class="cm">/* included in all copies or substantial portions of the Software.        */</span>
+<span class="cm">/*                                                                        */</span>
+<span class="cm">/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,        */</span>
+<span class="cm">/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF     */</span>
+<span class="cm">/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. */</span>
+<span class="cm">/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY   */</span>
+<span class="cm">/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,   */</span>
+<span class="cm">/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE      */</span>
+<span class="cm">/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */</span>
+<span class="cm">/**************************************************************************/</span>
+<span class="cp">#ifndef DISABLE_DEPRECATED</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"core/variant/typed_array.h"</span>
+<span class="n">TypedArray</span><span class="o">&lt;</span><span class="n">Vector2i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_id_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">get_id_path</span><span class="p">(</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="n">p_to_id</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_point_path_bind_compat_88047</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vector2i</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_to_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">get_point_path</span><span class="p">(</span><span class="n">p_from_id</span><span class="p">,</span><span class="w"> </span><span class="n">p_to_id</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_bind_compatibility_methods</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_compatibility_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">"get_id_path"</span><span class="p">,</span><span class="w"> </span><span class="s">"from_id"</span><span class="p">,</span><span class="w"> </span><span class="s">"to_id"</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_id_path_bind_compat_88047</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_compatibility_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">"get_point_path"</span><span class="p">,</span><span class="w"> </span><span class="s">"from_id"</span><span class="p">,</span><span class="w"> </span><span class="s">"to_id"</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AStarGrid2D</span><span class="o">::</span><span class="n">_get_point_path_bind_compat_88047</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">#endif </span><span class="c1">// DISABLE_DEPRECATED</span>
+</pre></div>
+</div>
+</div>
+<p>Unless the change in compatibility is complex, the compatibility method should call the modified method directly,
+instead of duplicating that method. Make sure to match the default arguments for that method (in the example above this would be <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+<p>This file should always be placed next to the original file, and have <code class="docutils literal notranslate"><span class="pre">.compat.inc</span></code> at the end instead of <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> or <code class="docutils literal notranslate"><span class="pre">.h</span></code>.
+Next, this should be included in the <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file we're adding compatibility methods to, so <code class="docutils literal notranslate"><span class="pre">core/math/a_star_grid_2d.cpp</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">core/math/a_star_grid_2d.cpp</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"a_star_grid_2d.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"a_star_grid_2d.compat.inc"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"core/variant/typed_array.h"</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, the GDExtension API changes need to be recorded. To do this, first compile Godot on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch, and
+then run it with the <code class="docutils literal notranslate"><span class="pre">--dump-extension-api</span></code> flag:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>master
+scons
+godot<span class="w"> </span>--dump-extension-api
+</pre></div>
+</div>
+<p>This will create a file named <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code> in your current directory. Switch to your feature branch, recompile Godot,
+and then run it with the <code class="docutils literal notranslate"><span class="pre">--validate-extension-api</span></code> flag followed by the path to the <code class="docutils literal notranslate"><span class="pre">extension_api.json</span></code> file you just generated:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>my-feature-branch
+scons
+godot<span class="w"> </span>--validate-extension-api<span class="w"> </span>/path/to/extension_api.json
+</pre></div>
+</div>
+<p>This will generate some lines starting with <code class="docutils literal notranslate"><span class="pre">Validate</span> <span class="pre">extension</span> <span class="pre">JSON</span></code> like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Validate extension JSON: Error: Field 'classes/AStar2D/methods/get_id_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStar2D/methods/get_point_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStar3D/methods/get_id_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStar3D/methods/get_point_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStarGrid2D/methods/get_id_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStarGrid2D/methods/get_point_path/arguments': size changed value in new API, from 2 to 3.
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If you get a <code class="docutils literal notranslate"><span class="pre">Hash</span> <span class="pre">changed</span></code> error for a method, it means that the compatibility binding is missing or incorrect.
+Such lines shouldn't be added to the validation file, but fixed by binding the proper compatibility method.
+Make sure to double-check the following:</p>
+<ul class="simple">
+<li><p>For the compatibility method (the one whose name ends with the PR number), the argument types, names, and default
+values must be identical to the version of the method from before your changes.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">_bind_compatibility_methods()</span></code>, argument names provided to the <code class="docutils literal notranslate"><span class="pre">D_METHOD()</span></code> macro in <code class="docutils literal notranslate"><span class="pre">ClassDB::bind_compatibility_method()</span></code>
+must be identical to those from the <code class="docutils literal notranslate"><span class="pre">ClassDB::bind_method()</span></code> call for the original method.</p></li>
+</ul>
+</div>
+<p>Add these lines, followed by a comment explaining what the API change was and the actions taken to prevent breakage,
+to a validation file named after the GitHub pull request ID and placed in the folder of the Godot version it would have broken compatibility for.</p>
+<p>Since this example was for PR #88047, its file name would be <code class="docutils literal notranslate"><span class="pre">GH-88047.txt</span></code>, and because this was done during
+the development of 4.3 (thus changing from 4.2), the file would be in the <code class="docutils literal notranslate"><span class="pre">misc/extension_api_validation/4.2-stable/</span></code> folder.</p>
+<p>See below for a complete example of such a file for this PR:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">misc/extension_api_validation/4.2-stable/GH-88047.txt</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GH-88047
+--------
+Validate extension JSON: Error: Field 'classes/AStar2D/methods/get_id_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStar2D/methods/get_point_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStar3D/methods/get_id_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStar3D/methods/get_point_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStarGrid2D/methods/get_id_path/arguments': size changed value in new API, from 2 to 3.
+Validate extension JSON: Error: Field 'classes/AStarGrid2D/methods/get_point_path/arguments': size changed value in new API, from 2 to 3.
+Added optional "allow_partial_path" argument to get_id_path and get_point_path methods in AStar classes.
+Compatibility methods registered.
+</pre></div>
+</div>
+</div>
+<p>And that's it! You might run into a bit more complicated cases, like rearranging arguments,
+changing return types, etc., but this covers the basics on how to use this system.</p>
+<p>For more information, see <a class="reference external" href="https://github.com/godotengine/godot/pull/76446">pull request #76446</a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

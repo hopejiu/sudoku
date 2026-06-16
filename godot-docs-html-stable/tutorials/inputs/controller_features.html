@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Controller features" property="og:title"/>
+
+
+
+<meta content="Godot supports controller-specific features that can further enhance the gameplay experience. This page describes these features, how existing games have used them, and how you can get started with..." property="og:description"/>
+<meta content="Godot supports controller-specific features that can further enhance the gameplay experience. This page describes these features, how existing games have used them, and how you can get started with..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Controller features — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="handling_quit_requests.html" rel="next" title="Handling quit requests"/>
+<link href="controllers_gamepads_joysticks.html" rel="prev" title="Controllers, gamepads, and joysticks"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/inputs/controller_features" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="controller-features">
+<span id="doc-controller-features"></span><h1>Controller features<a class="headerlink" href="#controller-features" title="Link to this heading"></a></h1>
+<p>Godot supports controller-specific features that can further enhance the gameplay
+experience. This page describes these features, how existing games have used them,
+and how you can get started with them in Godot.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These controller features are currently only supported on Windows, macOS, and Linux.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unless you specifically advertise your game as requiring specific controllers,
+remember that there is no guarantee that players will have a controller with
+any given features.</p>
+<p>As a result, we suggest using these features to enhance the gameplay experience
+for players whose controllers support them, without detracting from those who
+don't have controllers.</p>
+</div>
+<section id="led-color">
+<h2>LED color<a class="headerlink" href="#led-color" title="Link to this heading"></a></h2>
+<p>Games can use the LED lights on certain controllers to subtly complement the on-screen gameplay by
+providing some matching visuals in the player's hands. Here are some notable examples:</p>
+<ul class="simple">
+<li><p>In <em>Hades</em>, the color of the light matches the god you're receiving a boon from.</p></li>
+<li><p>In <em>Resident Evil 2</em>, the color of the light indicates your health (green for full, yellow for medium, red for low).</p></li>
+<li><p>In <em>Star Wars Jedi: Fallen Order</em>, the color of the light matches your lightsaber's color.</p></li>
+</ul>
+<p>Use the method <a class="reference internal" href="../../classes/class_input.html#class-input-method-set-joy-light"><span class="std std-ref">Input.set_joy_light()</span></a> to set the color
+of a given controller's LEDs.</p>
+<p>To determine if a given controller supports setting LED lights, use the <a class="reference internal" href="../../classes/class_input.html#class-input-method-has-joy-light"><span class="std std-ref">Input.has_joy_light()</span></a>
+method. The PlayStation DualShock and DualSense controllers are known to support LED lights.</p>
+<p>The following <code class="docutils literal notranslate"><span class="pre">_process()</span></code> method sets the LED color according to the currently pressed button,
+and turns it off if no button is being pressed:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">BLACK</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_joy_button_pressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">JOY_BUTTON_A</span><span class="p">):</span>
+<span class="w">        </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">BLUE</span>
+<span class="w">    </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_joy_button_pressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">JOY_BUTTON_X</span><span class="p">):</span>
+<span class="w">        </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">MAGENTA</span>
+<span class="w">    </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_joy_button_pressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">JOY_BUTTON_B</span><span class="p">):</span>
+<span class="w">        </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">RED</span>
+<span class="w">    </span><span class="k k-ControlFlow">elif</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_joy_button_pressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">JOY_BUTTON_Y</span><span class="p">):</span>
+<span class="w">        </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">GREEN</span>
+<span class="w">    </span><span class="nb">Input</span><span class="o">.</span><span class="nf">set_joy_light</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following example smoothly fades the LED through hues in a loop:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">hue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="nf">from_hsv</span><span class="p">(</span><span class="n">hue</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">Input</span><span class="o">.</span><span class="nf">set_joy_light</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">)</span>
+<span class="w">    </span><span class="n">hue</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1</span>
+</pre></div>
+</div>
+<p>The following example makes the LED blink red three times when the south button (Cross/X on PlayStation controllers) is pressed:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">blink_tween</span><span class="p">:</span><span class="w"> </span><span class="nb">Tween</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">null</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ready_to_blink</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">blink_tween</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">is_running</span><span class="p">()</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">is_joy_button_pressed</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">JOY_BUTTON_A</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">ready_to_blink</span><span class="p">:</span>
+<span class="w">        </span><span class="nf">do_blink</span><span class="p">()</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">do_blink</span><span class="p">():</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">blink_tween</span><span class="p">:</span>
+<span class="w">        </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">kill</span><span class="p">()</span>
+<span class="w">    </span><span class="n">blink_tween</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">create_tween</span><span class="p">()</span>
+<span class="w">    </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">tween_callback</span><span class="p">(</span><span class="k">func</span><span class="p">():</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">set_joy_light</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">RED</span><span class="p">))</span>
+<span class="w">    </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">tween_interval</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">tween_callback</span><span class="p">(</span><span class="k">func</span><span class="p">():</span><span class="w"> </span><span class="nb">Input</span><span class="o">.</span><span class="nf">set_joy_light</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">Color</span><span class="o">.</span><span class="vi">BLACK</span><span class="p">))</span>
+<span class="w">    </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">tween_interval</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">blink_tween</span><span class="o">.</span><span class="nf">set_loops</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

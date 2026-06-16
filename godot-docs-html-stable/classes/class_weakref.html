@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="WeakRef" property="og:title"/>
+
+
+
+<meta content="Inherits: RefCounted&lt; Object Holds an Object. If the object is RefCounted, it doesn't update the reference count. Description: A weakref can hold a RefCounted without contributing to the re..." property="og:description"/>
+<meta content="Inherits: RefCounted&lt; Object Holds an Object. If the object is RefCounted, it doesn't update the reference count. Description: A weakref can hold a RefCounted without contributing to the re..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) WeakRef — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_webrtcdatachannel.html" rel="next" title="WebRTCDataChannel"/>
+<link href="class_upnpdevice.html" rel="prev" title="UPNPDevice"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_weakref" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="weakref">
+<span id="class-weakref"></span><h1>WeakRef<a class="headerlink" href="#weakref" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Holds an <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a>. If the object is <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a>, it doesn't update the reference count.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A weakref can hold a <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> without contributing to the reference counter. A weakref can be created from an <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a> using <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-weakref"><span class="std std-ref">@GlobalScope.weakref()</span></a>. If this object is not a reference, weakref still works, however, it does not have any effect on the object. Weakrefs are useful in cases where multiple classes have variables that refer to each other. Without weakrefs, using these classes could lead to memory leaks, since both references keep each other from being released. Making part of the variables a weakref can prevent this cyclic dependency, and allows the references to be released.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a></p></td>
+<td><p><a class="reference internal" href="#class-weakref-method-get-ref"><span class="std std-ref">get_ref</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-weakref-method-get-ref"><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> <strong>get_ref</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-weakref-method-get-ref"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a> this weakref is referring to. Returns <code class="docutils literal notranslate"><span class="pre">null</span></code> if that object no longer exists.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

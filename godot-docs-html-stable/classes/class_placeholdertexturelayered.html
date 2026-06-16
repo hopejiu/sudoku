@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="PlaceholderTextureLayered" property="og:title"/>
+
+
+
+<meta content="Inherits: TextureLayered&lt; Texture&lt; Resource&lt; RefCounted&lt; Object Inherited By: PlaceholderCubemap, PlaceholderCubemapArray, PlaceholderTexture2DArray Placeholder class for a 2-dimensiona..." property="og:description"/>
+<meta content="Inherits: TextureLayered&lt; Texture&lt; Resource&lt; RefCounted&lt; Object Inherited By: PlaceholderCubemap, PlaceholderCubemapArray, PlaceholderTexture2DArray Placeholder class for a 2-dimensiona..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) PlaceholderTextureLayered — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_planemesh.html" rel="next" title="PlaneMesh"/>
+<link href="class_placeholdertexture3d.html" rel="prev" title="PlaceholderTexture3D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_placeholdertexturelayered" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="placeholdertexturelayered">
+<span id="class-placeholdertexturelayered"></span><h1>PlaceholderTextureLayered<a class="headerlink" href="#placeholdertexturelayered" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_texturelayered.html#class-texturelayered"><span class="std std-ref">TextureLayered</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_texture.html#class-texture"><span class="std std-ref">Texture</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p><strong>Inherited By:</strong> <a class="reference internal" href="class_placeholdercubemap.html#class-placeholdercubemap"><span class="std std-ref">PlaceholderCubemap</span></a>, <a class="reference internal" href="class_placeholdercubemaparray.html#class-placeholdercubemaparray"><span class="std std-ref">PlaceholderCubemapArray</span></a>, <a class="reference internal" href="class_placeholdertexture2darray.html#class-placeholdertexture2darray"><span class="std std-ref">PlaceholderTexture2DArray</span></a></p>
+<p>Placeholder class for a 2-dimensional texture array.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This class is used when loading a project that uses a <a class="reference internal" href="class_texturelayered.html#class-texturelayered"><span class="std std-ref">TextureLayered</span></a> subclass in 2 conditions:</p>
+<ul class="simple">
+<li><p>When running the project exported in dedicated server mode, only the texture's dimensions are kept (as they may be relied upon for gameplay purposes or positioning of other elements). This allows reducing the exported PCK's size significantly.</p></li>
+<li><p>When this subclass is missing due to using a different engine version or build (e.g. modules disabled).</p></li>
+</ul>
+<p><strong>Note:</strong> This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-placeholdertexturelayered-property-layers"><span class="std std-ref">layers</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a></p></td>
+<td><p><a class="reference internal" href="#class-placeholdertexturelayered-property-size"><span class="std std-ref">size</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector2i(1,</span> <span class="pre">1)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-placeholdertexturelayered-property-layers"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>layers</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-placeholdertexturelayered-property-layers"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_layers</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_layers</strong>()</p></li>
+</ul>
+<p>The number of layers in the texture array.</p>
+<p class="classref-property" id="class-placeholdertexturelayered-property-size"><a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a> <strong>size</strong> = <code class="docutils literal notranslate"><span class="pre">Vector2i(1,</span> <span class="pre">1)</span></code> <a class="reference internal" href="#class-placeholdertexturelayered-property-size"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_size</strong>(value: <a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a> <strong>get_size</strong>()</p></li>
+</ul>
+<p>The size of each texture layer (in pixels).</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="OfflineMultiplayerPeer" property="og:title"/>
+
+
+
+<meta content="Inherits: MultiplayerPeer&lt; PacketPeer&lt; RefCounted&lt; Object A MultiplayerPeer which is always connected and acts as a server. Description: This is the default MultiplayerAPI.multiplayer_peer..." property="og:description"/>
+<meta content="Inherits: MultiplayerPeer&lt; PacketPeer&lt; RefCounted&lt; Object A MultiplayerPeer which is always connected and acts as a server. Description: This is the default MultiplayerAPI.multiplayer_peer..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) OfflineMultiplayerPeer — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_oggpacketsequenceplayback.html" rel="next" title="OggPacketSequencePlayback"/>
+<link href="class_node3dgizmo.html" rel="prev" title="Node3DGizmo"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_offlinemultiplayerpeer" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="offlinemultiplayerpeer">
+<span id="class-offlinemultiplayerpeer"></span><h1>OfflineMultiplayerPeer<a class="headerlink" href="#offlinemultiplayerpeer" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_multiplayerpeer.html#class-multiplayerpeer"><span class="std std-ref">MultiplayerPeer</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_packetpeer.html#class-packetpeer"><span class="std std-ref">PacketPeer</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A <a class="reference internal" href="class_multiplayerpeer.html#class-multiplayerpeer"><span class="std std-ref">MultiplayerPeer</span></a> which is always connected and acts as a server.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>This is the default <a class="reference internal" href="class_multiplayerapi.html#class-multiplayerapi-property-multiplayer-peer"><span class="std std-ref">MultiplayerAPI.multiplayer_peer</span></a> for the <a class="reference internal" href="class_node.html#class-node-property-multiplayer"><span class="std std-ref">Node.multiplayer</span></a>. It mimics the behavior of a server with no peers connected.</p>
+<p>This means that the <a class="reference internal" href="class_scenetree.html#class-scenetree"><span class="std std-ref">SceneTree</span></a> will act as the multiplayer authority by default. Calls to <a class="reference internal" href="class_multiplayerapi.html#class-multiplayerapi-method-is-server"><span class="std std-ref">MultiplayerAPI.is_server()</span></a> will return <code class="docutils literal notranslate"><span class="pre">true</span></code>, and calls to <a class="reference internal" href="class_multiplayerapi.html#class-multiplayerapi-method-get-unique-id"><span class="std std-ref">MultiplayerAPI.get_unique_id()</span></a> will return <a class="reference internal" href="class_multiplayerpeer.html#class-multiplayerpeer-constant-target-peer-server"><span class="std std-ref">MultiplayerPeer.TARGET_PEER_SERVER</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Background loading" property="og:title"/>
+
+
+
+<meta content="Commonly, games need to load resources asynchronously. When switching the main scene of your game (e.g. going to a new level), you might want to show a loading screen with some indication that prog..." property="og:description"/>
+<meta content="Commonly, games need to load resources asynchronously. When switching the main scene of your game (e.g. going to a new level), you might want to show a loading screen with some indication that prog..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Background loading — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="data_paths.html" rel="next" title="File paths in Godot projects"/>
+<link href="index.html" rel="prev" title="File and data I/O"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/io/background_loading" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="background-loading">
+<span id="doc-background-loading"></span><h1>Background loading<a class="headerlink" href="#background-loading" title="Link to this heading"></a></h1>
+<p>Commonly, games need to load resources asynchronously.
+When switching the main scene of your game (e.g. going to a new
+level), you might want to show a loading screen with some indication
+that progress is being made, or you may want to load additional resources
+during gameplay.</p>
+<p>The standard load method
+(<a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader-method-load"><span class="std std-ref">ResourceLoader.load</span></a> or GDScript's simpler
+<a class="reference internal" href="../../classes/class_%40gdscript.html#class-gdscript-method-load"><span class="std std-ref">load</span></a>) blocks your
+thread, making your game appear unresponsive while the resource is being loaded.</p>
+<p>One way around this is using <code class="docutils literal notranslate"><span class="pre">ResourceLoader</span></code> to load resources asynchronously
+in background threads.</p>
+<section id="using-resourceloader">
+<h2>Using ResourceLoader<a class="headerlink" href="#using-resourceloader" title="Link to this heading"></a></h2>
+<p>Generally, you queue requests to load resources for a path using
+<a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader-method-load-threaded-request"><span class="std std-ref">ResourceLoader.load_threaded_request</span></a>,
+which will then be loaded in threads in the background.</p>
+<p>You can check the status with
+<a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader-method-load-threaded-get-status"><span class="std std-ref">ResourceLoader.load_threaded_get_status</span></a>.
+Progress can be obtained by passing an array variable via progress which will return
+a one element array containing the percentage.</p>
+<p>Finally, you retrieve loaded resources by calling
+<a class="reference internal" href="../../classes/class_resourceloader.html#class-resourceloader-method-load-threaded-get"><span class="std std-ref">ResourceLoader.load_threaded_get</span></a>.</p>
+<p>Once you call <code class="docutils literal notranslate"><span class="pre">load_threaded_get()</span></code>, either the resource finished loading in
+the background and will be returned instantly or the load will block at this point like
+<code class="docutils literal notranslate"><span class="pre">load()</span></code> would. If you want to guarantee this does not block,
+you either need to ensure there is enough time between requesting the load and
+retrieving the resource or you need to check the status manually.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>This example demonstrates how to load a scene in the background.
+We will have a button spawn an enemy when pressed.
+The enemy will be <code class="docutils literal notranslate"><span class="pre">Enemy.tscn</span></code> which we will load on <code class="docutils literal notranslate"><span class="pre">_ready</span></code> and instantiate when pressed.
+The path will be <code class="docutils literal notranslate"><span class="pre">"Enemy.tscn"</span></code> which is located at <code class="docutils literal notranslate"><span class="pre">res://Enemy.tscn</span></code>.</p>
+<p>First, we will start a request to load the resource and connect the button:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">ENEMY_SCENE_PATH</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Enemy.tscn"</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="nb">ResourceLoader</span><span class="o">.</span><span class="nf">load_threaded_request</span><span class="p">(</span><span class="n">ENEMY_SCENE_PATH</span><span class="p">)</span>
+<span class="w">    </span><span class="bp">self</span><span class="o">.</span><span class="vi">pressed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_button_pressed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyButton</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Button</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">EnemyScenePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Enemy.tscn"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">LoadThreadedRequest</span><span class="p">(</span><span class="n">EnemyScenePath</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Pressed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnButtonPressed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">_on_button_pressed</span></code> will be called when the button is pressed.
+This method will be used to spawn an enemy.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_button_pressed</span><span class="p">():</span><span class="w"> </span><span class="c1"># Button was pressed.</span>
+<span class="w">    </span><span class="c1"># Obtain the resource now that we need it.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enemy_scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ResourceLoader</span><span class="o">.</span><span class="nf">load_threaded_get</span><span class="p">(</span><span class="n">ENEMY_SCENE_PATH</span><span class="p">)</span>
+<span class="w">    </span><span class="c1"># Instantiate the enemy scene and add it to the current scene.</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">enemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemy_scene</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">enemy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnButtonPressed</span><span class="p">()</span><span class="w"> </span><span class="c1">// Button was pressed.</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Obtain the resource now that we need it.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">enemyScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">PackedScene</span><span class="p">)</span><span class="n">ResourceLoader</span><span class="p">.</span><span class="n">LoadThreadedGet</span><span class="p">(</span><span class="n">EnemyScenePath</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Instantiate the enemy scene and add it to the current scene.</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">enemy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enemyScene</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">();</span>
+<span class="w">    </span><span class="n">AddChild</span><span class="p">(</span><span class="n">enemy</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Sprite3D" property="og:title"/>
+
+
+
+<meta content="Inherits: SpriteBase3D&lt; GeometryInstance3D&lt; VisualInstance3D&lt; Node3D&lt; Node&lt; Object 2D sprite node in a 3D world. Description: A node that displays a 2D texture in a 3D environment. T..." property="og:description"/>
+<meta content="Inherits: SpriteBase3D&lt; GeometryInstance3D&lt; VisualInstance3D&lt; Node3D&lt; Node&lt; Object 2D sprite node in a 3D world. Description: A node that displays a 2D texture in a 3D environment. T..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Sprite3D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_spritebase3d.html" rel="next" title="SpriteBase3D"/>
+<link href="class_sprite2d.html" rel="prev" title="Sprite2D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_sprite3d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="sprite3d">
+<span id="class-sprite3d"></span><h1>Sprite3D<a class="headerlink" href="#sprite3d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_spritebase3d.html#class-spritebase3d"><span class="std std-ref">SpriteBase3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_geometryinstance3d.html#class-geometryinstance3d"><span class="std std-ref">GeometryInstance3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_visualinstance3d.html#class-visualinstance3d"><span class="std std-ref">VisualInstance3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>2D sprite node in a 3D world.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A node that displays a 2D texture in a 3D environment. The texture displayed can be a region from a larger atlas texture, or a frame from a sprite sheet animation. See also <a class="reference internal" href="class_spritebase3d.html#class-spritebase3d"><span class="std std-ref">SpriteBase3D</span></a> where properties such as the billboard mode are defined.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-frame-coords"><span class="std std-ref">frame_coords</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Vector2i(0,</span> <span class="pre">0)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-hframes"><span class="std std-ref">hframes</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-region-enabled"><span class="std std-ref">region_enabled</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_rect2.html#class-rect2"><span class="std std-ref">Rect2</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-region-rect"><span class="std std-ref">region_rect</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Rect2(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-texture"><span class="std std-ref">texture</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-sprite3d-property-vframes"><span class="std std-ref">vframes</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="signals">
+<h2>Signals<a class="headerlink" href="#signals" title="Link to this heading"></a></h2>
+<p class="classref-signal" id="class-sprite3d-signal-frame-changed"><strong>frame_changed</strong>() <a class="reference internal" href="#class-sprite3d-signal-frame-changed"><span class="std std-ref">🔗</span></a></p>
+<p>Emitted when the <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a> changes.</p>
+<p class="classref-signal" id="class-sprite3d-signal-texture-changed"><strong>texture_changed</strong>() <a class="reference internal" href="#class-sprite3d-signal-texture-changed"><span class="std std-ref">🔗</span></a></p>
+<p>Emitted when the <a class="reference internal" href="#class-sprite3d-property-texture"><span class="std std-ref">texture</span></a> changes.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-sprite3d-property-frame"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>frame</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_frame</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_frame</strong>()</p></li>
+</ul>
+<p>Current frame to display from sprite sheet. <a class="reference internal" href="#class-sprite3d-property-hframes"><span class="std std-ref">hframes</span></a> or <a class="reference internal" href="#class-sprite3d-property-vframes"><span class="std std-ref">vframes</span></a> must be greater than 1. This property is automatically adjusted when <a class="reference internal" href="#class-sprite3d-property-hframes"><span class="std std-ref">hframes</span></a> or <a class="reference internal" href="#class-sprite3d-property-vframes"><span class="std std-ref">vframes</span></a> are changed to keep pointing to the same visual frame (same column and row). If that's impossible, this value is reset to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p class="classref-property" id="class-sprite3d-property-frame-coords"><a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a> <strong>frame_coords</strong> = <code class="docutils literal notranslate"><span class="pre">Vector2i(0,</span> <span class="pre">0)</span></code> <a class="reference internal" href="#class-sprite3d-property-frame-coords"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_frame_coords</strong>(value: <a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_vector2i.html#class-vector2i"><span class="std std-ref">Vector2i</span></a> <strong>get_frame_coords</strong>()</p></li>
+</ul>
+<p>Coordinates of the frame to display from sprite sheet. This is as an alias for the <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a> property. <a class="reference internal" href="#class-sprite3d-property-hframes"><span class="std std-ref">hframes</span></a> or <a class="reference internal" href="#class-sprite3d-property-vframes"><span class="std std-ref">vframes</span></a> must be greater than 1.</p>
+<p class="classref-property" id="class-sprite3d-property-hframes"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>hframes</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-sprite3d-property-hframes"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_hframes</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_hframes</strong>()</p></li>
+</ul>
+<p>The number of columns in the sprite sheet. When this property is changed, <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a> is adjusted so that the same visual frame is maintained (same row and column). If that's impossible, <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a> is reset to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p class="classref-property" id="class-sprite3d-property-region-enabled"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>region_enabled</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-sprite3d-property-region-enabled"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_region_enabled</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_region_enabled</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the sprite will use <a class="reference internal" href="#class-sprite3d-property-region-rect"><span class="std std-ref">region_rect</span></a> and display only the specified part of its texture.</p>
+<p class="classref-property" id="class-sprite3d-property-region-rect"><a class="reference internal" href="class_rect2.html#class-rect2"><span class="std std-ref">Rect2</span></a> <strong>region_rect</strong> = <code class="docutils literal notranslate"><span class="pre">Rect2(0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> <a class="reference internal" href="#class-sprite3d-property-region-rect"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_region_rect</strong>(value: <a class="reference internal" href="class_rect2.html#class-rect2"><span class="std std-ref">Rect2</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_rect2.html#class-rect2"><span class="std std-ref">Rect2</span></a> <strong>get_region_rect</strong>()</p></li>
+</ul>
+<p>The region of the atlas texture to display. <a class="reference internal" href="#class-sprite3d-property-region-enabled"><span class="std std-ref">region_enabled</span></a> must be <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p class="classref-property" id="class-sprite3d-property-texture"><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a> <strong>texture</strong> <a class="reference internal" href="#class-sprite3d-property-texture"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_texture</strong>(value: <a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a> <strong>get_texture</strong>()</p></li>
+</ul>
+<p><a class="reference internal" href="class_texture2d.html#class-texture2d"><span class="std std-ref">Texture2D</span></a> object to draw. If <a class="reference internal" href="class_geometryinstance3d.html#class-geometryinstance3d-property-material-override"><span class="std std-ref">GeometryInstance3D.material_override</span></a> is used, this will be overridden. The size information is still used.</p>
+<p class="classref-property" id="class-sprite3d-property-vframes"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>vframes</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code> <a class="reference internal" href="#class-sprite3d-property-vframes"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_vframes</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_vframes</strong>()</p></li>
+</ul>
+<p>The number of rows in the sprite sheet. When this property is changed, <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a> is adjusted so that the same visual frame is maintained (same row and column). If that's impossible, <a class="reference internal" href="#class-sprite3d-property-frame"><span class="std std-ref">frame</span></a> is reset to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="VisualShaderNodeTransformOp" property="og:title"/>
+
+
+
+<meta content="Inherits: VisualShaderNode&lt; Resource&lt; RefCounted&lt; Object A Transform3D operator to be used within the visual shader graph. Description: Applies operator to two transform (4×4 matrices) inp..." property="og:description"/>
+<meta content="Inherits: VisualShaderNode&lt; Resource&lt; RefCounted&lt; Object A Transform3D operator to be used within the visual shader graph. Description: Applies operator to two transform (4×4 matrices) inp..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) VisualShaderNodeTransformOp — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_visualshadernodetransformparameter.html" rel="next" title="VisualShaderNodeTransformParameter"/>
+<link href="class_visualshadernodetransformfunc.html" rel="prev" title="VisualShaderNodeTransformFunc"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_visualshadernodetransformop" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="visualshadernodetransformop">
+<span id="class-visualshadernodetransformop"></span><h1>VisualShaderNodeTransformOp<a class="headerlink" href="#visualshadernodetransformop" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_visualshadernode.html#class-visualshadernode"><span class="std std-ref">VisualShaderNode</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A <a class="reference internal" href="class_transform3d.html#class-transform3d"><span class="std std-ref">Transform3D</span></a> operator to be used within the visual shader graph.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Applies <a class="reference internal" href="#class-visualshadernodetransformop-property-operator"><span class="std std-ref">operator</span></a> to two transform (4×4 matrices) inputs.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a></p></td>
+<td><p><a class="reference internal" href="#class-visualshadernodetransformop-property-operator"><span class="std std-ref">operator</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Link to this heading"></a></h2>
+<p class="classref-enumeration" id="enum-visualshadernodetransformop-operator">enum <strong>Operator</strong>: <a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">🔗</span></a></p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-axb"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_AxB</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>Multiplies transform <code class="docutils literal notranslate"><span class="pre">a</span></code> by the transform <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-bxa"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_BxA</strong> = <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Multiplies transform <code class="docutils literal notranslate"><span class="pre">b</span></code> by the transform <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-axb-comp"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_AxB_COMP</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Performs a component-wise multiplication of transform <code class="docutils literal notranslate"><span class="pre">a</span></code> by the transform <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-bxa-comp"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_BxA_COMP</strong> = <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>Performs a component-wise multiplication of transform <code class="docutils literal notranslate"><span class="pre">b</span></code> by the transform <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-add"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_ADD</strong> = <code class="docutils literal notranslate"><span class="pre">4</span></code></p>
+<p>Adds two transforms.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-a-minus-b"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_A_MINUS_B</strong> = <code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+<p>Subtracts the transform <code class="docutils literal notranslate"><span class="pre">a</span></code> from the transform <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-b-minus-a"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_B_MINUS_A</strong> = <code class="docutils literal notranslate"><span class="pre">6</span></code></p>
+<p>Subtracts the transform <code class="docutils literal notranslate"><span class="pre">b</span></code> from the transform <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-a-div-b"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_A_DIV_B</strong> = <code class="docutils literal notranslate"><span class="pre">7</span></code></p>
+<p>Divides the transform <code class="docutils literal notranslate"><span class="pre">a</span></code> by the transform <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-b-div-a"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_B_DIV_A</strong> = <code class="docutils literal notranslate"><span class="pre">8</span></code></p>
+<p>Divides the transform <code class="docutils literal notranslate"><span class="pre">b</span></code> by the transform <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<p class="classref-enumeration-constant" id="class-visualshadernodetransformop-constant-op-max"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>OP_MAX</strong> = <code class="docutils literal notranslate"><span class="pre">9</span></code></p>
+<p>Represents the size of the <a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> enum.</p>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-visualshadernodetransformop-property-operator"><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>operator</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-visualshadernodetransformop-property-operator"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_operator</strong>(value: <a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a>)</p></li>
+<li><p><a class="reference internal" href="#enum-visualshadernodetransformop-operator"><span class="std std-ref">Operator</span></a> <strong>get_operator</strong>()</p></li>
+</ul>
+<p>The type of the operation to be performed on the transforms.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

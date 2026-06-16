@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="AnimatableBody3D" property="og:title"/>
+
+
+
+<meta content="Inherits: StaticBody3D&lt; PhysicsBody3D&lt; CollisionObject3D&lt; Node3D&lt; Node&lt; Object A 3D physics body that can't be moved by external forces. When moved manually, it affects other bo..." property="og:description"/>
+<meta content="Inherits: StaticBody3D&lt; PhysicsBody3D&lt; CollisionObject3D&lt; Node3D&lt; Node&lt; Object A 3D physics body that can't be moved by external forces. When moved manually, it affects other bo..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) AnimatableBody3D — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_animatedsprite2d.html" rel="next" title="AnimatedSprite2D"/>
+<link href="class_animatablebody2d.html" rel="prev" title="AnimatableBody2D"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_animatablebody3d" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="animatablebody3d">
+<span id="class-animatablebody3d"></span><h1>AnimatableBody3D<a class="headerlink" href="#animatablebody3d" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_staticbody3d.html#class-staticbody3d"><span class="std std-ref">StaticBody3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_physicsbody3d.html#class-physicsbody3d"><span class="std std-ref">PhysicsBody3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_collisionobject3d.html#class-collisionobject3d"><span class="std std-ref">CollisionObject3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node3d.html#class-node3d"><span class="std std-ref">Node3D</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_node.html#class-node"><span class="std std-ref">Node</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A 3D physics body that can't be moved by external forces. When moved manually, it affects other bodies in its path.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>An animatable 3D physics body. It can't be moved by external forces or contacts, but can be moved manually by other means such as code, <a class="reference internal" href="class_animationmixer.html#class-animationmixer"><span class="std std-ref">AnimationMixer</span></a>s (with <a class="reference internal" href="class_animationmixer.html#class-animationmixer-property-callback-mode-process"><span class="std std-ref">AnimationMixer.callback_mode_process</span></a> set to <a class="reference internal" href="class_animationmixer.html#class-animationmixer-constant-animation-callback-mode-process-physics"><span class="std std-ref">AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS</span></a>), and <a class="reference internal" href="class_remotetransform3d.html#class-remotetransform3d"><span class="std std-ref">RemoteTransform3D</span></a>.</p>
+<p>When <strong>AnimatableBody3D</strong> is moved, its linear and angular velocity are estimated and used to affect other physics bodies in its path. This makes it useful for moving platforms, doors, and other moving objects.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/physics/physics_introduction.html"><span class="doc">Physics introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../tutorials/physics/troubleshooting_physics_issues.html"><span class="doc">Troubleshooting physics issues</span></a></p></li>
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2747">3D Physics Tests Demo</a></p></li>
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2710">Third Person Shooter (TPS) Demo</a></p></li>
+<li><p><a class="reference external" href="https://godotengine.org/asset-library/asset/2755">3D Voxel Demo</a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-animatablebody3d-property-sync-to-physics"><span class="std std-ref">sync_to_physics</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-animatablebody3d-property-sync-to-physics"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>sync_to_physics</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-animatablebody3d-property-sync-to-physics"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_sync_to_physics</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_sync_to_physics_enabled</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the body's movement will be synchronized to the physics frame. This is useful when animating movement via <a class="reference internal" href="class_animationplayer.html#class-animationplayer"><span class="std std-ref">AnimationPlayer</span></a>, for example on moving platforms. Do <strong>not</strong> use together with <a class="reference internal" href="class_physicsbody3d.html#class-physicsbody3d-method-move-and-collide"><span class="std std-ref">PhysicsBody3D.move_and_collide()</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

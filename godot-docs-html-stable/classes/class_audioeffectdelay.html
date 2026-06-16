@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="AudioEffectDelay" property="og:title"/>
+
+
+
+<meta content="Inherits: AudioEffect&lt; Resource&lt; RefCounted&lt; Object Adds a delay audio effect to an audio bus. Plays input signal back after a period of time. Two tap delay and feedback options. Descripti..." property="og:description"/>
+<meta content="Inherits: AudioEffect&lt; Resource&lt; RefCounted&lt; Object Adds a delay audio effect to an audio bus. Plays input signal back after a period of time. Two tap delay and feedback options. Descripti..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) AudioEffectDelay — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_audioeffectdistortion.html" rel="next" title="AudioEffectDistortion"/>
+<link href="class_audioeffectcompressor.html" rel="prev" title="AudioEffectCompressor"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_audioeffectdelay" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="audioeffectdelay">
+<span id="class-audioeffectdelay"></span><h1>AudioEffectDelay<a class="headerlink" href="#audioeffectdelay" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_audioeffect.html#class-audioeffect"><span class="std std-ref">AudioEffect</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Adds a delay audio effect to an audio bus. Plays input signal back after a period of time.</p>
+<p>Two tap delay and feedback options.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Plays input signal back after a period of time. The delayed signal may be played back multiple times to create the sound of a repeating, decaying echo. Delay effects range from a subtle echo effect to a pronounced blending of previous sounds with new sounds.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/audio/audio_buses.html"><span class="doc">Audio buses</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-dry"><span class="std std-ref">dry</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-feedback-active"><span class="std std-ref">feedback_active</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-feedback-delay-ms"><span class="std std-ref">feedback_delay_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">340.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-feedback-level-db"><span class="std std-ref">feedback_level_db</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-6.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-feedback-lowpass"><span class="std std-ref">feedback_lowpass</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">16000.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap1-active"><span class="std std-ref">tap1_active</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap1-delay-ms"><span class="std std-ref">tap1_delay_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">250.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap1-level-db"><span class="std std-ref">tap1_level_db</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-6.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap1-pan"><span class="std std-ref">tap1_pan</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap2-active"><span class="std std-ref">tap2_active</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap2-delay-ms"><span class="std std-ref">tap2_delay_ms</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">500.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap2-level-db"><span class="std std-ref">tap2_level_db</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-12.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audioeffectdelay-property-tap2-pan"><span class="std std-ref">tap2_pan</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-0.4</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-audioeffectdelay-property-dry"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>dry</strong> = <code class="docutils literal notranslate"><span class="pre">1.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-dry"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_dry</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_dry</strong>()</p></li>
+</ul>
+<p>Output percent of original sound. At 0, only delayed sounds are output. Value can range from 0 to 1.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-feedback-active"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>feedback_active</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-feedback-active"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_feedback_active</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_feedback_active</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, feedback is enabled.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-feedback-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>feedback_delay_ms</strong> = <code class="docutils literal notranslate"><span class="pre">340.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-feedback-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_feedback_delay_ms</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_feedback_delay_ms</strong>()</p></li>
+</ul>
+<p>Feedback delay time in milliseconds.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-feedback-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>feedback_level_db</strong> = <code class="docutils literal notranslate"><span class="pre">-6.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-feedback-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_feedback_level_db</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_feedback_level_db</strong>()</p></li>
+</ul>
+<p>Sound level for feedback.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-feedback-lowpass"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>feedback_lowpass</strong> = <code class="docutils literal notranslate"><span class="pre">16000.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-feedback-lowpass"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_feedback_lowpass</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_feedback_lowpass</strong>()</p></li>
+</ul>
+<p>Low-pass filter for feedback, in Hz. Frequencies below this value are filtered out of the source signal.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap1-active"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>tap1_active</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap1-active"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap1_active</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_tap1_active</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the first tap will be enabled.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap1-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>tap1_delay_ms</strong> = <code class="docutils literal notranslate"><span class="pre">250.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap1-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap1_delay_ms</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_tap1_delay_ms</strong>()</p></li>
+</ul>
+<p>First tap delay time in milliseconds.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap1-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>tap1_level_db</strong> = <code class="docutils literal notranslate"><span class="pre">-6.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap1-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap1_level_db</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_tap1_level_db</strong>()</p></li>
+</ul>
+<p>Sound level for the first tap.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap1-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>tap1_pan</strong> = <code class="docutils literal notranslate"><span class="pre">0.2</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap1-pan"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap1_pan</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_tap1_pan</strong>()</p></li>
+</ul>
+<p>Pan position for the first tap. Value can range from -1 (fully left) to 1 (fully right).</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap2-active"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>tap2_active</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap2-active"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap2_active</strong>(value: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_tap2_active</strong>()</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the second tap will be enabled.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap2-delay-ms"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>tap2_delay_ms</strong> = <code class="docutils literal notranslate"><span class="pre">500.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap2-delay-ms"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap2_delay_ms</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_tap2_delay_ms</strong>()</p></li>
+</ul>
+<p>Second tap delay time in milliseconds.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap2-level-db"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>tap2_level_db</strong> = <code class="docutils literal notranslate"><span class="pre">-12.0</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap2-level-db"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap2_level_db</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_tap2_level_db</strong>()</p></li>
+</ul>
+<p>Sound level for the second tap.</p>
+<p class="classref-property" id="class-audioeffectdelay-property-tap2-pan"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>tap2_pan</strong> = <code class="docutils literal notranslate"><span class="pre">-0.4</span></code> <a class="reference internal" href="#class-audioeffectdelay-property-tap2-pan"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_tap2_pan</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_tap2_pan</strong>()</p></li>
+</ul>
+<p>Pan position for the second tap. Value can range from -1 (fully left) to 1 (fully right).</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<meta content="Instancing with signals" property="og:title"/>
+
+
+
+<meta content="Signals provide a way to decouple game objects, allowing you to avoid forcing a fixed arrangement of nodes. One sign that a signal might be called for is when you find yourself using get_parent(). ..." property="og:description"/>
+<meta content="Signals provide a way to decouple game objects, allowing you to avoid forcing a fixed arrangement of nodes. One sign that a signal might be called for is when you find yourself using get_parent(). ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Instancing with signals — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="pausing_games.html" rel="next" title="Pausing games and process mode"/>
+<link href="change_scenes_manually.html" rel="prev" title="Change scenes manually"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/scripting/instancing_with_signals" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="instancing-with-signals">
+<span id="doc-instancing-with-signals"></span><h1>Instancing with signals<a class="headerlink" href="#instancing-with-signals" title="Link to this heading"></a></h1>
+<p>Signals provide a way to decouple game objects, allowing you to avoid forcing a
+fixed arrangement of nodes. One sign that a signal might be called for is when
+you find yourself using <code class="docutils literal notranslate"><span class="pre">get_parent()</span></code>. Referring directly to a node's parent
+means that you can't easily move that node to another location in the scene tree.
+This can be especially problematic when you are instancing objects at runtime
+and may want to place them in an arbitrary location in the running scene tree.</p>
+<p>Below we'll consider an example of such a situation: firing bullets.</p>
+<section id="shooting-example">
+<h2>Shooting example<a class="headerlink" href="#shooting-example" title="Link to this heading"></a></h2>
+<p>Consider a player character that can rotate and shoot towards the mouse. Every
+time the mouse button is clicked, we create an instance of the bullet at the
+player's location. See <a class="reference internal" href="../../getting_started/step_by_step/instancing.html#doc-instancing"><span class="std std-ref">Creating instances</span></a> for details.</p>
+<p>We'll use an <code class="docutils literal notranslate"><span class="pre">Area2D</span></code> for the bullet, which moves in a straight line at a
+given velocity:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Area2D</span>
+<span class="k">var</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="o">.</span><span class="vi">RIGHT</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_physics_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">delta</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Bullet</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Area2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">Velocity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector2</span><span class="p">.</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_PhysicsProcess</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Position</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>However, if the bullets are added as children of the player, then they will
+remain "attached" to the player as it rotates:</p>
+<img alt="../../_images/signals_shoot1.gif" src="../../_images/signals_shoot1.gif"/>
+<p>Instead, we need the bullets to be independent of the player's movement - once
+fired, they should continue traveling in a straight line and the player can no
+longer affect them. Instead of being added to the scene tree as a child of the
+player, it makes more sense to add the bullet as a child of the "main" game
+scene, which may be the player's parent or even further up the tree.</p>
+<p>You could do this by adding the bullet to the main scene directly:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">bullet_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bullet</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="nf">get_parent</span><span class="p">()</span><span class="o">.</span><span class="nf">add_child</span><span class="p">(</span><span class="n">bullet_instance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Node</span><span class="w"> </span><span class="n">bulletInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bullet</span><span class="p">.</span><span class="n">Instantiate</span><span class="p">();</span>
+<span class="n">GetParent</span><span class="p">().</span><span class="n">AddChild</span><span class="p">(</span><span class="n">bulletInstance</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+<p>However, this will lead to a different problem. Now if you try to test your
+"Player" scene independently, it will crash on shooting, because there is no
+parent node to access. This makes it a lot harder to test your player code
+independently and also means that if you decide to change your main scene's
+node structure, the player's parent may no longer be the appropriate node to
+receive the bullets.</p>
+<p>The solution to this is to use a signal to "emit" the bullets from the player.
+The player then has no need to "know" what happens to the bullets after that -
+whatever node is connected to the signal can "receive" the bullets and take the
+appropriate action to spawn them.</p>
+<p>Here is the code for the player using signals to emit the bullet:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Sprite2D</span>
+<span class="k">signal</span><span class="w"> </span><span class="nf">shoot</span><span class="p">(</span><span class="n">bullet</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="n">location</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="nc">Bullet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Function">preload</span><span class="p">(</span><span class="s2">"res://bullet.tscn"</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_input</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="nb">InputEventMouseButton</span><span class="p">:</span>
+<span class="w">        </span><span class="k k-ControlFlow">if</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">button_index</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MOUSE_BUTTON_LEFT</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="vi">pressed</span><span class="p">:</span>
+<span class="w">            </span><span class="n">shoot</span><span class="o">.</span><span class="nf">emit</span><span class="p">(</span><span class="nc">Bullet</span><span class="p">,</span><span class="w"> </span><span class="n">rotation</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="nf">look_at</span><span class="p">(</span><span class="nf">get_global_mouse_position</span><span class="p">())</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sprite2D</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Signal]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ShootEventHandler</span><span class="p">(</span><span class="n">PackedScene</span><span class="w"> </span><span class="n">bullet</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">location</span><span class="p">);</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">PackedScene</span><span class="w"> </span><span class="n">_bullet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Load</span><span class="o">&lt;</span><span class="n">PackedScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"res://Bullet.tscn"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Input</span><span class="p">(</span><span class="n">InputEvent</span><span class="w"> </span><span class="n">@event</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">@event</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">InputEventMouseButton</span><span class="w"> </span><span class="n">mouseButton</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mouseButton</span><span class="p">.</span><span class="n">ButtonIndex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MouseButton</span><span class="p">.</span><span class="n">Left</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">mouseButton</span><span class="p">.</span><span class="n">Pressed</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">EmitSignal</span><span class="p">(</span><span class="n">SignalName</span><span class="p">.</span><span class="n">Shoot</span><span class="p">,</span><span class="w"> </span><span class="n">_bullet</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation</span><span class="p">,</span><span class="w"> </span><span class="n">Position</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Process</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LookAt</span><span class="p">(</span><span class="n">GetGlobalMousePosition</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>In the main scene, we then connect the player's signal (it will appear in the
+"Node" tab of the Inspector)</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_player_shoot</span><span class="p">(</span><span class="nc">Bullet</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="n">location</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">spawned_bullet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bullet</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">add_child</span><span class="p">(</span><span class="n">spawned_bullet</span><span class="p">)</span>
+<span class="w">    </span><span class="n">spawned_bullet</span><span class="o">.</span><span class="vi">rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">direction</span>
+<span class="w">    </span><span class="n">spawned_bullet</span><span class="o">.</span><span class="vi">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span>
+<span class="w">    </span><span class="n">spawned_bullet</span><span class="o">.</span><span class="vi">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spawned_bullet</span><span class="o">.</span><span class="vi">velocity</span><span class="o">.</span><span class="nf">rotated</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnPlayerShoot</span><span class="p">(</span><span class="n">PackedScene</span><span class="w"> </span><span class="n">bullet</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="n">Vector2</span><span class="w"> </span><span class="n">location</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">spawnedBullet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bullet</span><span class="p">.</span><span class="n">Instantiate</span><span class="o">&lt;</span><span class="n">Bullet</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">AddChild</span><span class="p">(</span><span class="n">spawnedBullet</span><span class="p">);</span>
+<span class="w">    </span><span class="n">spawnedBullet</span><span class="p">.</span><span class="n">Rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">direction</span><span class="p">;</span>
+<span class="w">    </span><span class="n">spawnedBullet</span><span class="p">.</span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span><span class="p">;</span>
+<span class="w">    </span><span class="n">spawnedBullet</span><span class="p">.</span><span class="n">Velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spawnedBullet</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">Rotated</span><span class="p">(</span><span class="n">direction</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Now the bullets will maintain their own movement independent of the player's
+rotation:</p>
+<img alt="../../_images/signals_shoot2.gif" src="../../_images/signals_shoot2.gif"/>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

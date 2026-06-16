@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Making HTTP requests" property="og:title"/>
+
+
+
+<meta content="Why use HTTP?: HTTP requests are useful to communicate with web servers and other non-Godot programs. Compared to Godot's other networking features (like High-level multiplayer), HTTP requests..." property="og:description"/>
+<meta content="Why use HTTP?: HTTP requests are useful to communicate with web servers and other non-Godot programs. Compared to Godot's other networking features (like High-level multiplayer), HTTP requests..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Making HTTP requests — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="http_client_class.html" rel="next" title="HTTP client class"/>
+<link href="high_level_multiplayer.html" rel="prev" title="High-level multiplayer"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/networking/http_request_class" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="making-http-requests">
+<span id="doc-http-request-class"></span><h1>Making HTTP requests<a class="headerlink" href="#making-http-requests" title="Link to this heading"></a></h1>
+<section id="why-use-http">
+<h2>Why use HTTP?<a class="headerlink" href="#why-use-http" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP requests</a> are useful
+to communicate with web servers and other non-Godot programs.</p>
+<p>Compared to Godot's other networking features (like
+<a class="reference internal" href="high_level_multiplayer.html#doc-high-level-multiplayer"><span class="std std-ref">High-level multiplayer</span></a>),
+HTTP requests have more overhead and take more time to get going,
+so they aren't suited for real-time communication, and aren't great to send
+lots of small updates as is common for multiplayer gameplay.</p>
+<p>HTTP, however, offers interoperability with external
+web resources and is great at sending and receiving large amounts
+of data, for example to transfer files like game assets. These assets can then
+be loaded using
+<a class="reference internal" href="../io/runtime_file_loading_and_saving.html#doc-runtime-loading-and-saving"><span class="std std-ref">runtime file loading and saving</span></a>.</p>
+<p>So HTTP may be useful for your game's login system, lobby browser,
+to retrieve some information from the web or to download game assets.</p>
+</section>
+<section id="http-requests-in-godot">
+<h2>HTTP requests in Godot<a class="headerlink" href="#http-requests-in-godot" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> node is the easiest way to make HTTP requests in Godot.
+It is backed by the more low-level <a class="reference internal" href="../../classes/class_httpclient.html#class-httpclient"><span class="std std-ref">HTTPClient</span></a>,
+for which a tutorial is available <a class="reference internal" href="http_client_class.html#doc-http-client-class"><span class="std std-ref">here</span></a>.</p>
+<p>For this example, we will make an HTTP request to GitHub to retrieve the name
+of the latest Godot release.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When exporting to <strong>Android</strong>, make sure to enable the <strong>Internet</strong>
+permission in the Android export preset before exporting the project or
+using one-click deploy. Otherwise, network communication of any kind will be
+blocked by the Android OS.</p>
+</div>
+</section>
+<section id="preparing-the-scene">
+<h2>Preparing the scene<a class="headerlink" href="#preparing-the-scene" title="Link to this heading"></a></h2>
+<p>Create a new empty scene, add a root <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> and add a script to it.
+Then add an <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> node as a child.</p>
+<img alt="../../_images/rest_api_scene.webp" src="../../_images/rest_api_scene.webp"/>
+</section>
+<section id="scripting-the-request">
+<h2>Scripting the request<a class="headerlink" href="#scripting-the-request" title="Link to this heading"></a></h2>
+<p>When the project is started (so in <code class="docutils literal notranslate"><span class="pre">_ready()</span></code>), we're going to send an HTTP request
+to Github using our <a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> node,
+and once the request completes, we're going to parse the returned JSON data,
+look for the <code class="docutils literal notranslate"><span class="pre">name</span></code> field and print that to console.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">extends</span><span class="w"> </span><span class="nb">Node</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="sx">$HTTPRequest</span><span class="o">.</span><span class="vi">request_completed</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">_on_request_completed</span><span class="p">)</span>
+<span class="w">    </span><span class="sx">$HTTPRequest</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="s2">"https://api.github.com/repos/godotengine/godot/releases/latest"</span><span class="p">)</span>
+<span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_request_completed</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">response_code</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">):</span>
+<span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="o">.</span><span class="nf">parse_string</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="nf">get_string_from_utf8</span><span class="p">())</span>
+<span class="w">    </span><span class="nb nb-Function">print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HttpRequest</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"HTTPRequest"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">httpRequest</span><span class="p">.</span><span class="n">RequestCompleted</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">OnRequestCompleted</span><span class="p">;</span>
+<span class="w">        </span><span class="n">httpRequest</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="s">"https://api.github.com/repos/godotengine/godot/releases/latest"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnRequestCompleted</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">body</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Dictionary</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="p">.</span><span class="n">ParseString</span><span class="p">(</span><span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="n">body</span><span class="p">)).</span><span class="n">AsGodotDictionary</span><span class="p">();</span>
+<span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s">"name"</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Save the script and the scene, and run the project.
+The name of the most recent Godot release on Github should be printed to the output log.
+For more information on parsing JSON, see the class references for <a class="reference internal" href="../../classes/class_json.html#class-json"><span class="std std-ref">JSON</span></a>.</p>
+<p>Note that you may want to check whether the <code class="docutils literal notranslate"><span class="pre">result</span></code> equals <code class="docutils literal notranslate"><span class="pre">RESULT_SUCCESS</span></code>
+and whether a JSON parsing error occurred, see the JSON class reference and
+<a class="reference internal" href="../../classes/class_httprequest.html#class-httprequest"><span class="std std-ref">HTTPRequest</span></a> for more.</p>
+<p>You have to wait for a request to finish before sending another one.
+Making multiple request at once requires you to have one node per request.
+A common strategy is to create and delete HTTPRequest nodes at runtime as necessary.</p>
+</section>
+<section id="sending-data-to-the-server">
+<h2>Sending data to the server<a class="headerlink" href="#sending-data-to-the-server" title="Link to this heading"></a></h2>
+<p>Until now, we have limited ourselves to requesting data from a server.
+But what if you need to send data to the server? Here is a common way of doing it:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="o">.</span><span class="nf">stringify</span><span class="p">(</span><span class="n">data_to_send</span><span class="p">)</span>
+<span class="k">var</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"Content-Type: application/json"</span><span class="p">]</span>
+<span class="sx">$HTTPRequest</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="nb">HTTPClient</span><span class="o">.</span><span class="vi">METHOD_POST</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="p">.</span><span class="n">Stringify</span><span class="p">(</span><span class="n">dataToSend</span><span class="p">);</span>
+<span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Content-Type: application/json"</span><span class="p">];</span>
+<span class="n">HttpRequest</span><span class="w"> </span><span class="n">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HttpRequest</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"HTTPRequest"</span><span class="p">);</span>
+<span class="n">httpRequest</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Post</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="setting-custom-http-headers">
+<h2>Setting custom HTTP headers<a class="headerlink" href="#setting-custom-http-headers" title="Link to this heading"></a></h2>
+<p>Of course, you can also set custom HTTP headers. These are given as a string array,
+with each string containing a header in the format <code class="docutils literal notranslate"><span class="pre">"header:</span> <span class="pre">value"</span></code>.
+For example, to set a custom user agent (the HTTP <code class="docutils literal notranslate"><span class="pre">User-Agent</span></code> header) you could use the following:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="sx">$HTTPRequest</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="s2">"https://api.github.com/repos/godotengine/godot/releases/latest"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"User-Agent: YourCustomUserAgent"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">httpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNode</span><span class="o">&lt;</span><span class="n">HttpRequest</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"HTTPRequest"</span><span class="p">);</span>
+<span class="n">httpRequest</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="s">"https://api.github.com/repos/godotengine/godot/releases/latest"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">"User-Agent: YourCustomUserAgent"</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Be aware that someone might analyse and decompile your released application and
+thus may gain access to any embedded authorization information like tokens, usernames or passwords.
+That means it is usually not a good idea to embed things such as database
+access credentials inside your game. Avoid providing information useful to an attacker whenever possible.</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

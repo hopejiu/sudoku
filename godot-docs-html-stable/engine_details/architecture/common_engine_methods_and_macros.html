@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Common engine methods and macros" property="og:title"/>
+
+
+
+<meta content="Godot's C++ codebase makes use of dozens of custom methods and macros which are used in almost every file. This page is geared towards beginner contributors, but it can also be useful for thos..." property="og:description"/>
+<meta content="Godot's C++ codebase makes use of dozens of custom methods and macros which are used in almost every file. This page is geared towards beginner contributors, but it can also be useful for thos..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Common engine methods and macros — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="core_types.html" rel="next" title="Core types"/>
+<link href="godot_architecture_diagram.html" rel="prev" title="Godot's architecture overview"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/architecture/common_engine_methods_and_macros" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="common-engine-methods-and-macros">
+<span id="doc-common-engine-methods-and-macros"></span><h1>Common engine methods and macros<a class="headerlink" href="#common-engine-methods-and-macros" title="Link to this heading"></a></h1>
+<p>Godot's C++ codebase makes use of dozens of custom methods and macros which are
+used in almost every file. This page is geared towards beginner contributors,
+but it can also be useful for those writing custom C++ modules.</p>
+<section id="print-text">
+<h2>Print text<a class="headerlink" href="#print-text" title="Link to this heading"></a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Prints a message to standard output.</span>
+<span class="n">print_line</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="c1">// Non-String arguments are automatically converted to String for printing.</span>
+<span class="c1">// If passing several arguments, they will be concatenated together with a</span>
+<span class="c1">// space between each argument.</span>
+<span class="n">print_line</span><span class="p">(</span><span class="s">"There are"</span><span class="p">,</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w"> </span><span class="s">"nodes"</span><span class="p">);</span>
+<span class="c1">// Prints a message to standard output, but only when the engine</span>
+<span class="c1">// is started with the `--verbose` command line argument.</span>
+<span class="n">print_verbose</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="c1">// Prints a rich-formatted message using BBCode to standard output.</span>
+<span class="c1">// This supports a subset of BBCode tags supported by RichTextLabel</span>
+<span class="c1">// and will also appear formatted in the editor Output panel.</span>
+<span class="c1">// On Windows, this requires Windows 10 or later to work in the terminal.</span>
+<span class="n">print_line_rich</span><span class="p">(</span><span class="s">"[b]Bold[/b], [color=red]Red text[/color]"</span><span class="p">)</span>
+<span class="c1">// Prints a formatted error or warning message with a trace.</span>
+<span class="n">ERR_PRINT</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="n">WARN_PRINT</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="c1">// Prints an error or warning message only once per session.</span>
+<span class="c1">// This can be used to avoid spamming the console output.</span>
+<span class="n">ERR_PRINT_ONCE</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+<span class="n">WARN_PRINT_ONCE</span><span class="p">(</span><span class="s">"Message"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you need to add placeholders in your messages, use format strings as
+described below.</p>
+</section>
+<section id="format-a-string">
+<h2>Format a string<a class="headerlink" href="#format-a-string" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">vformat()</span></code> function returns a formatted <a class="reference internal" href="../../classes/class_string.html#class-string"><span class="std std-ref">String</span></a>. It behaves
+in a way similar to C's <code class="docutils literal notranslate"><span class="pre">sprintf()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">vformat</span><span class="p">(</span><span class="s">"My name is %s."</span><span class="p">,</span><span class="w"> </span><span class="s">"Godette"</span><span class="p">);</span>
+<span class="n">vformat</span><span class="p">(</span><span class="s">"%d bugs on the wall!"</span><span class="p">,</span><span class="w"> </span><span class="mi">1234</span><span class="p">);</span>
+<span class="n">vformat</span><span class="p">(</span><span class="s">"Pi is approximately %f."</span><span class="p">,</span><span class="w"> </span><span class="mf">3.1416</span><span class="p">);</span>
+<span class="c1">// Converts the resulting String into a `const char *`.</span>
+<span class="c1">// You may need to do this if passing the result as an argument</span>
+<span class="c1">// to a method that expects a `const char *` instead of a String.</span>
+<span class="n">vformat</span><span class="p">(</span><span class="s">"My name is %s."</span><span class="p">,</span><span class="w"> </span><span class="s">"Godette"</span><span class="p">).</span><span class="n">utf8</span><span class="p">().</span><span class="n">get_data</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In most cases, try to use <code class="docutils literal notranslate"><span class="pre">vformat()</span></code> instead of string concatenation as it
+makes for more readable code.</p>
+</section>
+<section id="convert-an-integer-or-float-to-a-string">
+<h2>Convert an integer or float to a string<a class="headerlink" href="#convert-an-integer-or-float-to-a-string" title="Link to this heading"></a></h2>
+<p>This is not needed when printing numbers using <code class="docutils literal notranslate"><span class="pre">print_line()</span></code>, but you may
+still need to perform manual conversion for some other use cases.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Stores the string "42" using integer-to-string conversion.</span>
+<span class="n">String</span><span class="w"> </span><span class="n">int_to_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">itos</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="c1">// Stores the string "123.45" using real-to-string conversion.</span>
+<span class="n">String</span><span class="w"> </span><span class="n">real_to_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rtos</span><span class="p">(</span><span class="mf">123.45</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="internationalize-a-string">
+<h2>Internationalize a string<a class="headerlink" href="#internationalize-a-string" title="Link to this heading"></a></h2>
+<p>There are two types of internationalization in Godot's codebase:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TTR()</span></code>: <strong>Editor ("tools") translations</strong> will only be processed in the
+editor. If a user uses the same text in one of their projects, it won't be
+translated if they provide a translation for it. When contributing to the
+engine, this is generally the macro you should use for localizable strings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTR()</span></code>: <strong>Runtime translations</strong> will be automatically localized in
+projects if they provide a translation for the given string. This kind of
+translation shouldn't be used in editor-only code.</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns the translated string that matches the user's locale settings.</span>
+<span class="c1">// Translations are located in `editor/translations`.</span>
+<span class="c1">// The localization template is generated automatically; don't modify it.</span>
+<span class="n">TTR</span><span class="p">(</span><span class="s">"Exit the editor?"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To insert placeholders in localizable strings, wrap the localization macro in a
+<code class="docutils literal notranslate"><span class="pre">vformat()</span></code> call as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"example.txt"</span><span class="p">;</span>
+<span class="n">vformat</span><span class="p">(</span><span class="n">TTR</span><span class="p">(</span><span class="s">"Couldn't open </span><span class="se">\"</span><span class="s">%s</span><span class="se">\"</span><span class="s"> for reading."</span><span class="p">),</span><span class="w"> </span><span class="n">file_path</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">vformat()</span></code> and a translation macro together, always wrap the
+translation macro in <code class="docutils literal notranslate"><span class="pre">vformat()</span></code>, not the other way around. Otherwise, the
+string will never match the translation as it will have the placeholder
+already replaced when it's passed to TranslationServer.</p>
+</div>
+</section>
+<section id="clamp-a-value">
+<h2>Clamp a value<a class="headerlink" href="#clamp-a-value" title="Link to this heading"></a></h2>
+<p>Godot provides macros for clamping a value with a lower bound (<code class="docutils literal notranslate"><span class="pre">MAX</span></code>), an
+upper bound (<code class="docutils literal notranslate"><span class="pre">MIN</span></code>) or both (<code class="docutils literal notranslate"><span class="pre">CLAMP</span></code>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">MAX</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span>
+<span class="n">MIN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="n">CLAMP</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10</span>
+</pre></div>
+</div>
+<p>This works with any type that can be compared to other values (like <code class="docutils literal notranslate"><span class="pre">int</span></code> and
+<code class="docutils literal notranslate"><span class="pre">float</span></code>).</p>
+</section>
+<section id="microbenchmarking">
+<h2>Microbenchmarking<a class="headerlink" href="#microbenchmarking" title="Link to this heading"></a></h2>
+<p>If you want to benchmark a piece of code but don't know how to use a profiler,
+use this snippet:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Time</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_ticks_usec</span><span class="p">();</span>
+<span class="c1">// Your code here...</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Time</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_ticks_usec</span><span class="p">();</span>
+<span class="n">print_line</span><span class="p">(</span><span class="n">vformat</span><span class="p">(</span><span class="s">"Snippet took %d microseconds"</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This will print the time spent between the <code class="docutils literal notranslate"><span class="pre">begin</span></code> declaration and the <code class="docutils literal notranslate"><span class="pre">end</span></code>
+declaration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have to <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">"core/os/time.h"</span></code> if it's not present already.</p>
+<p>When opening a pull request, make sure to remove this snippet as well as the
+include if it wasn't there previously.</p>
+</div>
+</section>
+<section id="get-project-editor-settings">
+<h2>Get project/editor settings<a class="headerlink" href="#get-project-editor-settings" title="Link to this heading"></a></h2>
+<p>There are four macros available for this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns the specified project setting's value,</span>
+<span class="c1">// defaulting to `false` if it doesn't exist.</span>
+<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">"section/subsection/value"</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="c1">// Returns the specified editor setting's value,</span>
+<span class="c1">// defaulting to "Untitled" if it doesn't exist.</span>
+<span class="n">EDITOR_DEF</span><span class="p">(</span><span class="s">"section/subsection/value"</span><span class="p">,</span><span class="w"> </span><span class="s">"Untitled"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If a default value has been specified elsewhere, don't specify it again to avoid
+repetition:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns the value of the project setting.</span>
+<span class="n">GLOBAL_GET</span><span class="p">(</span><span class="s">"section/subsection/value"</span><span class="p">);</span>
+<span class="c1">// Returns the value of the editor setting.</span>
+<span class="n">EDITOR_GET</span><span class="p">(</span><span class="s">"section/subsection/value"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It's recommended to use <code class="docutils literal notranslate"><span class="pre">GLOBAL_DEF</span></code>/<code class="docutils literal notranslate"><span class="pre">EDITOR_DEF</span></code> only once per setting and
+use <code class="docutils literal notranslate"><span class="pre">GLOBAL_GET</span></code>/<code class="docutils literal notranslate"><span class="pre">EDITOR_GET</span></code> in all other places where it's referenced.</p>
+</section>
+<section id="error-macros">
+<span id="doc-common-engine-methods-and-macros-error-macros"></span><h2>Error macros<a class="headerlink" href="#error-macros" title="Link to this heading"></a></h2>
+<p>Godot features many error macros to make error reporting more convenient.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Conditions in error macros work in the <strong>opposite</strong> way of GDScript's
+built-in <code class="docutils literal notranslate"><span class="pre">assert()</span></code> function. An error is reached if the condition inside
+evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code>, not <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only variants with custom messages are documented here, as these should
+always be used in new contributions. Make sure the custom message provided
+includes enough information for people to diagnose the issue, even if they
+don't know C++. In case a method was passed invalid arguments, you can print
+the invalid value in question to ease debugging.</p>
+<p>For internal error checking where displaying a human-readable message isn't
+necessary, remove <code class="docutils literal notranslate"><span class="pre">_MSG</span></code> at the end of the macro name and don't supply a
+message argument.</p>
+<p>Also, always try to return processable data so the engine can keep running
+well.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Conditionally prints an error message and returns from the function.</span>
+<span class="c1">// Use this in methods which don't return a value.</span>
+<span class="n">ERR_FAIL_COND_MSG</span><span class="p">(</span><span class="o">!</span><span class="n">mesh</span><span class="p">.</span><span class="n">is_valid</span><span class="p">(),</span><span class="w"> </span><span class="n">vformat</span><span class="p">(</span><span class="s">"Couldn't load mesh at: %s"</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">));</span>
+<span class="c1">// Conditionally prints an error message and returns `0` from the function.</span>
+<span class="c1">// Use this in methods which must return a value.</span>
+<span class="n">ERR_FAIL_COND_V_MSG</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">rect</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"Couldn't calculate the rectangle's area."</span><span class="p">);</span>
+<span class="c1">// Prints an error message if `index` is &lt; 0 or &gt;= `SomeEnum::QUALITY_MAX`,</span>
+<span class="c1">// then returns from the function.</span>
+<span class="n">ERR_FAIL_INDEX_MSG</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">SomeEnum</span><span class="o">::</span><span class="n">QUALITY_MAX</span><span class="p">,</span>
+<span class="w">        </span><span class="n">vformat</span><span class="p">(</span><span class="s">"Invalid quality: %d. See SomeEnum for allowed values."</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">));</span>
+<span class="c1">// Prints an error message if `index` is &lt; 0 &gt;= `some_array.size()`,</span>
+<span class="c1">// then returns `-1` from the function.</span>
+<span class="n">ERR_FAIL_INDEX_V_MSG</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">some_array</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">vformat</span><span class="p">(</span><span class="s">"Item %d is out of bounds."</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">));</span>
+<span class="c1">// Unconditionally prints an error message and returns from the function.</span>
+<span class="c1">// Only use this if you need to perform complex error checking.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">complex_error_checking_routine</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ERR_FAIL_MSG</span><span class="p">(</span><span class="s">"Couldn't reload the filesystem cache."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Unconditionally prints an error message and returns `false` from the function.</span>
+<span class="c1">// Only use this if you need to perform complex error checking.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">complex_error_checking_routine</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ERR_FAIL_V_MSG</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="s">"Couldn't parse the input arguments."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Crashes the engine. This should generally never be used</span>
+<span class="c1">// except for testing crash handling code. Godot's philosophy</span>
+<span class="c1">// is to never crash, both in the editor and in exported projects.</span>
+<span class="n">CRASH_NOW_MSG</span><span class="p">(</span><span class="s">"Can't predict the future! Aborting."</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/error/error_macros.h">core/error/error_macros.h</a>
+in Godot's codebase for more information about each error macro.</p>
+<p>Some functions return an error code (materialized by a return type of
+<code class="docutils literal notranslate"><span class="pre">Error</span></code>). This value can be returned directly from an error macro.
+See the list of available error codes in
+<a class="reference external" href="https://github.com/godotengine/godot/blob/master/core/error/error_list.h">core/error/error_list.h</a>.</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

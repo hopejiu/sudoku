@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Deploying to Android" property="og:title"/>
+
+
+
+<meta content="Setup: Most standalone headsets run on Android and OpenXR support is making its way to these platforms. Before following the OpenXR-specific instructions here, you'll need to first setup your ..." property="og:description"/>
+<meta content="Setup: Most standalone headsets run on Android and OpenXR support is making its way to these platforms. Before following the OpenXR-specific instructions here, you'll need to first setup your ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Deploying to Android — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="a_better_xr_start_script.html" rel="next" title="A better XR start script"/>
+<link href="setting_up_xr.html" rel="prev" title="Setting up XR"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/xr/deploying_to_android" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="deploying-to-android">
+<span id="doc-deploying-to-android"></span><h1>Deploying to Android<a class="headerlink" href="#deploying-to-android" title="Link to this heading"></a></h1>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>Most standalone headsets run on Android and OpenXR support is making its way to these platforms.</p>
+<p>Before following the OpenXR-specific instructions here, you'll need to first setup your system to export to Android in general, including:</p>
+<ul class="simple">
+<li><p>Installing OpenJDK 17</p></li>
+<li><p>Installing Android Studio</p></li>
+<li><p>Configuring the location of the Android SDK in Godot</p></li>
+</ul>
+<p>See <a class="reference internal" href="../export/exporting_for_android.html#doc-exporting-for-android"><span class="std std-ref">Exporting for Android</span></a> for the full details, and return here when you've finished these steps.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While the Mobile Vulkan renderer has many optimizations targeted at mobile devices, we're still working out the kinks.
+It is highly advisable to use the compatibility renderer (OpenGL) for the time being when targeting Android based XR devices.</p>
+</div>
+</section>
+<section id="gradle-android-build">
+<h2>Gradle Android build<a class="headerlink" href="#gradle-android-build" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Official support for the Android platform wasn't added to the OpenXR specification initially resulting in various vendors creating custom loaders to make OpenXR available on their headsets.
+While the long term expectation is that all vendors will adopt the official OpenXR loader, for now these loaders need to be added to your project.</p>
+</div>
+<p>In order to include the vendor-specific OpenXR loader into your project, you will need to setup a gradle Android build.</p>
+<p>Select <strong>Install Android Build Template...</strong> from the <strong>Project</strong> menu:</p>
+<img alt="../../_images/android_gradle_build.webp" src="../../_images/android_gradle_build.webp"/>
+<p>This will create a folder called <strong>android</strong> inside of your project that contains all the runtime files needed on Android. You can now customize this installation. Godot won't show this in the editor but you can find it with a file browser.</p>
+<p>You can read more about gradle builds here: <a class="reference internal" href="../export/android_gradle_build.html#doc-android-gradle-build"><span class="std std-ref">Gradle builds for Android</span></a>.</p>
+</section>
+<section id="installing-the-vendors-plugin">
+<h2>Installing the vendors plugin<a class="headerlink" href="#installing-the-vendors-plugin" title="Link to this heading"></a></h2>
+<p>The vendors plugin can be downloaded from the asset library, search for "OpenXR vendors"
+and install the one named "Godot OpenXR Vendors plugin v4".</p>
+<img alt="../../_images/openxr_loader_asset_lib.webp" src="../../_images/openxr_loader_asset_lib.webp"/>
+<p>You will find the installed files inside the <strong>addons</strong> folder. Alternatively you
+can manually install the vendors plugin by downloading it <a class="reference external" href="https://github.com/GodotVR/godot_openxr_vendors/releases">from the release page here</a>.
+You will need to copy the <cite>assets/addons/godotopenxrvendors</cite> folder from the zip
+file into your projects <cite>addons</cite> folder.</p>
+<p>You can find the main repository of the vendors plugin <a class="reference external" href="https://github.com/GodotVR/godot_openxr_vendors">here</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From Godot 4.6 onwards, the vendor plugin is now an optional but recommended plugin.
+Godot can export directly to most Android-compatible devices.
+This can be useful for demonstration and tutorial projects where a single APK can be deployed to multiple devices.
+The vendor plugin unlocks vendor specific implementations and settings, and may be required to release on app stores.</p>
+</div>
+</section>
+<section id="creating-the-export-presets">
+<h2>Creating the export presets<a class="headerlink" href="#creating-the-export-presets" title="Link to this heading"></a></h2>
+<p>You will need to setup a separate export preset for each device, as each device will need its own loader included.</p>
+<p>Open <strong>Project</strong> and select <strong>Export..</strong>.
+Click on <strong>Add..</strong> and select <strong>Android</strong>.
+Next change the name of the export preset for the device you're setting this up for, say <strong>Meta Quest</strong>.
+And enable <strong>Use Gradle Build</strong>.
+Next change the <strong>XR Mode</strong> to <strong>OpenXR</strong>.
+If you want to use one-click deploy (described below), ensure that <strong>Runnable</strong> is enabled.</p>
+<p>If you've installed the vendor plugin you will also find entries for the different headsets under <strong>XR Features</strong>.
+Select the entry for your headset, if you see one.
+Otherwise, enable the Khronos plugin.</p>
+<img alt="../../_images/android_meta_quest.webp" src="../../_images/android_meta_quest.webp"/>
+<p>Scroll to the bottom of the list and you'll find additional XR feature sections,
+currently only <strong>Meta XR Features</strong>, <strong>Pico XR Features</strong>, <strong>Magicleap XR Features</strong>
+and <strong>Khronos XR Features</strong> for HTC are available. You will need to select the
+appropriate settings if you wish to use these features.</p>
+</section>
+<section id="running-on-your-device-from-the-godot-editor">
+<h2>Running on your device from the Godot editor<a class="headerlink" href="#running-on-your-device-from-the-godot-editor" title="Link to this heading"></a></h2>
+<p>If you've setup your export settings as described above, and your headset is connected to your computer and correctly recognized, you can launch it directly from the Godot editor using <a class="reference internal" href="../export/one-click_deploy.html#doc-one-click-deploy"><span class="std std-ref">One-click deploy</span></a>:</p>
+<img alt="../../_images/android_one_click_deploy.webp" src="../../_images/android_one_click_deploy.webp"/>
+<p>For some devices on some platforms, you may need to perform some extra steps in order for your device to be recognized correctly, so be sure to check the developer documentation from your headset vendor.</p>
+<p>For example, with the Meta Quest 2, you need to enable developer mode on the headset, and if you're on Windows, you'll need to install special ADB drivers. See the <a class="reference external" href="https://developer.oculus.com/documentation/native/android/mobile-device-setup/">official Meta Quest developer documentation</a> for more details.</p>
+<p>If you're having any issues with one-click deploy, check the <a class="reference internal" href="../export/one-click_deploy.html#doc-one-click-deploy-troubleshooting"><span class="std std-ref">Troubleshooting section</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

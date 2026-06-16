@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="StreamPeerTCP" property="og:title"/>
+
+
+
+<meta content="Inherits: StreamPeerSocket&lt; StreamPeer&lt; RefCounted&lt; Object A stream peer that handles TCP connections. Description: A stream peer that handles TCP connections. This object can be used to c..." property="og:description"/>
+<meta content="Inherits: StreamPeerSocket&lt; StreamPeer&lt; RefCounted&lt; Object A stream peer that handles TCP connections. Description: A stream peer that handles TCP connections. This object can be used to c..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) StreamPeerTCP — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_streampeertls.html" rel="next" title="StreamPeerTLS"/>
+<link href="class_streampeersocket.html" rel="prev" title="StreamPeerSocket"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_streampeertcp" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="streampeertcp">
+<span id="class-streampeertcp"></span><h1>StreamPeerTCP<a class="headerlink" href="#streampeertcp" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_streampeersocket.html#class-streampeersocket"><span class="std std-ref">StreamPeerSocket</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_streampeer.html#class-streampeer"><span class="std std-ref">StreamPeer</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>A stream peer that handles TCP connections.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A stream peer that handles TCP connections. This object can be used to connect to TCP servers, or also is returned by a TCP server.</p>
+<p><strong>Note:</strong> When exporting to Android, make sure to enable the <code class="docutils literal notranslate"><span class="pre">INTERNET</span></code> permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeertcp-method-bind"><span class="std std-ref">bind</span></a>(port: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, host: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "*")</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeertcp-method-connect-to-host"><span class="std std-ref">connect_to_host</span></a>(host: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, port: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeertcp-method-get-connected-host"><span class="std std-ref">get_connected_host</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeertcp-method-get-connected-port"><span class="std std-ref">get_connected_port</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-streampeertcp-method-get-local-port"><span class="std std-ref">get_local_port</span></a>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-streampeertcp-method-set-no-delay"><span class="std std-ref">set_no_delay</span></a>(enabled: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-streampeertcp-method-bind"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>bind</strong>(port: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, host: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> = "*") <a class="reference internal" href="#class-streampeertcp-method-bind"><span class="std std-ref">🔗</span></a></p>
+<p>Opens the TCP socket, and binds it to the specified local address.</p>
+<p>This method is generally not needed, and only used to force the subsequent call to <a class="reference internal" href="#class-streampeertcp-method-connect-to-host"><span class="std std-ref">connect_to_host()</span></a> to use the specified <code class="docutils literal notranslate"><span class="pre">host</span></code> and <code class="docutils literal notranslate"><span class="pre">port</span></code> as source address. This can be desired in some NAT punchthrough techniques, or when forcing the source network interface.</p>
+<p class="classref-method" id="class-streampeertcp-method-connect-to-host"><a class="reference internal" href="class_%40globalscope.html#enum-globalscope-error"><span class="std std-ref">Error</span></a> <strong>connect_to_host</strong>(host: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, port: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-streampeertcp-method-connect-to-host"><span class="std std-ref">🔗</span></a></p>
+<p>Connects to the specified <code class="docutils literal notranslate"><span class="pre">host:port</span></code> pair. A hostname will be resolved if valid. Returns <a class="reference internal" href="class_%40globalscope.html#class-globalscope-constant-ok"><span class="std std-ref">@GlobalScope.OK</span></a> on success.</p>
+<p class="classref-method" id="class-streampeertcp-method-get-connected-host"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_connected_host</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-streampeertcp-method-get-connected-host"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the IP of this peer.</p>
+<p class="classref-method" id="class-streampeertcp-method-get-connected-port"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_connected_port</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-streampeertcp-method-get-connected-port"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the port of this peer.</p>
+<p class="classref-method" id="class-streampeertcp-method-get-local-port"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_local_port</strong>() <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-streampeertcp-method-get-local-port"><span class="std std-ref">🔗</span></a></p>
+<p>Returns the local port to which this peer is bound.</p>
+<p class="classref-method" id="class-streampeertcp-method-set-no-delay"><abbr title="No return value.">void</abbr> <strong>set_no_delay</strong>(enabled: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a>) <a class="reference internal" href="#class-streampeertcp-method-set-no-delay"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, packets will be sent immediately. If <code class="docutils literal notranslate"><span class="pre">enabled</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code> (the default), packet transfers will be delayed and combined using <a class="reference external" href="https://en.wikipedia.org/wiki/Nagle%27s_algorithm">Nagle's algorithm</a>.</p>
+<p><strong>Note:</strong> It's recommended to leave this disabled for applications that send large packets or need to transfer a lot of data, as enabling this can decrease the total available bandwidth.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

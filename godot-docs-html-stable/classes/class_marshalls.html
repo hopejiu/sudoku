@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Marshalls" property="og:title"/>
+
+
+
+<meta content="Inherits: Object Data transformation (marshaling) and encoding helpers. Description: Provides data transformation and encoding utility functions. Methods:,, PackedByteArray, base64_to_raw(base64_st..." property="og:description"/>
+<meta content="Inherits: Object Data transformation (marshaling) and encoding helpers. Description: Provides data transformation and encoding utility functions. Methods:,, PackedByteArray, base64_to_raw(base64_st..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Marshalls — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_meshconvexdecompositionsettings.html" rel="next" title="MeshConvexDecompositionSettings"/>
+<link href="class_mainloop.html" rel="prev" title="MainLoop"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_marshalls" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="marshalls">
+<span id="class-marshalls"></span><h1>Marshalls<a class="headerlink" href="#marshalls" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Data transformation (marshaling) and encoding helpers.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Provides data transformation and encoding utility functions.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a></p></td>
+<td><p><a class="reference internal" href="#class-marshalls-method-base64-to-raw"><span class="std std-ref">base64_to_raw</span></a>(base64_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-marshalls-method-base64-to-utf8"><span class="std std-ref">base64_to_utf8</span></a>(base64_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a></p></td>
+<td><p><a class="reference internal" href="#class-marshalls-method-base64-to-variant"><span class="std std-ref">base64_to_variant</span></a>(base64_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, allow_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-marshalls-method-raw-to-base64"><span class="std std-ref">raw_to_base64</span></a>(array: <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-marshalls-method-utf8-to-base64"><span class="std std-ref">utf8_to_base64</span></a>(utf8_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-marshalls-method-variant-to-base64"><span class="std std-ref">variant_to_base64</span></a>(variant: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>, full_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-marshalls-method-base64-to-raw"><a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a> <strong>base64_to_raw</strong>(base64_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-marshalls-method-base64-to-raw"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a decoded <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a> corresponding to the Base64-encoded string <code class="docutils literal notranslate"><span class="pre">base64_str</span></code>.</p>
+<p class="classref-method" id="class-marshalls-method-base64-to-utf8"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>base64_to_utf8</strong>(base64_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-marshalls-method-base64-to-utf8"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a decoded string corresponding to the Base64-encoded string <code class="docutils literal notranslate"><span class="pre">base64_str</span></code>.</p>
+<p class="classref-method" id="class-marshalls-method-base64-to-variant"><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> <strong>base64_to_variant</strong>(base64_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>, allow_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false) <a class="reference internal" href="#class-marshalls-method-base64-to-variant"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a decoded <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> corresponding to the Base64-encoded string <code class="docutils literal notranslate"><span class="pre">base64_str</span></code>. If <code class="docutils literal notranslate"><span class="pre">allow_objects</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, decoding objects is allowed.</p>
+<p>Internally, this uses the same decoding mechanism as the <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-bytes-to-var"><span class="std std-ref">@GlobalScope.bytes_to_var()</span></a> method.</p>
+<p><strong>Warning:</strong> Deserialized objects can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats such as remote code execution.</p>
+<p class="classref-method" id="class-marshalls-method-raw-to-base64"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>raw_to_base64</strong>(array: <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>) <a class="reference internal" href="#class-marshalls-method-raw-to-base64"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a Base64-encoded string of a given <a class="reference internal" href="class_packedbytearray.html#class-packedbytearray"><span class="std std-ref">PackedByteArray</span></a>.</p>
+<p class="classref-method" id="class-marshalls-method-utf8-to-base64"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>utf8_to_base64</strong>(utf8_str: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-marshalls-method-utf8-to-base64"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a Base64-encoded string of the UTF-8 string <code class="docutils literal notranslate"><span class="pre">utf8_str</span></code>.</p>
+<p class="classref-method" id="class-marshalls-method-variant-to-base64"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>variant_to_base64</strong>(variant: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>, full_objects: <a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> = false) <a class="reference internal" href="#class-marshalls-method-variant-to-base64"><span class="std std-ref">🔗</span></a></p>
+<p>Returns a Base64-encoded string of the <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> <code class="docutils literal notranslate"><span class="pre">variant</span></code>. If <code class="docutils literal notranslate"><span class="pre">full_objects</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, encoding objects is allowed (and can potentially include code).</p>
+<p>Internally, this uses the same encoding mechanism as the <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-var-to-bytes"><span class="std std-ref">@GlobalScope.var_to_bytes()</span></a> method.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

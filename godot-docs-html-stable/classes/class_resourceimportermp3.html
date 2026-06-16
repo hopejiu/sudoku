@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ResourceImporterMP3" property="og:title"/>
+
+
+
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports an MP3 audio file for playback. Description: MP3 is a lossy audio format, with worse audio quality compared to ResourceImporterOggVorbis..." property="og:description"/>
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports an MP3 audio file for playback. Description: MP3 is a lossy audio format, with worse audio quality compared to ResourceImporterOggVorbis..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ResourceImporterMP3 — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_resourceimporterobj.html" rel="next" title="ResourceImporterOBJ"/>
+<link href="class_resourceimporterlayeredtexture.html" rel="prev" title="ResourceImporterLayeredTexture"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_resourceimportermp3" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="resourceimportermp3">
+<span id="class-resourceimportermp3"></span><h1>ResourceImporterMP3<a class="headerlink" href="#resourceimportermp3" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_resourceimporter.html#class-resourceimporter"><span class="std std-ref">ResourceImporter</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Imports an MP3 audio file for playback.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>MP3 is a lossy audio format, with worse audio quality compared to <a class="reference internal" href="class_resourceimporteroggvorbis.html#class-resourceimporteroggvorbis"><span class="std std-ref">ResourceImporterOggVorbis</span></a> at a given bitrate.</p>
+<p>In most cases, it's recommended to use Ogg Vorbis over MP3. However, if you're using an MP3 sound source with no higher quality source available, then it's recommended to use the MP3 file directly to avoid double lossy compression.</p>
+<p>MP3 requires more CPU to decode than <a class="reference internal" href="class_resourceimporterwav.html#class-resourceimporterwav"><span class="std std-ref">ResourceImporterWAV</span></a>. If you need to play a lot of simultaneous sounds, it's recommended to use WAV for those sounds instead, especially if targeting low-end devices.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/assets_pipeline/importing_audio_samples.html"><span class="doc">Importing audio samples</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimportermp3-property-bar-beats"><span class="std std-ref">bar_beats</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimportermp3-property-beat-count"><span class="std std-ref">beat_count</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimportermp3-property-bpm"><span class="std std-ref">bpm</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimportermp3-property-loop"><span class="std std-ref">loop</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimportermp3-property-loop-offset"><span class="std std-ref">loop_offset</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-resourceimportermp3-property-bar-beats"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>bar_beats</strong> = <code class="docutils literal notranslate"><span class="pre">4</span></code> <a class="reference internal" href="#class-resourceimportermp3-property-bar-beats"><span class="std std-ref">🔗</span></a></p>
+<p>The number of bars within a single beat in the audio track. This is only relevant for music that wishes to make use of interactive music functionality, not sound effects.</p>
+<p>A more convenient editor for <a class="reference internal" href="#class-resourceimportermp3-property-bar-beats"><span class="std std-ref">bar_beats</span></a> is provided in the <strong>Advanced Import Settings</strong> dialog, as it lets you preview your changes without having to reimport the audio.</p>
+<p class="classref-property" id="class-resourceimportermp3-property-beat-count"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>beat_count</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-resourceimportermp3-property-beat-count"><span class="std std-ref">🔗</span></a></p>
+<p>The beat count of the audio track. This is only relevant for music that wishes to make use of interactive music functionality, not sound effects.</p>
+<p>A more convenient editor for <a class="reference internal" href="#class-resourceimportermp3-property-beat-count"><span class="std std-ref">beat_count</span></a> is provided in the <strong>Advanced Import Settings</strong> dialog, as it lets you preview your changes without having to reimport the audio.</p>
+<p class="classref-property" id="class-resourceimportermp3-property-bpm"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>bpm</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-resourceimportermp3-property-bpm"><span class="std std-ref">🔗</span></a></p>
+<p>The beats per minute of the audio track. This should match the BPM measure that was used to compose the track. This is only relevant for music that wishes to make use of interactive music functionality, not sound effects.</p>
+<p>A more convenient editor for <a class="reference internal" href="#class-resourceimportermp3-property-bpm"><span class="std std-ref">bpm</span></a> is provided in the <strong>Advanced Import Settings</strong> dialog, as it lets you preview your changes without having to reimport the audio.</p>
+<p class="classref-property" id="class-resourceimportermp3-property-loop"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>loop</strong> = <code class="docutils literal notranslate"><span class="pre">false</span></code> <a class="reference internal" href="#class-resourceimportermp3-property-loop"><span class="std std-ref">🔗</span></a></p>
+<p>If enabled, the audio will begin playing at the beginning after playback ends by reaching the end of the audio.</p>
+<p><strong>Note:</strong> In <a class="reference internal" href="class_audiostreamplayer.html#class-audiostreamplayer"><span class="std std-ref">AudioStreamPlayer</span></a>, the <a class="reference internal" href="class_audiostreamplayer.html#class-audiostreamplayer-signal-finished"><span class="std std-ref">AudioStreamPlayer.finished</span></a> signal won't be emitted for looping audio when it reaches the end of the audio file, as the audio will keep playing indefinitely.</p>
+<p class="classref-property" id="class-resourceimportermp3-property-loop-offset"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>loop_offset</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-resourceimportermp3-property-loop-offset"><span class="std std-ref">🔗</span></a></p>
+<p>Determines where audio will start to loop after playback reaches the end of the audio. This can be used to only loop a part of the audio file, which is useful for some ambient sounds or music. The value is determined in seconds relative to the beginning of the audio. A value of <code class="docutils literal notranslate"><span class="pre">0.0</span></code> will loop the entire audio file.</p>
+<p>Only has an effect if <a class="reference internal" href="#class-resourceimportermp3-property-loop"><span class="std std-ref">loop</span></a> is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>A more convenient editor for <a class="reference internal" href="#class-resourceimportermp3-property-loop-offset"><span class="std std-ref">loop_offset</span></a> is provided in the <strong>Advanced Import Settings</strong> dialog, as it lets you preview your changes without having to reimport the audio.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

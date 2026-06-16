@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="CapsuleMesh" property="og:title"/>
+
+
+
+<meta content="Inherits: PrimitiveMesh&lt; Mesh&lt; Resource&lt; RefCounted&lt; Object Class representing a capsule-shaped PrimitiveMesh. Description: Class representing a capsule-shaped PrimitiveMesh. Properties..." property="og:description"/>
+<meta content="Inherits: PrimitiveMesh&lt; Mesh&lt; Resource&lt; RefCounted&lt; Object Class representing a capsule-shaped PrimitiveMesh. Description: Class representing a capsule-shaped PrimitiveMesh. Properties..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) CapsuleMesh — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_capsuleshape2d.html" rel="next" title="CapsuleShape2D"/>
+<link href="class_canvastexture.html" rel="prev" title="CanvasTexture"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_capsulemesh" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="capsulemesh">
+<span id="class-capsulemesh"></span><h1>CapsuleMesh<a class="headerlink" href="#capsulemesh" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_primitivemesh.html#class-primitivemesh"><span class="std std-ref">PrimitiveMesh</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_mesh.html#class-mesh"><span class="std std-ref">Mesh</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Class representing a capsule-shaped <a class="reference internal" href="class_primitivemesh.html#class-primitivemesh"><span class="std std-ref">PrimitiveMesh</span></a>.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Class representing a capsule-shaped <a class="reference internal" href="class_primitivemesh.html#class-primitivemesh"><span class="std std-ref">PrimitiveMesh</span></a>.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-capsulemesh-property-height"><span class="std std-ref">height</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-capsulemesh-property-radial-segments"><span class="std std-ref">radial_segments</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">64</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-capsulemesh-property-radius"><span class="std std-ref">radius</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-capsulemesh-property-rings"><span class="std std-ref">rings</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-capsulemesh-property-height"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>height</strong> = <code class="docutils literal notranslate"><span class="pre">2.0</span></code> <a class="reference internal" href="#class-capsulemesh-property-height"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_height</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_height</strong>()</p></li>
+</ul>
+<p>Total height of the capsule mesh (including the hemispherical ends).</p>
+<p><strong>Note:</strong> The <a class="reference internal" href="#class-capsulemesh-property-height"><span class="std std-ref">height</span></a> of a capsule must be at least twice its <a class="reference internal" href="#class-capsulemesh-property-radius"><span class="std std-ref">radius</span></a>. Otherwise, the capsule becomes a circle. If the <a class="reference internal" href="#class-capsulemesh-property-height"><span class="std std-ref">height</span></a> is less than twice the <a class="reference internal" href="#class-capsulemesh-property-radius"><span class="std std-ref">radius</span></a>, the properties adjust to a valid value.</p>
+<p class="classref-property" id="class-capsulemesh-property-radial-segments"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>radial_segments</strong> = <code class="docutils literal notranslate"><span class="pre">64</span></code> <a class="reference internal" href="#class-capsulemesh-property-radial-segments"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_radial_segments</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_radial_segments</strong>()</p></li>
+</ul>
+<p>Number of radial segments on the capsule mesh.</p>
+<p class="classref-property" id="class-capsulemesh-property-radius"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>radius</strong> = <code class="docutils literal notranslate"><span class="pre">0.5</span></code> <a class="reference internal" href="#class-capsulemesh-property-radius"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_radius</strong>(value: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>get_radius</strong>()</p></li>
+</ul>
+<p>Radius of the capsule mesh.</p>
+<p><strong>Note:</strong> The <a class="reference internal" href="#class-capsulemesh-property-radius"><span class="std std-ref">radius</span></a> of a capsule cannot be greater than half of its <a class="reference internal" href="#class-capsulemesh-property-height"><span class="std std-ref">height</span></a>. Otherwise, the capsule becomes a circle. If the <a class="reference internal" href="#class-capsulemesh-property-radius"><span class="std std-ref">radius</span></a> is greater than half of the <a class="reference internal" href="#class-capsulemesh-property-height"><span class="std std-ref">height</span></a>, the properties adjust to a valid value.</p>
+<p class="classref-property" id="class-capsulemesh-property-rings"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>rings</strong> = <code class="docutils literal notranslate"><span class="pre">8</span></code> <a class="reference internal" href="#class-capsulemesh-property-rings"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_rings</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_rings</strong>()</p></li>
+</ul>
+<p>Number of rings along the height of the capsule.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="GLTFMesh" property="og:title"/>
+
+
+
+<meta content="Inherits: Resource&lt; RefCounted&lt; Object GLTFMesh represents a glTF mesh. Description: GLTFMesh handles 3D mesh data imported from glTF files. It includes properties for blend channels, blend w..." property="og:description"/>
+<meta content="Inherits: Resource&lt; RefCounted&lt; Object GLTFMesh represents a glTF mesh. Description: GLTFMesh handles 3D mesh data imported from glTF files. It includes properties for blend channels, blend w..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) GLTFMesh — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_gltfnode.html" rel="next" title="GLTFNode"/>
+<link href="class_gltflight.html" rel="prev" title="GLTFLight"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_gltfmesh" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="gltfmesh">
+<span id="class-gltfmesh"></span><h1>GLTFMesh<a class="headerlink" href="#gltfmesh" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_resource.html#class-resource"><span class="std std-ref">Resource</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>GLTFMesh represents a glTF mesh.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>GLTFMesh handles 3D mesh data imported from glTF files. It includes properties for blend channels, blend weights, instance materials, and the mesh itself.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/io/runtime_file_loading_and_saving.html"><span class="doc">Runtime file loading and saving</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a></p></td>
+<td><p><a class="reference internal" href="#class-gltfmesh-property-blend-weights"><span class="std std-ref">blend_weights</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PackedFloat32Array()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a>[<a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a>]</p></td>
+<td><p><a class="reference internal" href="#class-gltfmesh-property-instance-materials"><span class="std std-ref">instance_materials</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_importermesh.html#class-importermesh"><span class="std std-ref">ImporterMesh</span></a></p></td>
+<td><p><a class="reference internal" href="#class-gltfmesh-property-mesh"><span class="std std-ref">mesh</span></a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-gltfmesh-property-original-name"><span class="std std-ref">original_name</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a></p></td>
+<td><p><a class="reference internal" href="#class-gltfmesh-method-get-additional-data"><span class="std std-ref">get_additional_data</span></a>(extension_name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-gltfmesh-method-set-additional-data"><span class="std std-ref">set_additional_data</span></a>(extension_name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, additional_data: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-gltfmesh-property-blend-weights"><a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> <strong>blend_weights</strong> = <code class="docutils literal notranslate"><span class="pre">PackedFloat32Array()</span></code> <a class="reference internal" href="#class-gltfmesh-property-blend-weights"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_blend_weights</strong>(value: <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> <strong>get_blend_weights</strong>()</p></li>
+</ul>
+<p>An array of floats representing the blend weights of the mesh.</p>
+<p><strong>Note:</strong> The returned array is <em>copied</em> and any changes to it will not update the original property value. See <a class="reference internal" href="class_packedfloat32array.html#class-packedfloat32array"><span class="std std-ref">PackedFloat32Array</span></a> for more details.</p>
+<p class="classref-property" id="class-gltfmesh-property-instance-materials"><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a>[<a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a>] <strong>instance_materials</strong> = <code class="docutils literal notranslate"><span class="pre">[]</span></code> <a class="reference internal" href="#class-gltfmesh-property-instance-materials"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_instance_materials</strong>(value: <a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a>[<a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a>])</p></li>
+<li><p><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a>[<a class="reference internal" href="class_material.html#class-material"><span class="std std-ref">Material</span></a>] <strong>get_instance_materials</strong>()</p></li>
+</ul>
+<p>An array of Material objects representing the materials used in the mesh.</p>
+<p class="classref-property" id="class-gltfmesh-property-mesh"><a class="reference internal" href="class_importermesh.html#class-importermesh"><span class="std std-ref">ImporterMesh</span></a> <strong>mesh</strong> <a class="reference internal" href="#class-gltfmesh-property-mesh"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_mesh</strong>(value: <a class="reference internal" href="class_importermesh.html#class-importermesh"><span class="std std-ref">ImporterMesh</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_importermesh.html#class-importermesh"><span class="std std-ref">ImporterMesh</span></a> <strong>get_mesh</strong>()</p></li>
+</ul>
+<p>The <a class="reference internal" href="class_importermesh.html#class-importermesh"><span class="std std-ref">ImporterMesh</span></a> object representing the mesh itself.</p>
+<p class="classref-property" id="class-gltfmesh-property-original-name"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>original_name</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-gltfmesh-property-original-name"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_original_name</strong>(value: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_original_name</strong>()</p></li>
+</ul>
+<p>The original name of the mesh.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-gltfmesh-method-get-additional-data"><a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a> <strong>get_additional_data</strong>(extension_name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>) <a class="reference internal" href="#class-gltfmesh-method-get-additional-data"><span class="std std-ref">🔗</span></a></p>
+<p>Gets additional arbitrary data in this <strong>GLTFMesh</strong> instance. This can be used to keep per-node state data in <a class="reference internal" href="class_gltfdocumentextension.html#class-gltfdocumentextension"><span class="std std-ref">GLTFDocumentExtension</span></a> classes, which is important because they are stateless.</p>
+<p>The argument should be the <a class="reference internal" href="class_gltfdocumentextension.html#class-gltfdocumentextension"><span class="std std-ref">GLTFDocumentExtension</span></a> name (does not have to match the extension name in the glTF file), and the return value can be anything you set. If nothing was set, the return value is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p class="classref-method" id="class-gltfmesh-method-set-additional-data"><abbr title="No return value.">void</abbr> <strong>set_additional_data</strong>(extension_name: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a>, additional_data: <a class="reference internal" href="class_variant.html#class-variant"><span class="std std-ref">Variant</span></a>) <a class="reference internal" href="#class-gltfmesh-method-set-additional-data"><span class="std std-ref">🔗</span></a></p>
+<p>Sets additional arbitrary data in this <strong>GLTFMesh</strong> instance. This can be used to keep per-node state data in <a class="reference internal" href="class_gltfdocumentextension.html#class-gltfdocumentextension"><span class="std std-ref">GLTFDocumentExtension</span></a> classes, which is important because they are stateless.</p>
+<p>The first argument should be the <a class="reference internal" href="class_gltfdocumentextension.html#class-gltfdocumentextension"><span class="std std-ref">GLTFDocumentExtension</span></a> name (does not have to match the extension name in the glTF file), and the second argument can be anything you want.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

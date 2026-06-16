@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Project organization" property="og:title"/>
+
+
+
+<meta content="Introduction: Since Godot has no restrictions on project structure or filesystem usage, organizing files when learning the engine can seem challenging. This tutorial suggests a workflow which shoul..." property="og:description"/>
+<meta content="Introduction: Since Godot has no restrictions on project structure or filesystem usage, organizing files when learning the engine can seem challenging. This tutorial suggests a workflow which shoul..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Project organization — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="version_control_systems.html" rel="next" title="Version control systems"/>
+<link href="logic_preferences.html" rel="prev" title="Logic preferences"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/best_practices/project_organization" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="project-organization">
+<span id="doc-project-organization"></span><h1>Project organization<a class="headerlink" href="#project-organization" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Since Godot has no restrictions on project structure or filesystem usage,
+organizing files when learning the engine can seem challenging. This
+tutorial suggests a workflow which should be a good starting point.
+We will also cover using version control with Godot.</p>
+</section>
+<section id="organization">
+<h2>Organization<a class="headerlink" href="#organization" title="Link to this heading"></a></h2>
+<p>Godot is scene-based in nature, and uses the filesystem as-is,
+without metadata or an asset database.</p>
+<p>Unlike other engines, many resources are contained within the scene
+itself, so the amount of files in the filesystem is considerably lower.</p>
+<p>Considering that, the most common approach is to group assets as close
+to scenes as possible; when a project grows, it makes it more
+maintainable.</p>
+<p>As an example, one can usually place into a single folder their basic assets,
+such as sprite images, 3D model meshes, materials, and music, etc.
+They can then use a separate folder to store built levels that use them.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/project.godot
+/docs/.gdignore  # See "Ignoring specific folders" below
+/docs/learning.html
+/models/town/house/house.dae
+/models/town/house/window.png
+/models/town/house/door.png
+/characters/player/cubio.dae
+/characters/player/cubio.png
+/characters/enemies/goblin/goblin.dae
+/characters/enemies/goblin/goblin.png
+/characters/npcs/suzanne/suzanne.dae
+/characters/npcs/suzanne/suzanne.png
+/levels/riverdale/riverdale.scn
+</pre></div>
+</div>
+</section>
+<section id="style-guide">
+<h2>Style guide<a class="headerlink" href="#style-guide" title="Link to this heading"></a></h2>
+<p>For consistency across projects, we recommend following these guidelines:</p>
+<ul class="simple">
+<li><p>Use <strong>snake_case</strong> for folder and file names (with the exception of C#
+scripts). This sidesteps case sensitivity issues that can crop up after
+exporting a project on Windows. C# scripts are an exception to this rule,
+as the convention is to name them after the class name which should be
+in PascalCase.</p></li>
+<li><p>Use <strong>PascalCase</strong> for node names, as this matches built-in node casing.</p></li>
+<li><p>In general, keep third-party resources in a top-level <code class="docutils literal notranslate"><span class="pre">addons/</span></code> folder, even
+if they aren't editor plugins. This makes it easier to track which files are
+third-party. There are some exceptions to this rule; for instance, if you use
+third-party game assets for a character, it makes more sense to include them
+within the same folder as the character scenes and scripts.</p></li>
+</ul>
+</section>
+<section id="importing">
+<h2>Importing<a class="headerlink" href="#importing" title="Link to this heading"></a></h2>
+<p>Godot versions prior to 3.0 did the import process from files outside
+the project. While this can be useful in large projects, it
+resulted in an organization hassle for most developers.</p>
+<p>Because of this, assets are now transparently imported from within the project
+folder.</p>
+<section id="ignoring-specific-folders">
+<h3>Ignoring specific folders<a class="headerlink" href="#ignoring-specific-folders" title="Link to this heading"></a></h3>
+<p>To prevent Godot from importing files contained in a specific folder, create
+an empty file called <code class="docutils literal notranslate"><span class="pre">.gdignore</span></code> in the folder (the leading <code class="docutils literal notranslate"><span class="pre">.</span></code> is required).
+This can be useful to speed up the initial project importing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To create a file whose name starts with a dot on Windows, place a dot
+at both the beginning and end of the filename (".gdignore."). Windows
+will automatically remove the trailing dot when you confirm the name.</p>
+<p>Alternatively, you can use a text editor such as Notepad++ or use the
+following command in a command prompt: <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">nul</span> <span class="pre">&gt;</span> <span class="pre">.gdignore</span></code></p>
+</div>
+<p>Once the folder is ignored, resources in that folder can't be loaded anymore
+using the <code class="docutils literal notranslate"><span class="pre">load()</span></code> and <code class="docutils literal notranslate"><span class="pre">preload()</span></code> methods. Ignoring a folder will also
+automatically hide it from the FileSystem dock, which can be useful to reduce clutter.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">.gdignore</span></code> file's contents are ignored, which is why the file
+should be empty. It does not support patterns like <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> files do.</p>
+</section>
+</section>
+<section id="case-sensitivity">
+<span id="doc-project-organization-case-sensitivity"></span><h2>Case sensitivity<a class="headerlink" href="#case-sensitivity" title="Link to this heading"></a></h2>
+<p>Windows and recent macOS versions use case-insensitive filesystems by default,
+whereas Linux distributions use a case-sensitive filesystem by default.
+This can cause issues after exporting a project, since Godot's PCK virtual
+filesystem is case-sensitive. To avoid this, it's recommended to stick to
+<code class="docutils literal notranslate"><span class="pre">snake_case</span></code> naming for all files in the project (and lowercase characters
+in general).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can break this rule when style guides say otherwise (such as the
+C# style guide). Still, be consistent to avoid mistakes.</p>
+</div>
+<p>On Windows 10, to further avoid mistakes related to case sensitivity,
+you can also make the project folder case-sensitive. After enabling the Windows
+Subsystem for Linux feature, run the following command in a PowerShell window:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="c1"># To enable case-sensitivity:</span>
+<span class="n">fsutil</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">setcasesensitiveinfo</span><span class="w"> </span><span class="o">&lt;</span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">folder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enable</span>
+<span class="c1"># To disable case-sensitivity:</span>
+<span class="n">fsutil</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">setcasesensitiveinfo</span><span class="w"> </span><span class="o">&lt;</span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">folder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">disable</span>
+</pre></div>
+</div>
+<p>If you haven't enabled the Windows Subsystem for Linux, you can enter the
+following line in a PowerShell window <em>running as Administrator</em> then reboot
+when asked:</p>
+<div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nc">Enable</span><span class="o">-</span><span class="nc">WindowsOptionalFeature</span><span class="w"> </span><span class="o">-</span><span class="nc">Online</span><span class="w"> </span><span class="o">-</span><span class="nc">FeatureName</span><span class="w"> </span><span class="nc">Microsoft</span><span class="o">-</span><span class="nc">Windows</span><span class="o">-</span><span class="nc">Subsystem</span><span class="o">-</span><span class="nc">Linux</span>
+</pre></div>
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

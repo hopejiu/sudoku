@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Visual Studio" property="og:title"/>
+
+
+
+<meta content="Visual Studio Community is a Windows-only IDE by Microsoft that's free for individual use or non-commercial use within organizations. It has many useful features, such as memory view, performa..." property="og:description"/>
+<meta content="Visual Studio Community is a Windows-only IDE by Microsoft that's free for individual use or non-commercial use within organizations. It has many useful features, such as memory view, performa..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Visual Studio — Godot Engine (4.6) documentation in English</title>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="visual_studio_code.html" rel="next" title="Visual Studio Code"/>
+<link href="rider.html" rel="prev" title="JetBrains Rider"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="engine_details/development/configuring_an_ide/visual_studio" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="visual-studio">
+<span id="doc-configuring-an-ide-vs"></span><h1>Visual Studio<a class="headerlink" href="#visual-studio" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://visualstudio.microsoft.com">Visual Studio Community</a> is a Windows-only IDE
+by <a class="reference external" href="https://microsoft.com">Microsoft</a> that's free for individual use or non-commercial use within organizations.
+It has many useful features, such as memory view, performance view, source
+control and more.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This documentation is for contributions to the game engine, and not using
+Visual Studio as a C# editor. To code C# in an external editor, see
+<a class="reference internal" href="../../../tutorials/scripting/c_sharp/c_sharp_basics.html#doc-c-sharp-setup-external-editor"><span class="std std-ref">the C# guide to configure an external editor</span></a>.</p>
+</div>
+<section id="importing-the-project">
+<h2>Importing the project<a class="headerlink" href="#importing-the-project" title="Link to this heading"></a></h2>
+<p>Visual Studio requires a solution file to work on a project. While Godot does not come
+with the solution file, it can be generated using SCons.</p>
+<ul>
+<li><p>Navigate to the Godot root folder and open a Command Prompt or PowerShell window.</p></li>
+<li><div class="line-block">
+<div class="line">Run <code class="docutils literal notranslate"><span class="pre">scons</span> <span class="pre">platform=windows</span> <span class="pre">vsproj=yes</span> <span class="pre">dev_build=yes</span></code> to generate the solution with debug symbols.</div>
+<div class="line">The <code class="docutils literal notranslate"><span class="pre">vsproj</span></code> parameter signals that you want Visual Studio solution generated.</div>
+<div class="line">The <code class="docutils literal notranslate"><span class="pre">dev_build</span></code> parameter makes sure the debug symbols are included, allowing to e.g. step through code using breakpoints.</div>
+</div>
+</li>
+<li><p>You can now open the project by double-clicking on the <code class="docutils literal notranslate"><span class="pre">godot.sln</span></code> in the project root
+or by using the <strong>Open a project or solution</strong> option inside of the Visual Studio.</p></li>
+<li><p>Use the <strong>Build</strong> top menu to build the project.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Visual Studio must be configured with the C++ package. It can be selected
+in the installer:</p>
+<figure class="align-center">
+<img alt="../../../_images/vs_1_install_cpp_package.png" src="../../../_images/vs_1_install_cpp_package.png"/>
+</figure>
+</div>
+</section>
+<section id="debugging-the-project">
+<h2>Debugging the project<a class="headerlink" href="#debugging-the-project" title="Link to this heading"></a></h2>
+<p>Visual Studio features a powerful debugger. This allows the user to examine Godot's
+source code, stop at specific points in the code, inspect the current execution context,
+and make live changes to the codebase.</p>
+<p>You can launch the project with the debugger attached using the <strong>Debug &gt; Start Debugging</strong>
+option from the top menu. However, unless you want to debug the Project Manager specifically,
+you'd need to configure debugging options first. This is due to the fact that when the Godot
+Project Manager opens a project, the initial process is terminated and the debugger gets detached.</p>
+<ul class="simple">
+<li><p>To configure the launch options to use with the debugger use <strong>Project &gt; Properties</strong>
+from the top menu:</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/vs_2_project_properties.png" src="../../../_images/vs_2_project_properties.png"/>
+</figure>
+<ul class="simple">
+<li><p>Open the <strong>Debugging</strong> section and under <strong>Command Arguments</strong> add two new arguments:
+the <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag opens the editor instead of the Project Manager, and the <code class="docutils literal notranslate"><span class="pre">--path</span></code> argument
+tells the executable to open the specified project (must be provided as an <em>absolute</em> path
+to the project root, not the <code class="docutils literal notranslate"><span class="pre">project.godot</span></code> file; if the path contains spaces be sure to pass it inside double quotation marks).</p></li>
+</ul>
+<figure class="align-center">
+<img alt="../../../_images/vs_3_debug_command_line.webp" src="../../../_images/vs_3_debug_command_line.webp"/>
+</figure>
+<p>To learn more about command line arguments, refer to the
+<a class="reference internal" href="../../../tutorials/editor/command_line_tutorial.html#doc-command-line-tutorial"><span class="std std-ref">command line tutorial</span></a>.</p>
+<p>Even if you start the project without a debugger attached it can still be connected to the running
+process using <strong>Debug &gt; Attach to Process...</strong> menu.</p>
+<p>To check that everything is working, put a breakpoint in <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> and press <kbd class="kbd docutils literal notranslate">F5</kbd> to
+start debugging.</p>
+<figure class="align-center">
+<img alt="../../../_images/vs_4_debugging_main.png" src="../../../_images/vs_4_debugging_main.png"/>
+</figure>
+<p>If you run into any issues, ask for help in one of
+<a class="reference external" href="https://godotengine.org/community">Godot's community channels</a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Pausing games and process mode" property="og:title"/>
+
+
+
+<meta content="Introduction: In most games it is desirable to, at some point, interrupt the game to do something else, such as taking a break or changing options. Implementing a fine-grained control for what can ..." property="og:description"/>
+<meta content="Introduction: In most games it is desirable to, at some point, interrupt the game to do something else, such as taking a break or changing options. Implementing a fine-grained control for what can ..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Pausing games and process mode — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="filesystem.html" rel="next" title="File system"/>
+<link href="instancing_with_signals.html" rel="prev" title="Instancing with signals"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/scripting/pausing_games" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="pausing-games-and-process-mode">
+<span id="doc-pausing-games"></span><h1>Pausing games and process mode<a class="headerlink" href="#pausing-games-and-process-mode" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In most games it is desirable to, at some point, interrupt the
+game to do something else, such as taking a break or changing options.
+Implementing a fine-grained control for what can be paused (and what cannot)
+is a lot of work, so a simple framework for pausing is provided in
+Godot.</p>
+</section>
+<section id="how-pausing-works">
+<h2>How pausing works<a class="headerlink" href="#how-pausing-works" title="Link to this heading"></a></h2>
+<p>To pause the game the pause state must be set. This is done by assigning
+<code class="docutils literal notranslate"><span class="pre">true</span></code> to the <a class="reference internal" href="../../classes/class_scenetree.html#class-scenetree-property-paused"><span class="std std-ref">SceneTree.paused</span></a> property:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-0-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-0-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">paused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-0-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GetTree</span><span class="p">().</span><span class="n">Paused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+<p>Doing this will cause two things. First, 2D and 3D physics will be stopped
+for all nodes. Second, the behavior of certain nodes will stop or start
+depending on their process mode.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The physics servers can be made active while the game is
+paused by using their <code class="docutils literal notranslate"><span class="pre">set_active</span></code> methods.</p>
+</div>
+</section>
+<section id="process-modes">
+<h2>Process Modes<a class="headerlink" href="#process-modes" title="Link to this heading"></a></h2>
+<p>Each node in Godot has a "Process Mode" that defines when it processes. It can
+be found and changed under a node's <a class="reference internal" href="../../classes/class_node.html#class-node"><span class="std std-ref">Node</span></a> properties in the inspector.</p>
+<img alt="../../_images/pausemode.webp" src="../../_images/pausemode.webp"/>
+<p>You can also alter the property with code:</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-1-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-1-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_ready</span><span class="p">():</span>
+<span class="w">    </span><span class="n">process_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Node</span><span class="o">.</span><span class="vi">PROCESS_MODE_PAUSABLE</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-1-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ProcessMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">.</span><span class="n">ProcessModeEnum</span><span class="p">.</span><span class="n">Pausable</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>This is what each mode tells a node to do:</p>
+<ul class="simple">
+<li><p><strong>Inherit</strong>: Process depending on the state of the parent,
+grandparent, etc. The first parent that has a non-Inherit state.</p></li>
+<li><p><strong>Pausable</strong>: Process the node (and its children in Inherit
+mode) only when the game is not paused.</p></li>
+<li><p><strong>WhenPaused</strong>: Process the node (and its children in Inherit
+mode) <em>only</em> when the game is paused.</p></li>
+<li><p><strong>Always</strong>: Process the node (and its children in Inherit
+mode) no matter what. Paused or not, this node will process.</p></li>
+<li><p><strong>Disabled</strong>: The node (and its children in Inherit
+mode) will not process at all.</p></li>
+</ul>
+<p>By default, all nodes have this property in the "Inherit" state. If the
+parent is set to "Inherit", then the grandparent will be checked and so
+on. If a state can't be found in any of the grandparents, the pause state
+in SceneTree is used. This means that, by default, when the game is paused
+every node will be paused. Several things happen when a node stops processing.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">_process</span></code>, <code class="docutils literal notranslate"><span class="pre">_physics_process</span></code>, <code class="docutils literal notranslate"><span class="pre">_input</span></code>, and <code class="docutils literal notranslate"><span class="pre">_input_event</span></code> functions
+will not be called. However signals still work and cause their connected function to
+run, even if that function's script is attached to a node that is not currently being processed.</p>
+<p>Animation nodes will pause their current animation, audio nodes
+will pause their current audio stream, and particles will pause. These resume
+automatically when the game is no longer paused.</p>
+<p>It is important to note that even if a node is processing while the game is
+paused physics will <strong>NOT</strong> work for it by default. As stated earlier this is
+because the physics servers are turned off. The physics servers can be made
+active while the game is paused by using their <code class="docutils literal notranslate"><span class="pre">set_active</span></code> methods.</p>
+</section>
+<section id="pause-menu-example">
+<h2>Pause menu example<a class="headerlink" href="#pause-menu-example" title="Link to this heading"></a></h2>
+<p>Start by creating a button that will be used to pause the game.</p>
+<p>Create a menu containing a close button, set the <strong>Process Mode</strong> of the menu's root node
+to <strong>When Paused</strong>, then hide the menu. Since the process mode is set to <strong>When Paused</strong>
+on the root node, all its children and grandchildren will inherit that process mode.
+This way, all the nodes in the menu will start processing when the game is paused.</p>
+<p>Attach a script to the menu's root node, connect the pause button created earlier to a new method in
+the script, and inside that method pause the game and show the pause menu.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-2-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-2-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_pause_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">paused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">true</span>
+<span class="w">    </span><span class="nf">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-2-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnPauseButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Paused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Show</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>Finally, connect the menu's close button to a new method in the script. Inside that method,
+unpause the game and hide the pause menu.</p>
+<div class="sphinx-tabs docutils container">
+<div role="tablist"><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tab" tabindex="0">GDScript</button><button class="sphinx-tabs-tab code-tab group-tab" id="tab-3-QyM=" name="QyM=" role="tab" tabindex="-1">C#</button></div><div class="sphinx-tabs-panel code-tab group-tab" id="panel-3-R0RTY3JpcHQ=" name="R0RTY3JpcHQ=" role="tabpanel" tabindex="0"><div class="highlight-gdscript notranslate"><div class="highlight"><pre><span></span><span class="k">func</span><span class="w"> </span><span class="nf nf-Declaration">_on_close_button_pressed</span><span class="p">():</span>
+<span class="w">    </span><span class="nf">hide</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">get_tree</span><span class="p">()</span><span class="o">.</span><span class="vi">paused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">false</span>
+</pre></div>
+</div>
+</div><div class="sphinx-tabs-panel code-tab group-tab" hidden="true" id="panel-3-QyM=" name="QyM=" role="tabpanel" tabindex="0"><div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnCloseButtonPressed</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Hide</span><span class="p">();</span>
+<span class="w">    </span><span class="n">GetTree</span><span class="p">().</span><span class="n">Paused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<p>You should now have a working pause menu.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ResourceImporterBMFont" property="og:title"/>
+
+
+
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports a bitmap font in the BMFont (.fnt) format. Description: The BMFont format is a format created by the BMFont program. Many BMFont-compati..." property="og:description"/>
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports a bitmap font in the BMFont (.fnt) format. Description: The BMFont format is a format created by the BMFont program. Many BMFont-compati..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ResourceImporterBMFont — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_resourceimportercsvtranslation.html" rel="next" title="ResourceImporterCSVTranslation"/>
+<link href="class_resourceimporterbitmap.html" rel="prev" title="ResourceImporterBitMap"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_resourceimporterbmfont" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="resourceimporterbmfont">
+<span id="class-resourceimporterbmfont"></span><h1>ResourceImporterBMFont<a class="headerlink" href="#resourceimporterbmfont" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_resourceimporter.html#class-resourceimporter"><span class="std std-ref">ResourceImporter</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Imports a bitmap font in the BMFont (<code class="docutils literal notranslate"><span class="pre">.fnt</span></code>) format.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The BMFont format is a format created by the <a class="reference external" href="https://www.angelcode.com/products/bmfont/">BMFont</a> program. Many BMFont-compatible programs also exist, like <a class="reference external" href="https://www.bmglyph.com/">BMGlyph</a>.</p>
+<p>Compared to <a class="reference internal" href="class_resourceimporterimagefont.html#class-resourceimporterimagefont"><span class="std std-ref">ResourceImporterImageFont</span></a>, <strong>ResourceImporterBMFont</strong> supports bitmap fonts with varying glyph widths/heights.</p>
+<p>See also <a class="reference internal" href="class_resourceimporterdynamicfont.html#class-resourceimporterdynamicfont"><span class="std std-ref">ResourceImporterDynamicFont</span></a>.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="../tutorials/ui/gui_using_fonts.html#bitmap-fonts">Bitmap fonts - Using fonts</a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterbmfont-property-compress"><span class="std std-ref">compress</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterbmfont-property-fallbacks"><span class="std std-ref">fallbacks</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterbmfont-property-scaling-mode"><span class="std std-ref">scaling_mode</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-resourceimporterbmfont-property-compress"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>compress</strong> = <code class="docutils literal notranslate"><span class="pre">true</span></code> <a class="reference internal" href="#class-resourceimporterbmfont-property-compress"><span class="std std-ref">🔗</span></a></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, uses lossless compression for the resulting font.</p>
+<p class="classref-property" id="class-resourceimporterbmfont-property-fallbacks"><a class="reference internal" href="class_array.html#class-array"><span class="std std-ref">Array</span></a> <strong>fallbacks</strong> = <code class="docutils literal notranslate"><span class="pre">[]</span></code> <a class="reference internal" href="#class-resourceimporterbmfont-property-fallbacks"><span class="std std-ref">🔗</span></a></p>
+<p>List of font fallbacks to use if a glyph isn't found in this bitmap font. Fonts at the beginning of the array are attempted first.</p>
+<p class="classref-property" id="class-resourceimporterbmfont-property-scaling-mode"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>scaling_mode</strong> = <code class="docutils literal notranslate"><span class="pre">2</span></code> <a class="reference internal" href="#class-resourceimporterbmfont-property-scaling-mode"><span class="std std-ref">🔗</span></a></p>
+<p>Font scaling mode.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

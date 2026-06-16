@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="AudioStreamPlaybackPolyphonic" property="og:title"/>
+
+
+
+<meta content="Inherits: AudioStreamPlayback&lt; RefCounted&lt; Object Playback instance for AudioStreamPolyphonic. Description: Playback instance for AudioStreamPolyphonic. After setting the stream property of A..." property="og:description"/>
+<meta content="Inherits: AudioStreamPlayback&lt; RefCounted&lt; Object Playback instance for AudioStreamPolyphonic. Description: Playback instance for AudioStreamPolyphonic. After setting the stream property of A..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) AudioStreamPlaybackPolyphonic — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_audiostreamplaybackresampled.html" rel="next" title="AudioStreamPlaybackResampled"/>
+<link href="class_audiostreamplaybackplaylist.html" rel="prev" title="AudioStreamPlaybackPlaylist"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_audiostreamplaybackpolyphonic" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="audiostreamplaybackpolyphonic">
+<span id="class-audiostreamplaybackpolyphonic"></span><h1>AudioStreamPlaybackPolyphonic<a class="headerlink" href="#audiostreamplaybackpolyphonic" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_audiostreamplayback.html#class-audiostreamplayback"><span class="std std-ref">AudioStreamPlayback</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Playback instance for <a class="reference internal" href="class_audiostreampolyphonic.html#class-audiostreampolyphonic"><span class="std std-ref">AudioStreamPolyphonic</span></a>.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Playback instance for <a class="reference internal" href="class_audiostreampolyphonic.html#class-audiostreampolyphonic"><span class="std std-ref">AudioStreamPolyphonic</span></a>. After setting the <code class="docutils literal notranslate"><span class="pre">stream</span></code> property of <a class="reference internal" href="class_audiostreamplayer.html#class-audiostreamplayer"><span class="std std-ref">AudioStreamPlayer</span></a>, <a class="reference internal" href="class_audiostreamplayer2d.html#class-audiostreamplayer2d"><span class="std std-ref">AudioStreamPlayer2D</span></a>, or <a class="reference internal" href="class_audiostreamplayer3d.html#class-audiostreamplayer3d"><span class="std std-ref">AudioStreamPlayer3D</span></a>, the playback instance can be obtained by calling <a class="reference internal" href="class_audiostreamplayer.html#class-audiostreamplayer-method-get-stream-playback"><span class="std std-ref">AudioStreamPlayer.get_stream_playback()</span></a>, <a class="reference internal" href="class_audiostreamplayer2d.html#class-audiostreamplayer2d-method-get-stream-playback"><span class="std std-ref">AudioStreamPlayer2D.get_stream_playback()</span></a> or <a class="reference internal" href="class_audiostreamplayer3d.html#class-audiostreamplayer3d-method-get-stream-playback"><span class="std std-ref">AudioStreamPlayer3D.get_stream_playback()</span></a> methods.</p>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-is-stream-playing"><span class="std std-ref">is_stream_playing</span></a>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">play_stream</span></a>(stream: <a class="reference internal" href="class_audiostream.html#class-audiostream"><span class="std std-ref">AudioStream</span></a>, from_offset: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> = 0, volume_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> = 0, pitch_scale: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> = 1.0, playback_type: <a class="reference internal" href="class_audioserver.html#enum-audioserver-playbacktype"><span class="std std-ref">PlaybackType</span></a> = 0, bus: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a> = &amp;"Master")</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-set-stream-pitch-scale"><span class="std std-ref">set_stream_pitch_scale</span></a>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pitch_scale: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-set-stream-volume"><span class="std std-ref">set_stream_volume</span></a>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, volume_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-stop-stream"><span class="std std-ref">stop_stream</span></a>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h2>
+<p class="classref-constant" id="class-audiostreamplaybackpolyphonic-constant-invalid-id"><strong>INVALID_ID</strong> = <code class="docutils literal notranslate"><span class="pre">-1</span></code> <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-constant-invalid-id"><span class="std std-ref">🔗</span></a></p>
+<p>Returned by <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">play_stream()</span></a> in case it could not allocate a stream for playback.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-audiostreamplaybackpolyphonic-method-is-stream-playing"><a class="reference internal" href="class_bool.html#class-bool"><span class="std std-ref">bool</span></a> <strong>is_stream_playing</strong>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-is-stream-playing"><span class="std std-ref">🔗</span></a></p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the stream associated with the given integer ID is still playing. Check <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">play_stream()</span></a> for information on when this ID becomes invalid.</p>
+<p class="classref-method" id="class-audiostreamplaybackpolyphonic-method-play-stream"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>play_stream</strong>(stream: <a class="reference internal" href="class_audiostream.html#class-audiostream"><span class="std std-ref">AudioStream</span></a>, from_offset: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> = 0, volume_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> = 0, pitch_scale: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> = 1.0, playback_type: <a class="reference internal" href="class_audioserver.html#enum-audioserver-playbacktype"><span class="std std-ref">PlaybackType</span></a> = 0, bus: <a class="reference internal" href="class_stringname.html#class-stringname"><span class="std std-ref">StringName</span></a> = &amp;"Master") <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">🔗</span></a></p>
+<p>Play an <a class="reference internal" href="class_audiostream.html#class-audiostream"><span class="std std-ref">AudioStream</span></a> at a given offset, volume, pitch scale, playback type, and bus. Playback starts immediately.</p>
+<p>The return value is a unique integer ID that is associated to this playback stream and which can be used to control it.</p>
+<p>This ID becomes invalid when the stream ends (if it does not loop), when the <strong>AudioStreamPlaybackPolyphonic</strong> is stopped, or when <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-stop-stream"><span class="std std-ref">stop_stream()</span></a> is called.</p>
+<p>This function returns <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-constant-invalid-id"><span class="std std-ref">INVALID_ID</span></a> if the amount of streams currently playing equals <a class="reference internal" href="class_audiostreampolyphonic.html#class-audiostreampolyphonic-property-polyphony"><span class="std std-ref">AudioStreamPolyphonic.polyphony</span></a>. If you need a higher amount of maximum polyphony, raise this value.</p>
+<p class="classref-method" id="class-audiostreamplaybackpolyphonic-method-set-stream-pitch-scale"><abbr title="No return value.">void</abbr> <strong>set_stream_pitch_scale</strong>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, pitch_scale: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-set-stream-pitch-scale"><span class="std std-ref">🔗</span></a></p>
+<p>Change the stream pitch scale. The <code class="docutils literal notranslate"><span class="pre">stream</span></code> argument is an integer ID returned by <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">play_stream()</span></a>.</p>
+<p class="classref-method" id="class-audiostreamplaybackpolyphonic-method-set-stream-volume"><abbr title="No return value.">void</abbr> <strong>set_stream_volume</strong>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>, volume_db: <a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a>) <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-set-stream-volume"><span class="std std-ref">🔗</span></a></p>
+<p>Change the stream volume (in db). The <code class="docutils literal notranslate"><span class="pre">stream</span></code> argument is an integer ID returned by <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">play_stream()</span></a>.</p>
+<p class="classref-method" id="class-audiostreamplaybackpolyphonic-method-stop-stream"><abbr title="No return value.">void</abbr> <strong>stop_stream</strong>(stream: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>) <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-stop-stream"><span class="std std-ref">🔗</span></a></p>
+<p>Stop a stream. The <code class="docutils literal notranslate"><span class="pre">stream</span></code> argument is an integer ID returned by <a class="reference internal" href="#class-audiostreamplaybackpolyphonic-method-play-stream"><span class="std std-ref">play_stream()</span></a>, which becomes invalid after calling this function.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

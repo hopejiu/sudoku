@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="ResourceImporterBitMap" property="og:title"/>
+
+
+
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports a BitMap resource (2D array of boolean values). Description: BitMap resources are typically used as click masks in TextureButton and Tou..." property="og:description"/>
+<meta content="Inherits: ResourceImporter&lt; RefCounted&lt; Object Imports a BitMap resource (2D array of boolean values). Description: BitMap resources are typically used as click masks in TextureButton and Tou..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) ResourceImporterBitMap — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_resourceimporterbmfont.html" rel="next" title="ResourceImporterBMFont"/>
+<link href="class_resourceimporter.html" rel="prev" title="ResourceImporter"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_resourceimporterbitmap" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="resourceimporterbitmap">
+<span id="class-resourceimporterbitmap"></span><h1>ResourceImporterBitMap<a class="headerlink" href="#resourceimporterbitmap" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_resourceimporter.html#class-resourceimporter"><span class="std std-ref">ResourceImporter</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Imports a <a class="reference internal" href="class_bitmap.html#class-bitmap"><span class="std std-ref">BitMap</span></a> resource (2D array of boolean values).</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="class_bitmap.html#class-bitmap"><span class="std std-ref">BitMap</span></a> resources are typically used as click masks in <a class="reference internal" href="class_texturebutton.html#class-texturebutton"><span class="std std-ref">TextureButton</span></a> and <a class="reference internal" href="class_touchscreenbutton.html#class-touchscreenbutton"><span class="std std-ref">TouchScreenButton</span></a>.</p>
+</section>
+<section class="classref-introduction-group" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tutorials/assets_pipeline/importing_images.html"><span class="doc">Importing images</span></a></p></li>
+</ul>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterbitmap-property-create-from"><span class="std std-ref">create_from</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a></p></td>
+<td><p><a class="reference internal" href="#class-resourceimporterbitmap-property-threshold"><span class="std std-ref">threshold</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-resourceimporterbitmap-property-create-from"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>create_from</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-resourceimporterbitmap-property-create-from"><span class="std std-ref">🔗</span></a></p>
+<p>The data source to use for generating the bitmap.</p>
+<p><strong>Black &amp; White:</strong> Pixels whose HSV value is greater than the <a class="reference internal" href="#class-resourceimporterbitmap-property-threshold"><span class="std std-ref">threshold</span></a> will be considered as "enabled" (bit is <code class="docutils literal notranslate"><span class="pre">true</span></code>). If the pixel is lower than or equal to the threshold, it will be considered as "disabled" (bit is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+<p><strong>Alpha:</strong> Pixels whose alpha value is greater than the <a class="reference internal" href="#class-resourceimporterbitmap-property-threshold"><span class="std std-ref">threshold</span></a> will be considered as "enabled" (bit is <code class="docutils literal notranslate"><span class="pre">true</span></code>). If the pixel is lower than or equal to the threshold, it will be considered as "disabled" (bit is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+<p class="classref-property" id="class-resourceimporterbitmap-property-threshold"><a class="reference internal" href="class_float.html#class-float"><span class="std std-ref">float</span></a> <strong>threshold</strong> = <code class="docutils literal notranslate"><span class="pre">0.5</span></code> <a class="reference internal" href="#class-resourceimporterbitmap-property-threshold"><span class="std std-ref">🔗</span></a></p>
+<p>The threshold to use to determine which bits should be considered enabled or disabled. See also <a class="reference internal" href="#class-resourceimporterbitmap-property-create-from"><span class="std std-ref">create_from</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

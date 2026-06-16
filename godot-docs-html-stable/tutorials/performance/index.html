@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Performance" property="og:title"/>
+
+
+
+<meta content="Introduction: Godot follows a balanced performance philosophy. In the performance world, there are always tradeoffs, which consist of trading speed for usability and flexibility. Some practical exa..." property="og:description"/>
+<meta content="Introduction: Godot follows a balanced performance philosophy. In the performance world, there are always tradeoffs, which consist of trading speed for usability and flexibility. Some practical exa..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) Performance — Godot Engine (4.6) documentation in English</title>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="general_optimization.html" rel="next" title="General optimization tips"/>
+<link href="../networking/webrtc.html" rel="prev" title="WebRTC"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="tutorials/performance/index" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="performance">
+<span id="doc-performance"></span><h1>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Godot follows a balanced performance philosophy. In the performance world,
+there are always tradeoffs, which consist of trading speed for usability
+and flexibility. Some practical examples of this are:</p>
+<ul class="simple">
+<li><p>Rendering large amounts of objects efficiently is easy, but when a
+large scene must be rendered, it can become inefficient. To solve this,
+visibility computation must be added to the rendering. This makes rendering
+less efficient, but at the same time, fewer objects are rendered. Therefore,
+the overall rendering efficiency is improved.</p></li>
+<li><p>Configuring the properties of every material for every object that
+needs to be rendered is also slow. To solve this, objects are sorted by
+material to reduce the costs. At the same time, sorting has a cost.</p></li>
+<li><p>In 3D physics, a similar situation happens. The best algorithms to
+handle large amounts of physics objects (such as SAP) are slow at
+insertion/removal of objects and raycasting. Algorithms that allow faster
+insertion and removal, as well as raycasting, will not be able to handle as
+many active objects.</p></li>
+</ul>
+<p>And there are many more examples of this! Game engines strive to be
+general-purpose in nature. Balanced algorithms are always favored over
+algorithms that might be fast in some situations and slow in others, or
+algorithms that are fast but are more difficult to use.</p>
+<p>Godot is not an exception to this. While it is designed to have backends
+swappable for different algorithms, the default backends prioritize balance and
+flexibility over performance.</p>
+<p>With this clear, the aim of this tutorial section is to explain how to get the
+maximum performance out of Godot. While the tutorials can be read in any order,
+it is a good idea to start from <a class="reference internal" href="general_optimization.html#doc-general-optimization"><span class="std std-ref">General optimization tips</span></a>.</p>
+</section>
+<section id="common">
+<h2>Common<a class="headerlink" href="#common" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="toc-learn-features-general-optimization">
+</div>
+</section>
+<section id="cpu">
+<h2>CPU<a class="headerlink" href="#cpu" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="toc-learn-features-cpu-optimization">
+</div>
+</section>
+<section id="gpu">
+<h2>GPU<a class="headerlink" href="#gpu" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="toc-learn-features-gpu-optimization">
+</div>
+</section>
+<section id="d">
+<h2>3D<a class="headerlink" href="#d" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="toc-learn-features-3d-optimization">
+</div>
+</section>
+<section id="threads">
+<h2>Threads<a class="headerlink" href="#threads" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound" id="toc-learn-features-threads">
+</div>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

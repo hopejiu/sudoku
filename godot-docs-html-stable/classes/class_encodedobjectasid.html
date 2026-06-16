@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="EncodedObjectAsID" property="og:title"/>
+
+
+
+<meta content="Inherits: RefCounted&lt; Object Holds a reference to an Object's instance ID. Description: Utility class which holds a reference to the internal identifier of an Object instance, as given by O..." property="og:description"/>
+<meta content="Inherits: RefCounted&lt; Object Holds a reference to an Object's instance ID. Description: Utility class which holds a reference to the internal identifier of an Object instance, as given by O..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) EncodedObjectAsID — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_enetconnection.html" rel="next" title="ENetConnection"/>
+<link href="class_editorvcsinterface.html" rel="prev" title="EditorVCSInterface"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_encodedobjectasid" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="encodedobjectasid">
+<span id="class-encodedobjectasid"></span><h1>EncodedObjectAsID<a class="headerlink" href="#encodedobjectasid" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Holds a reference to an <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a>'s instance ID.</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Utility class which holds a reference to the internal identifier of an <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a> instance, as given by <a class="reference internal" href="class_object.html#class-object-method-get-instance-id"><span class="std std-ref">Object.get_instance_id()</span></a>. This ID can then be used to retrieve the object instance with <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-instance-from-id"><span class="std std-ref">@GlobalScope.instance_from_id()</span></a>.</p>
+<p>This class is used internally by the editor inspector and script debugger, but can also be used in plugins to pass and display objects as their IDs.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a></p></td>
+<td><p><a class="reference internal" href="#class-encodedobjectasid-property-object-id"><span class="std std-ref">object_id</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-encodedobjectasid-property-object-id"><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>object_id</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-encodedobjectasid-property-object-id"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_object_id</strong>(value: <a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_int.html#class-int"><span class="std std-ref">int</span></a> <strong>get_object_id</strong>()</p></li>
+</ul>
+<p>The <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a> identifier stored in this <strong>EncodedObjectAsID</strong> instance. The object instance can be retrieved with <a class="reference internal" href="class_%40globalscope.html#class-globalscope-method-instance-from-id"><span class="std std-ref">@GlobalScope.instance_from_id()</span></a>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>

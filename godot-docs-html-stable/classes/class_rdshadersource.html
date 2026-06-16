@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="RDShaderSource" property="og:title"/>
+
+
+
+<meta content="Inherits: RefCounted&lt; Object Shader source code (used by RenderingDevice). Description: Shader source code in text form. See also RDShaderFile. RDShaderSource is only meant to be used with the R..." property="og:description"/>
+<meta content="Inherits: RefCounted&lt; Object Shader source code (used by RenderingDevice). Description: Shader source code in text form. See also RDShaderFile. RDShaderSource is only meant to be used with the R..." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>(DEV) RDShaderSource — Godot Engine (4.6) documentation in English</title>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="class_rdtextureformat.html" rel="next" title="RDTextureFormat"/>
+<link href="class_rdsamplerstate.html" rel="prev" title="RDSamplerState"/>
+<meta content="4.6" name="doc_version"/>
+
+<meta content="classes/class_rdshadersource" name="doc_pagename"/>
+</head>
+<body class="wy-body-for-nav">
+<div class="wy-grid-for-nav">
+<section class="wy-nav-content-wrap">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div role="navigation">
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div itemprop="articleBody">
+<div class="admonition-grid">
+</div>
+<section id="rdshadersource">
+<span id="class-rdshadersource"></span><h1>RDShaderSource<a class="headerlink" href="#rdshadersource" title="Link to this heading"></a></h1>
+<p><strong>Inherits:</strong> <a class="reference internal" href="class_refcounted.html#class-refcounted"><span class="std std-ref">RefCounted</span></a> <strong>&lt;</strong> <a class="reference internal" href="class_object.html#class-object"><span class="std std-ref">Object</span></a></p>
+<p>Shader source code (used by <a class="reference internal" href="class_renderingdevice.html#class-renderingdevice"><span class="std std-ref">RenderingDevice</span></a>).</p>
+<section class="classref-introduction-group" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Shader source code in text form.</p>
+<p>See also <a class="reference internal" href="class_rdshaderfile.html#class-rdshaderfile"><span class="std std-ref">RDShaderFile</span></a>. <strong>RDShaderSource</strong> is only meant to be used with the <a class="reference internal" href="class_renderingdevice.html#class-renderingdevice"><span class="std std-ref">RenderingDevice</span></a> API. It should not be confused with Godot's own <a class="reference internal" href="class_shader.html#class-shader"><span class="std std-ref">Shader</span></a> resource, which is what Godot's various nodes use for high-level shader programming.</p>
+</section>
+<section class="classref-reftable-group" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderlanguage"><span class="std std-ref">ShaderLanguage</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-property-language"><span class="std std-ref">language</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-property-source-compute"><span class="std std-ref">source_compute</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-property-source-fragment"><span class="std std-ref">source_fragment</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-property-source-tesselation-control"><span class="std std-ref">source_tesselation_control</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-property-source-tesselation-evaluation"><span class="std std-ref">source_tesselation_evaluation</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-property-source-vertex"><span class="std std-ref">source_vertex</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">""</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-reftable-group" id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-method-get-stage-source"><span class="std std-ref">get_stage_source</span></a>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></td>
+</tr>
+<tr class="row-even"><td><p><abbr title="No return value.">void</abbr></p></td>
+<td><p><a class="reference internal" href="#class-rdshadersource-method-set-stage-source"><span class="std std-ref">set_stage_source</span></a>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="classref-descriptions-group" id="property-descriptions">
+<h2>Property Descriptions<a class="headerlink" href="#property-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-property" id="class-rdshadersource-property-language"><a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderlanguage"><span class="std std-ref">ShaderLanguage</span></a> <strong>language</strong> = <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference internal" href="#class-rdshadersource-property-language"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_language</strong>(value: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderlanguage"><span class="std std-ref">ShaderLanguage</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderlanguage"><span class="std std-ref">ShaderLanguage</span></a> <strong>get_language</strong>()</p></li>
+</ul>
+<p>The language the shader is written in.</p>
+<p class="classref-property" id="class-rdshadersource-property-source-compute"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>source_compute</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-rdshadersource-property-source-compute"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>Source code for the shader's compute stage.</p>
+<p class="classref-property" id="class-rdshadersource-property-source-fragment"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>source_fragment</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-rdshadersource-property-source-fragment"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>Source code for the shader's fragment stage.</p>
+<p class="classref-property" id="class-rdshadersource-property-source-tesselation-control"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>source_tesselation_control</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-rdshadersource-property-source-tesselation-control"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>Source code for the shader's tessellation control stage.</p>
+<p class="classref-property" id="class-rdshadersource-property-source-tesselation-evaluation"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>source_tesselation_evaluation</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-rdshadersource-property-source-tesselation-evaluation"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>Source code for the shader's tessellation evaluation stage.</p>
+<p class="classref-property" id="class-rdshadersource-property-source-vertex"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>source_vertex</strong> = <code class="docutils literal notranslate"><span class="pre">""</span></code> <a class="reference internal" href="#class-rdshadersource-property-source-vertex"><span class="std std-ref">🔗</span></a></p>
+<ul class="classref-property-setget simple">
+<li><p><abbr title="No return value.">void</abbr> <strong>set_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>)</p></li>
+<li><p><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr></p></li>
+</ul>
+<p>Source code for the shader's vertex stage.</p>
+</section>
+<section class="classref-descriptions-group" id="method-descriptions">
+<h2>Method Descriptions<a class="headerlink" href="#method-descriptions" title="Link to this heading"></a></h2>
+<p class="classref-method" id="class-rdshadersource-method-get-stage-source"><a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a> <strong>get_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>) <abbr title="This method has no side effects. It doesn't modify any of the instance's member variables.">const</abbr> <a class="reference internal" href="#class-rdshadersource-method-get-stage-source"><span class="std std-ref">🔗</span></a></p>
+<p>Returns source code for the specified shader <code class="docutils literal notranslate"><span class="pre">stage</span></code>. Equivalent to getting one of <a class="reference internal" href="#class-rdshadersource-property-source-compute"><span class="std std-ref">source_compute</span></a>, <a class="reference internal" href="#class-rdshadersource-property-source-fragment"><span class="std std-ref">source_fragment</span></a>, <a class="reference internal" href="#class-rdshadersource-property-source-tesselation-control"><span class="std std-ref">source_tesselation_control</span></a>, <a class="reference internal" href="#class-rdshadersource-property-source-tesselation-evaluation"><span class="std std-ref">source_tesselation_evaluation</span></a> or <a class="reference internal" href="#class-rdshadersource-property-source-vertex"><span class="std std-ref">source_vertex</span></a>.</p>
+<p class="classref-method" id="class-rdshadersource-method-set-stage-source"><abbr title="No return value.">void</abbr> <strong>set_stage_source</strong>(stage: <a class="reference internal" href="class_renderingdevice.html#enum-renderingdevice-shaderstage"><span class="std std-ref">ShaderStage</span></a>, source: <a class="reference internal" href="class_string.html#class-string"><span class="std std-ref">String</span></a>) <a class="reference internal" href="#class-rdshadersource-method-set-stage-source"><span class="std std-ref">🔗</span></a></p>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">source</span></code> code for the specified shader <code class="docutils literal notranslate"><span class="pre">stage</span></code>. Equivalent to setting one of <a class="reference internal" href="#class-rdshadersource-property-source-compute"><span class="std std-ref">source_compute</span></a>, <a class="reference internal" href="#class-rdshadersource-property-source-fragment"><span class="std std-ref">source_fragment</span></a>, <a class="reference internal" href="#class-rdshadersource-property-source-tesselation-control"><span class="std std-ref">source_tesselation_control</span></a>, <a class="reference internal" href="#class-rdshadersource-property-source-tesselation-evaluation"><span class="std std-ref">source_tesselation_evaluation</span></a> or <a class="reference internal" href="#class-rdshadersource-property-source-vertex"><span class="std std-ref">source_vertex</span></a>.</p>
+<p><strong>Note:</strong> If you set the compute shader source code using this method directly, remember to remove the Godot-specific hint <code class="docutils literal notranslate"><span class="pre">#[compute]</span></code>.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</div></section>
+</div>
+</body>
+</html>
