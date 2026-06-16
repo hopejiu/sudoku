@@ -71,7 +71,7 @@ static func _compute_stats(history: Array[Dictionary]) -> String:
 	var sorted_levels := level_counts.keys()
 	sorted_levels.sort()
 	for lvl in sorted_levels:
-		var cnt := level_counts[lvl]
+		var cnt: int = level_counts[lvl]
 		if best_times.has(lvl):
 			lines.append("难度%d: %d局  最佳 %s  平均 %s" % [
 				lvl, cnt,
@@ -85,11 +85,11 @@ static func _compute_stats(history: Array[Dictionary]) -> String:
 
 
 static func _format_entry(entry: Dictionary) -> String:
-	var dt := entry.get("datetime", {})
+	var dt: Dictionary = entry.get("datetime", {})
 	var date_str := "%04d-%02d-%02d" % [dt.get("year", 0), dt.get("month", 0), dt.get("day", 0)]
-	var total_sec := entry.get("time", 0)
-	var m := total_sec / 60
-	var s := total_sec % 60
+	var total_sec: int = entry.get("time", 0)
+	var m: int = total_sec / 60
+	var s: int = total_sec % 60
 	var won := "✓" if entry.get("won", false) else "✗"
 	return "%s  难度%s  %02d:%02d  %s" % [date_str, entry.get("level", "?"), m, s, won]
 

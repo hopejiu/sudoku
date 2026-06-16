@@ -1,3 +1,4 @@
+class_name SudokuGame
 extends Control
 ## SudokuGame — 数独游戏主脚本
 ## 管理顶部栏、网格、键盘、计时器、暂停、通关、自动存档
@@ -50,7 +51,7 @@ func _ready() -> void:
 
 
 func _connect_signals() -> void:
-	var keyboard := keyboard_node as NumberKeyboard
+	var keyboard: NumberKeyboard = keyboard_node as NumberKeyboard
 	keyboard.number_pressed.connect(_on_number_pressed)
 	keyboard.clear_pressed.connect(_on_clear_pressed)
 	keyboard.note_mode_toggled.connect(_on_note_mode_toggled)
@@ -127,7 +128,7 @@ func _load_history_puzzle(params: Dictionary) -> void:
 	selected_row = -1
 	selected_col = -1
 	elapsed_time = 0.0
-	streak_count = 0
+	_streak_win_count = 0
 	is_game_over = false
 	is_paused = false
 	level = level_from_history
@@ -384,7 +385,7 @@ func _auto_save() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		var key := event.keycode
+		var key: int = event.keycode
 		if key >= KEY_1 and key <= KEY_9:
 			_on_number_pressed(key - KEY_1 + 1)
 		elif key == KEY_BACKSPACE or key == KEY_DELETE:

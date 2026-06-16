@@ -13,13 +13,13 @@ class_name SudokuBoard
 const GRID_SIZE := 9
 const MAX_UNDO := 50
 
-var grid: Array[Array]        # grid[r][c]
-var given: Array[Array]       # given[r][c]
-var notes: Array[Array]       # notes[r][c] 位掩码
-var conflict: Array[Array]    # conflict[r][c]
-var undo_stack: Array[Dictionary]
+var grid          # grid[r][c]
+var given         # given[r][c]
+var notes         # notes[r][c] 位掩码
+var conflict      # conflict[r][c]
+var undo_stack    # Array[Dictionary]
 var hint_count: int = 0
-var solution: Array[Array]    # 完整解，用于提示功能
+var solution      # 完整解，用于提示功能
 
 
 func _init() -> void:

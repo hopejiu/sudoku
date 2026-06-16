@@ -19,17 +19,21 @@
 
 | 步骤 | 操作 |
 |------|------|
-| 1 | 在 Theme 编辑器中，`Theme Type` 下拉选择 **Button** |
-| 2 | 点击 `Style Boxes` → `normal` 旁的 `[empty]` → **New StyleBoxFlat** |
-| 3 | 在 Inspector 中设置 StyleBoxFlat： |
-| 3a | `Background Color` = `#FFFFFF`（白色背景） |
-| 3b | `Corner Radius` → `Top Left`/`Top Right`/`Bottom Left`/`Bottom Right` = `6` |
-| 3c | `Content Margin` → `Left`/`Right` = `12`, `Top`/`Bottom` = `8` |
-| 4 | 重复步骤 2-3 为 `hover`、`pressed`、`disabled` 状态设置不同背景色： |
-|    | - `hover`: 背景色设为略暗的白（如 `#F0F0F0`） |
-|    | - `pressed`: 背景色设为 Primary 色（`#1E3A8A` × 20% 透明度） |
+| 1 | 在 Theme 编辑器中，`Theme Type` 下拉选择 **Button**（如果列表为空先点左下 `+` Add Theme Type） |
+| 2 | 在右侧面板确保 `Show Default` 已勾选（显示继承的默认项） |
+| 3 | 切换到 **Styles** 标签页（不是 "Style Boxes"，Godot 4 英文版叫 **Styles**，中文版可能叫"样式"） |
+| 4 | 找到 `normal` 项（灰色显示），点击其右侧的 **Override** 按钮 → 变为可编辑状态 |
+| 5 | 点击 `normal` 旁的 `[empty]` 下拉箭头 → **New StyleBoxFlat** |
+| 6 | 创建后，选中它，在 Inspector 中设置： |
+| 6a | `Background Color` = `#FFFFFF`（白色背景） |
+| 6b | `Corner Radius` → `Top Left`/`Top Right`/`Bottom Left`/`Bottom Right` = `6` |
+| 6c | `Content Margin` → `Left`/`Right` = `12`, `Top`/`Bottom` = `8` |
+| 7 | 重复步骤 4-6 为 `hover`、`pressed`、`disabled` 状态做同样操作： |
+|    | - 先点 **Override** 按钮 → 再创建 New StyleBoxFlat → Inspector 改背景色 |
+|    | - `hover`: 背景色 = `#F0F0F0` |
+|    | - `pressed`: 背景色 = Primary 色（`#1E3A8A` 约 20% 透明度） |
 |    | - `disabled`: 背景色 = `#E0E0E0` |
-| 5 | 在 Theme 编辑器中，为 Button 的 `Fonts` → `font` 选择 `msyh.ttc` 字体资源 |
+| 8 | 切换到 **Fonts** 标签，为 Button 的 `font` 项点 **Override** → 选择 `msyh.ttc` |
 
 **purple_light 版本**：同理，Primary 色改为 `#7C3AED`，按钮 hover 背景微调。
 
@@ -38,8 +42,9 @@
 | 步骤 | 操作 |
 |------|------|
 | 1 | Theme 编辑器 → `Add Theme Type` → 选 **Panel** |
-| 2 | `Style Boxes` → `panel` → **New StyleBoxFlat** |
-| 3 | Inspector: `Background Color` = `#FFFFFF`，`Corner Radius` = `8` |
+| 2 | 切换到 **Styles** 标签，找到 `panel` 项，点击 **Override** |
+| 3 | 点击 `[empty]` → **New StyleBoxFlat** |
+| 4 | Inspector: `Background Color` = `#FFFFFF`，`Corner Radius` = `8` |
 
 ### 1.4 配置 Label 样式
 
@@ -106,12 +111,17 @@
 
 ---
 
-## 4. 确认对话框 UI 设计（可选增强）
+## 4. 确认对话框 UI（已实现）
 
-**目标**：在 `重新开始` 和 `返回主界面` 前增加确认弹窗。
+`SudokuGame.gd` 中已实现完整的确认流程：
 
-**方案**：在 `SudokuGame.tscn` 的 `PauseOverlay/PausePanel/PauseVBox` 中增加一组节点：
+- `%ConfirmLabel` / `%ConfirmYes` / `%ConfirmNo` 节点需在 `PauseOverlay/PausePanel/PauseVBox` 中存在
+- 代码中已连接信号、实现 `_show_confirm` / `_hide_confirm` / `_on_confirm_yes` / `_on_confirm_no` 方法
+- 重启和返回主界面操作前会弹出确认，确认后执行
 
+**如 Scene 中尚未创建 UI 节点**：
+
+在 `SudokuGame.tscn` 的 `PauseOverlay/PausePanel/PauseVBox` 中增加：
 ```
 PauseVBox (VBoxContainer)
 ├── ... 现有节点 ...
@@ -119,64 +129,27 @@ PauseVBox (VBoxContainer)
 ├── ConfirmYes (Button, visible=false, text="确定")
 └── ConfirmNo (Button, visible=false, text="取消")
 ```
-
-然后在 `SudokuGame.gd` 中添加：
-
-```gdscript
-@onready var confirm_label: Label = %ConfirmLabel
-@onready var confirm_yes: Button = %ConfirmYes
-@onready var confirm_no: Button = %ConfirmNo
-
-# 在 _connect_signals 中添加：
-confirm_yes.pressed.connect(_on_confirm_yes)
-confirm_no.pressed.connect(_on_confirm_no)
-
-# 为 _on_restart_pressed 和 _on_main_menu_pressed 添加确认流程
-```
+确保 `%` 唯一名称（`%ConfirmLabel` / `%ConfirmYes` / `%ConfirmNo`）已在 Scene 中注册。
 
 ---
 
-## 5. "维持难度" 按钮默认高亮
+## 5. "维持难度" 按钮默认高亮（已实现）
 
-**目标**：通关弹窗中"维持难度"按钮显示为高亮/选中状态。
+在 `SudokuGame.gd` 的 `_on_victory()` 中已在第 334 行调用 `same_btn.grab_focus()`，通关弹窗中"维持难度"按钮会自动获得焦点高亮。
 
-**方法 A（代码）**：在 SudokuGame.gd 的 `_on_victory()` 中：
-
-```gdscript
-same_btn.grab_focus()  # 使按钮获得键盘焦点
-```
-
-**方法 B（Theme）**：在 Theme 编辑器中为 Button 的 `focused` 状态设置不同的 StyleBoxFlat 背景色（更亮或带边框色）。
+如需要 Theme 侧进一步强调（例如 focused 状态的 StyleBoxFlat 不同颜色），可在 Theme 编辑器中对 Button 的 `focused` 状态微调。
 
 ---
 
-## 6. 统计摘要界面（可选需求 §10.4）
+## 6. 统计摘要界面（已实现）
 
-**目标**：展示总游戏次数、通关率、各难度最佳用时/平均用时。
+统计摘要功能已在 `HistoryList.gd` 中完整实现（第 44-84 行 `_compute_stats()`）：
 
-可新建一个场景 `StatSummary.tscn` 或在 `HistoryList.tscn` 顶部加入统计区域。
+- 总游戏次数、通关次数、通关率
+- 各难度下的局数、最佳用时、平均用时
+- 在 `_refresh_list()` 第 25 行通过 `stats_label.text = _compute_stats(history)` 展示
 
-**代码实现思路**（已具备基础）：
-
-```gdscript
-# 从 SaveManager.load_history() 计算统计
-var history := SaveManager.load_history()
-var total := history.size()
-var won := 0
-var best_times := {}  # level -> min time
-var total_times := {} # level -> sum time (for avg)
-
-for entry in history:
-    if entry.get("won"):
-        won += 1
-        var lvl := entry.get("level", 0)
-        var t := entry.get("time", 0)
-        if not best_times.has(lvl) or t < best_times[lvl]:
-            best_times[lvl] = t
-        total_times[lvl] = total_times.get(lvl, 0) + t
-```
-
-在 `HistoryList.gd` 的 `_ready()` 中调用并展示在列表上方。
+**如果需要调整展示布局**：编辑 `HistoryList.tscn` 中 `StatsLabel` 的位置和样式。
 
 ---
 
@@ -216,9 +189,9 @@ func _on_theme_changed(name: String) -> void:
 | P0 | 1.6 Duplicate 到 purple_light | 5min | 第二主题可用 |
 | P1 | 2.1 网格/键盘分割微调 | 5min | 不同屏幕适配 |
 | P1 | 2.2 弹窗定位微调 | 5min | 弹窗位置正确 |
-| P1 | 7 图标关联 | 10min | 图标代替文字标签 |
-| P2 | 4 确认对话框 UI | 15min | 操作安全提示 |
-| P2 | 5 维持难度高亮 | 5min | 用户体验优化 |
-| P2 | 6 统计摘要 | 20min | 数据可视化 |
+| P1 | 7 图标关联 + 颜色绑定 | 10min | 图标代替文字标签 |
+| ~~P2~~ | ~~4 确认对话框 UI~~ | ✅ 已实现 | |
+| ~~P2~~ | ~~5 维持难度高亮~~ | ✅ 已实现 | |
+| ~~P2~~ | ~~6 统计摘要~~ | ✅ 已实现 | |
 
 > 注：启动编辑器后，先运行一次场景（F6）查看当前效果，再按上述步骤逐个优化。

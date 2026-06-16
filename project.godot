@@ -1,28 +1,75 @@
-; 游戏集合 - 数独模块
-; Godot 4.x project configuration
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
+
 config/name="游戏集合"
 config/description="数独游戏 - 难度可调的经典数独体验"
 run/main_scene="res://scenes/main/Main.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icons/app_icon.svg"
 
+[autoload]
+
+SaveManager="*res://autoload/SaveManager.gd"
+ThemeManager="*res://autoload/ThemeManager.gd"
+
 [gui]
+
 theme/custom="res://themes/classic.theme"
 theme/theme_color_saturation=1.0
 theme/theme_contrast=0.1
 
-[rendering]
-renderer/rendering_method="forward_plus"
-
 [input]
-; 方向键导航（桌面端）
-ui_left=[{"keycode": 65, "type": 0}, {"keycode": 4194319, "type": 0}]
-ui_right=[{"keycode": 68, "type": 0}, {"keycode": 4194321, "type": 0}]
-ui_up=[{"keycode": 87, "type": 0}, {"keycode": 4194320, "type": 0}]
-ui_down=[{"keycode": 83, "type": 0}, {"keycode": 4194322, "type": 0}]
 
-[autoload]
-SaveManager="*res://autoload/SaveManager.gd"
-ThemeManager="*res://autoload/ThemeManager.gd"
+ui_left={
+"deadzone": 0.5,
+"events": [{
+"keycode": 65,
+"type": 0
+}, {
+"keycode": 4194319,
+"type": 0
+}]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [{
+"keycode": 68,
+"type": 0
+}, {
+"keycode": 4194321,
+"type": 0
+}]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [{
+"keycode": 87,
+"type": 0
+}, {
+"keycode": 4194320,
+"type": 0
+}]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [{
+"keycode": 83,
+"type": 0
+}, {
+"keycode": 4194322,
+"type": 0
+}]
+}

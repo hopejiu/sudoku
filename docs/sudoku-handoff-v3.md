@@ -27,8 +27,10 @@
 │   ├── classic.theme
 │   └── purple_light.theme
 ├── docs/
-│   ├── adr/0001-*.md / 0002-scene-switch-architecture.md
-│   ├── sudoku-handoff-v2.md
+│   ├── adr/0001-godot-4-engine-and-architecture.md
+│   ├── adr/0002-scene-switch-architecture.md
+│   ├── editor-guide.md              # Theme/布局操作指南
+│   ├── sudoku-handoff-v3.md
 │   └── 美术资源需求.md
 ├── assets/                     # 字体 + SVG 图标（已导入）
 ├── .gitignore
@@ -96,9 +98,11 @@ SudokuGame.gd _ready():
 ### ❌ 待办 (P2+)
 1. **Theme 编辑器微调**：在 Godot 编辑器中打开 `.theme` 文件，调整颜色和 StyleBox（当前为代码生成默认值）
 2. **图标 modulate 颜色绑定**：场景中的 SVG 图标 `modulate` 需绑定 `ThemeManager.theme_changed` 信号
-3. **鼓励话术**：同难度连胜 5 次触发弹窗引导提高难度（`streak_count % 5 == 0` 处有 TODO）
-4. **更改难度菜单按钮**：TopBar 中 `MenuBtn`(⋮) 目前未连接，保留作为后续"重设/改难度"入口
-5. **音效开关**：预留，后续扩展
+3. **音效开关**：预留，后续扩展
+
+### 已从待办移除
+- ~~**鼓励话术**：已在 `SudokuGame.gd` 中实现，`_streak_win_count % 5 == 0` 弹窗触发正常。~~
+- ~~**MenuBtn(⋮)**：已连接到 `_on_pause_pressed()`，作为暂停的快捷入口；后续如需独立菜单功能可再分离。~~
 
 ## 关键代码引用
 

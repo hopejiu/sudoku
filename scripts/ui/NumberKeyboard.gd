@@ -1,3 +1,4 @@
+class_name NumberKeyboard
 extends Control
 ## NumberKeyboard — 数字键盘
 ## 底部 3×3 数字键 + 删除键 + 笔记模式切换

@@ -26,12 +26,12 @@ func _ready() -> void:
 
 
 func _refresh() -> void:
-	var dt := entry.get("datetime", {})
+	var dt: Dictionary = entry.get("datetime", {})
 	date_label.text = "日期: %04d-%02d-%02d" % [dt.get("year", 0), dt.get("month", 0), dt.get("day", 0)]
 	diff_label.text = "难度: %d" % entry.get("level", "?")
-	var total_sec := entry.get("time", 0)
-	var m := total_sec / 60
-	var s := total_sec % 60
+	var total_sec: int = entry.get("time", 0)
+	var m: int = total_sec / 60
+	var s: int = total_sec % 60
 	time_label.text = "用时: %02d:%02d" % [m, s]
 	info_label.text = "通关" if entry.get("won", false) else "未完成"
 	continue_btn.disabled = not entry.get("won", false) == false
@@ -42,7 +42,7 @@ func _on_back_pressed() -> void:
 
 
 func _on_replay_pressed() -> void:
-	var lvl := entry.get("level", 8)
+	var lvl: int = entry.get("level", 8)
 	SaveManager.set_temp("next_game", {"action": "new", "level": lvl})
 	get_tree().change_scene_to_file("res://scenes/sudoku/SudokuGame.tscn")
 
