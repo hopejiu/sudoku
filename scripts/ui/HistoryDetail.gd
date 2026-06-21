@@ -53,6 +53,11 @@ func _refresh() -> void:
 	continue_btn.disabled = won
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		SceneTransition.change_to("res://scenes/sudoku/HistoryList.tscn")
+
+
 func _on_back_pressed() -> void:
 	SceneTransition.change_to("res://scenes/sudoku/HistoryList.tscn")
 
@@ -65,9 +70,9 @@ func _on_replay_pressed() -> void:
 		"level": lvl,
 		"board_snapshot": snapshot,
 	})
-	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")
 
 
 func _on_continue_pressed() -> void:
 	SceneParams.set_param("next_game", {"action": "continue"})
-	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")

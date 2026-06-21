@@ -113,6 +113,11 @@ static func _format_entry(entry: Dictionary) -> String:
 	return "%s  |  难度 %s  |  %02d:%02d%s%s" % [date_str, entry.get("level", "?"), m, s, hint_txt, won_mark]
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		_on_back_pressed()
+
+
 func _on_entry_pressed(_index: int, entry: Dictionary) -> void:
 	SceneParams.set_param("history_entry", entry)
 	SceneTransition.change_to("res://scenes/sudoku/HistoryDetail.tscn")

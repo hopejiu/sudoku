@@ -20,9 +20,8 @@ var _dialog_tween: Tween = null
 
 
 func _ready() -> void:
-	# 检查是否有存档
-	var saved := SaveManager.load_current_game()
-	continue_btn.disabled = saved.is_empty()
+	# 检查队列是否有存档
+	continue_btn.disabled = SaveManager.queue_is_empty()
 
 	# 信号连接（TSCN 中已连接了部分，这里补运行时需要的）
 	_on_difficulty_changed(diff_slider.value)
@@ -73,13 +72,18 @@ func _animate_hide_dialog(panel: Panel) -> void:
 # 导航
 # --------------------------------------------------------------------------
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		SceneTransition.change_to("res://scenes/main/Main.tscn")
+
+
 func _on_back_pressed() -> void:
 	SceneTransition.change_to("res://scenes/main/Main.tscn")
 
 
 func _on_continue_pressed() -> void:
 	SceneParams.set_param("next_game", {"action": "continue"})
-	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")
 
 
 func _on_new_game_pressed() -> void:
@@ -102,7 +106,7 @@ func _on_difficulty_changed(value: float) -> void:
 func _on_diff_confirm_pressed() -> void:
 	var lvl := int(diff_slider.value)
 	SceneParams.set_param("next_game", {"action": "new", "level": lvl})
-	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")
 
 
 func _on_diff_cancel_pressed() -> void:

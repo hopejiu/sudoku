@@ -50,6 +50,10 @@ var _font_bold: Font = null
 
 
 func _ready() -> void:
+	# 拦截 Android 返回键/手势，不直接退出
+	if get_tree():
+		get_tree().set_quit_on_go_back(false)
+
 	# 加载字体
 	_font = load("res://assets/fonts/msyh.ttc") if ResourceLoader.exists("res://assets/fonts/msyh.ttc") else null
 	_font_bold = load("res://assets/fonts/msyhbd.ttc") if ResourceLoader.exists("res://assets/fonts/msyhbd.ttc") else null
@@ -113,6 +117,7 @@ func _apply_material_theme(theme_name: String) -> void:
 	theme.set_type_variation("TextButton", "Button")
 	theme.set_type_variation("DialogAction", "Button")
 	theme.set_type_variation("PrimaryAction", "Button")
+	theme.set_type_variation("SecondaryAction", "Button")
 	theme.set_type_variation("IconButton", "Button")
 
 	# ======== Panel 基础 ========
@@ -191,7 +196,18 @@ func _apply_material_theme(theme_name: String) -> void:
 	theme.set_color("font_hover_color", "PrimaryAction", colors.on_primary)
 	theme.set_color("font_pressed_color", "PrimaryAction", colors.on_primary)
 	theme.set_color("font_disabled_color", "PrimaryAction", Color("#94A3B8"))
-	theme.set_font_size("font_size", "PrimaryAction", 24)
+	theme.set_font_size("font_size", "PrimaryAction", 20)
+
+	# ======== SecondaryAction — 弹窗次要按钮（浅底+边框）========
+	theme.set_stylebox("normal", "SecondaryAction", _make_stylebox(Color.TRANSPARENT, 10, 0, 1, colors.divider))
+	theme.set_stylebox("hover", "SecondaryAction", _make_stylebox(colors.primary_container, 10, 2, 1, colors.primary))
+	theme.set_stylebox("pressed", "SecondaryAction", _make_stylebox(colors.primary_container.darkened(0.05), 10, 0, 1, colors.primary))
+	theme.set_stylebox("disabled", "SecondaryAction", _make_stylebox(Color.TRANSPARENT, 10, 0, 1, colors.divider))
+	theme.set_color("font_color", "SecondaryAction", colors.primary)
+	theme.set_color("font_hover_color", "SecondaryAction", colors.primary)
+	theme.set_color("font_pressed_color", "SecondaryAction", colors.primary)
+	theme.set_color("font_disabled_color", "SecondaryAction", Color("#94A3B8"))
+	theme.set_font_size("font_size", "SecondaryAction", 20)
 
 	# ======== IconButton — TopBar 图标按钮 ========
 	theme.set_stylebox("normal", "IconButton", _make_stylebox(Color.TRANSPARENT, 8, 0))

@@ -235,7 +235,11 @@ func deserialize(data: Dictionary) -> void:
 	grid = data.get("grid", [])
 	given = data.get("given", [])
 	notes = data.get("notes", [])
-	undo_stack = data.get("undo_stack", [])
+	# 反序列化可能返回未类型化的 Array，需手动转换到 Array[Dictionary]
+	var raw_undo: Array = data.get("undo_stack", [])
+	undo_stack = []
+	for entry in raw_undo:
+		undo_stack.append(entry)
 	hint_count = data.get("hint_count", 0)
 	solution = data.get("solution", [])
 	update_conflicts()

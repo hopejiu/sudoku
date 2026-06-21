@@ -60,7 +60,7 @@ expand_icon = true
 
 [node name="TitleLabel" type="Label" parent="VBox/TopBar/TopHBox"]
 layout_mode = 2
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 text = "数独"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 22
@@ -204,13 +204,15 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 layout_mode = 2
 text = "取消"
-theme_type_variation = &"DialogAction"
+theme_type_variation = &"SecondaryAction"
+size_flags_horizontal = 3
 
 [node name="DiffConfirm" type="Button" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow/DiffBtnHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "确认"
-theme_type_variation = &"DialogAction"
+theme_type_variation = &"PrimaryAction"
+size_flags_horizontal = 3
 
 [connection signal="pressed" from="VBox/TopBar/TopHBox/BackBtn" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBox/Center/CardPanel/PopupVBox/ContinueBtn" to="." method="_on_continue_pressed"]

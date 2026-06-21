@@ -16,6 +16,12 @@ func _on_theme_changed(_name: String) -> void:
 	%SettingsBtn.modulate = primary
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		# 主界面不退出，做无操作（或提示）
+		pass
+
+
 func _on_settings_btn_pressed() -> void:
 	if ThemeManager.current_theme_name == "classic":
 		ThemeManager.set_theme("purple_light")

@@ -30,6 +30,11 @@ var _number_count: Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 # 标志位：首次布局完成
 var _ready_called := false
 
+# 后台预填充（队列 < 3 时自动生成）
+var _refill_thread: Thread = null
+var _refilling: bool = false
+var _refill_results: Array = []
+
 @onready var bg: ColorRect = %Bg
 @onready var difficulty_label: Label = %DifficultyLabel
 @onready var timer_label: Label = %TimerLabel
@@ -68,13 +73,19 @@ var _dialog_tween: Tween = null
 
 func _ready() -> void:
 	push_warning("[SudokuGame] _ready() called")
+	var data := SaveManager.load_current_game()
+	if data.is_empty():
+		# 没有存档数据，重定向到加载页面
+		push_warning("[SudokuGame] no saved data, redirecting to loading")
+		SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")
+		return
+
 	board = SudokuBoard.new()
-	# 将 Grid 的 render_state 指向新建的 render_state
 	var grid: SudokuGrid = grid_control as SudokuGrid
 	grid.render_state = render_state
 	grid.cell_selected.connect(_on_cell_selected)
-	_load_game_params()
 	_connect_signals()
+	_restore_from_save(data)
 	_bind_theme_colors()
 	ThemeManager.theme_changed.connect(_on_theme_changed)
 	_ready_called = true
@@ -85,6 +96,9 @@ func _exit_tree() -> void:
 	# 清理所有信号连接，防止lambda泄漏
 	if _dialog_tween and _dialog_tween.is_valid():
 		_dialog_tween.kill()
+	# 清理后台生成线程
+	if _refill_thread and _refill_thread.is_alive():
+		_refill_thread.wait_to_finish()
 
 
 func _bind_theme_colors() -> void:
@@ -147,88 +161,38 @@ func _animate_dialog_hide(panel: Panel) -> void:
 
 
 # --------------------------------------------------------------------------
-# 游戏参数加载
+# 游戏加载
 # --------------------------------------------------------------------------
 
-func _load_game_params() -> void:
-	var params: Dictionary = SceneParams.get_param("next_game", {})
-	if params.is_empty():
-		_start_new_game(8)
-		return
-
-	var action: String = params.get("action", "new")
-	match action:
-		"continue":
-			_load_saved_game()
-		"history_replay":
-			_load_history_puzzle(params)
-		_:
-			_start_new_game(params.get("level", 8))
-
-	SceneParams.set("next_game", {})
+## 从 current.save 恢复游戏状态
+func _restore_from_save(data: Dictionary) -> void:
+	board.deserialize(data.get("board", {}))
+	level = data.get("level", 8)
+	timer_controller.elapsed_time = data.get("elapsed_time", 0.0)
+	_streak_win_count = data.get("streak", 0)
+	selected_row = -1
+	selected_col = -1
+	is_game_over = false
+	is_paused = false
+	_count_numbers()
+	_update_ui()
+	# 触发后台队列填充（确保队列保持 3 个）
+	_start_queue_refill()
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_PAUSED and not is_game_over:
 		_on_pause_pressed()
-
-
-func _start_new_game(lvl: int) -> void:
-	level = clampi(lvl, 1, 16)
-	push_warning("[SudokuGame] _start_new_game level=%d" % level)
-	var puzzle := SudokuGenerator.generate(level)
-	board.load_puzzle(puzzle.grid, puzzle.given, puzzle.solution)
-	selected_row = -1
-	selected_col = -1
-	timer_controller.reset()
-	is_game_over = false
-	is_paused = false
-	_count_numbers()
-	_update_ui()
-	_auto_save()
-
-
-func _load_saved_game() -> void:
-	var data: Dictionary = SaveManager.load_current_game()
-	if data.is_empty():
-		_start_new_game(8)
-		return
-	board.deserialize(data.get("board", {}))
-	level = data.get("level", 8)
-	timer_controller.elapsed_time = data.get("elapsed_time", 0.0)
-	_streak_win_count = data.get("streak", 0)
-	is_game_over = false
-	is_paused = false
-	_count_numbers()
-	_update_ui()
-
-
-## 从历史记录重开：加载该局原始题目（board_snapshot 中的 given 和 solution）
-func _load_history_puzzle(params: Dictionary) -> void:
-	var snapshot: Dictionary = params.get("board_snapshot", {})
-	if snapshot.is_empty():
-		var lvl: int = params.get("level", 8)
-		_start_new_game(lvl)
-		return
-
-	board.deserialize(snapshot)
-	var history_lvl: int = params.get("level", 8)
-	level = history_lvl
-	selected_row = -1
-	selected_col = -1
-	timer_controller.reset()
-	_streak_win_count = 0
-	is_game_over = false
-	is_paused = false
-	for r in 9:
-		for c in 9:
-			if not board.given[r][c]:
-				board.grid[r][c] = 0
-				board.notes[r][c] = 0
-	board.undo_stack.clear()
-	board.hint_count = 0
-	board.update_conflicts()
-	_update_ui()
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if is_paused and confirm_btn_row.visible:
+			# 确认框可见 → 取消确认（相当于按取消）
+			_on_confirm_no()
+		elif not is_paused and not is_game_over:
+			# 游戏进行中 → 暂停
+			_on_pause_pressed()
+		elif is_paused:
+			# 已暂停 → 返回主界面（带确认）
+			_on_main_menu_pressed()
 
 
 func _process(delta: float) -> void:
@@ -237,6 +201,13 @@ func _process(delta: float) -> void:
 	# 网格脉冲动画衰减
 	if _ready_called:
 		(grid_control as SudokuGrid).tick_pulse(delta)
+
+	# 检查后台队列填充完成
+	if _refilling and _refill_thread and not _refill_thread.is_alive():
+		_refill_results = _refill_thread.wait_to_finish()
+		_refilling = false
+		_refill_thread = null
+		_apply_refill_results()
 
 
 func _update_ui() -> void:
@@ -427,7 +398,9 @@ func _do_restart() -> void:
 	await get_tree().create_timer(0.12).timeout
 	pause_overlay.hide()
 	_streak_win_count = 0
-	_start_new_game(level)
+	SaveManager.queue_pop_front()
+	SceneParams.set_param("next_game", {"action": "new", "level": level})
+	SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")
 
 
 func _do_main_menu() -> void:
@@ -478,7 +451,7 @@ func _on_confirm_no() -> void:
 func _on_victory() -> void:
 	is_game_over = true
 	_record_history()
-	SaveManager.clear_current_game()
+	SaveManager.queue_pop_front()
 
 	_streak_win_count += 1
 
@@ -528,11 +501,9 @@ func _on_victory() -> void:
 func _on_difficulty_choice(new_level: int) -> void:
 	new_level = clampi(new_level, 1, 16)
 	victory_overlay.hide()
-	if new_level != level:
-		_streak_win_count = 0
-	elif _streak_win_count % 5 == 0:
-		_streak_win_count = 0
-	_start_new_game(new_level)
+	# 通关时已弹出队首，直接跳转加载页
+	SceneParams.set_param("next_game", {"action": "new", "level": new_level})
+	SceneTransition.change_to("res://scenes/sudoku/SudokuLoading.tscn")
 
 
 func _record_history() -> void:
@@ -558,7 +529,64 @@ func _auto_save() -> void:
 		"elapsed_time": timer_controller.elapsed_time,
 		"streak": _streak_win_count,
 	}
-	SaveManager.save_current_game(data)
+	SaveManager.queue_set_front(data)
+
+
+# --------------------------------------------------------------------------
+# 后台队列填充（维持队列到 3 个）
+# --------------------------------------------------------------------------
+
+## 启动后台填充线程
+func _start_queue_refill() -> void:
+	if _refilling or is_game_over:
+		return
+	var queue := SaveManager.load_queue()
+	var needed := 3 - queue.size()
+	if needed <= 0:
+		return
+	_refilling = true
+	_refill_thread = Thread.new()
+	_refill_thread.start(_refill_task.bind(level, needed))
+
+
+static func _refill_task(lvl: int, count: int) -> Array:
+	var results = []
+	for i in count:
+		results.append(SudokuGenerator.generate(lvl))
+	return results
+
+
+## 将批量生成结果追加到队列尾部
+func _apply_refill_results() -> void:
+	if _refill_results.is_empty() or is_game_over:
+		return
+	var queue := SaveManager.load_queue()
+	for r in _refill_results:
+		var entry := _make_refill_entry(r, level)
+		queue.append(entry)
+	SaveManager.save_queue(queue)
+
+
+## 构造预生成条目
+static func _make_refill_entry(result: Dictionary, lvl: int) -> Dictionary:
+	var notes := []
+	for r in 9:
+		notes.append([])
+		for c in 9:
+			notes[r].append(0)
+	return {
+		"board": {
+			"grid": result.grid,
+			"given": result.given,
+			"notes": notes,
+			"undo_stack": [],
+			"hint_count": 0,
+			"solution": result.solution,
+		},
+		"level": lvl,
+		"elapsed_time": 0.0,
+		"streak": 0,
+	}
 
 
 # --------------------------------------------------------------------------
