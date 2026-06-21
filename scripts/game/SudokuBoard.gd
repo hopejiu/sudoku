@@ -189,8 +189,8 @@ func _is_valid_placement(row: int, col: int, num: int) -> bool:
 	for rr in GRID_SIZE:
 		if rr != row and grid[rr][col] == num:
 			return false
-	var br := (row / 3) * 3
-	var bc := (col / 3) * 3
+	var br := int(row / 3.0) * 3
+	var bc := int(col / 3.0) * 3
 	for rr in range(br, br + 3):
 		for cc in range(bc, bc + 3):
 			if (rr != row or cc != col) and grid[rr][cc] == num:

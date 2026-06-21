@@ -2,9 +2,11 @@ class_name SudokuGrid
 extends Control
 ## SudokuGrid — 数独网格 _draw() 渲染
 ##
-## 通过 render_state（GridRenderState）获取盘面数据，
-## 不再直接通过 owner 访问 SudokuGame 内部状态。
-## 用户交互通过 cell_selected 信号回传。
+## 通过 render_state（GridRenderState）获取盘面数据。
+## 功能增强：
+## - 同数字高亮：选中已填数字格时，高亮所有相同数字的格
+## - 选中格粗边框
+## - 填入数字时短暂脉冲反馈
 
 signal cell_selected(row: int, col: int)
 
@@ -16,6 +18,11 @@ var draw_offset_x: float = 0.0
 ## 由 SudokuGame 注入的渲染状态
 var render_state: GridRenderState = null
 
+# ---- 脉冲动画状态 ----
+var _pulse_alpha: float = 0.0
+var _pulse_r: int = -1
+var _pulse_c: int = -1
+
 
 func _draw() -> void:
 	if render_state == null:
@@ -26,11 +33,13 @@ func _draw() -> void:
 	if draw_offset_x != 0.0:
 		draw_set_transform(Vector2(draw_offset_x, 0.0))
 	_draw_backgrounds()
+	_draw_same_number_highlight()
 	_draw_grid_lines()
 	_draw_numbers()
 	_draw_notes()
 	_draw_conflicts()
 	_draw_selection()
+	_draw_pulse()
 
 
 func _compute_cell_size() -> void:
@@ -132,6 +141,50 @@ func _draw_notes() -> void:
 					var ascent: float = font.get_ascent(font_size)
 					var y: float = margin + r * cell_size + sub_r * sub + (sub + ascent) / 2.0
 					draw_string(font, Vector2(x, y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, ThemeManager.get_color("user_number"))
+
+
+## 绘制选中格同数字高亮（半透明圆角矩形）
+func _draw_same_number_highlight() -> void:
+	if render_state.selected_row < 0:
+		return
+	var sel_val: int = render_state.grid[render_state.selected_row][render_state.selected_col]
+	if sel_val == 0:
+		return
+	var color: Color = ThemeManager.get_color("highlight")
+	for r in CELL_COUNT:
+		for c in CELL_COUNT:
+			if (r == render_state.selected_row and c == render_state.selected_col):
+				continue
+			if render_state.grid[r][c] == sel_val:
+				_draw_rect(c, r, 1, 1, color)
+
+
+## 绘制脉冲动画反馈（数字填入时短暂闪烁）
+func _draw_pulse() -> void:
+	if _pulse_alpha <= 0.0 or _pulse_r < 0:
+		return
+	var pulse_color := ThemeManager.get_color("primary")
+	pulse_color.a = _pulse_alpha * 0.3
+	_draw_rect(_pulse_c, _pulse_r, 1, 1, pulse_color)
+
+
+## 触发脉冲动画
+func trigger_pulse(row: int, col: int) -> void:
+	_pulse_r = row
+	_pulse_c = col
+	_pulse_alpha = 1.0
+	queue_redraw()
+
+
+## 脉冲动画每帧衰减（由 SudokuGame 的 _process 驱动）
+func tick_pulse(delta: float) -> void:
+	if _pulse_alpha > 0.0:
+		_pulse_alpha -= delta * 4.0  # 约 0.25 秒淡出
+		if _pulse_alpha <= 0.0:
+			_pulse_alpha = 0.0
+			_pulse_r = -1
+			_pulse_c = -1
+		queue_redraw()
 
 
 ## 绘制冲突红框

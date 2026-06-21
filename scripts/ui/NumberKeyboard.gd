@@ -2,7 +2,9 @@ class_name NumberKeyboard
 extends Control
 ## NumberKeyboard — 数字键盘
 ## 底部 3×3 数字键 + 删除键 + 笔记模式切换
-## 按钮在 _ready() 中动态创建，使用 NumberKey 主题变体
+## 增强功能：
+## - 已用完数字高亮（9 个都填满时按钮风格切换）
+## - 按键按下时 scale 反馈动画
 
 signal number_pressed(num: int)
 signal clear_pressed()
@@ -11,6 +13,11 @@ signal note_mode_toggled(enabled: bool)
 var is_note_mode: bool = false
 var note_toggle: Button
 var clear_btn: Button
+
+## 数字按钮引用（索引 1-9）
+var _number_buttons: Array[Button] = []
+## 各数字已填入数（由 SudokuGame 同步）
+var _number_counts: Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 @onready var number_grid: GridContainer = %NumberGrid
 
@@ -27,7 +34,11 @@ func _ready() -> void:
 		btn.custom_minimum_size = Vector2(48, 48)
 		var num := i + 1
 		btn.pressed.connect(_on_number_button_pressed.bind(num))
+		# 按下时触发 scale 反馈
+		btn.button_down.connect(_on_key_button_down.bind(btn))
+		btn.button_up.connect(_on_key_button_up.bind(btn))
 		number_grid.add_child(btn)
+		_number_buttons.append(btn)
 
 	# 笔记/删除按钮放在 GridContainer 第 4 行（跟数字按钮统一尺寸）
 	note_toggle = Button.new()
@@ -54,6 +65,8 @@ func _ready() -> void:
 	clear_btn.custom_minimum_size = Vector2(48, 48)
 	clear_btn.theme_type_variation = &"FuncButton"
 	clear_btn.pressed.connect(_on_clear_button_pressed)
+	clear_btn.button_down.connect(_on_key_button_down.bind(clear_btn))
+	clear_btn.button_up.connect(_on_key_button_up.bind(clear_btn))
 	number_grid.add_child(clear_btn)
 
 	push_warning("[NumberKeyboard] _ready(): created 9 number keys + note + spacer + clear, grid child_count=%d" % number_grid.get_child_count())
@@ -83,6 +96,33 @@ func _on_number_button_pressed(num: int) -> void:
 
 func _on_clear_button_pressed() -> void:
 	clear_pressed.emit()
+
+
+## 按键按下 — 缩放反馈
+func _on_key_button_down(btn: Button) -> void:
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(btn, "scale", Vector2(0.92, 0.92), 0.06)
+
+
+## 按键抬起 — 恢复缩放
+func _on_key_button_up(btn: Button) -> void:
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(btn, "scale", Vector2.ONE, 0.08)
+
+
+## 更新数字计数并高亮已用完数字
+func update_number_counts(counts: Array[int]) -> void:
+	_number_counts = counts
+	for i in range(9):
+		var num := i + 1
+		var btn: Button = _number_buttons[i]
+		var is_complete := counts[num] >= 9
+		btn.disabled = is_complete
+		# complete 状态的按钮用不同文字透明度
+		if is_complete:
+			btn.modulate = Color(1, 1, 1, 0.45)
+		else:
+			btn.modulate = Color.WHITE
 
 
 func _on_note_toggle_pressed(toggled_on: bool) -> void:

@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/HistoryDetail.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_back.svg" id="2"]
 
 [node name="HistoryDetail" type="Control"]
 script = ExtResource("1")
@@ -35,9 +36,9 @@ mouse_filter = 2
 
 [node name="InnerHBox" type="HBoxContainer" parent="VBox/TopBar"]
 layout_mode = 0
-offset_left = 8
+offset_left = 12
 offset_top = 0
-offset_right = -8
+offset_right = -12
 offset_bottom = 0
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +51,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"IconButton"
 custom_minimum_size = Vector2(32, 32)
-text = "←"
+icon = ExtResource("2")
 alignment = 1
 vertical_alignment = 1
 expand_icon = true
@@ -65,13 +66,14 @@ theme_override_font_sizes/font_size = 20
 
 [node name="Spacer" type="Control" parent="VBox/TopBar/InnerHBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(44, 0)
+custom_minimum_size = Vector2(32, 0)
 
 [node name="MetaVBox" type="VBoxContainer" parent="VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
+theme_override_constants/separation = 12
 
 [node name="DateLabel" type="Label" parent="VBox/MetaVBox"]
 unique_name_in_owner = true

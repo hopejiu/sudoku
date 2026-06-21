@@ -112,6 +112,7 @@ func _apply_material_theme(theme_name: String) -> void:
 	theme.set_type_variation("NumberKey", "Button")
 	theme.set_type_variation("TextButton", "Button")
 	theme.set_type_variation("DialogAction", "Button")
+	theme.set_type_variation("PrimaryAction", "Button")
 	theme.set_type_variation("IconButton", "Button")
 
 	# ======== Panel 基础 ========
@@ -181,6 +182,17 @@ func _apply_material_theme(theme_name: String) -> void:
 	theme.set_color("font_disabled_color", "DialogAction", Color("#94A3B8"))
 	theme.set_font_size("font_size", "DialogAction", 24)
 
+	# ======== PrimaryAction — 弹窗主按钮（高亮凸出）========
+	theme.set_stylebox("normal", "PrimaryAction", _make_stylebox(colors.primary.lightened(0.2), 10, 6))
+	theme.set_stylebox("hover", "PrimaryAction", _make_stylebox(colors.primary.lightened(0.3), 10, 8))
+	theme.set_stylebox("pressed", "PrimaryAction", _make_stylebox(colors.primary.lightened(0.1), 10, 2))
+	theme.set_stylebox("disabled", "PrimaryAction", _make_stylebox(Color("#E2E8F0"), 10, 0))
+	theme.set_color("font_color", "PrimaryAction", colors.on_primary)
+	theme.set_color("font_hover_color", "PrimaryAction", colors.on_primary)
+	theme.set_color("font_pressed_color", "PrimaryAction", colors.on_primary)
+	theme.set_color("font_disabled_color", "PrimaryAction", Color("#94A3B8"))
+	theme.set_font_size("font_size", "PrimaryAction", 24)
+
 	# ======== IconButton — TopBar 图标按钮 ========
 	theme.set_stylebox("normal", "IconButton", _make_stylebox(Color.TRANSPARENT, 8, 0))
 	theme.set_stylebox("hover", "IconButton", _make_stylebox(colors.primary_container, 8, 0))
@@ -234,22 +246,25 @@ func _apply_material_theme(theme_name: String) -> void:
 	theme.set_color("font_color", "CheckBox", colors.primary)
 
 	# ======== GridContainer ========
-	theme.set_constant("v_separation", "GridContainer", 8)
-	theme.set_constant("h_separation", "GridContainer", 8)
+	theme.set_constant("v_separation", "GridContainer", 6)
+	theme.set_constant("h_separation", "GridContainer", 6)
 
 	# ======== ScrollContainer ========
 	theme.set_stylebox("bg", "ScrollContainer", _make_stylebox(Color.TRANSPARENT, 0, 0))
 
 	# ======== 全局间距 ========
-	theme.set_constant("h_separation", "HBoxContainer", 8)
-	theme.set_constant("v_separation", "VBoxContainer", 8)
-	theme.set_constant("margin_left", "MarginContainer", 16)
-	theme.set_constant("margin_top", "MarginContainer", 16)
-	theme.set_constant("margin_right", "MarginContainer", 16)
-	theme.set_constant("margin_bottom", "MarginContainer", 16)
+	theme.set_constant("h_separation", "HBoxContainer", 10)
+	theme.set_constant("v_separation", "VBoxContainer", 12)
+	theme.set_constant("margin_left", "MarginContainer", 20)
+	theme.set_constant("margin_top", "MarginContainer", 20)
+	theme.set_constant("margin_right", "MarginContainer", 20)
+	theme.set_constant("margin_bottom", "MarginContainer", 20)
 
 	# 设置引擎窗口清除色（场景背景）
 	RenderingServer.set_default_clear_color(colors.background)
+
+	# 应用移动端安全区域（notch/状态栏 padding）
+	_apply_safe_area()
 
 	# 应用到当前场景树的根 Viewport
 	if get_tree() and get_tree().root:
@@ -259,3 +274,44 @@ func _apply_material_theme(theme_name: String) -> void:
 		push_warning("[ThemeManager] theme + linear filter applied to root viewport")
 	else:
 		push_warning("[ThemeManager] WARN: no tree/root yet, theme NOT applied")
+
+
+## 检测并应用安全区域偏移（挖孔屏/状态栏）
+## 修复场景根 VBox 的顶部 margin，避免 TopBar 被遮挡
+func _apply_safe_area() -> void:
+	if not get_tree() or not get_tree().root:
+		return
+	var safe_area := DisplayServer.get_display_safe_area()
+	# 仅在顶部有安全区域时才调整（桌面端 safe_area 等于全屏，不调整）
+	var top_inset := safe_area.position.y
+	if top_inset <= 0:
+		return
+	# 推迟到下一帧确保场景树已构建
+	await get_tree().process_frame
+	# 遍历场景根节点，找第一个 VBoxContainer 增加顶部 padding
+	var root := get_tree().root
+	if root.get_child_count() == 0:
+		return
+	var current_scene := root.get_child(root.get_child_count() - 1)
+	if not current_scene:
+		return
+	# 递归查找 VBoxContainer
+	var vbox := _find_vbox(current_scene)
+	if vbox:
+		# 在 Theme 中添加顶部 margin
+		var existing := get_tree().root.theme.get_constant("margin_top", "MarginContainer")
+		var new_top := maxi(top_inset, existing)
+		get_tree().root.theme.set_constant("margin_top", "MarginContainer", new_top)
+		# 同步 VBox 的自定义 top margin
+		vbox.add_theme_constant_override("margin_top", new_top)
+
+
+## 递归查找 VBoxContainer
+func _find_vbox(node: Node) -> VBoxContainer:
+	if node is VBoxContainer:
+		return node
+	for child in node.get_children():
+		var result := _find_vbox(child)
+		if result:
+			return result
+	return null

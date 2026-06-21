@@ -3,6 +3,8 @@ extends Control
 ## 独立于主界面的数独入口，包含继续上局、新游戏、历史记录选项
 ## 从 SudokuCard 点击导航至此，完成选择后跳转 SudokuGame
 
+const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+
 @onready var bg: ColorRect = %Bg
 @onready var back_btn: Button = %BackBtn
 @onready var continue_btn: Button = %ContinueBtn
@@ -72,12 +74,12 @@ func _animate_hide_dialog(panel: Panel) -> void:
 # --------------------------------------------------------------------------
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
+	SceneTransition.change_to("res://scenes/main/Main.tscn")
 
 
 func _on_continue_pressed() -> void:
 	SceneParams.set_param("next_game", {"action": "continue"})
-	get_tree().change_scene_to_file("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
 
 
 func _on_new_game_pressed() -> void:
@@ -86,7 +88,7 @@ func _on_new_game_pressed() -> void:
 
 
 func _on_history_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/sudoku/HistoryList.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/HistoryList.tscn")
 
 
 # --------------------------------------------------------------------------
@@ -100,7 +102,7 @@ func _on_difficulty_changed(value: float) -> void:
 func _on_diff_confirm_pressed() -> void:
 	var lvl := int(diff_slider.value)
 	SceneParams.set_param("next_game", {"action": "new", "level": lvl})
-	get_tree().change_scene_to_file("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
 
 
 func _on_diff_cancel_pressed() -> void:

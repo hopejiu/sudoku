@@ -8,6 +8,8 @@ extends Control
 ## - DialogAnimator：弹窗动画（静态方法调用）
 ## - SceneParams：场景参数传递
 
+const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+
 var board: SudokuBoard
 var render_state := GridRenderState.new()
 var timer_controller := TimerController.new()
@@ -21,6 +23,12 @@ var is_game_over: bool = false
 
 # 同难度连胜计数，达到 5 的倍数时触发鼓励
 var _streak_win_count: int = 0
+
+# 各数字已填入数量（1-9），用于键盘高亮
+var _number_count: Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+# 标志位：首次布局完成
+var _ready_called := false
 
 @onready var bg: ColorRect = %Bg
 @onready var difficulty_label: Label = %DifficultyLabel
@@ -62,12 +70,14 @@ func _ready() -> void:
 	push_warning("[SudokuGame] _ready() called")
 	board = SudokuBoard.new()
 	# 将 Grid 的 render_state 指向新建的 render_state
-	(grid_control as SudokuGrid).render_state = render_state
-	(grid_control as SudokuGrid).cell_selected.connect(_on_cell_selected)
+	var grid: SudokuGrid = grid_control as SudokuGrid
+	grid.render_state = render_state
+	grid.cell_selected.connect(_on_cell_selected)
 	_load_game_params()
 	_connect_signals()
 	_bind_theme_colors()
 	ThemeManager.theme_changed.connect(_on_theme_changed)
+	_ready_called = true
 	push_warning("[SudokuGame] _ready() complete, grid_control=%s, grid_size=%s" % [grid_control, grid_control.size])
 
 
@@ -83,6 +93,8 @@ func _bind_theme_colors() -> void:
 	undo_btn.modulate = primary
 	hint_btn.modulate = primary
 	pause_btn.modulate = primary
+	timer_toggle_btn.modulate = primary
+	auto_btn.modulate = primary
 
 
 func _on_theme_changed(_name: String) -> void:
@@ -92,6 +104,8 @@ func _on_theme_changed(_name: String) -> void:
 	undo_btn.modulate = primary
 	hint_btn.modulate = primary
 	pause_btn.modulate = primary
+	timer_toggle_btn.modulate = primary
+	auto_btn.modulate = primary
 
 
 func _connect_signals() -> void:
@@ -169,6 +183,7 @@ func _start_new_game(lvl: int) -> void:
 	timer_controller.reset()
 	is_game_over = false
 	is_paused = false
+	_count_numbers()
 	_update_ui()
 	_auto_save()
 
@@ -184,6 +199,7 @@ func _load_saved_game() -> void:
 	_streak_win_count = data.get("streak", 0)
 	is_game_over = false
 	is_paused = false
+	_count_numbers()
 	_update_ui()
 
 
@@ -218,6 +234,9 @@ func _load_history_puzzle(params: Dictionary) -> void:
 func _process(delta: float) -> void:
 	timer_controller.tick(delta, is_paused, is_game_over)
 	timer_label.text = timer_controller.get_formatted_time()
+	# 网格脉冲动画衰减
+	if _ready_called:
+		(grid_control as SudokuGrid).tick_pulse(delta)
 
 
 func _update_ui() -> void:
@@ -248,6 +267,17 @@ func _on_cell_selected(row: int, col: int) -> void:
 	grid_control.queue_redraw()
 
 
+## 统计盘面上每个数字的出现次数（用于键盘高亮）
+func _count_numbers() -> void:
+	_number_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	for r in 9:
+		for c in 9:
+			var v: int = board.grid[r][c]
+			if v > 0:
+				_number_count[v] += 1
+	(keyboard_node as NumberKeyboard).update_number_counts(_number_count)
+
+
 ## 切换计时标签显隐
 func _on_timer_toggle_pressed() -> void:
 	timer_label.visible = not timer_label.visible
@@ -264,7 +294,18 @@ func _on_number_pressed(num: int) -> void:
 	if is_note_mode:
 		board.toggle_note(selected_row, selected_col, num)
 	else:
+		var old_val: int = board.grid[selected_row][selected_col]
 		board.set_cell(selected_row, selected_col, num)
+		if old_val != num:
+			# 触发脉冲反馈
+			(grid_control as SudokuGrid).trigger_pulse(selected_row, selected_col)
+			# 更新数字计数
+			if old_val > 0:
+				_number_count[old_val] -= 1
+			if num > 0:
+				_number_count[num] += 1
+			# 同步键盘高亮
+			(keyboard_node as NumberKeyboard).update_number_counts(_number_count)
 		if board.is_victory():
 			_on_victory()
 			return
@@ -278,7 +319,11 @@ func _on_clear_pressed() -> void:
 	if is_note_mode:
 		board.notes[selected_row][selected_col] = 0
 	else:
+		var old_val: int = board.grid[selected_row][selected_col]
 		board.set_cell(selected_row, selected_col, 0)
+		if old_val > 0:
+			_number_count[old_val] -= 1
+			(keyboard_node as NumberKeyboard).update_number_counts(_number_count)
 	grid_control.queue_redraw()
 	_auto_save()
 
@@ -295,6 +340,8 @@ func _on_undo_pressed() -> void:
 	if is_game_over:
 		return
 	board.undo()
+	_count_numbers()
+	(keyboard_node as NumberKeyboard).update_number_counts(_number_count)
 	grid_control.queue_redraw()
 	_auto_save()
 
@@ -317,6 +364,10 @@ func _on_hint_pressed() -> void:
 		selected_row = r
 		selected_col = c
 		board.get_hint(r, c)
+		# 提示时脉冲反馈 + 计数更新
+		(grid_control as SudokuGrid).trigger_pulse(r, c)
+		_count_numbers()
+		(keyboard_node as NumberKeyboard).update_number_counts(_number_count)
 		hint_label.text = "提示 %d 次" % board.hint_count
 		# 使用方法引用替代 lambda，避免信号泄漏
 		get_tree().create_timer(2.0).timeout.connect(_clear_hint)
@@ -339,6 +390,8 @@ func _on_auto_fill_pressed() -> void:
 		return
 	var count := board.auto_fill_singles()
 	if count > 0:
+		_count_numbers()
+		(keyboard_node as NumberKeyboard).update_number_counts(_number_count)
 		_auto_save()
 		_update_ui()
 		if board.is_victory():
@@ -347,7 +400,7 @@ func _on_auto_fill_pressed() -> void:
 
 func _on_pause_pressed() -> void:
 	is_paused = true
-	pause_overlay.show()
+	DialogAnimator.show_overlay(pause_overlay, self)
 	_animate_dialog_show(pause_panel)
 
 
@@ -356,7 +409,7 @@ func _on_resume_pressed() -> void:
 	_hide_confirm()
 	_animate_dialog_hide(pause_panel)
 	await get_tree().create_timer(0.12).timeout
-	pause_overlay.hide()
+	DialogAnimator.hide_overlay(pause_overlay, self)
 
 
 func _on_restart_pressed() -> void:
@@ -380,7 +433,7 @@ func _do_restart() -> void:
 func _do_main_menu() -> void:
 	pause_overlay.hide()
 	SceneParams.set("next_game", {})
-	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
+	SceneTransition.change_to("res://scenes/main/Main.tscn")
 
 
 # --------------------------------------------------------------------------
@@ -436,6 +489,11 @@ func _on_victory() -> void:
 	hard_btn.disabled = not level_up
 	same_btn.disabled = false
 
+	# 主按钮（维持难度）与其他按钮视觉区分
+	same_btn.theme_type_variation = &"PrimaryAction"
+	easy_btn.theme_type_variation = &"DialogAction"
+	hard_btn.theme_type_variation = &"DialogAction"
+
 	# 重新绑定难度按钮
 	easy_btn.pressed.disconnect(_on_difficulty_choice)
 	same_btn.pressed.disconnect(_on_difficulty_choice)
@@ -456,8 +514,12 @@ func _on_victory() -> void:
 	else:
 		v_streak_label.text = ""
 
-	victory_overlay.show()
-	# 通关弹窗动画：获取胜利面板节点
+	# 撒花庆祝效果
+	var confetti := ConfettiEffect.new()
+	add_child(confetti)
+
+	# 通关弹窗动画
+	DialogAnimator.show_overlay(victory_overlay, self)
 	var victory_panel := victory_overlay.get_node("Center/Popup") as Panel
 	if victory_panel:
 		_animate_dialog_show(victory_panel)

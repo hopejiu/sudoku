@@ -44,6 +44,11 @@
 ```bash
 cd /mnt/d/code/Sudoku && ./exe_headless/godot --headless --path . --quit
 ```
+windows 环境的路径
+```
+E:\software\Godot_v4.6.3\Godot_v4.6.3-stable_win64_console.exe
+```
+
 **最新结果: 零错误。**
 
 ## 已完成的架构决策

@@ -81,15 +81,16 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"GameCard"
-custom_minimum_size = Vector2(160, 200)
+custom_minimum_size = Vector2(220, 280)
 script = ExtResource("2")
 
 [node name="CardVBox" type="VBoxContainer" parent="VBox/CardArea/SudokuCard"]
 layout_mode = 0
-offset_left = 24
-offset_top = 24
-offset_right = -24
-offset_bottom = -24
+offset_left = 32
+offset_top = 32
+offset_right = -32
+offset_bottom = -32
+theme_override_constants/separation = 12
 
 [node name="CardIcon" type="TextureRect" parent="VBox/CardArea/SudokuCard/CardVBox"]
 unique_name_in_owner = true
@@ -101,7 +102,7 @@ stretch_mode = 5
 
 [node name="CardSpacer" type="Control" parent="VBox/CardArea/SudokuCard/CardVBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(0, 4)
 
 [node name="CardLabel" type="Label" parent="VBox/CardArea/SudokuCard/CardVBox"]
 layout_mode = 2
@@ -109,7 +110,7 @@ unique_name_in_owner = true
 size_flags_horizontal = 4
 text = "数 独"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 theme_override_colors/font_color = Color(0.118, 0.227, 0.541, 1)
 
 [connection signal="pressed" from="VBox/TopBar/TopHBox/SettingsBtn" to="." method="_on_settings_btn_pressed"]

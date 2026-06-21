@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b8oqbbw72hytr" path="res://assets/icons/icon_hint.svg" id="5"]
 [ext_resource type="Texture2D" uid="uid://bexjaascqqv1p" path="res://assets/icons/icon_pause.svg" id="6"]
 [ext_resource type="Texture2D" path="res://assets/icons/icon_thunder.svg" id="7"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_timer.svg" id="8"]
 
 [node name="SudokuGame" type="Control"]
 script = ExtResource("1")
@@ -32,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 4
 
 [node name="TopBar" type="Panel" parent="VBox"]
 custom_minimum_size = Vector2(0, 56)
@@ -64,9 +66,10 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"IconButton"
 custom_minimum_size = Vector2(24, 24)
-text = "⏱"
+icon = ExtResource("8")
 alignment = 1
 vertical_alignment = 1
+expand_icon = true
 
 [node name="DifficultyLabel" type="Label" parent="VBox/TopBar/InnerHBox"]
 unique_name_in_owner = true
@@ -129,6 +132,7 @@ script = ExtResource("2")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 
 [node name="NumberKeyboard" parent="VBox" instance=ExtResource("3")]
 unique_name_in_owner = true

@@ -2,6 +2,8 @@ extends Control
 ## HistoryList — 历史记录列表
 ## 按时间倒序展示最近 20 局，点击进入详情，顶部显示统计摘要
 
+const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+
 @onready var bg: ColorRect = %Bg
 @onready var back_btn: Button = %BackBtn
 @onready var item_list: VBoxContainer = %ItemList
@@ -103,14 +105,18 @@ static func _format_entry(entry: Dictionary) -> String:
 	var total_sec: int = entry.get("time", 0)
 	var m: int = int(total_sec / 60.0)
 	var s: int = total_sec % 60
-	var won := "✓" if entry.get("won", false) else "✗"
-	return "%s  难度%s  %02d:%02d  %s" % [date_str, entry.get("level", "?"), m, s, won]
+	var won_mark := " ✓" if entry.get("won", false) else ""
+	var hint_txt := ""
+	var hc: int = entry.get("hint_count", 0)
+	if hc > 0:
+		hint_txt = " 提示%d" % hc
+	return "%s  |  难度 %s  |  %02d:%02d%s%s" % [date_str, entry.get("level", "?"), m, s, hint_txt, won_mark]
 
 
 func _on_entry_pressed(_index: int, entry: Dictionary) -> void:
 	SceneParams.set_param("history_entry", entry)
-	get_tree().change_scene_to_file("res://scenes/sudoku/HistoryDetail.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/HistoryDetail.tscn")
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
+	SceneTransition.change_to("res://scenes/main/Main.tscn")

@@ -2,6 +2,8 @@ extends Panel
 ## SudokuCard — 游戏集合卡片
 ## 点击后导航到对应游戏的入口场景（SudokuMenu）
 
+const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+
 @onready var card_icon: TextureRect = %CardIcon
 
 
@@ -22,4 +24,4 @@ func _on_card_input(event: InputEvent) -> void:
 
 
 func _navigate_to_sudoku() -> void:
-	get_tree().change_scene_to_file("res://scenes/sudoku/SudokuMenu.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuMenu.tscn")

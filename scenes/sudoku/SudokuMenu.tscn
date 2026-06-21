@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/SudokuMenu.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_back.svg" id="2"]
 
 [node name="SudokuMenu" type="Control"]
 script = ExtResource("1")
@@ -26,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 4
 
 [node name="TopBar" type="Panel" parent="VBox"]
 custom_minimum_size = Vector2(0, 60)
@@ -35,9 +37,9 @@ mouse_filter = 2
 
 [node name="TopHBox" type="HBoxContainer" parent="VBox/TopBar"]
 layout_mode = 0
-offset_left = 8
+offset_left = 12
 offset_top = 0
-offset_right = -8
+offset_right = -12
 offset_bottom = 0
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +53,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"IconButton"
 custom_minimum_size = Vector2(32, 32)
-text = "←"
+icon = ExtResource("2")
 alignment = 1
 vertical_alignment = 1
 expand_icon = true
@@ -66,7 +68,7 @@ vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="VBox/TopBar/TopHBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(44, 0)
+custom_minimum_size = Vector2(32, 0)
 
 [node name="Center" type="CenterContainer" parent="VBox"]
 layout_mode = 2
@@ -148,10 +150,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24
+offset_left = 28
 offset_top = 28
-offset_right = -24
-offset_bottom = -24
+offset_right = -28
+offset_bottom = -28
 theme_override_constants/separation = 16
 
 [node name="DiffTitle" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]

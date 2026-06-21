@@ -2,6 +2,8 @@ extends Control
 ## HistoryDetail — 历史详情
 ## 只读显示历史对局的元数据，支持「重开」和「继续」
 
+const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+
 var entry: Dictionary = {}
 
 @onready var bg: ColorRect = %Bg
@@ -52,7 +54,7 @@ func _refresh() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/sudoku/HistoryList.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/HistoryList.tscn")
 
 
 func _on_replay_pressed() -> void:
@@ -63,9 +65,9 @@ func _on_replay_pressed() -> void:
 		"level": lvl,
 		"board_snapshot": snapshot,
 	})
-	get_tree().change_scene_to_file("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
 
 
 func _on_continue_pressed() -> void:
 	SceneParams.set_param("next_game", {"action": "continue"})
-	get_tree().change_scene_to_file("res://scenes/sudoku/SudokuGame.tscn")
+	SceneTransition.change_to("res://scenes/sudoku/SudokuGame.tscn")
