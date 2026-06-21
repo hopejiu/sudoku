@@ -24,10 +24,18 @@ config/icon="res://assets/icons/app_icon.svg"
 
 SaveManager="*res://autoload/SaveManager.gd"
 ThemeManager="*res://autoload/ThemeManager.gd"
+SceneParams="*res://autoload/SceneParams.gd"
+
+[display]
+
+window/size/viewport_width=360
+window/size/viewport_height=640
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
 
 [gui]
 
-theme/custom="res://themes/classic.theme"
 theme/theme_color_saturation=1.0
 theme/theme_contrast=0.1
 
@@ -73,3 +81,8 @@ ui_down={
 "type": 0
 }]
 }
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
+environment/default_clear_color=Color(0.973, 0.98, 0.988, 1)

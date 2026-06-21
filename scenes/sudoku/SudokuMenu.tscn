@@ -1,0 +1,219 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/SudokuMenu.gd" id="1"]
+
+[node name="SudokuMenu" type="Control"]
+script = ExtResource("1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Bg" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.973, 0.980, 0.988, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="Panel" parent="VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_type_variation = &"TopBarPanel"
+mouse_filter = 2
+
+[node name="TopHBox" type="HBoxContainer" parent="VBox/TopBar"]
+layout_mode = 0
+offset_left = 8
+offset_top = 0
+offset_right = -8
+offset_bottom = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+
+[node name="BackBtn" type="Button" parent="VBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(32, 32)
+text = "←"
+alignment = 1
+vertical_alignment = 1
+expand_icon = true
+
+[node name="TitleLabel" type="Label" parent="VBox/TopBar/TopHBox"]
+layout_mode = 2
+size_flags_horizontal = 1
+text = "数独"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBox/TopBar/TopHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(44, 0)
+
+[node name="Center" type="CenterContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CardPanel" type="Panel" parent="VBox/Center"]
+layout_mode = 2
+unique_name_in_owner = true
+theme_type_variation = &"GameCard"
+custom_minimum_size = Vector2(240, 240)
+
+[node name="PopupVBox" type="VBoxContainer" parent="VBox/Center/CardPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24
+offset_top = 24
+offset_right = -24
+offset_bottom = -24
+theme_override_constants/separation = 16
+
+[node name="PTitle" type="Label" parent="VBox/Center/CardPanel/PopupVBox"]
+layout_mode = 2
+text = "数 独"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+
+[node name="PSep" type="HSeparator" parent="VBox/Center/CardPanel/PopupVBox"]
+layout_mode = 2
+
+[node name="ContinueBtn" type="Button" parent="VBox/Center/CardPanel/PopupVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "继续上局"
+theme_type_variation = &"DialogAction"
+
+[node name="NewGameBtn" type="Button" parent="VBox/Center/CardPanel/PopupVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "开启新游戏"
+theme_type_variation = &"DialogAction"
+
+[node name="HistoryBtn" type="Button" parent="VBox/Center/CardPanel/PopupVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "历史记录"
+theme_type_variation = &"DialogAction"
+
+[node name="DifficultyOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Center" type="CenterContainer" parent="DifficultyOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DiffPanel" type="Panel" parent="DifficultyOverlay/Center"]
+layout_mode = 2
+unique_name_in_owner = true
+theme_type_variation = &"DialogPanel"
+custom_minimum_size = Vector2(300, 260)
+
+[node name="DiffVBox" type="VBoxContainer" parent="DifficultyOverlay/Center/DiffPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24
+offset_top = 28
+offset_right = -24
+offset_bottom = -24
+theme_override_constants/separation = 16
+
+[node name="DiffTitle" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+text = "选择难度"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="DiffSep" type="HSeparator" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+
+[node name="DiffSliderRow" type="HBoxContainer" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+
+[node name="DiffLabel" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow"]
+layout_mode = 2
+text = "难度"
+vertical_alignment = 1
+
+[node name="DiffSlider" type="HSlider" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 16.0
+value = 8.0
+
+[node name="DiffValue" type="Label" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "8"
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 1
+
+[node name="DiffSpacer" type="Control" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DiffBtnRow" type="CenterContainer" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox"]
+layout_mode = 2
+
+[node name="DiffBtnHBox" type="HBoxContainer" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="DiffCancel" type="Button" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow/DiffBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "取消"
+theme_type_variation = &"DialogAction"
+
+[node name="DiffConfirm" type="Button" parent="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow/DiffBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "确认"
+theme_type_variation = &"DialogAction"
+
+[connection signal="pressed" from="VBox/TopBar/TopHBox/BackBtn" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBox/Center/CardPanel/PopupVBox/ContinueBtn" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="VBox/Center/CardPanel/PopupVBox/NewGameBtn" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="VBox/Center/CardPanel/PopupVBox/HistoryBtn" to="." method="_on_history_pressed"]
+[connection signal="value_changed" from="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffSliderRow/DiffSlider" to="." method="_on_difficulty_changed"]
+[connection signal="pressed" from="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow/DiffBtnHBox/DiffCancel" to="." method="_on_diff_cancel_pressed"]
+[connection signal="pressed" from="DifficultyOverlay/Center/DiffPanel/DiffVBox/DiffBtnRow/DiffBtnHBox/DiffConfirm" to="." method="_on_diff_confirm_pressed"]

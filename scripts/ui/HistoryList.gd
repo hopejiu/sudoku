@@ -2,6 +2,7 @@ extends Control
 ## HistoryList — 历史记录列表
 ## 按时间倒序展示最近 20 局，点击进入详情，顶部显示统计摘要
 
+@onready var bg: ColorRect = %Bg
 @onready var back_btn: Button = %BackBtn
 @onready var item_list: VBoxContainer = %ItemList
 @onready var empty_hint: Label = %EmptyHint
@@ -11,6 +12,16 @@ extends Control
 func _ready() -> void:
 	back_btn.pressed.connect(_on_back_pressed)
 	_refresh_list()
+
+	# 主题颜色绑定
+	ThemeManager.theme_changed.connect(_on_theme_changed)
+	_on_theme_changed(ThemeManager.current_theme_name)
+
+
+func _on_theme_changed(_name: String) -> void:
+	bg.color = ThemeManager.get_color("background")
+	var primary := ThemeManager.get_color("primary")
+	back_btn.modulate = primary
 
 
 func _refresh_list() -> void:
@@ -24,19 +35,21 @@ func _refresh_list() -> void:
 	# 统计摘要
 	stats_label.text = _compute_stats(history)
 
-	# 列表
+	# 列表（使用 MD 风格 TextButton）
 	for i in history.size():
 		var entry: Dictionary = history[i]
 		var btn := Button.new()
 		btn.text = _format_entry(entry)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.theme_type_variation = &"TextButton"
+		btn.custom_minimum_size = Vector2(0, 44)
 		var index := i
 		btn.pressed.connect(_on_entry_pressed.bind(index, entry))
 		item_list.add_child(btn)
 
 
 static func _format_time(seconds: int) -> String:
-	var m := seconds / 60
+	var m := int(seconds / 60.0)
 	var s := seconds % 60
 	return "%02d:%02d" % [m, s]
 
@@ -88,14 +101,14 @@ static func _format_entry(entry: Dictionary) -> String:
 	var dt: Dictionary = entry.get("datetime", {})
 	var date_str := "%04d-%02d-%02d" % [dt.get("year", 0), dt.get("month", 0), dt.get("day", 0)]
 	var total_sec: int = entry.get("time", 0)
-	var m: int = total_sec / 60
+	var m: int = int(total_sec / 60.0)
 	var s: int = total_sec % 60
 	var won := "✓" if entry.get("won", false) else "✗"
 	return "%s  难度%s  %02d:%02d  %s" % [date_str, entry.get("level", "?"), m, s, won]
 
 
-func _on_entry_pressed(index: int, entry: Dictionary) -> void:
-	SaveManager.set_temp("history_entry", entry)
+func _on_entry_pressed(_index: int, entry: Dictionary) -> void:
+	SceneParams.set_param("history_entry", entry)
 	get_tree().change_scene_to_file("res://scenes/sudoku/HistoryDetail.tscn")
 
 

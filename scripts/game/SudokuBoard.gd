@@ -13,13 +13,13 @@ class_name SudokuBoard
 const GRID_SIZE := 9
 const MAX_UNDO := 50
 
-var grid          # grid[r][c]
-var given         # given[r][c]
-var notes         # notes[r][c] 位掩码
-var conflict      # conflict[r][c]
-var undo_stack    # Array[Dictionary]
+var grid: Array  # Array[Array[int]]
+var given: Array  # Array[Array[bool]]
+var notes: Array  # Array[Array[int]]
+var conflict: Array  # Array[Array[bool]]
+var undo_stack: Array[Dictionary]
 var hint_count: int = 0
-var solution      # 完整解，用于提示功能
+var solution: Array  # Array[Array[int]]
 
 
 func _init() -> void:
@@ -66,15 +66,16 @@ func set_cell(row: int, col: int, value: int) -> bool:
 	if old_val == value:
 		return false
 
-	# 记录回撤
+	# 记录回撤（含笔记状态）
 	undo_stack.push_back({
 		"r": row, "c": col,
 		"ov": old_val, "nv": value,
-		"on": 0, "nn": 0,
+		"on": notes[row][col], "nn": 0,
 	})
 	if undo_stack.size() > MAX_UNDO:
 		undo_stack.pop_front()
 
+	notes[row][col] = 0  # 放置数字时清除笔记
 	grid[row][col] = value
 	update_conflicts()
 	return true
@@ -114,8 +115,8 @@ func update_conflicts() -> void:
 			if conflict[r][c]:
 				continue
 			# 检查宫
-			var br := (r / 3) * 3
-			var bc := (c / 3) * 3
+			var br := int(r / 3.0) * 3
+			var bc := int(c / 3.0) * 3
 			for rr in range(br, br + 3):
 				for cc in range(bc, bc + 3):
 					if (rr != r or cc != c) and grid[rr][cc] == v:
@@ -141,6 +142,60 @@ func toggle_note(row: int, col: int, num: int) -> void:
 	var mask := 1 << num
 	# 笔记不记录回撤
 	notes[row][col] ^= mask
+
+
+## 自动填充所有唯一候选格
+## 扫描全盘，对每个空格检查 1-9 唯一可行数字，有则填入。
+## 重复直到再无单候选格。返回本次填充总数。
+func auto_fill_singles() -> int:
+	var filled := 0
+	var changed := true
+	while changed:
+		changed = false
+		for r in GRID_SIZE:
+			for c in GRID_SIZE:
+				if grid[r][c] != 0 or given[r][c]:
+					continue
+				var candidate := 0
+				for num in range(1, 10):
+					if _is_valid_placement(r, c, num):
+						if candidate == 0:
+							candidate = num
+						else:
+							candidate = -1  # 多于一个候选
+							break
+				if candidate > 0:
+					undo_stack.push_back({
+						"r": r, "c": c,
+						"ov": 0, "nv": candidate,
+						"on": notes[r][c], "nn": 0,
+					})
+					if undo_stack.size() > MAX_UNDO:
+						undo_stack.pop_front()
+					notes[r][c] = 0
+					grid[r][c] = candidate
+					filled += 1
+					changed = true
+	if filled > 0:
+		update_conflicts()
+	return filled
+
+
+## 检查单个数字在盘面上是否合法（不修改盘面）
+func _is_valid_placement(row: int, col: int, num: int) -> bool:
+	for cc in GRID_SIZE:
+		if cc != col and grid[row][cc] == num:
+			return false
+	for rr in GRID_SIZE:
+		if rr != row and grid[rr][col] == num:
+			return false
+	var br := (row / 3) * 3
+	var bc := (col / 3) * 3
+	for rr in range(br, br + 3):
+		for cc in range(bc, bc + 3):
+			if (rr != row or cc != col) and grid[rr][cc] == num:
+				return false
+	return true
 
 
 ## 获取提示

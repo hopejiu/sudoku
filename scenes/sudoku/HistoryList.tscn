@@ -8,6 +8,17 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="Bg" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.973, 0.980, 0.988, 1)
+
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -16,30 +27,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="HBoxContainer" parent="VBox"]
+[node name="TopBar" type="Panel" parent="VBox"]
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
-custom_minimum_size = Vector2(0, 48)
+theme_type_variation = &"TopBarPanel"
+mouse_filter = 2
 
-[node name="BackBtn" type="Button" parent="VBox/TopBar"]
+[node name="InnerHBox" type="HBoxContainer" parent="VBox/TopBar"]
+layout_mode = 0
+offset_left = 8
+offset_top = 0
+offset_right = -8
+offset_bottom = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackBtn" type="Button" parent="VBox/TopBar/InnerHBox"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "< 返回"
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(32, 32)
+text = "←"
+alignment = 1
+vertical_alignment = 1
+expand_icon = true
 
-[node name="TitleLabel" type="Label" parent="VBox/TopBar"]
+[node name="TitleLabel" type="Label" parent="VBox/TopBar/InnerHBox"]
 layout_mode = 2
 size_flags_horizontal = 1
 text = "历史记录"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
 
-[node name="EmptyLabel" type="Label" parent="VBox/TopBar"]
-unique_name_in_owner = true
+[node name="Spacer" type="Control" parent="VBox/TopBar/InnerHBox"]
 layout_mode = 2
-text = ""
+custom_minimum_size = Vector2(44, 0)
 
 [node name="StatsLabel" type="Label" parent="VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-text = ""
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
 autowrap_mode = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBox"]

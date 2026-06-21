@@ -3,12 +3,27 @@
 [ext_resource type="Script" path="res://scripts/ui/SudokuGame.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/ui/SudokuGrid.gd" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/sudoku/NumberKeyboard.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://n5tt5dh704qc" path="res://assets/icons/icon_undo.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://b8oqbbw72hytr" path="res://assets/icons/icon_hint.svg" id="5"]
+[ext_resource type="Texture2D" uid="uid://bexjaascqqv1p" path="res://assets/icons/icon_pause.svg" id="6"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_thunder.svg" id="7"]
 
 [node name="SudokuGame" type="Control"]
 script = ExtResource("1")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Bg" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.973, 0.980, 0.988, 1)
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -18,54 +33,96 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="HBoxContainer" parent="VBox"]
+[node name="TopBar" type="Panel" parent="VBox"]
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
-custom_minimum_size = Vector2(0, 48)
+theme_type_variation = &"TopBarPanel"
+mouse_filter = 2
 
-[node name="LeftGroup" type="HBoxContainer" parent="VBox/TopBar"]
+[node name="InnerHBox" type="HBoxContainer" parent="VBox/TopBar"]
+layout_mode = 0
+offset_left = 12
+offset_top = 0
+offset_right = -12
+offset_bottom = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftGroup" type="HBoxContainer" parent="VBox/TopBar/InnerHBox"]
 layout_mode = 2
 
-[node name="DifficultyLabel" type="Label" parent="VBox/TopBar/LeftGroup"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "难度 8"
-
-[node name="TimerLabel" type="Label" parent="VBox/TopBar/LeftGroup"]
+[node name="TimerLabel" type="Label" parent="VBox/TopBar/InnerHBox/LeftGroup"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "00:00"
 
-[node name="Spacer" type="Control" parent="VBox/TopBar"]
+[node name="TimerToggleBtn" type="Button" parent="VBox/TopBar/InnerHBox/LeftGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(24, 24)
+text = "⏱"
+alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultyLabel" type="Label" parent="VBox/TopBar/InnerHBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+text = "难度 8"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.118, 0.227, 0.541, 1)
 
-[node name="RightGroup" type="HBoxContainer" parent="VBox/TopBar"]
+[node name="RightGroup" type="HBoxContainer" parent="VBox/TopBar/InnerHBox"]
 layout_mode = 2
 
-[node name="HintLabel" type="Label" parent="VBox/TopBar/RightGroup"]
+[node name="HintLabel" type="Label" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
 layout_mode = 2
 text = ""
 
-[node name="UndoBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+[node name="UndoBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "←"
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(32, 32)
+icon = ExtResource("4")
+alignment = 1
+vertical_alignment = 1
+expand_icon = true
 
-[node name="HintBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+[node name="HintBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "?"
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(32, 32)
+icon = ExtResource("5")
+alignment = 1
+vertical_alignment = 1
+expand_icon = true
 
-[node name="PauseBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+[node name="AutoBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "⏸"
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(32, 32)
+icon = ExtResource("7")
+alignment = 1
+vertical_alignment = 1
+expand_icon = true
 
-[node name="MenuBtn" type="Button" parent="VBox/TopBar/RightGroup"]
+[node name="PauseBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "⋮"
+theme_type_variation = &"IconButton"
+custom_minimum_size = Vector2(32, 32)
+icon = ExtResource("6")
+alignment = 1
+vertical_alignment = 1
+expand_icon = true
 
 [node name="Grid" type="Control" parent="VBox"]
 script = ExtResource("2")
@@ -76,7 +133,6 @@ size_flags_vertical = 3
 [node name="NumberKeyboard" parent="VBox" instance=ExtResource("3")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 2
 
 [node name="PauseOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -84,7 +140,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0, 0, 0, 0.5)
+color = Color(0, 0, 0, 0.45)
 mouse_filter = 2
 visible = false
 
@@ -95,38 +151,49 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="PausePanel" type="Panel" parent="PauseOverlay/Center"]
-layout_mode = 0
-offset_left = -120
-offset_top = -100
-offset_right = 120
-offset_bottom = 100
+layout_mode = 2
+unique_name_in_owner = true
+theme_type_variation = &"DialogPanel"
+custom_minimum_size = Vector2(280, 260)
 
 [node name="PauseVBox" type="VBoxContainer" parent="PauseOverlay/Center/PausePanel"]
-layout_mode = 0
-offset_left = 16
-offset_top = 16
-offset_right = -16
-offset_bottom = -16
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28
+offset_top = 28
+offset_right = -28
+offset_bottom = -28
+theme_override_constants/separation = 16
 
 [node name="PauseTitle" type="Label" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
 layout_mode = 2
-text = "暂停"
+text = "暂 停"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+
+[node name="PauseSep" type="HSeparator" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+layout_mode = 2
 
 [node name="ResumeBtn" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "继续"
+theme_type_variation = &"DialogAction"
 
 [node name="RestartBtn" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "重新开始"
+theme_type_variation = &"DialogAction"
 
 [node name="MainMenuBtn" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "返回主界面"
+theme_type_variation = &"DialogAction"
 
 [node name="ConfirmLabel" type="Label" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
 unique_name_in_owner = true
@@ -135,21 +202,30 @@ text = ""
 horizontal_alignment = 1
 visible = false
 
-[node name="ConfirmBtnRow" type="HBoxContainer" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+[node name="ConfirmSpacer" type="Control" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConfirmBtnRow" type="CenterContainer" parent="PauseOverlay/Center/PausePanel/PauseVBox"]
+layout_mode = 2
+unique_name_in_owner = true
 visible = false
 
-[node name="ConfirmYes" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow"]
-unique_name_in_owner = true
+[node name="ConfirmBtnHBox" type="HBoxContainer" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow"]
 layout_mode = 2
-size_flags_horizontal = 1
-text = "确定"
+theme_override_constants/separation = 16
 
-[node name="ConfirmNo" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow"]
+[node name="ConfirmYes" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow/ConfirmBtnHBox"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 1
+text = "确定"
+theme_type_variation = &"DialogAction"
+
+[node name="ConfirmNo" type="Button" parent="PauseOverlay/Center/PausePanel/PauseVBox/ConfirmBtnRow/ConfirmBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "取消"
+theme_type_variation = &"DialogAction"
 
 [node name="VictoryOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -157,7 +233,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0, 0, 0, 0.6)
+color = Color(0, 0, 0, 0.5)
 mouse_filter = 2
 visible = false
 
@@ -168,23 +244,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Popup" type="Panel" parent="VictoryOverlay/Center"]
-layout_mode = 0
-offset_left = -160
-offset_top = -140
-offset_right = 160
-offset_bottom = 140
+layout_mode = 2
+theme_type_variation = &"DialogPanel"
+custom_minimum_size = Vector2(300, 320)
 
 [node name="VBox" type="VBoxContainer" parent="VictoryOverlay/Center/Popup"]
-layout_mode = 0
-offset_left = 16
-offset_top = 16
-offset_right = -16
-offset_bottom = -16
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28
+offset_top = 28
+offset_right = -28
+offset_bottom = -28
+theme_override_constants/separation = 16
 
 [node name="VTitle" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
 layout_mode = 2
 text = "通关！"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="VTimeLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
 unique_name_in_owner = true
@@ -204,17 +283,23 @@ layout_mode = 2
 text = ""
 horizontal_alignment = 1
 
+[node name="VictorySep" type="HSeparator" parent="VictoryOverlay/Center/Popup/VBox"]
+layout_mode = 2
+
 [node name="EasyBtn" type="Button" parent="VictoryOverlay/Center/Popup/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "降低难度"
+theme_type_variation = &"DialogAction"
 
 [node name="SameBtn" type="Button" parent="VictoryOverlay/Center/Popup/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "维持难度"
+theme_type_variation = &"DialogAction"
 
 [node name="HardBtn" type="Button" parent="VictoryOverlay/Center/Popup/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "增加难度"
+theme_type_variation = &"DialogAction"
