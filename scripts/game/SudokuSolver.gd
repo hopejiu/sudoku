@@ -4,6 +4,8 @@ class_name SudokuSolver
 ## 不支持场景/节点依赖。
 ## 规则检测委托给 SudokuRules 共享工具类。
 
+const SudokuRules := preload("res://scripts/game/SudokuRules.gd")
+
 ## 用回溯法求解，返回第一个找到的解，无解返回空数组
 static func solve(grid: Array) -> Array:
 	var copy := SudokuRules.copy_grid(grid)
@@ -15,7 +17,7 @@ static func solve(grid: Array) -> Array:
 ## 判断是否有唯一解（限制最多数到 2 个解）
 static func is_unique(grid: Array) -> bool:
 	var copy := SudokuRules.copy_grid(grid)
-	return SudokuRules.count_solutions(copy, 0, 2) == 1
+	return SudokuRules.count_solutions(copy, 2) == 1
 
 
 static func _solve_recursive(grid: Array) -> bool:

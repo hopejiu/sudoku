@@ -18,10 +18,11 @@ var draw_offset_x: float = 0.0
 ## 由 SudokuGame 注入的渲染状态
 var render_state: GridRenderState = null
 
-# ---- 脉冲动画状态 ----
+# ---- 脉冲动画状态（U3：Tween 驱动，无需 _process 追踪） ----
 var _pulse_alpha: float = 0.0
 var _pulse_r: int = -1
 var _pulse_c: int = -1
+var _pulse_tween: Tween = null
 
 
 func _draw() -> void:
@@ -168,23 +169,21 @@ func _draw_pulse() -> void:
 	_draw_rect(_pulse_c, _pulse_r, 1, 1, pulse_color)
 
 
-## 触发脉冲动画
+## 触发脉冲动画（U3：Tween 驱动淡出，无需 SudokuGame 每帧调用 tick_pulse）
 func trigger_pulse(row: int, col: int) -> void:
+	if _pulse_tween and _pulse_tween.is_valid():
+		_pulse_tween.kill()
 	_pulse_r = row
 	_pulse_c = col
 	_pulse_alpha = 1.0
 	queue_redraw()
-
-
-## 脉冲动画每帧衰减（由 SudokuGame 的 _process 驱动）
-func tick_pulse(delta: float) -> void:
-	if _pulse_alpha > 0.0:
-		_pulse_alpha -= delta * 4.0  # 约 0.25 秒淡出
-		if _pulse_alpha <= 0.0:
-			_pulse_alpha = 0.0
-			_pulse_r = -1
-			_pulse_c = -1
-		queue_redraw()
+	_pulse_tween = create_tween().set_ease(Tween.EASE_OUT)
+	_pulse_tween.tween_method(func(a): _pulse_alpha = a; queue_redraw(), 1.0, 0.0, 0.25)
+	_pulse_tween.finished.connect(func():
+		_pulse_alpha = 0.0
+		_pulse_r = -1
+		_pulse_c = -1
+	, CONNECT_ONE_SHOT)
 
 
 ## 绘制冲突红框

@@ -1,3 +1,4 @@
 {
-    "godotTools.editorPath.godot4": "e:\\software\\Godot_v4.6.3-stable_win64.exe\\Godot_v4.6.3-stable_win64_console.exe"
+    "godotTools.editorPath.godot4": "e:\\software\\Godot_v4.6.3-stable_win64.exe\\Godot_v4.6.3-stable_win64_console.exe",
+    "terminal.integrated.defaultProfile.windows": "Windows PowerShell"
 }

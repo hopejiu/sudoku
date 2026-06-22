@@ -34,9 +34,7 @@ func _ready() -> void:
 		btn.custom_minimum_size = Vector2(48, 48)
 		var num := i + 1
 		btn.pressed.connect(_on_number_button_pressed.bind(num))
-		# 按下时触发 scale 反馈
-		btn.button_down.connect(_on_key_button_down.bind(btn))
-		btn.button_up.connect(_on_key_button_up.bind(btn))
+		# U7：移除手动 scale Tween，Button 已有 Theme hover/pressed 样式反馈
 		number_grid.add_child(btn)
 		_number_buttons.append(btn)
 
@@ -65,8 +63,6 @@ func _ready() -> void:
 	clear_btn.custom_minimum_size = Vector2(48, 48)
 	clear_btn.theme_type_variation = &"FuncButton"
 	clear_btn.pressed.connect(_on_clear_button_pressed)
-	clear_btn.button_down.connect(_on_key_button_down.bind(clear_btn))
-	clear_btn.button_up.connect(_on_key_button_up.bind(clear_btn))
 	number_grid.add_child(clear_btn)
 
 	push_warning("[NumberKeyboard] _ready(): created 9 number keys + note + spacer + clear, grid child_count=%d" % number_grid.get_child_count())
@@ -96,18 +92,6 @@ func _on_number_button_pressed(num: int) -> void:
 
 func _on_clear_button_pressed() -> void:
 	clear_pressed.emit()
-
-
-## 按键按下 — 缩放反馈
-func _on_key_button_down(btn: Button) -> void:
-	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "scale", Vector2(0.92, 0.92), 0.06)
-
-
-## 按键抬起 — 恢复缩放
-func _on_key_button_up(btn: Button) -> void:
-	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "scale", Vector2.ONE, 0.08)
 
 
 ## 更新数字计数并高亮已用完数字

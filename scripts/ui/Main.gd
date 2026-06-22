@@ -3,16 +3,34 @@ extends Control
 ## 顶部标题栏 + 游戏卡片列表，整体布局与主题切换
 
 @onready var bg: ColorRect = %Bg
+@onready var title_label: Label = %TitleLabel  # U8: 改用 %UniqueName
 
 func _ready() -> void:
-	ThemeManager.theme_changed.connect(_on_theme_changed)
-	_on_theme_changed(ThemeManager.current_theme_name)
+	ThemeManager.theme_changed.connect(_apply_theme_colors)
+	_apply_theme_colors()
+	# 兼容 Godot 4.7（可能缺少 SVG 加载器）：生成兜底图标
+	_generate_fallback_icon()
 
 
-func _on_theme_changed(_name: String) -> void:
+func _generate_fallback_icon() -> void:
+	if %SettingsBtn.icon and %SettingsBtn.icon.get_size().x > 0:
+		return
+	var img := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	img.fill(Color(1, 1, 1, 0))
+	for x in 32:
+		for y in 32:
+			var dx := x - 16.0
+			var dy := y - 16.0
+			var dist := sqrt(dx * dx + dy * dy)
+			if dist > 4.0 and dist < 14.0 and int(x + y) % 4 < 3:
+				img.set_pixel(x, y, Color(1, 1, 1, 1))
+	%SettingsBtn.icon = ImageTexture.create_from_image(img)
+
+
+func _apply_theme_colors() -> void:
 	bg.color = ThemeManager.get_color("background")
 	var primary := ThemeManager.get_color("primary")
-	%TopBar.get_node("TopHBox/TitleLabel").add_theme_color_override("font_color", primary)
+	title_label.add_theme_color_override("font_color", primary)
 	%SettingsBtn.modulate = primary
 
 

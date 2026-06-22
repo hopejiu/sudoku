@@ -7,6 +7,8 @@ extends Control
 ## - GridRenderState：网格渲染数据
 ## - DialogAnimator：弹窗动画（静态方法调用）
 ## - SceneParams：场景参数传递
+##
+## 后台队列生成由 GameQueueManager Autoload 统一管理。
 
 const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
 
@@ -30,10 +32,8 @@ var _number_count: Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 # 标志位：首次布局完成
 var _ready_called := false
 
-# 后台预填充（队列 < 3 时自动生成）
-var _refill_thread: Thread = null
-var _refilling: bool = false
-var _refill_results: Array = []
+# 标志位：是否正在队列填充
+var _queue_refilling: bool = false
 
 @onready var bg: ColorRect = %Bg
 @onready var difficulty_label: Label = %DifficultyLabel
@@ -86,8 +86,8 @@ func _ready() -> void:
 	grid.cell_selected.connect(_on_cell_selected)
 	_connect_signals()
 	_restore_from_save(data)
-	_bind_theme_colors()
-	ThemeManager.theme_changed.connect(_on_theme_changed)
+	ThemeManager.theme_changed.connect(_apply_theme_colors)
+	_apply_theme_colors()
 	_ready_called = true
 	push_warning("[SudokuGame] _ready() complete, grid_control=%s, grid_size=%s" % [grid_control, grid_control.size])
 
@@ -96,22 +96,10 @@ func _exit_tree() -> void:
 	# 清理所有信号连接，防止lambda泄漏
 	if _dialog_tween and _dialog_tween.is_valid():
 		_dialog_tween.kill()
-	# 清理后台生成线程
-	if _refill_thread and _refill_thread.is_alive():
-		_refill_thread.wait_to_finish()
 
 
-func _bind_theme_colors() -> void:
-	var primary := ThemeManager.get_color("primary")
-	difficulty_label.add_theme_color_override("font_color", primary)
-	undo_btn.modulate = primary
-	hint_btn.modulate = primary
-	pause_btn.modulate = primary
-	timer_toggle_btn.modulate = primary
-	auto_btn.modulate = primary
-
-
-func _on_theme_changed(_name: String) -> void:
+func _apply_theme_colors() -> void:
+	## U1 优化：合并 _bind_theme_colors 与 _on_theme_changed，消除重复
 	bg.color = ThemeManager.get_color("background")
 	var primary := ThemeManager.get_color("primary")
 	difficulty_label.add_theme_color_override("font_color", primary)
@@ -176,8 +164,10 @@ func _restore_from_save(data: Dictionary) -> void:
 	is_paused = false
 	_count_numbers()
 	_update_ui()
-	# 触发后台队列填充（确保队列保持 3 个）
-	_start_queue_refill()
+	# 触发后台队列填充（由 GameQueueManager 统一管理，维持队列至 MAX_QUEUE_SIZE）
+	var queue := SaveManager.load_queue()
+	var needed := 3 - queue.size()
+	_queue_refilling = not GameQueueManager.ensure_filled(level, max(1, needed))
 
 
 func _notification(what: int) -> void:
@@ -198,16 +188,10 @@ func _notification(what: int) -> void:
 func _process(delta: float) -> void:
 	timer_controller.tick(delta, is_paused, is_game_over)
 	timer_label.text = timer_controller.get_formatted_time()
-	# 网格脉冲动画衰减
-	if _ready_called:
-		(grid_control as SudokuGrid).tick_pulse(delta)
 
-	# 检查后台队列填充完成
-	if _refilling and _refill_thread and not _refill_thread.is_alive():
-		_refill_results = _refill_thread.wait_to_finish()
-		_refilling = false
-		_refill_thread = null
-		_apply_refill_results()
+	# 检查 GameQueueManager 后台队列填充完成
+	if _queue_refilling and GameQueueManager.poll_generation():
+		_queue_refilling = false
 
 
 func _update_ui() -> void:
@@ -487,9 +471,9 @@ func _on_victory() -> void:
 	else:
 		v_streak_label.text = ""
 
-	# 撒花庆祝效果
+	# 撒花庆祝效果（作为 victory_overlay 的子节点，确保渲染在弹窗上方，C4 修复）
 	var confetti := ConfettiEffect.new()
-	add_child(confetti)
+	victory_overlay.add_child(confetti)
 
 	# 通关弹窗动画
 	DialogAnimator.show_overlay(victory_overlay, self)
@@ -530,93 +514,3 @@ func _auto_save() -> void:
 		"streak": _streak_win_count,
 	}
 	SaveManager.queue_set_front(data)
-
-
-# --------------------------------------------------------------------------
-# 后台队列填充（维持队列到 3 个）
-# --------------------------------------------------------------------------
-
-## 启动后台填充线程
-func _start_queue_refill() -> void:
-	if _refilling or is_game_over:
-		return
-	var queue := SaveManager.load_queue()
-	var needed := 3 - queue.size()
-	if needed <= 0:
-		return
-	_refilling = true
-	_refill_thread = Thread.new()
-	_refill_thread.start(_refill_task.bind(level, needed))
-
-
-static func _refill_task(lvl: int, count: int) -> Array:
-	var results = []
-	for i in count:
-		results.append(SudokuGenerator.generate(lvl))
-	return results
-
-
-## 将批量生成结果追加到队列尾部
-func _apply_refill_results() -> void:
-	if _refill_results.is_empty() or is_game_over:
-		return
-	var queue := SaveManager.load_queue()
-	for r in _refill_results:
-		var entry := _make_refill_entry(r, level)
-		queue.append(entry)
-	SaveManager.save_queue(queue)
-
-
-## 构造预生成条目
-static func _make_refill_entry(result: Dictionary, lvl: int) -> Dictionary:
-	var notes := []
-	for r in 9:
-		notes.append([])
-		for c in 9:
-			notes[r].append(0)
-	return {
-		"board": {
-			"grid": result.grid,
-			"given": result.given,
-			"notes": notes,
-			"undo_stack": [],
-			"hint_count": 0,
-			"solution": result.solution,
-		},
-		"level": lvl,
-		"elapsed_time": 0.0,
-		"streak": 0,
-	}
-
-
-# --------------------------------------------------------------------------
-# 物理键盘输入
-# --------------------------------------------------------------------------
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo:
-		var key: int = event.keycode
-		if key >= KEY_1 and key <= KEY_9:
-			_on_number_pressed(key - KEY_1 + 1)
-		elif key == KEY_BACKSPACE or key == KEY_DELETE:
-			_on_clear_pressed()
-		elif key == KEY_ESCAPE:
-			_on_pause_pressed()
-		elif key == KEY_LEFT or key == KEY_A:
-			_move_selection(0, -1)
-		elif key == KEY_RIGHT or key == KEY_D:
-			_move_selection(0, 1)
-		elif key == KEY_UP or key == KEY_W:
-			_move_selection(-1, 0)
-		elif key == KEY_DOWN or key == KEY_S:
-			_move_selection(1, 0)
-
-
-func _move_selection(dr: int, dc: int) -> void:
-	if selected_row < 0:
-		selected_row = 4
-		selected_col = 4
-	else:
-		selected_row = clampi(selected_row + dr, 0, 8)
-		selected_col = clampi(selected_col + dc, 0, 8)
-	grid_control.queue_redraw()

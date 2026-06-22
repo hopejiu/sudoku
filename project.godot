@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="游戏集合"
 config/description="数独游戏 - 难度可调的经典数独体验"
 run/main_scene="res://scenes/main/Main.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://assets/icons/app_icon.svg"
 
 [autoload]
@@ -25,6 +25,7 @@ config/icon="res://assets/icons/app_icon.svg"
 SaveManager="*res://autoload/SaveManager.gd"
 ThemeManager="*res://autoload/ThemeManager.gd"
 SceneParams="*res://autoload/SceneParams.gd"
+GameQueueManager="*res://autoload/GameQueueManager.gd"
 
 [display]
 
@@ -84,5 +85,6 @@ ui_down={
 
 [rendering]
 
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 environment/default_clear_color=Color(0.973, 0.98, 0.988, 1)

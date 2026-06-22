@@ -8,7 +8,14 @@ const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
 
 
 func _ready() -> void:
-	card_icon.texture = preload("res://assets/icons/icon_sudoku.svg")
+	# 兼容 Godot 4.7（可能缺少 SVG 加载器）
+	if ResourceLoader.exists("res://assets/icons/icon_sudoku.svg"):
+		card_icon.texture = ResourceLoader.load("res://assets/icons/icon_sudoku.svg")
+	else:
+		# 兜底：生成纯色图标
+		var img := Image.create(64, 64, false, Image.FORMAT_RGBA8)
+		img.fill(Color(0.1, 0.2, 0.5, 0.8))
+		card_icon.texture = ImageTexture.create_from_image(img)
 	ThemeManager.theme_changed.connect(_on_theme_changed)
 	_on_theme_changed(ThemeManager.current_theme_name)
 

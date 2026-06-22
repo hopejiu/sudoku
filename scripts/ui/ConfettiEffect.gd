@@ -3,9 +3,9 @@ extends CPUParticles2D
 ## ConfettiEffect — 胜利撒花粒子效果
 ##
 ## 纯代码创建，无外部资源依赖。
-## 自包含：在首次 process 中定位并发射，响应窗口缩放。
+## 自包含：call_deferred 在下一帧定位并发射，无需 _process。
 
-var _emitted := false
+
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
 	scale_amount_min = 0.6
 	scale_amount_max = 1.2
 
-	# 多彩颜色渐变（CPUParticles2D.color_ramp 接收 Gradient，非 GradientTexture1D）
+	# 多彩颜色渐变
 	var gradient := Gradient.new()
 	gradient.add_point(0.0, Color(1.0, 0.2, 0.2))   # 红
 	gradient.add_point(0.25, Color(1.0, 0.8, 0.0))   # 黄
@@ -43,19 +43,15 @@ func _ready() -> void:
 	self.texture = ImageTexture.create_from_image(img)
 
 	finished.connect(_on_finished)
+	# 下一帧定位并发射，无需 _process（U4 优化）
+	call_deferred("_emit_once")
 
 
-func _process(_delta: float) -> void:
-	if not _emitted:
-		_emitted = true
-		_update_position()
-		emitting = true
-
-
-func _update_position() -> void:
+func _emit_once() -> void:
 	var parent := get_parent()
 	if parent:
 		position = Vector2(parent.size.x / 2.0, -20)
+	emitting = true
 
 
 func _on_finished() -> void:
