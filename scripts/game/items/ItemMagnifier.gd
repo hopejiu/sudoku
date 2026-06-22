@@ -23,7 +23,7 @@ func can_use(_board: SudokuBoard, _selected_row: int, _selected_col: int) -> boo
 	return true
 
 
-func use(_board: SudokuBoard, _selected_row: int, _selected_col: int) -> Dictionary:
+func use(_board: SudokuBoard, _selected_row: int, _selected_col: int, _args: Dictionary = {}) -> Dictionary:
 	return {
 		"hint_bonus": 1,
 		"flash": true,

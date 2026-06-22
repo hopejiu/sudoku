@@ -186,7 +186,7 @@ static func create_item(item_id: StringName) -> ItemBase:
 static func get_all_item_defs() -> Array:
 	var result := []
 	for key in ITEMS:
-		var def := ITEMS[key].duplicate()
+		var def: Dictionary = ITEMS[key].duplicate()
 		def["id"] = key
 		result.append(def)
 	return result

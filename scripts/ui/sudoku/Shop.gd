@@ -53,12 +53,12 @@ func _refresh() -> void:
 
 		var title := Label.new()
 		title.text = "%s  (拥有: %d)" % [name_str, owned]
-		title.theme_override_font_sizes/font_size = 18
+		title.add_theme_font_size_override("font_size", 18)
 		info.add_child(title)
 
 		var desc_label := Label.new()
 		desc_label.text = desc
-		desc_label.theme_override_font_sizes/font_size = 14
+		desc_label.add_theme_font_size_override("font_size", 14)
 		desc_label.theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
 		info.add_child(desc_label)
 

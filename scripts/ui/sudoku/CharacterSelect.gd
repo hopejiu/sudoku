@@ -92,7 +92,7 @@ func _make_card(char_id: StringName, def: Dictionary) -> Button:
 
 	var name_label := Label.new()
 	name_label.text = def.get("name", "?")
-	name_label.theme_override_font_sizes/font_size = 20
+	name_label.add_theme_font_size_override("font_size", 20)
 	name_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	info.add_child(name_label)
 
@@ -100,7 +100,7 @@ func _make_card(char_id: StringName, def: Dictionary) -> Button:
 	var skill_name: String = def.get("skill_name", "")
 	var skill_desc: String = def.get("skill_desc", "")
 	skill_label.text = "【%s】%s" % [skill_name, skill_desc]
-	skill_label.theme_override_font_sizes/font_size = 13
+	skill_label.add_theme_font_size_override("font_size", 13)
 	skill_label.theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 	skill_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	skill_label.mouse_filter = Control.MOUSE_FILTER_PASS

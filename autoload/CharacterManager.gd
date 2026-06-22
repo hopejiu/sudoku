@@ -65,7 +65,7 @@ func set_character(char_id: StringName) -> void:
 		return
 	current_char_id = char_id
 	character_changed.emit(char_id)
-	_save()
+	save()
 
 
 ## 获取当前角色定义
@@ -110,7 +110,7 @@ func load_dialogue() -> void:
 	if not file:
 		_dialogue_loaded = true
 		return
-	var json := JSON.parse_string(file.get_as_text())
+	var json = JSON.parse_string(file.get_as_text())
 	if typeof(json) == TYPE_DICTIONARY:
 		_dialogue_data = json
 	_dialogue_loaded = true
