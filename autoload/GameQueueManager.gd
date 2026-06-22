@@ -14,7 +14,7 @@ signal queue_filled
 signal generation_started
 
 const MAX_QUEUE_SIZE := 3
-const SudokuGenerator := preload("res://scripts/game/SudokuGenerator.gd")
+const SudokuGenerator := preload("res://scripts/game/board/SudokuGenerator.gd")
 
 var _generate_thread: Thread = null
 var _is_generating: bool = false

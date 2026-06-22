@@ -2,7 +2,7 @@ extends Control
 ## HistoryList — 历史记录列表
 ## 按时间倒序展示最近 20 局，点击进入详情，顶部显示统计摘要
 
-const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+const SceneTransition := preload("res://scripts/ui/common/SceneTransition.gd")
 
 @onready var bg: ColorRect = %Bg
 @onready var back_btn: Button = %BackBtn

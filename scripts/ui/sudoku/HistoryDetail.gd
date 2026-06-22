@@ -2,7 +2,7 @@ extends Control
 ## HistoryDetail — 历史详情
 ## 只读显示历史对局的元数据，支持「重开」和「继续」
 
-const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+const SceneTransition := preload("res://scripts/ui/common/SceneTransition.gd")
 
 var entry: Dictionary = {}
 

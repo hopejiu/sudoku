@@ -1,12 +1,11 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/SudokuGame.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/ui/SudokuGrid.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/ui/sudoku/SudokuGame.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/sudoku/SudokuGrid.gd" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/sudoku/NumberKeyboard.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://n5tt5dh704qc" path="res://assets/icons/icon_undo.svg" id="4"]
 [ext_resource type="Texture2D" uid="uid://b8oqbbw72hytr" path="res://assets/icons/icon_hint.svg" id="5"]
 [ext_resource type="Texture2D" uid="uid://bexjaascqqv1p" path="res://assets/icons/icon_pause.svg" id="6"]
-[ext_resource type="Texture2D" path="res://assets/icons/icon_thunder.svg" id="7"]
 [ext_resource type="Texture2D" path="res://assets/icons/icon_timer.svg" id="8"]
 
 [node name="SudokuGame" type="Control"]
@@ -101,21 +100,30 @@ expand_icon = true
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"IconButton"
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(40, 32)
 icon = ExtResource("5")
 alignment = 1
 vertical_alignment = 1
 expand_icon = true
 
-[node name="AutoBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
+[node name="HintCount" type="Label" parent="VBox/TopBar/InnerHBox/RightGroup/HintBtn"]
+layout_mode = 0
+offset_left = 20
+offset_top = -2
+offset_right = 38
+offset_bottom = 14
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+mouse_filter = 2
+
+[node name="ItemsBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"IconButton"
 custom_minimum_size = Vector2(32, 32)
-icon = ExtResource("7")
+text = "🎒"
 alignment = 1
 vertical_alignment = 1
-expand_icon = true
 
 [node name="PauseBtn" type="Button" parent="VBox/TopBar/InnerHBox/RightGroup"]
 unique_name_in_owner = true
@@ -134,9 +142,150 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="NumberKeyboard" parent="VBox" instance=ExtResource("3")]
+[node name="ItemsPanel" type="HBoxContainer" parent="VBox"]
 unique_name_in_owner = true
 layout_mode = 2
+visible = false
+custom_minimum_size = Vector2(0, 40)
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBox/ItemsPanel"]
+layout_mode = 2
+text = "道具:"
+vertical_alignment = 1
+
+[node name="MagnifierBtn" type="Button" parent="VBox/ItemsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "🔍 放大镜 ×0"
+theme_type_variation = &"SecondaryAction"
+custom_minimum_size = Vector2(0, 36)
+size_flags_horizontal = 3
+
+[node name="BombBtn" type="Button" parent="VBox/ItemsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "💣 炸弹 ×0"
+theme_type_variation = &"SecondaryAction"
+custom_minimum_size = Vector2(0, 36)
+size_flags_horizontal = 3
+
+[node name="ItemCoinsLabel" type="Label" parent="VBox/ItemsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "积分: 0"
+vertical_alignment = 1
+
+[node name="BottomHBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 184)
+theme_override_constants/separation = 0
+
+[node name="CharacterPanel" type="Control" parent="VBox/BottomHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(130, 0)
+size_flags_horizontal = 0
+
+[node name="PortraitRect" type="TextureRect" parent="VBox/BottomHBox/CharacterPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4
+offset_top = 4
+offset_right = -4
+offset_bottom = -24
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CharNameLabel" type="Label" parent="VBox/BottomHBox/CharacterPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4
+offset_top = -22
+offset_right = -4
+offset_bottom = -2
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillNameLabel" type="Label" parent="VBox/BottomHBox/CharacterPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2
+offset_top = 158
+offset_right = -2
+offset_bottom = 180
+autowrap_mode = 1
+theme_override_font_sizes/font_size = 9
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 0.7)
+mouse_filter = 2
+
+[node name="ComboDots" type="HBoxContainer" parent="VBox/BottomHBox/CharacterPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 15
+offset_top = 166
+offset_right = -15
+offset_bottom = 182
+theme_override_constants/separation = 4
+visible = false
+mouse_filter = 2
+
+[node name="Dot1" type="ColorRect" parent="VBox/BottomHBox/CharacterPanel/ComboDots"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.8, 0.8, 0.8, 0.3)
+mouse_filter = 2
+
+[node name="Dot2" type="ColorRect" parent="VBox/BottomHBox/CharacterPanel/ComboDots"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.8, 0.8, 0.8, 0.3)
+mouse_filter = 2
+
+[node name="Dot3" type="ColorRect" parent="VBox/BottomHBox/CharacterPanel/ComboDots"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.8, 0.8, 0.8, 0.3)
+mouse_filter = 2
+
+[node name="Dot4" type="ColorRect" parent="VBox/BottomHBox/CharacterPanel/ComboDots"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.8, 0.8, 0.8, 0.3)
+mouse_filter = 2
+
+[node name="Dot5" type="ColorRect" parent="VBox/BottomHBox/CharacterPanel/ComboDots"]
+layout_mode = 2
+custom_minimum_size = Vector2(8, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.8, 0.8, 0.8, 0.3)
+mouse_filter = 2
+
+[node name="SpeechBubble" type="Label" parent="VBox/BottomHBox/CharacterPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2
+offset_top = 134
+offset_right = -2
+offset_bottom = -2
+autowrap_mode = 1
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="NumberKeyboard" parent="VBox/BottomHBox" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PauseOverlay" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -283,6 +432,20 @@ layout_mode = 2
 text = "提示次数: 0"
 horizontal_alignment = 1
 
+[node name="VXpLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.2, 0.7, 0.3, 1)
+
+[node name="VCoinsLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1)
+
 [node name="VStreakLabel" type="Label" parent="VictoryOverlay/Center/Popup/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -309,3 +472,54 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "增加难度"
 theme_type_variation = &"DialogAction"
+
+[node name="LevelUpOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.55)
+mouse_filter = 2
+visible = false
+
+[node name="Center" type="CenterContainer" parent="LevelUpOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="LevelUpOverlay/Center"]
+layout_mode = 2
+theme_type_variation = &"DialogPanel"
+custom_minimum_size = Vector2(280, 200)
+
+[node name="VBox" type="VBoxContainer" parent="LevelUpOverlay/Center/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28
+offset_top = 28
+offset_right = -28
+offset_bottom = -28
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="LevelUpOverlay/Center/Panel/VBox"]
+layout_mode = 2
+text = "🎉 升级！"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+
+[node name="LuLevelLabel" type="Label" parent="LevelUpOverlay/Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "当前等级: 1"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="LuOkBtn" type="Button" parent="LevelUpOverlay/Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "太棒了！"
+theme_type_variation = &"PrimaryAction"

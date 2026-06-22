@@ -3,13 +3,14 @@ extends Control
 ## 独立于主界面的数独入口，包含继续上局、新游戏、历史记录选项
 ## 从 SudokuCard 点击导航至此，完成选择后跳转 SudokuGame
 
-const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+const SceneTransition := preload("res://scripts/ui/common/SceneTransition.gd")
 
 @onready var bg: ColorRect = %Bg
 @onready var back_btn: Button = %BackBtn
 @onready var continue_btn: Button = %ContinueBtn
 @onready var new_game_btn: Button = %NewGameBtn
 @onready var history_btn: Button = %HistoryBtn
+@onready var shop_btn: Button = %ShopBtn
 
 @onready var difficulty_overlay: ColorRect = %DifficultyOverlay
 @onready var diff_panel: Panel = %DiffPanel
@@ -24,6 +25,7 @@ func _ready() -> void:
 	continue_btn.disabled = SaveManager.queue_is_empty()
 
 	# 信号连接（TSCN 中已连接了部分，这里补运行时需要的）
+	shop_btn.pressed.connect(_on_shop_pressed)
 	_on_difficulty_changed(diff_slider.value)
 
 	# 主题绑定
@@ -87,12 +89,15 @@ func _on_continue_pressed() -> void:
 
 
 func _on_new_game_pressed() -> void:
-	difficulty_overlay.show()
-	_animate_show_dialog(diff_panel)
+	SceneTransition.change_to("res://scenes/sudoku/CharacterSelect.tscn")
 
 
 func _on_history_pressed() -> void:
 	SceneTransition.change_to("res://scenes/sudoku/HistoryList.tscn")
+
+
+func _on_shop_pressed() -> void:
+	SceneTransition.change_to("res://scenes/sudoku/Shop.tscn")
 
 
 # --------------------------------------------------------------------------

@@ -16,8 +16,10 @@ var clear_btn: Button
 
 ## 数字按钮引用（索引 1-9）
 var _number_buttons: Array[Button] = []
-## 各数字已填入数（由 SudokuGame 同步）
+## 各数字已填入数
 var _number_counts: Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+## 盘面引用（由 SudokuGame 注入，用于角色B 冲突屏蔽）
+var _board_ref: SudokuBoard = null
 
 @onready var number_grid: GridContainer = %NumberGrid
 
@@ -92,6 +94,22 @@ func _on_number_button_pressed(num: int) -> void:
 
 func _on_clear_button_pressed() -> void:
 	clear_pressed.emit()
+
+
+## 注入盘面引用（用于角色B 冲突数字禁用）
+func set_board_ref(board: SudokuBoard) -> void:
+	_board_ref = board
+
+
+## 从盘面重新计算数字计数
+func refresh_from_board(board: SudokuBoard) -> void:
+	var counts := [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	for r in 9:
+		for c in 9:
+			var v: int = board.grid[r][c]
+			if v > 0:
+				counts[v] += 1
+	update_number_counts(counts)
 
 
 ## 更新数字计数并高亮已用完数字

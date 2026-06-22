@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/HistoryDetail.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/sudoku/HistoryDetail.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/icons/icon_back.svg" id="2"]
 
 [node name="HistoryDetail" type="Control"]

@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/SudokuLoading.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/ui/LoadingSpinner.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/ui/sudoku/SudokuLoading.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/common/LoadingSpinner.gd" id="2"]
 
 [node name="SudokuLoading" type="Control"]
 script = ExtResource("1")

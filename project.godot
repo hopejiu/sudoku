@@ -26,6 +26,9 @@ SaveManager="*res://autoload/SaveManager.gd"
 ThemeManager="*res://autoload/ThemeManager.gd"
 SceneParams="*res://autoload/SceneParams.gd"
 GameQueueManager="*res://autoload/GameQueueManager.gd"
+PlayerManager="*res://autoload/PlayerManager.gd"
+CharacterManager="*res://autoload/CharacterManager.gd"
+ProfileSaver="*res://autoload/ProfileSaver.gd"
 
 [display]
 

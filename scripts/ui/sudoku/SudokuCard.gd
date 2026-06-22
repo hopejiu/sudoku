@@ -2,7 +2,7 @@ extends Panel
 ## SudokuCard — 游戏集合卡片
 ## 点击后导航到对应游戏的入口场景（SudokuMenu）
 
-const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+const SceneTransition := preload("res://scripts/ui/common/SceneTransition.gd")
 
 @onready var card_icon: TextureRect = %CardIcon
 

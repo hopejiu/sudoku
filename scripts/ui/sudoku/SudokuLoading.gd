@@ -12,7 +12,7 @@ extends Control
 ##
 ## 线程生命周期由 GameQueueManager Autoload 统一管理。
 
-const SceneTransition := preload("res://scripts/ui/SceneTransition.gd")
+const SceneTransition := preload("res://scripts/ui/common/SceneTransition.gd")
 
 @onready var bg: ColorRect = %Bg
 @onready var spinner: Control = %Spinner

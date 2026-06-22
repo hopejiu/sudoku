@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2o0fsblwfiuh"]
 
 [ext_resource type="Script" uid="uid://degwhgn5gaiys" path="res://scripts/ui/Main.gd" id="1"]
-[ext_resource type="Script" uid="uid://brqqvwf7g82b8" path="res://scripts/ui/SudokuCard.gd" id="2"]
+[ext_resource type="Script" uid="uid://brqqvwf7g82b8" path="res://scripts/ui/sudoku/SudokuCard.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cyhdi38wi6qn" path="res://assets/icons/icon_settings.svg" id="2_q24mn"]
 
 [node name="Main" type="Control" unique_id=364721475]

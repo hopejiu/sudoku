@@ -4,10 +4,10 @@ class_name SudokuGenerator
 ## 基于回溯法生成唯一解谜题。
 ## 规则检测委托给 SudokuRules 共享工具类。
 
-const SudokuRules := preload("res://scripts/game/SudokuRules.gd")
+const SudokuRules := preload("res://scripts/game/board/SudokuRules.gd")
 
 ## 生成指定难度的谜题
-## level: 1~16, 挖空数 = 26 + level * 2
+## level: 1~20, 挖空数 = 26 + level * 2
 static func generate(level: int) -> Dictionary:
 	var solution := _fill_grid()
 	var grid := SudokuRules.copy_grid(solution)

@@ -18,7 +18,8 @@ var given: Array  # Array[Array[bool]]
 var notes: Array  # Array[Array[int]]
 var conflict: Array  # Array[Array[bool]]
 var undo_stack: Array[Dictionary]
-var hint_count: int = 0
+var hint_count: int = 0  # 本局已使用提示次数
+var hint_cap: int = 999  # 本局提示上限（由 SudokuGame 在加载时设置）
 var solution: Array  # Array[Array[int]]
 
 
@@ -44,6 +45,7 @@ func _clear_board() -> void:
 			conflict[r].append(false)
 	undo_stack = []
 	hint_count = 0
+	hint_cap = 999
 	solution = []
 
 
@@ -199,9 +201,12 @@ func _is_valid_placement(row: int, col: int, num: int) -> bool:
 
 
 ## 获取提示
+## 返回填入的数字。如果提示次数已达上限或无解，返回 0。
 func get_hint(row: int, col: int) -> int:
 	if solution.is_empty():
 		return 0
+	if hint_count >= hint_cap:
+		return -1  # 提示已达上限
 	var correct: int = solution[row][col]
 	if grid[row][col] != correct:
 		# 记录提示操作到回撤栈
@@ -226,6 +231,7 @@ func serialize() -> Dictionary:
 		"notes": notes,
 		"undo_stack": undo_stack,
 		"hint_count": hint_count,
+		"hint_cap": hint_cap,
 		"solution": solution,
 	}
 
@@ -241,5 +247,6 @@ func deserialize(data: Dictionary) -> void:
 	for entry in raw_undo:
 		undo_stack.append(entry)
 	hint_count = data.get("hint_count", 0)
+	hint_cap = data.get("hint_cap", 999)
 	solution = data.get("solution", [])
 	update_conflicts()

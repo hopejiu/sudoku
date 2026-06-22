@@ -4,7 +4,7 @@ class_name SudokuSolver
 ## 不支持场景/节点依赖。
 ## 规则检测委托给 SudokuRules 共享工具类。
 
-const SudokuRules := preload("res://scripts/game/SudokuRules.gd")
+const SudokuRules := preload("res://scripts/game/board/SudokuRules.gd")
 
 ## 用回溯法求解，返回第一个找到的解，无解返回空数组
 static func solve(grid: Array) -> Array:
